@@ -18,7 +18,8 @@ public:
     virtual std::string get_long_name() const { return m_long_name; }
     virtual std::string get_short_name() const { return m_short_name; }
     virtual void search(IEntry::ISearchResultsCol& results) const;
-    virtual const IEntry* get_entry(int unique_id) const { return m_verses[unique_id].get(); }
+    virtual const IVerse* get_entry(int unique_id) const { return m_verses[unique_id].get(); }
+    virtual int num_entries() const { return static_cast<int>(m_verses.size()); }
     virtual bool Save(const std::string& filename);
     virtual bool Resume(const std::string& filename);
 

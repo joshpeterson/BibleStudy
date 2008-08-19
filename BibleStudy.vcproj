@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BOOST_DIR)&quot;;&quot;$(GOOGLE_PROTOBUF_DIR)\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(BOOST_DIR)&quot;;&quot;$(GOOGLE_PROTOBUF_DIR)\include&quot;;&quot;$(QT_DIR)\include&quot;;&quot;$(QT_DIR)\include\QtCore&quot;;&quot;$(QT_DIR)\include\QtGui&quot;;&quot;$(QT_DIR)\ActiveQt&quot;;&quot;$(QT_DIR)\mkspecs\win32-msvc2005&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libprotoc.lib libprotobuf.lib $(NOINHERIT)"
+				AdditionalDependencies="libprotoc.lib libprotobuf.lib qtmain.lib QtGuid4.lib QtCored4.lib $(NOINHERIT)"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(BOOST_DIR)\lib&quot;;&quot;$(GOOGLE_PROTOBUF_DIR)\$(ConfigurationName)&quot;"
+				AdditionalLibraryDirectories="&quot;$(BOOST_DIR)\lib&quot;;&quot;$(GOOGLE_PROTOBUF_DIR)\$(ConfigurationName)&quot;;&quot;$(QT_DIR)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -120,7 +120,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(BOOST_DIR)&quot;;&quot;$(GOOGLE_PROTOBUF_DIR)\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(BOOST_DIR)&quot;;&quot;$(GOOGLE_PROTOBUF_DIR)\include&quot;;&quot;$(QT_DIR)\include&quot;;&quot;$(QT_DIR)\include\QtCore&quot;;&quot;$(QT_DIR)\include\QtGui&quot;;&quot;$(QT_DIR)\ActiveQt&quot;;&quot;$(QT_DIR)\mkspecs\win32-msvc2005&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -139,9 +139,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="kernel32.lib libprotoc.lib libprotobuf.lib $(NOINHERIT)"
+				AdditionalDependencies="kernel32.lib libprotoc.lib libprotobuf.lib qtmain.lib QtGui4.lib QtCore4.lib $(NOINHERIT)"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(BOOST_DIR)\lib&quot;;&quot;$(GOOGLE_PROTOBUF_DIR)\$(ConfigurationName)&quot;"
+				AdditionalLibraryDirectories="&quot;$(BOOST_DIR)\lib&quot;;&quot;$(GOOGLE_PROTOBUF_DIR)\$(ConfigurationName)&quot;;&quot;$(QT_DIR)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -189,6 +189,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SearchResultsModel.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\SearchResultsSerial.cpp"
 				>
 			</File>
@@ -198,6 +202,10 @@
 			</File>
 			<File
 				RelativePath=".\TranslationBuffer.pb.cc"
+				>
+			</File>
+			<File
+				RelativePath=".\UISearchWidget.cpp"
 				>
 			</File>
 			<File
@@ -227,6 +235,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SearchResultsModel.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SearchResultsSerial.h"
 				>
 			</File>
@@ -236,6 +248,10 @@
 			</File>
 			<File
 				RelativePath=".\TranslationBuffer.pb.h"
+				>
+			</File>
+			<File
+				RelativePath=".\UISearchWidget.h"
 				>
 			</File>
 			<File

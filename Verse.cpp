@@ -25,6 +25,6 @@ void Verse::match(ISearchResultsCol& search_strings) const
 
 void Verse::display(std::ostream& out) const
 {
-    out << m_book << " " << m_chapter << ":" << m_verse << " " << m_text << std::endl;
+    out << m_book << " " << m_chapter << ":" << m_verse << std::endl << m_text << std::endl;
 }
 
