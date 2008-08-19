@@ -1,4 +1,4 @@
-CONFIG += qt thread exceptions stl
+CONFIG += qt thread exceptions stl debug_and_release
 
 HEADERS += IDocument.h
 HEADERS += IEntry.h

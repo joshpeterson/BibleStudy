@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
     std::cout << "Enter search: ";
     std::getline(std::cin, user_query);
     std::cout << std::endl;*/
-    IEntry::ISearchResultsPtr query(new SearchResultsSerial("son of man"));
+    IEntry::ISearchResultsPtr query(new SearchResultsSerial("my disciple"));
     IEntry::ISearchResultsCol results;
     results.push_back(query);
 
