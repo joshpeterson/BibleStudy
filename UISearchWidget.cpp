@@ -5,15 +5,20 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "UISearchWidget.h"
+#include "IEntry.h"
+#include "SearchResultsSerial.h"
+#include "Translation.h"
+#include "SearchResultsModel.h"
 
-UISearchWidget::UISearchWidget(QWidget* parent) : QWidget(parent)
+UISearchWidget::UISearchWidget(boost::shared_ptr<Translation> translation, QWidget* parent) : 
+    QWidget(parent),
+    m_translation(translation),
+    m_search_button(new QPushButton(tr("Search"))),
+    m_search_input_field(new QLineEdit(tr("Search Text")))
 {
-    QPushButton* search_button = new QPushButton(tr("Search"));
-    QLineEdit* search_input_field = new QLineEdit(tr("Search Text"));
-
     QHBoxLayout* search_field_row = new QHBoxLayout;
-    search_field_row->addWidget(search_input_field);
-    search_field_row->addWidget(search_button);
+    search_field_row->addWidget(m_search_input_field);
+    search_field_row->addWidget(m_search_button);
 
     QCheckBox* dr_check_box = new QCheckBox(tr("DR"));
     QCheckBox* ltv_check_box = new QCheckBox(tr("LTV"));
@@ -32,4 +37,16 @@ UISearchWidget::UISearchWidget(QWidget* parent) : QWidget(parent)
     layout->addLayout(search_field_row);
     layout->addLayout(translation_selection_row);
     setLayout(layout);
+}
+
+void UISearchWidget::perform_search(const QString& search_string)
+{
+    IEntry::ISearchResultsPtr query(new SearchResultsSerial(search_string.toStdString()));
+    IEntry::ISearchResultsCol results;
+    results.push_back(query);
+
+    m_translation->search(results);
+
+    boost::shared_ptr<QAbstractItemModel> model(new SearchResultsModel(m_translation.get(), query));
+    emit search_complete(model);
 }

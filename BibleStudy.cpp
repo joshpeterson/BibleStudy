@@ -6,11 +6,13 @@
 #include "SearchResultsSerial.h"
 #include "UISearchWidget.h"
 #include "SearchResultsModel.h"
+#include "UISearchResultsWidget.h"
 #include <QApplication>
 #include <QPushButton>
 #include <QAbstractItemModel>
 #include <QTableView>
 #include <QHeaderView>
+#include <QVBoxLayout>
 
 int main(int argc, char* argv[])
 {
@@ -20,24 +22,34 @@ int main(int argc, char* argv[])
 
     //raw_text.open("c:\\Documents and Settings\\Josh\\Desktop\\DR.txt");
 
-	Translation test;
+    boost::shared_ptr<Translation> test(new Translation);
 
     //test.Import("Douay-Rheims", "DR", "c:\\Documents and Settings\\Josh\\Desktop\\DR.txt");
 
     //test.Save("c:\\Documents and Settings\\Josh\\Desktop\\DR.buf");
 
-    test.Resume("c:\\Documents and Settings\\Josh\\Desktop\\DR.buf");
+    test->Resume("c:\\Documents and Settings\\Josh\\Desktop\\DR.buf");
+
+    UISearchWidget* search = new UISearchWidget(test);
+    UISearchResultsWidget* results = new UISearchResultsWidget;
+
+    QVBoxLayout* layout = new QVBoxLayout;
+
+    layout->addWidget(search);
+    layout->addWidget(results);
 
 
    /* std::string user_query;
     std::cout << "Enter search: ";
     std::getline(std::cin, user_query);
     std::cout << std::endl;*/
+    /*
     IEntry::ISearchResultsPtr query(new SearchResultsSerial("my disciple"));
     IEntry::ISearchResultsCol results;
     results.push_back(query);
 
     test.search(results);
+    */
 
     /*int displayed_verses = 0;
     const int max_displayed_verses = 5;
@@ -63,6 +75,7 @@ int main(int argc, char* argv[])
     }
     std::cout << std::endl;*/
 
+    /*
     QAbstractItemModel* model = new SearchResultsModel(&test, query);
     QTableView* table_view = new QTableView;
     table_view->setModel(model);
@@ -72,6 +85,7 @@ int main(int argc, char* argv[])
     header->setResizeMode(QHeaderView::ResizeToContents);
     header->setStretchLastSection(true);
     table_view->show();
+    */
     //UISearchWidget search;
 
     //search.show();
