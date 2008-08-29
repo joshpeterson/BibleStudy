@@ -16,6 +16,8 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<Translation> translation, QWidg
     m_search_button(new QPushButton(tr("Search"))),
     m_search_input_field(new QLineEdit(tr("Search Text")))
 {
+    QObject::connect(m_search_button, SIGNAL(clicked()), this, SLOT(perform_search()));
+
     QHBoxLayout* search_field_row = new QHBoxLayout;
     search_field_row->addWidget(m_search_input_field);
     search_field_row->addWidget(m_search_button);
@@ -39,9 +41,9 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<Translation> translation, QWidg
     setLayout(layout);
 }
 
-void UISearchWidget::perform_search(const QString& search_string)
+void UISearchWidget::perform_search()
 {
-    IEntry::ISearchResultsPtr query(new SearchResultsSerial(search_string.toStdString()));
+    IEntry::ISearchResultsPtr query(new SearchResultsSerial(m_search_input_field->text().toStdString()));
     IEntry::ISearchResultsCol results;
     results.push_back(query);
 

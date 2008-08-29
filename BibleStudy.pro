@@ -11,6 +11,7 @@ HEADERS += TranslationBuffer.pb.h
 HEADERS += UISearchWidget.h
 HEADERS += Verse.h
 HEADERS += UISearchResultsWidget.h
+HEADERS += UIBibleStudyWidget.h
 
 SOURCES += BibleStudy.cpp
 SOURCES += SearchResultsModel.cpp
@@ -20,6 +21,7 @@ SOURCES += UISearchWidget.cpp
 SOURCES += Verse.cpp
 SOURCES += TranslationBuffer.pb.cc
 SOURCES += UISearchResultsWidget.cpp
+SOURCES += UIBibleStudyWidget.cpp
 
 INCLUDEPATH += "$$(BOOST_DIR)"
 INCLUDEPATH += "$$(GOOGLE_PROTOBUF_DIR)\include"

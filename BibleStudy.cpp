@@ -7,6 +7,7 @@
 #include "UISearchWidget.h"
 #include "SearchResultsModel.h"
 #include "UISearchResultsWidget.h"
+#include "UIBibleStudyWidget.h"
 #include <QApplication>
 #include <QPushButton>
 #include <QAbstractItemModel>
@@ -29,15 +30,10 @@ int main(int argc, char* argv[])
     //test.Save("c:\\Documents and Settings\\Josh\\Desktop\\DR.buf");
 
     test->Resume("c:\\Documents and Settings\\Josh\\Desktop\\DR.buf");
+    
+    UIBibleStudyWidget study(test);
 
-    UISearchWidget* search = new UISearchWidget(test);
-    UISearchResultsWidget* results = new UISearchResultsWidget;
-
-    QVBoxLayout* layout = new QVBoxLayout;
-
-    layout->addWidget(search);
-    layout->addWidget(results);
-
+    study.show();
 
    /* std::string user_query;
     std::cout << "Enter search: ";

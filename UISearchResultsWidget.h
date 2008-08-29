@@ -14,6 +14,9 @@ class UISearchResultsWidget : public QWidget
 public:
     UISearchResultsWidget(QWidget* parent = 0);
 
+signals:
+    void search_results_updated();
+
 public slots:
     void display_search_results(boost::shared_ptr<QAbstractItemModel> model);
 

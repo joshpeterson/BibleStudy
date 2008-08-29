@@ -20,8 +20,8 @@ public:
 signals:
     void search_complete(boost::shared_ptr<QAbstractItemModel> model);
 
-public slots:
-    void perform_search(const QString& search_string);
+private slots:
+    void perform_search();
 
 private:
     boost::shared_ptr<Translation> m_translation;
