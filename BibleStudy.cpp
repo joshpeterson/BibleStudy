@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 
     //test.Save("c:\\Documents and Settings\\Josh\\Desktop\\DR.buf");
 
-    test->Resume("c:\\Documents and Settings\\Josh\\Desktop\\DR.buf");
+    test->Resume("c:\\Documents and Settings\\Josh\\My Documents\\BibleStudy\\trunk\\Translations\\DR.buf");
     
     UIBibleStudyWidget study(test);
 

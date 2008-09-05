@@ -17,8 +17,8 @@ public:
 signals:
     void search_results_updated();
 
-public slots:
-    void display_search_results(boost::shared_ptr<QAbstractItemModel> model);
+//public slots:
+//    void display_search_results(boost::shared_ptr<QAbstractItemModel> model);
 
 private:
     QTableView* m_table_view;

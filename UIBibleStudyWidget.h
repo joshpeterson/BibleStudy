@@ -5,6 +5,8 @@
 #include <boost/shared_ptr.hpp>
 
 class QVBoxLayout;
+class QTableView;
+class QAbstractItemModel;
 class Translation;
 class UISearchWidget;
 class UISearchResultsWidget;
@@ -18,10 +20,11 @@ public:
 
 public slots:
     void refresh_search_results();
+    void display_search_results(boost::shared_ptr<QAbstractItemModel> model);
 
 private:
     UISearchWidget* m_search;
-    UISearchResultsWidget* m_results;
+    QTableView* m_results;
     QVBoxLayout* m_layout;
 };
 
