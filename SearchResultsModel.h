@@ -6,7 +6,9 @@
 class SearchResultsModel : public QAbstractTableModel
 {
 public:
-    SearchResultsModel(const Translation* translation, const IEntry::ISearchResultsPtr results, QObject* parent = 0);
+    SearchResultsModel(const Translation* translation, ISearchResults* results, QObject* parent = 0);
+    void SetResults(const IEntry::ISearchResultsPtr results);
+
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
@@ -15,7 +17,7 @@ public:
                         int role = Qt::DisplayRole) const;
 private:
     const Translation* m_translation;
-    const IEntry::ISearchResultsPtr m_results;
+    IEntry::ISearchResultsPtr m_results;
 
     enum ColumnType
     {

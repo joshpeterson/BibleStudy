@@ -49,6 +49,6 @@ void UISearchWidget::perform_search()
 
     m_translation->search(results);
 
-    boost::shared_ptr<QAbstractItemModel> model(new SearchResultsModel(m_translation.get(), query));
-    emit search_complete(model);
+    //boost::shared_ptr<QAbstractItemModel> model(new SearchResultsModel(m_translation.get(), query));
+    emit search_complete(query);
 }

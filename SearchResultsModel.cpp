@@ -2,7 +2,7 @@
 #include "IVerse.h"
 
 SearchResultsModel::SearchResultsModel(const Translation* translation, 
-                                       const IEntry::ISearchResultsPtr results,
+                                       ISearchResults* results,
                                        QObject* parent) :
     QAbstractTableModel(parent),
     m_translation(translation),
@@ -10,9 +10,18 @@ SearchResultsModel::SearchResultsModel(const Translation* translation,
 {
 }
 
+void SearchResultsModel::SetResults(const IEntry::ISearchResultsPtr results)
+{
+    m_results = results;
+    this->reset();
+}
+
  int SearchResultsModel::rowCount(const QModelIndex &parent) const
  {
-     return m_results->num_results();
+     if (m_results)
+        return m_results->num_results();
+     else
+         return 0;
  }
 
  int SearchResultsModel::columnCount(const QModelIndex &parent) const
@@ -22,6 +31,9 @@ SearchResultsModel::SearchResultsModel(const Translation* translation,
 
  QVariant SearchResultsModel::data(const QModelIndex &index, int role) const
  {
+    if (!m_results)
+        return QVariant();
+
     if (!index.isValid())
         return QVariant();
 

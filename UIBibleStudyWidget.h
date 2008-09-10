@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <boost/shared_ptr.hpp>
+#include "IEntry.h"
 
 class QVBoxLayout;
 class QTableView;
@@ -10,6 +11,7 @@ class QAbstractItemModel;
 class Translation;
 class UISearchWidget;
 class UISearchResultsWidget;
+class SearchResultsModel;
 
 class UIBibleStudyWidget : public QWidget
 {
@@ -20,12 +22,13 @@ public:
 
 public slots:
     void refresh_search_results();
-    void display_search_results(boost::shared_ptr<QAbstractItemModel> model);
+    void display_search_results(IEntry::ISearchResultsPtr query);
 
 private:
     UISearchWidget* m_search;
-    QTableView* m_results;
+    QTableView* m_results_view;
     QVBoxLayout* m_layout;
+    boost::shared_ptr<SearchResultsModel> m_results_model;
 };
 
 #endif //__UI_BIBLE_STUDY_WIDGET

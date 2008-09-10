@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <boost/shared_ptr.hpp>
+#include "IEntry.h"
 
 class QAbstractItemModel;
 class QPushButton;
@@ -18,7 +19,7 @@ public:
     UISearchWidget(boost::shared_ptr<Translation> translation, QWidget* parent = 0);
 
 signals:
-    void search_complete(boost::shared_ptr<QAbstractItemModel> model);
+    void search_complete(IEntry::ISearchResultsPtr query);
 
 private slots:
     void perform_search();

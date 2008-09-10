@@ -39,13 +39,13 @@ int main(int argc, char* argv[])
     std::cout << "Enter search: ";
     std::getline(std::cin, user_query);
     std::cout << std::endl;*/
-    /*
-    IEntry::ISearchResultsPtr query(new SearchResultsSerial("my disciple"));
-    IEntry::ISearchResultsCol results;
-    results.push_back(query);
+    
+    //IEntry::ISearchResultsPtr query(new SearchResultsSerial("my disciple"));
+    //IEntry::ISearchResultsCol results;
+    //results.push_back(query);
 
-    test.search(results);
-    */
+    //test->search(results);
+    
 
     /*int displayed_verses = 0;
     const int max_displayed_verses = 5;
@@ -71,17 +71,17 @@ int main(int argc, char* argv[])
     }
     std::cout << std::endl;*/
 
-    /*
-    QAbstractItemModel* model = new SearchResultsModel(&test, query);
-    QTableView* table_view = new QTableView;
-    table_view->setModel(model);
-    table_view->setSortingEnabled(true);
-    table_view->setShowGrid(false);
-    QHeaderView* header = table_view->horizontalHeader();
-    header->setResizeMode(QHeaderView::ResizeToContents);
-    header->setStretchLastSection(true);
-    table_view->show();
-    */
+    
+    //QAbstractItemModel* model = new SearchResultsModel(test.get(), query);
+    //QTableView* table_view = new QTableView;
+    //table_view->setModel(model);
+    //table_view->setSortingEnabled(true);
+    //table_view->setShowGrid(false);
+    //QHeaderView* header = table_view->horizontalHeader();
+    //header->setResizeMode(QHeaderView::ResizeToContents);
+    //header->setStretchLastSection(true);
+    //table_view->show();
+    
     //UISearchWidget search;
 
     //search.show();
