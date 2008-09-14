@@ -28,3 +28,4 @@ private:
         text_column = 4
     };
 };
+

@@ -97,3 +97,4 @@ void SearchResultsModel::SetResults(const IEntry::ISearchResultsPtr results)
     else
         return QString("%1").arg(section);
  }
+

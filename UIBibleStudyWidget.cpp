@@ -51,3 +51,4 @@ void UIBibleStudyWidget::refresh_search_results()
     //m_results_view->updateGeometry();
     //m_results_view->show();
 }
+

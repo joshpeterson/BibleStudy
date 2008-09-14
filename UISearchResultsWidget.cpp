@@ -28,3 +28,4 @@ UISearchResultsWidget::UISearchResultsWidget(QWidget *parent) :
 //
 //    emit search_results_updated();
 //}
+

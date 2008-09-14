@@ -22,3 +22,4 @@ public:
 };
 
 #endif // __IENTRY_H
+

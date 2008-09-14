@@ -18,3 +18,4 @@ public:
 };
 
 #endif // __IDocument_H
+

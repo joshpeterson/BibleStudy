@@ -37,7 +37,7 @@ bool Translation::Save(const std::string &filename)
         verse_buffer->set_unique_id((*it)->get_unqiue_id());
     }
 
-    std::fstream output(filename.c_str(), ios::out | ios::trunc | ios::binary);
+    std::fstream output(filename.c_str(), std::ios::out | std::ios::trunc | std::ios::binary);
     if (!buffer.SerializeToOstream(&output))
         return false;
     output.close();
@@ -49,7 +49,7 @@ bool Translation::Resume(const std::string &filename)
 {
     BibleStudy::TranslationBuffer buffer;
 
-    std::fstream input(filename.c_str(), ios::in | ios::binary);
+    std::fstream input(filename.c_str(), std::ios::in | std::ios::binary);
     if (!input || !buffer.ParseFromIstream(&input)) 
         return false;
 

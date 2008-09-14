@@ -11,12 +11,16 @@ namespace BibleStudy {
 namespace {
 
 const ::google::protobuf::Descriptor* VerseBuffer_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  VerseBuffer_reflection_ = NULL;
 const ::google::protobuf::Descriptor* TranslationBuffer_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  TranslationBuffer_reflection_ = NULL;
 
 }  // namespace
 
 
-void proto_BuildDescriptors_TranslationBuffer_2eproto() {
+void protobuf_BuildDesc_TranslationBuffer_2eproto() {
   static bool already_here = false;
   if (already_here) return;
   already_here = true;
@@ -32,9 +36,27 @@ void proto_BuildDescriptors_TranslationBuffer_2eproto() {
     "_name\030\001 \002(\t\022\022\n\nshort_name\030\002 \002(\t\022&\n\005verse"
     "\030\003 \003(\0132\027.BibleStudy.VerseBuffer", 231);
   VerseBuffer_descriptor_ = file->message_type(0);
+  VerseBuffer_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      VerseBuffer_descriptor_,
+      &VerseBuffer::default_instance(),
+      VerseBuffer::_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerseBuffer, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerseBuffer, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     VerseBuffer_descriptor_, &VerseBuffer::default_instance());
   TranslationBuffer_descriptor_ = file->message_type(1);
+  TranslationBuffer_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      TranslationBuffer_descriptor_,
+      &TranslationBuffer::default_instance(),
+      TranslationBuffer::_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TranslationBuffer, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TranslationBuffer, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     TranslationBuffer_descriptor_, &TranslationBuffer::default_instance());
 }
@@ -42,7 +64,7 @@ void proto_BuildDescriptors_TranslationBuffer_2eproto() {
 // Force BuildDescriptors() to be called at static initialization time.
 struct StaticDescriptorInitializer_TranslationBuffer_2eproto {
   StaticDescriptorInitializer_TranslationBuffer_2eproto() {
-    proto_BuildDescriptors_TranslationBuffer_2eproto();
+    protobuf_BuildDesc_TranslationBuffer_2eproto();
   }
 } static_descriptor_initializer_TranslationBuffer_2eproto_;
 
@@ -65,10 +87,7 @@ const int VerseBuffer::_offsets_[5] = {
 };
 
 VerseBuffer::VerseBuffer()
-  : _reflection_(descriptor(),
-                 this, &default_instance_,
-                 _offsets_, _has_bits_, NULL),
-    _cached_size_(0),
+  : _cached_size_(0),
     book_(const_cast< ::std::string*>(&_default_book_)),
     chapter_(0),
     verse_(0),
@@ -80,10 +99,7 @@ VerseBuffer::VerseBuffer()
 }
 
 VerseBuffer::VerseBuffer(const VerseBuffer& from)
-  : _reflection_(descriptor(),
-                 this, &default_instance_,
-                 _offsets_, _has_bits_, NULL),
-    _cached_size_(0),
+  : _cached_size_(0),
     book_(const_cast< ::std::string*>(&_default_book_)),
     chapter_(0),
     verse_(0),
@@ -105,7 +121,7 @@ VerseBuffer::~VerseBuffer() {
 }
 
 const ::google::protobuf::Descriptor* VerseBuffer::descriptor() {
-  if (VerseBuffer_descriptor_ == NULL) proto_BuildDescriptors_TranslationBuffer_2eproto();
+  if (VerseBuffer_descriptor_ == NULL) protobuf_BuildDesc_TranslationBuffer_2eproto();
   return VerseBuffer_descriptor_;
 }
 
@@ -117,13 +133,9 @@ const ::google::protobuf::Descriptor* VerseBuffer::GetDescriptor() const {
   return descriptor();
 }
 
-const ::google::protobuf::Message::Reflection*
-VerseBuffer::GetReflection() const {
-  return &_reflection_;
-}
-
-::google::protobuf::Message::Reflection* VerseBuffer::GetReflection() {
-  return &_reflection_;
+const ::google::protobuf::Reflection* VerseBuffer::GetReflection() const {
+  if (VerseBuffer_reflection_ == NULL) protobuf_BuildDesc_TranslationBuffer_2eproto();
+  return VerseBuffer_reflection_;
 }
 
 // ===================================================================
@@ -140,10 +152,7 @@ const int TranslationBuffer::_offsets_[3] = {
 };
 
 TranslationBuffer::TranslationBuffer()
-  : _reflection_(descriptor(),
-                 this, &default_instance_,
-                 _offsets_, _has_bits_, NULL),
-    _cached_size_(0),
+  : _cached_size_(0),
     long_name_(const_cast< ::std::string*>(&_default_long_name_)),
     short_name_(const_cast< ::std::string*>(&_default_short_name_)) {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -152,10 +161,7 @@ TranslationBuffer::TranslationBuffer()
 }
 
 TranslationBuffer::TranslationBuffer(const TranslationBuffer& from)
-  : _reflection_(descriptor(),
-                 this, &default_instance_,
-                 _offsets_, _has_bits_, NULL),
-    _cached_size_(0),
+  : _cached_size_(0),
     long_name_(const_cast< ::std::string*>(&_default_long_name_)),
     short_name_(const_cast< ::std::string*>(&_default_short_name_)) {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -174,7 +180,7 @@ TranslationBuffer::~TranslationBuffer() {
 }
 
 const ::google::protobuf::Descriptor* TranslationBuffer::descriptor() {
-  if (TranslationBuffer_descriptor_ == NULL) proto_BuildDescriptors_TranslationBuffer_2eproto();
+  if (TranslationBuffer_descriptor_ == NULL) protobuf_BuildDesc_TranslationBuffer_2eproto();
   return TranslationBuffer_descriptor_;
 }
 
@@ -186,13 +192,9 @@ const ::google::protobuf::Descriptor* TranslationBuffer::GetDescriptor() const {
   return descriptor();
 }
 
-const ::google::protobuf::Message::Reflection*
-TranslationBuffer::GetReflection() const {
-  return &_reflection_;
-}
-
-::google::protobuf::Message::Reflection* TranslationBuffer::GetReflection() {
-  return &_reflection_;
+const ::google::protobuf::Reflection* TranslationBuffer::GetReflection() const {
+  if (TranslationBuffer_reflection_ == NULL) protobuf_BuildDesc_TranslationBuffer_2eproto();
+  return TranslationBuffer_reflection_;
 }
 
 }  // namespace BibleStudy
