@@ -6,22 +6,25 @@
 
 class QAbstractItemModel;
 class QTableView;
+class QVBoxLayout;
+class Translation;
+class ISearchResults;
+class SearchResultsModel;
 
 class UISearchResultsWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    UISearchResultsWidget(QWidget* parent = 0);
+    UISearchResultsWidget(boost::shared_ptr<Translation> translation, QWidget* parent = 0);
 
-signals:
-    void search_results_updated();
-
-//public slots:
-//    void display_search_results(boost::shared_ptr<QAbstractItemModel> model);
+public slots:
+    void display_search_results(boost::shared_ptr<ISearchResults> query);
 
 private:
-    QTableView* m_table_view;
+    QTableView* m_results_view;
+    QVBoxLayout* m_layout;
+    boost::shared_ptr<SearchResultsModel> m_results_model;
 };
 
 #endif //__UI_SEARCH_RESULTS_WIDGET

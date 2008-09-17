@@ -1,3 +1,4 @@
+#include <boost/scoped_ptr.hpp>
 #include <QPushButton>
 #include <QLineEdit>
 #include <QCheckBox>
@@ -5,10 +6,9 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "UISearchWidget.h"
-#include "IEntry.h"
 #include "SearchResultsSerial.h"
 #include "Translation.h"
-#include "SearchResultsModel.h"
+#include "CommandPerformSearch.h"
 
 UISearchWidget::UISearchWidget(boost::shared_ptr<Translation> translation, QWidget* parent) : 
     QWidget(parent),
@@ -43,13 +43,15 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<Translation> translation, QWidg
 
 void UISearchWidget::perform_search()
 {
-    IEntry::ISearchResultsPtr query(new SearchResultsSerial(m_search_input_field->text().toStdString()));
-    IEntry::ISearchResultsCol results;
-    results.push_back(query);
-
-    m_translation->search(results);
-
-    //boost::shared_ptr<QAbstractItemModel> model(new SearchResultsModel(m_translation.get(), query));
-    emit search_complete(query);
-}
+    boost::scoped_ptr<CommandPerformSearch> search_command(m_translation, m_search_input_field->text().toStdString());
+    search_command();
+    emit search_complete(search_command->get_results());
+//    boost::shared_ptr<ISearchResults> query(new SearchResultsSerial(m_search_input_field->text().toStdString()));
+//    std::vector<boost::shared_ptr<ISearchResults> > results;
+//    results.push_back(query);
+//
+//    m_translation->search(results);
+//
+//    emit search_complete(query);
+//}
 
