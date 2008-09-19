@@ -13,7 +13,7 @@ public:
     typedef boost::shared_ptr<ISearchResults> ISearchResultsPtr;
     typedef std::vector<ISearchResultsPtr> ISearchResultsCol;
 
-    virtual void match(ISearchResultsCol& search_strings) const = 0;
+    virtual void match(boost::shared_ptr<ISearchResults> search_string) const = 0;
 
     virtual int get_unqiue_id() const = 0;
     virtual std::string get_text() const = 0;

@@ -2,6 +2,7 @@
 #define __IDocument_H
 
 #include <string>
+#include <boost/shared_ptr.hpp>
 #include "IEntry.h"
 
 class IDocument

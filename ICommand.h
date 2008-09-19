@@ -3,7 +3,7 @@
 
 class ICommand
 {
-    virtual void operator()() = 0;
+    virtual void Execute() = 0;
 };
 
 #endif // __ICOMMAND_H

@@ -12,15 +12,10 @@ Verse::Verse(const std::string& book, int chapter, int verse, const std::string&
 }
 
 // IEntry
-void Verse::match(ISearchResultsCol& search_strings) const
+void Verse::match(boost::shared_ptr<ISearchResults> search_string) const
 {
-    ISearchResultsCol::iterator search_string = search_strings.begin();
-    ISearchResultsCol::iterator search_string_end = search_strings.end();
-    for(; search_string != search_string_end; ++search_string)
-    {
-        if (m_text.find((*search_string)->get_search_string()) != std::string::npos)
-            (*search_string)->add_matching_verse(m_unique_id);
-    }
+    if (m_text.find(search_string->get_search_string()) != std::string::npos)
+        search_string->add_matching_verse(m_unique_id);
 }
 
 void Verse::display(std::ostream& out) const

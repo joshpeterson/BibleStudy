@@ -14,7 +14,7 @@ public:
     Verse(const std::string& book, int chapter, int verse, const std::string& text, int unique_verse_id);
 
     // IEntry
-    virtual void match(ISearchResultsCol& search_strings) const;
+    virtual void match(boost::shared_ptr<ISearchResults> search_string) const;
     virtual int get_unqiue_id() const {return m_unique_id; }
     virtual std::string get_text() const { return m_text; }
     virtual void display(std::ostream& out) const;

@@ -7,16 +7,37 @@
 #include <boost/iostreams/device/mapped_file.hpp>
 #include "Translation.h"
 #include "Verse.h"
-#include "TranslationBuffer.pb.h"
+#include "TranslationBufferNoWarnings.pb.h"
 
-void Translation::search(IEntry::ISearchResultsCol& results) const
+void Translation::search(std::vector<boost::shared_ptr<ISearchResults> >& results) const
 {
-    for (std::vector< boost::shared_ptr<IVerse> >::const_iterator it = m_verses.begin();
-         it != m_verses.end();
+    partial_search(m_verses.begin(), m_verses.end(), results[0]);
+}
+
+void Translation::partial_search(std::vector< boost::shared_ptr<IVerse> >::const_iterator begin, 
+                                 std::vector< boost::shared_ptr<IVerse> >::const_iterator end,
+                                 boost::shared_ptr<ISearchResults> query) const
+{
+    for (std::vector< boost::shared_ptr<IVerse> >::const_iterator it = begin;
+         it != end;
          ++it)
     {
-        (*it)->match(results);
+        (*it)->match(query);
     }
+}
+
+std::vector<boost::shared_ptr<const IVerse> > Translation::get_entry(int unique_id, int num_entries_context) const
+{
+    size_t requested_lower_bound = unique_id - num_entries_context;
+    size_t lower_bound =  requested_lower_bound >= 0 ? requested_lower_bound : 0;
+ 
+    size_t requested_upper_bound = unique_id + num_entries_context;
+    size_t upper_bound = requested_upper_bound <= (m_verses.size()-1) ? requested_upper_bound : (m_verses.size()-1);
+
+    std::vector<boost::shared_ptr<const IVerse> > verses;
+    std::copy(&m_verses[lower_bound], &m_verses[upper_bound], verses.begin());
+
+    return verses;
 }
 
 bool Translation::Save(const std::string &filename)

@@ -43,9 +43,9 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<Translation> translation, QWidg
 
 void UISearchWidget::perform_search()
 {
-    boost::scoped_ptr<CommandPerformSearch> search_command(m_translation, m_search_input_field->text().toStdString());
-    search_command();
-    emit search_complete(search_command->get_results());
+    CommandPerformSearch search_command(m_translation, m_search_input_field->text().toStdString());
+    search_command.Execute();
+    emit search_complete(search_command.get_results());
 //    boost::shared_ptr<ISearchResults> query(new SearchResultsSerial(m_search_input_field->text().toStdString()));
 //    std::vector<boost::shared_ptr<ISearchResults> > results;
 //    results.push_back(query);
@@ -53,5 +53,5 @@ void UISearchWidget::perform_search()
 //    m_translation->search(results);
 //
 //    emit search_complete(query);
-//}
+}
 

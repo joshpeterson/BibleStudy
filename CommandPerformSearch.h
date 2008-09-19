@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <boost/shared_ptr.hpp>
 #include "ICommand.h"
 
 class Translation;
@@ -16,7 +17,7 @@ public:
     boost::shared_ptr<ISearchResults> get_results();
 
     // ICommand
-    void operator()();
+    void Execute();
 
 private:
     boost::shared_ptr<Translation> m_translation;

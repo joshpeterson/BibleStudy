@@ -4,14 +4,17 @@ HEADERS += IDocument.h
 HEADERS += IEntry.h
 HEADERS += ISearchResults.h
 HEADERS += IVerse.h
+HEADERS += ICommand.h
 HEADERS += SearchResultsModel.h
 HEADERS += SearchResultsSerial.h
 HEADERS += Translation.h
 HEADERS += TranslationBuffer.pb.h
+HEADERS += TranslationBufferNoWarnings.pb.h
 HEADERS += UISearchWidget.h
 HEADERS += Verse.h
 HEADERS += UISearchResultsWidget.h
 HEADERS += UIBibleStudyWidget.h
+HEADERS += CommandPerformSearch.h
 
 SOURCES += BibleStudy.cpp
 SOURCES += SearchResultsModel.cpp
@@ -22,6 +25,7 @@ SOURCES += Verse.cpp
 SOURCES += TranslationBuffer.pb.cc
 SOURCES += UISearchResultsWidget.cpp
 SOURCES += UIBibleStudyWidget.cpp
+SOURCES += CommandPerformSearch.cpp
 
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
