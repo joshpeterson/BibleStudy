@@ -12,6 +12,9 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<Translation> tran
     m_layout(new QVBoxLayout),
     m_results_model(new SearchResultsModel(translation.get(), NULL))
 {
+    QObject::connect(m_results_view, SIGNAL(doubleClicked(QModelIndex)), m_results_model.get(), SLOT(get_verse_display(QModelIndex)));
+    QObject::connect(m_results_model.get(), SIGNAL(verse_display_changed(int, int)), this, SLOT(change_verse_display(int, int)));
+
     m_results_view->setSortingEnabled(true);
     m_results_view->setShowGrid(false);
     QHeaderView* header = m_results_view->horizontalHeader();
@@ -31,4 +34,9 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<Translation> tran
 void UISearchResultsWidget::display_search_results(boost::shared_ptr<ISearchResults> query)
 {
     m_results_model->SetResults(query);
+}
+
+void UISearchResultsWidget::change_verse_display(int verse_id, int num_verses_context)
+{
+    emit verse_display_changed(verse_id, num_verses_context);
 }

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
 #include "IVerse.h"
 
 class ISearchResults;

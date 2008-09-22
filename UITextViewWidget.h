@@ -17,6 +17,8 @@ public:
 
 public slots:
     void display_text(int unique_id, int num_entries_context);
+    void increase_displayed_context();
+    void decrease_displayed_context();
 
 private:
     int m_displayed_id;

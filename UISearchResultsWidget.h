@@ -20,6 +20,10 @@ public:
 
 public slots:
     void display_search_results(boost::shared_ptr<ISearchResults> query);
+    void change_verse_display(int verse_id, int num_verses_context);
+
+signals:
+    void verse_display_changed(int verse_id, int num_verses_context);
 
 private:
     QTableView* m_results_view;

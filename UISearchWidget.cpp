@@ -46,12 +46,5 @@ void UISearchWidget::perform_search()
     CommandPerformSearch search_command(m_translation, m_search_input_field->text().toStdString());
     search_command.Execute();
     emit search_complete(search_command.get_results());
-//    boost::shared_ptr<ISearchResults> query(new SearchResultsSerial(m_search_input_field->text().toStdString()));
-//    std::vector<boost::shared_ptr<ISearchResults> > results;
-//    results.push_back(query);
-//
-//    m_translation->search(results);
-//
-//    emit search_complete(query);
 }
 

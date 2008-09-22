@@ -1,3 +1,5 @@
+#include <vector>
+#include <boost/shared_ptr.hpp>
 #include "SearchResultsModel.h"
 #include "IVerse.h"
 
@@ -40,9 +42,7 @@ void SearchResultsModel::SetResults(const IEntry::ISearchResultsPtr results)
     if (index.row() >= m_results->num_results())
         return QVariant();
 
-    if (role != Qt::DisplayRole)
-        return QVariant();
-    else
+    if (role == Qt::DisplayRole)
     {
         switch (index.column())
         {
@@ -64,6 +64,20 @@ void SearchResultsModel::SetResults(const IEntry::ISearchResultsPtr results)
             default:
                 return QVariant();
         }
+    }
+    else if (role == Qt::ToolTipRole)
+    {
+        switch (index.column())
+        {
+            case text_column:
+                return verse_collection_to_string(m_translation->get_entry(m_results->at(index.row()), 2)).c_str();
+            default:
+                return QVariant();
+        }
+    }
+    else
+    {
+        return QVariant();
     }
  }
 
@@ -98,3 +112,10 @@ void SearchResultsModel::SetResults(const IEntry::ISearchResultsPtr results)
         return QString("%1").arg(section);
  }
 
+ void SearchResultsModel::get_verse_display(const QModelIndex &index)
+ {
+     if (index.column() == text_column)
+     {
+         emit verse_display_changed(m_results->at(index.row()), 2);
+     }
+ }

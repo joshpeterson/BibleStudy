@@ -23,7 +23,7 @@ public:
     virtual bool Save(const std::string& filename);
     virtual bool Resume(const std::string& filename);
 
-    virtual std::vector<boost::shared_ptr<const IVerse> > get_entry(int unique_id, int num_entries_context) const;
+    std::vector<boost::shared_ptr<const IVerse> > get_entry(int unique_id, int num_entries_context) const;
     bool Import(const std::string& long_name, const std::string& short_name, const std::string& filename);
 
 private:
@@ -36,4 +36,8 @@ private:
                         boost::shared_ptr<ISearchResults> query) const;
 
 };
+
+std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection);
+std::string verse_collection_title(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection);
+
 #endif //__TRANSLATION_H
