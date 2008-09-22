@@ -15,6 +15,7 @@ HEADERS += Verse.h
 HEADERS += UISearchResultsWidget.h
 HEADERS += UIBibleStudyWidget.h
 HEADERS += CommandPerformSearch.h
+HEADERS += UITextViewWidget.h
 
 SOURCES += BibleStudy.cpp
 SOURCES += SearchResultsModel.cpp
@@ -26,6 +27,7 @@ SOURCES += TranslationBuffer.pb.cc
 SOURCES += UISearchResultsWidget.cpp
 SOURCES += UIBibleStudyWidget.cpp
 SOURCES += CommandPerformSearch.cpp
+SOURCES += UITextViewWidget.cpp
 
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"

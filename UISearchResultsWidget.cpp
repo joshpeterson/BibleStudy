@@ -25,13 +25,10 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<Translation> tran
     m_layout->addWidget(title);
     m_layout->addWidget(m_results_view);
 
-    m_results_view->hide();
-    
     setLayout(m_layout);
 }
 
 void UISearchResultsWidget::display_search_results(boost::shared_ptr<ISearchResults> query)
 {
     m_results_model->SetResults(query);
-    m_results_view->show();
 }

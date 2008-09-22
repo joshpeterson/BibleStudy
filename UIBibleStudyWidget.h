@@ -8,6 +8,7 @@ class QVBoxLayout;
 class Translation;
 class UISearchWidget;
 class UISearchResultsWidget;
+class UITextViewWidget;
 
 class UIBibleStudyWidget : public QWidget
 {
@@ -19,6 +20,7 @@ public:
 private:
     UISearchWidget* m_search;
     UISearchResultsWidget* m_results;
+    UITextViewWidget* m_text;
 };
 
 #endif //__UI_BIBLE_STUDY_WIDGET
