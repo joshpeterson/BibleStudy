@@ -28,11 +28,11 @@ void Translation::partial_search(std::vector< boost::shared_ptr<IVerse> >::const
 
 std::vector<boost::shared_ptr<const IVerse> > Translation::get_entry(int unique_id, int num_entries_context) const
 {
-    size_t requested_lower_bound = unique_id - num_entries_context;
-    size_t lower_bound =  requested_lower_bound >= 0 ? requested_lower_bound : 0;
+    int requested_lower_bound = unique_id - num_entries_context;
+    int lower_bound =  requested_lower_bound >= 0 ? requested_lower_bound : 0;
  
-    size_t requested_upper_bound = unique_id + num_entries_context + 1;
-    size_t upper_bound = requested_upper_bound <= (m_verses.size()-1) ? requested_upper_bound : (m_verses.size()-1);
+    int requested_upper_bound = unique_id + num_entries_context + 1;
+    int upper_bound = requested_upper_bound <= static_cast<int>(m_verses.size()-1) ? requested_upper_bound : (m_verses.size()-1);
 
     std::vector<boost::shared_ptr<const IVerse> > verses;
     std::copy(&m_verses[lower_bound], &m_verses[upper_bound], std::back_inserter(verses));

@@ -8,6 +8,7 @@ class QVBoxLayout;
 class Translation;
 class UISearchWidget;
 class UISearchResultsWidget;
+class UIStarredVersesWidget;
 class UITextViewWidget;
 
 class UIBibleStudyWidget : public QWidget
@@ -20,6 +21,7 @@ public:
 private:
     UISearchWidget* m_search;
     UISearchResultsWidget* m_results;
+    UIStarredVersesWidget* m_starred_verses;
     UITextViewWidget* m_text;
 };
 

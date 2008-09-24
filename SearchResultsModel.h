@@ -1,3 +1,6 @@
+#ifndef __SEARCH_RESULTS_MODEL_H
+#define __SEARCH_RESULTS_MODEL_H
+
 #include <QAbstractTableModel>
 #include "IEntry.h"
 #include "Translation.h"
@@ -38,3 +41,4 @@ private:
     };
 };
 
+#endif // __SEARCH_RESULTS_MODEL_H
