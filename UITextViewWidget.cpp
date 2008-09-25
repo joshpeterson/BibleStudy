@@ -1,6 +1,7 @@
 #include <QLabel>
 #include <QTextEdit>
 #include <QPushButton>
+#include <QToolButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "UITextViewWidget.h"
@@ -11,10 +12,10 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, Q
     m_displayed_id(-1),
     m_displayed_context(0),
     m_translation(translation),
-    m_title(new QLabel("Verse Title")),
-    m_text(new QTextEdit("Verse text goes here.")),
-    m_more_button(new QPushButton("More")),
-    m_less_button(new QPushButton("Less")),
+    m_title(new QLabel()),
+    m_text(new QTextEdit()),
+    m_more_button(new QToolButton()),
+    m_less_button(new QToolButton()),
     m_star_button(new QPushButton("Star")),
     m_prev_button(new QPushButton("Prev")),
     m_next_button(new QPushButton("Next"))
@@ -23,6 +24,18 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, Q
     QObject::connect(m_less_button, SIGNAL(clicked()), this, SLOT(decrease_displayed_context()));
     QObject::connect(m_next_button, SIGNAL(clicked()), this, SLOT(display_next_verse()));
     QObject::connect(m_prev_button, SIGNAL(clicked()), this, SLOT(display_prev_verse()));
+
+    m_star_button->setEnabled(false);
+    m_next_button->setEnabled(false);
+    m_prev_button->setEnabled(false);
+
+    m_more_button->setEnabled(false);
+    m_more_button->setIcon(QIcon("icons/plus.png"));
+    m_more_button->setToolTip(tr("Show more context"));
+    
+    m_less_button->setEnabled(false);
+    m_less_button->setIcon(QIcon("icons/minus.png"));
+    m_more_button->setToolTip(tr("Show less context"));
 
     QHBoxLayout* header_row = new QHBoxLayout;
 
@@ -57,6 +70,7 @@ void UITextViewWidget::display_text(int unique_id, int num_entries_context)
     m_text->setText(verse_collection_to_string(verses).c_str());
 
     m_star_button->setEnabled(star_button_should_be_enabled());
+    m_more_button->setEnabled(more_button_should_be_enabled());
     m_less_button->setEnabled(less_button_should_be_enabled());
     m_next_button->setEnabled(next_button_should_be_enabled());
     m_prev_button->setEnabled(prev_button_should_be_enabled());
@@ -121,6 +135,11 @@ bool UITextViewWidget::prev_button_should_be_enabled()
 bool UITextViewWidget::next_button_should_be_enabled()
 {
     return m_displayed_id != m_translation->num_entries()-1;
+}
+
+bool UITextViewWidget::more_button_should_be_enabled()
+{
+    return true;
 }
 
 bool UITextViewWidget::less_button_should_be_enabled()

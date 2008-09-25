@@ -4,7 +4,6 @@
 #include <QAbstractListModel>
 #include <boost/shared_ptr.hpp>
 #include <list>
-#include <pair>
 
 class Translation;
 

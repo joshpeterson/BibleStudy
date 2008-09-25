@@ -7,6 +7,7 @@
 class QLabel;
 class QTextEdit;
 class QPushButton;
+class QToolButton;
 class Translation;
 
 class UITextViewWidget : public QWidget
@@ -29,14 +30,15 @@ private:
     boost::shared_ptr<Translation> m_translation;
     QLabel* m_title;
     QTextEdit* m_text;
-    QPushButton* m_more_button;
-    QPushButton* m_less_button;
+    QToolButton* m_more_button;
+    QToolButton* m_less_button;
     QPushButton* m_star_button;
     QPushButton* m_prev_button;
     QPushButton* m_next_button;
 
     bool next_button_should_be_enabled();
     bool prev_button_should_be_enabled();
+    bool more_button_should_be_enabled();
     bool less_button_should_be_enabled();
     bool star_button_should_be_enabled();
 };
