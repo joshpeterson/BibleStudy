@@ -26,6 +26,8 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, Q
     QObject::connect(m_prev_button, SIGNAL(clicked()), this, SLOT(display_prev_verse()));
 
     m_star_button->setEnabled(false);
+    m_star_button->setToolTip(tr("Save this verse"));
+
     m_next_button->setEnabled(false);
     m_prev_button->setEnabled(false);
 
