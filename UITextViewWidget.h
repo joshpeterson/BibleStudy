@@ -6,7 +6,6 @@
 
 class QLabel;
 class QTextEdit;
-class QPushButton;
 class QToolButton;
 class Translation;
 
@@ -17,12 +16,20 @@ class UITextViewWidget : public QWidget
 public:
     UITextViewWidget(boost::shared_ptr<Translation> translation, QWidget* parent = 0);
 
+signals:
+    void verse_starred(int verse_id, int num_verses_context);
+    void verse_unstarred(int verse_id);
+
 public slots:
     void display_text(int unique_id, int num_entries_context);
+
+private slots:
     void increase_displayed_context();
     void decrease_displayed_context();
     void display_next_verse();
     void display_prev_verse();
+    void change_star_button_icon();
+    void change_starred_verse_state();
 
 private:
     int m_displayed_id;
@@ -32,9 +39,9 @@ private:
     QTextEdit* m_text;
     QToolButton* m_more_button;
     QToolButton* m_less_button;
-    QPushButton* m_star_button;
-    QPushButton* m_prev_button;
-    QPushButton* m_next_button;
+    QToolButton* m_star_button;
+    QToolButton* m_prev_button;
+    QToolButton* m_next_button;
 
     bool next_button_should_be_enabled();
     bool prev_button_should_be_enabled();

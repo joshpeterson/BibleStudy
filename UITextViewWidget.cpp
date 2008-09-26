@@ -1,6 +1,5 @@
 #include <QLabel>
 #include <QTextEdit>
-#include <QPushButton>
 #include <QToolButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -16,20 +15,21 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, Q
     m_text(new QTextEdit()),
     m_more_button(new QToolButton()),
     m_less_button(new QToolButton()),
-    m_star_button(new QPushButton("Star")),
-    m_prev_button(new QPushButton("Prev")),
-    m_next_button(new QPushButton("Next"))
+    m_star_button(new QToolButton()),
+    m_prev_button(new QToolButton()),
+    m_next_button(new QToolButton())
 {
     QObject::connect(m_more_button, SIGNAL(clicked()), this, SLOT(increase_displayed_context()));
     QObject::connect(m_less_button, SIGNAL(clicked()), this, SLOT(decrease_displayed_context()));
     QObject::connect(m_next_button, SIGNAL(clicked()), this, SLOT(display_next_verse()));
     QObject::connect(m_prev_button, SIGNAL(clicked()), this, SLOT(display_prev_verse()));
+    QObject::connect(m_star_button, SIGNAL(clicked()), this, SLOT(change_star_button_icon()));
+    QObject::connect(m_star_button, SIGNAL(clicked()), this, SLOT(change_starred_verse_state()));
 
     m_star_button->setEnabled(false);
+    m_star_button->setIcon(QIcon("icons/star_off.png"));
     m_star_button->setToolTip(tr("Save this verse"));
-
-    m_next_button->setEnabled(false);
-    m_prev_button->setEnabled(false);
+    m_star_button->setCheckable(true);
 
     m_more_button->setEnabled(false);
     m_more_button->setIcon(QIcon("icons/plus.png"));
@@ -37,7 +37,15 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, Q
     
     m_less_button->setEnabled(false);
     m_less_button->setIcon(QIcon("icons/minus.png"));
-    m_more_button->setToolTip(tr("Show less context"));
+    m_less_button->setToolTip(tr("Show less context"));
+
+    m_next_button->setEnabled(false);
+    m_next_button->setIcon(QIcon("icons/next.png"));
+    m_next_button->setToolTip(tr("Next verse"));
+
+    m_prev_button->setEnabled(false);
+    m_prev_button->setIcon(QIcon("icons/prev.png"));
+    m_prev_button->setToolTip(tr("Previous verse"));
 
     QHBoxLayout* header_row = new QHBoxLayout;
 
@@ -45,11 +53,8 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, Q
     header_row->addWidget(m_star_button);
     header_row->addWidget(m_less_button);
     header_row->addWidget(m_more_button);
-
-    QHBoxLayout* footer_row = new QHBoxLayout;
-
-    footer_row->addWidget(m_prev_button);
-    footer_row->addWidget(m_next_button);
+    header_row->addWidget(m_prev_button);
+    header_row->addWidget(m_next_button);
 
     m_text->setReadOnly(true);
 
@@ -57,7 +62,6 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, Q
 
     layout->addLayout(header_row);
     layout->addWidget(m_text);
-    layout->addLayout(footer_row);
 
     setLayout(layout);
 }
@@ -129,6 +133,22 @@ void UITextViewWidget::display_prev_verse()
     }
 }
 
+void UITextViewWidget::change_star_button_icon()
+{
+    if (m_star_button->isChecked())
+        m_star_button->setIcon(QIcon("icons/star_on.png"));
+    else
+        m_star_button->setIcon(QIcon("icons/star_off.png"));
+}
+
+void UITextViewWidget::change_starred_verse_state()
+{
+    if (m_star_button->isChecked())
+        emit verse_starred(m_displayed_id, m_displayed_context);
+    else
+        emit verse_unstarred(m_displayed_id);
+}
+
 bool UITextViewWidget::prev_button_should_be_enabled()
 {
     return m_displayed_id > 0;
@@ -141,7 +161,7 @@ bool UITextViewWidget::next_button_should_be_enabled()
 
 bool UITextViewWidget::more_button_should_be_enabled()
 {
-    return true;
+    return m_displayed_id != -1;
 }
 
 bool UITextViewWidget::less_button_should_be_enabled()
@@ -151,5 +171,5 @@ bool UITextViewWidget::less_button_should_be_enabled()
 
 bool UITextViewWidget::star_button_should_be_enabled()
 {
-    return true;
+    return m_displayed_id != -1;
 }

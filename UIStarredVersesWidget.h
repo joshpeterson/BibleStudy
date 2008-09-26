@@ -15,6 +15,10 @@ class UIStarredVersesWidget : public QWidget
 public:
     UIStarredVersesWidget(boost::shared_ptr<Translation> translation, QWidget* parent = 0);
 
+public slots:
+    void add_starred_verse(int verse_id, int num_verses_context);
+    void remove_starred_verse(int verse_id);
+
 private:
     boost::shared_ptr<Translation> m_translation;
     QListView* m_starred_verses_view;

@@ -112,10 +112,17 @@ void SearchResultsModel::SetResults(const IEntry::ISearchResultsPtr results)
         return QString("%1").arg(section);
  }
 
- void SearchResultsModel::get_verse_display(const QModelIndex &index)
+ std::pair<int, int> SearchResultsModel::get_verse_display(const QModelIndex &index)
  {
+     std::pair<int, int> verse_to_display;
      if (index.column() == text_column)
      {
-         emit verse_display_changed(m_results->at(index.row()), 2);
+         verse_to_display.first = m_results->at(index.row());
+         verse_to_display.second = 2;
+         return verse_to_display;
      }
+
+     verse_to_display.first = -1;
+     verse_to_display.second = -1;
+     return verse_to_display;
  }

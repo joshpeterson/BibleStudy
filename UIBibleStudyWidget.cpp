@@ -18,6 +18,7 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<Translation> translatio
                      m_results, SLOT(display_search_results(boost::shared_ptr<ISearchResults>)));
 
     QObject::connect(m_text, SIGNAL(verse_starred(int, int)), m_starred_verses, SLOT(add_starred_verse(int, int)));
+    QObject::connect(m_text, SIGNAL(verse_unstarred(int)), m_starred_verses, SLOT(remove_starred_verse(int)));
     QObject::connect(m_results, SIGNAL(verse_display_changed(int, int)), m_text, SLOT(display_text(int, int)));
 
     QHBoxLayout* bottom_row = new QHBoxLayout();

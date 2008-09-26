@@ -33,7 +33,7 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<Translation> translation, QWidg
     translation_selection_row->addWidget(ltv_check_box);
     translation_selection_row->addWidget(rsv_check_box);
     translation_selection_row->addWidget(nab_check_box);
-
+    
     QVBoxLayout* layout = new QVBoxLayout;
 
     layout->addLayout(search_field_row);

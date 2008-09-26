@@ -2,6 +2,7 @@
 #define __UI_SEARCH_RESULTS_WIDGET
 
 #include <QWidget>
+#include <QAbstractItemModel>
 #include <boost/shared_ptr.hpp>
 
 class QAbstractItemModel;
@@ -20,7 +21,7 @@ public:
 
 public slots:
     void display_search_results(boost::shared_ptr<ISearchResults> query);
-    void change_verse_display(int verse_id, int num_verses_context);
+    void display_verse_text(const QModelIndex& index);
 
 signals:
     void verse_display_changed(int verse_id, int num_verses_context);
