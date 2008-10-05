@@ -23,12 +23,12 @@ UIStarredVersesWidget::UIStarredVersesWidget(boost::shared_ptr<Translation> tran
     setLayout(layout);
 }
 
-void UIStarredVersesWidget::add_starred_verse(int verse_id, int num_verses_context)
+void UIStarredVersesWidget::add_starred_verse(boost::shared_ptr<VerseDisplay> verse)
 {
-    m_starred_verses_model->add_starred_verse(verse_id, num_verses_context);
+    m_starred_verses_model->add_starred_verse(verse);
 }
 
-void UIStarredVersesWidget::remove_starred_verse(int verse_id)
+void UIStarredVersesWidget::remove_starred_verse(boost::shared_ptr<VerseDisplay> verse)
 {
-    m_starred_verses_model->remove_starred_verse(verse_id);
+    m_starred_verses_model->remove_starred_verse(verse);
 }

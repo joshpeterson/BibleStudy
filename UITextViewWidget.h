@@ -8,6 +8,7 @@ class QLabel;
 class QTextEdit;
 class QToolButton;
 class Translation;
+class VerseDisplay;
 
 class UITextViewWidget : public QWidget
 {
@@ -17,8 +18,8 @@ public:
     UITextViewWidget(boost::shared_ptr<Translation> translation, QWidget* parent = 0);
 
 signals:
-    void verse_starred(int verse_id, int num_verses_context);
-    void verse_unstarred(int verse_id);
+    void verse_starred(boost::shared_ptr<VerseDisplay> verse);
+    void verse_unstarred(boost::shared_ptr<VerseDisplay> verse);
 
 public slots:
     void display_text(int unique_id, int num_entries_context);

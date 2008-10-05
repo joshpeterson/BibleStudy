@@ -5,6 +5,7 @@
 #include <QVBoxLayout>
 #include "UITextViewWidget.h"
 #include "Translation.h"
+#include "VerseDisplay.h"
 
 UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, QWidget* parent) :
     QWidget(parent),
@@ -75,6 +76,8 @@ void UITextViewWidget::display_text(int unique_id, int num_entries_context)
     m_title->setText(verse_collection_title(verses).c_str());
     m_text->setText(verse_collection_to_string(verses).c_str());
 
+    m_star_button->setChecked(false);
+
     m_star_button->setEnabled(star_button_should_be_enabled());
     m_more_button->setEnabled(more_button_should_be_enabled());
     m_less_button->setEnabled(less_button_should_be_enabled());
@@ -143,10 +146,11 @@ void UITextViewWidget::change_star_button_icon()
 
 void UITextViewWidget::change_starred_verse_state()
 {
+    boost::shared_ptr<VerseDisplay> verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_id, m_displayed_context));
     if (m_star_button->isChecked())
-        emit verse_starred(m_displayed_id, m_displayed_context);
+        emit verse_starred(verse);
     else
-        emit verse_unstarred(m_displayed_id);
+        emit verse_unstarred(verse);
 }
 
 bool UITextViewWidget::prev_button_should_be_enabled()

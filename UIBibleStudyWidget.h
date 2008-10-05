@@ -6,6 +6,7 @@
 
 class QVBoxLayout;
 class Translation;
+class VerseDisplay;
 class UISearchWidget;
 class UISearchResultsWidget;
 class UIStarredVersesWidget;
