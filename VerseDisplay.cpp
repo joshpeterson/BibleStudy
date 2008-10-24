@@ -25,3 +25,4 @@ bool VerseDisplay::operator==(const VerseDisplay& other) const
 {
     return m_verse_id == other.get_verse_id() && m_translation == other.get_translation();
 }
+

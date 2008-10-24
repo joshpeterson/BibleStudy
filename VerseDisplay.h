@@ -19,3 +19,4 @@ private:
 };
 
 #endif //__VERSE_DISPLAY_H
+

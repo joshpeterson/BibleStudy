@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <boost/spirit/phoenix/operators.hpp>
 #include <boost/spirit/phoenix/primitives.hpp>
 #include <boost/spirit/phoenix/special_ops.hpp>
@@ -67,3 +68,4 @@ std::pair<int, int> StarredVersesModel::get_verse_display(const QModelIndex &ind
      verse_to_display.second = m_starred_verses.at(index.row())->get_num_verses_context();
      return verse_to_display;
  }
+
