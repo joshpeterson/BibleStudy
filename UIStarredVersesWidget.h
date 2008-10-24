@@ -2,6 +2,7 @@
 #define __UI_STARRED_VERSES_WIDGET_H
 
 #include <QWidget>
+#include <QAbstractItemModel>
 #include <boost/shared_ptr.hpp>
 
 class QListView;
@@ -14,11 +15,16 @@ class UIStarredVersesWidget : public QWidget
     Q_OBJECT
 
 public:
-    UIStarredVersesWidget(boost::shared_ptr<Translation> translation, QWidget* parent = 0);
+    UIStarredVersesWidget(boost::shared_ptr<Translation> translation,
+                          boost::shared_ptr<StarredVersesModel> starred_verses_model, QWidget* parent = 0);
 
 public slots:
     void add_starred_verse(boost::shared_ptr<VerseDisplay> verse);
     void remove_starred_verse(boost::shared_ptr<VerseDisplay> verse);
+    void display_verse_text(const QModelIndex& index);
+
+signals:
+    void verse_display_changed(int verse_id, int num_verses_context);
 
 private:
     boost::shared_ptr<Translation> m_translation;

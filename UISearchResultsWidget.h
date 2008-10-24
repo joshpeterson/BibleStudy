@@ -17,7 +17,8 @@ class UISearchResultsWidget : public QWidget
     Q_OBJECT
 
 public:
-    UISearchResultsWidget(boost::shared_ptr<Translation> translation, QWidget* parent = 0);
+    UISearchResultsWidget(boost::shared_ptr<Translation> translation,
+                          boost::shared_ptr<SearchResultsModel> results_model, QWidget* parent = 0);
 
 public slots:
     void display_search_results(boost::shared_ptr<ISearchResults> query);

@@ -7,6 +7,8 @@
 class QVBoxLayout;
 class Translation;
 class VerseDisplay;
+class SearchResultsModel;
+class StarredVersesModel;
 class UISearchWidget;
 class UISearchResultsWidget;
 class UIStarredVersesWidget;
@@ -20,6 +22,9 @@ public:
     UIBibleStudyWidget(boost::shared_ptr<Translation> translation, QWidget* parent = 0);
 
 private:
+    boost::shared_ptr<SearchResultsModel> m_results_model;
+    boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
+
     UISearchWidget* m_search;
     UISearchResultsWidget* m_results;
     UIStarredVersesWidget* m_starred_verses;

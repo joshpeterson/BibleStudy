@@ -6,11 +6,13 @@
 #include "UISearchResultsWidget.h"
 #include "SearchResultsModel.h"
 
-UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<Translation> translation, QWidget *parent) :
+UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<Translation> translation, 
+                                             boost::shared_ptr<SearchResultsModel> results_model,
+                                             QWidget *parent) :
     QWidget(parent),
     m_results_view(new QTableView),
     m_layout(new QVBoxLayout),
-    m_results_model(new SearchResultsModel(translation.get(), NULL))
+    m_results_model(results_model)
 {
     QObject::connect(m_results_view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
 

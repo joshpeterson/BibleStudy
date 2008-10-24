@@ -15,6 +15,7 @@ public:
     void add_starred_verse(boost::shared_ptr<VerseDisplay> verse);
     void remove_starred_verse(boost::shared_ptr<VerseDisplay> verse);
     bool verse_starred(boost::shared_ptr<VerseDisplay> verse);
+    std::pair<int, int> get_verse_display(const QModelIndex& index);
     
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;

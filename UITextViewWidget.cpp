@@ -6,9 +6,13 @@
 #include "UITextViewWidget.h"
 #include "Translation.h"
 #include "VerseDisplay.h"
+#include "StarredVersesModel.h"
 
-UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, QWidget* parent) :
+UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, 
+                                   boost::shared_ptr<StarredVersesModel> starred_verses_model,
+                                   QWidget* parent) :
     QWidget(parent),
+    m_starred_verses_model(starred_verses_model),
     m_displayed_id(-1),
     m_displayed_context(0),
     m_translation(translation),
@@ -76,7 +80,10 @@ void UITextViewWidget::display_text(int unique_id, int num_entries_context)
     m_title->setText(verse_collection_title(verses).c_str());
     m_text->setText(verse_collection_to_string(verses).c_str());
 
-    m_star_button->setChecked(false);
+    boost::shared_ptr<VerseDisplay> verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_id, m_displayed_context));
+    m_star_button->setChecked(m_starred_verses_model->verse_starred(verse));
+
+    change_star_button_icon();
 
     m_star_button->setEnabled(star_button_should_be_enabled());
     m_more_button->setEnabled(more_button_should_be_enabled());
