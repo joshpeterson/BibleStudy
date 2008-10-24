@@ -13,8 +13,7 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation,
                                    QWidget* parent) :
     QWidget(parent),
     m_starred_verses_model(starred_verses_model),
-    m_displayed_id(-1),
-    m_displayed_context(0),
+    m_displayed_verse(new VerseDisplay("", -1, -1)),
     m_translation(translation),
     m_title(new QLabel()),
     m_text(new QTextEdit()),
@@ -71,17 +70,16 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation,
     setLayout(layout);
 }
 
-void UITextViewWidget::display_text(int unique_id, int num_entries_context)
+void UITextViewWidget::display_text(boost::shared_ptr<VerseDisplay> verse)
 {
-    m_displayed_id = unique_id;
-    m_displayed_context = num_entries_context;
+    m_displayed_verse = verse;
 
-    std::vector<boost::shared_ptr<const IVerse> > verses = m_translation->get_entry(unique_id, num_entries_context);
+    std::vector<boost::shared_ptr<const IVerse> > verses = m_translation->get_entry(m_displayed_verse->get_verse_id(),
+                                                                                    m_displayed_verse->get_num_verses_context());
     m_title->setText(verse_collection_title(verses).c_str());
     m_text->setText(verse_collection_to_string(verses).c_str());
 
-    boost::shared_ptr<VerseDisplay> verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_id, m_displayed_context));
-    m_star_button->setChecked(m_starred_verses_model->verse_starred(verse));
+    m_star_button->setChecked(m_starred_verses_model->verse_starred(m_displayed_verse));
 
     change_star_button_icon();
 
@@ -94,29 +92,33 @@ void UITextViewWidget::display_text(int unique_id, int num_entries_context)
 
 void UITextViewWidget::increase_displayed_context()
 {
-    m_displayed_context += 1;
+    m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_verse->get_verse_id(), 
+                                                                         m_displayed_verse->get_num_verses_context() + 1));
     
-    display_text(m_displayed_id, m_displayed_context);
+    display_text(m_displayed_verse);
 }
 
 void UITextViewWidget::decrease_displayed_context()
 {
-    int requested_displayed_context = m_displayed_context - 1;
+    int requested_displayed_context = m_displayed_verse->get_num_verses_context() - 1;
     
     if (requested_displayed_context >= 0)
-        m_displayed_context = requested_displayed_context;
-    
-    display_text(m_displayed_id, m_displayed_context);
+    {
+        m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_verse->get_verse_id(), 
+                                                                             requested_displayed_context));
+        display_text(m_displayed_verse);
+    }
 }
 
 void UITextViewWidget::display_next_verse()
 {
-    int requested_next_verse = m_displayed_id + 1;
+    int requested_next_verse = m_displayed_verse->get_verse_id() + 1;
 
     if (requested_next_verse < m_translation->num_entries()-1)
     {
-        m_displayed_id += 1;
-        display_text(m_displayed_id, m_displayed_context);
+        m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_verse->get_verse_id() +1, 
+                                                                             m_displayed_verse->get_num_verses_context()));
+        display_text(m_displayed_verse);
         
         if (!next_button_should_be_enabled() && m_next_button->isEnabled())
             m_next_button->setEnabled(false);
@@ -128,12 +130,13 @@ void UITextViewWidget::display_next_verse()
 
 void UITextViewWidget::display_prev_verse()
 {
-    int requested_next_verse = m_displayed_id - 1;
+    int requested_next_verse = m_displayed_verse->get_verse_id() - 1;
 
     if (requested_next_verse >= 0)
     {
-        m_displayed_id -= 1;
-        display_text(m_displayed_id, m_displayed_context);
+        m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_verse->get_verse_id() - 1, 
+                                                                             m_displayed_verse->get_num_verses_context()));
+        display_text(m_displayed_verse);
 
         if (!prev_button_should_be_enabled() && m_prev_button->isEnabled())
             m_prev_button->setEnabled(false);
@@ -153,34 +156,33 @@ void UITextViewWidget::change_star_button_icon()
 
 void UITextViewWidget::change_starred_verse_state()
 {
-    boost::shared_ptr<VerseDisplay> verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_id, m_displayed_context));
     if (m_star_button->isChecked())
-        emit verse_starred(verse);
+        emit verse_starred(m_displayed_verse);
     else
-        emit verse_unstarred(verse);
+        emit verse_unstarred(m_displayed_verse);
 }
 
 bool UITextViewWidget::prev_button_should_be_enabled()
 {
-    return m_displayed_id > 0;
+    return m_displayed_verse->get_verse_id() > 0;
 }
 
 bool UITextViewWidget::next_button_should_be_enabled()
 {
-    return m_displayed_id != m_translation->num_entries()-1;
+    return m_displayed_verse->get_verse_id() != m_translation->num_entries()-1;
 }
 
 bool UITextViewWidget::more_button_should_be_enabled()
 {
-    return m_displayed_id != -1;
+    return m_displayed_verse->get_verse_id() != -1;
 }
 
 bool UITextViewWidget::less_button_should_be_enabled()
 {
-    return m_displayed_context > 0;
+    return m_displayed_verse->get_num_verses_context() > 0;
 }
 
 bool UITextViewWidget::star_button_should_be_enabled()
 {
-    return m_displayed_id != -1;
+    return m_displayed_verse->get_verse_id() != -1;
 }

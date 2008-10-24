@@ -5,6 +5,7 @@
 #include <QLabel>
 #include "UISearchResultsWidget.h"
 #include "SearchResultsModel.h"
+#include "VerseDisplay.h"
 
 UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<Translation> translation, 
                                              boost::shared_ptr<SearchResultsModel> results_model,
@@ -39,7 +40,7 @@ void UISearchResultsWidget::display_search_results(boost::shared_ptr<ISearchResu
 
 void UISearchResultsWidget::display_verse_text(const QModelIndex& index)
 {
-    std::pair<int, int> verse_to_display = m_results_model->get_verse_display(index);
-    if (verse_to_display.first != -1)
-        emit verse_display_changed(verse_to_display.first, verse_to_display.second);
+    boost::shared_ptr<VerseDisplay> verse_to_display = m_results_model->get_verse_display(index);
+    if (verse_to_display->get_verse_id() != -1)
+        emit verse_display_changed(verse_to_display);
 }

@@ -11,6 +11,7 @@ class QVBoxLayout;
 class Translation;
 class ISearchResults;
 class SearchResultsModel;
+class VerseDisplay;
 
 class UISearchResultsWidget : public QWidget
 {
@@ -25,7 +26,7 @@ public slots:
     void display_verse_text(const QModelIndex& index);
 
 signals:
-    void verse_display_changed(int verse_id, int num_verses_context);
+    void verse_display_changed(boost::shared_ptr<VerseDisplay> verse);
 
 private:
     QTableView* m_results_view;

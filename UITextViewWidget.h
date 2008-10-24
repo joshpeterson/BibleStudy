@@ -24,7 +24,7 @@ signals:
     void verse_unstarred(boost::shared_ptr<VerseDisplay> verse);
 
 public slots:
-    void display_text(int unique_id, int num_entries_context);
+    void display_text(boost::shared_ptr<VerseDisplay> verse);
 
 private slots:
     void increase_displayed_context();
@@ -37,8 +37,7 @@ private slots:
 private:
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
     
-    int m_displayed_id;
-    int m_displayed_context;
+    boost::shared_ptr<VerseDisplay> m_displayed_verse;
     boost::shared_ptr<Translation> m_translation;
     QLabel* m_title;
     QTextEdit* m_text;

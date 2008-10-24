@@ -61,11 +61,9 @@ bool StarredVersesModel::verse_starred(boost::shared_ptr<VerseDisplay> verse)
     return std::find_if(m_starred_verses.begin(), m_starred_verses.end(), *arg1 == *verse) != m_starred_verses.end();
 }
 
-std::pair<int, int> StarredVersesModel::get_verse_display(const QModelIndex &index)
- {
-     std::pair<int, int> verse_to_display;
-     verse_to_display.first = m_starred_verses.at(index.row())->get_verse_id();
-     verse_to_display.second = m_starred_verses.at(index.row())->get_num_verses_context();
-     return verse_to_display;
- }
+boost::shared_ptr<VerseDisplay> StarredVersesModel::get_verse_display(const QModelIndex &index)
+{
+    return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_starred_verses.at(index.row())->get_verse_id(), 
+                                                            m_starred_verses.at(index.row())->get_num_verses_context()));
+}
 

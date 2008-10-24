@@ -6,12 +6,14 @@
 #include "Translation.h"
 #include "ISearchResults.h"
 
+class VerseDisplay;
+
 class SearchResultsModel : public QAbstractTableModel
 {
 public:
     SearchResultsModel(const Translation* translation, ISearchResults* results, QObject* parent = 0);
     void SetResults(const IEntry::ISearchResultsPtr results);
-    std::pair<int, int> get_verse_display(const QModelIndex& index);
+    boost::shared_ptr<VerseDisplay> get_verse_display(const QModelIndex& index);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;

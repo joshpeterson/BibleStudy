@@ -2,6 +2,7 @@
 #include <boost/shared_ptr.hpp>
 #include "SearchResultsModel.h"
 #include "IVerse.h"
+#include "VerseDisplay.h"
 
 SearchResultsModel::SearchResultsModel(const Translation* translation, 
                                        ISearchResults* results,
@@ -112,17 +113,10 @@ void SearchResultsModel::SetResults(const IEntry::ISearchResultsPtr results)
         return QString("%1").arg(section);
  }
 
- std::pair<int, int> SearchResultsModel::get_verse_display(const QModelIndex &index)
+ boost::shared_ptr<VerseDisplay> SearchResultsModel::get_verse_display(const QModelIndex &index)
  {
-     std::pair<int, int> verse_to_display;
      if (index.column() == text_column)
-     {
-         verse_to_display.first = m_results->at(index.row());
-         verse_to_display.second = 2;
-         return verse_to_display;
-     }
-
-     verse_to_display.first = -1;
-     verse_to_display.second = -1;
-     return verse_to_display;
+         return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_results->at(index.row()), 2));
+     else
+         return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", -1, -1));
  }

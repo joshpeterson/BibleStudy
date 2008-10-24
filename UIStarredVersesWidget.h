@@ -24,7 +24,7 @@ public slots:
     void display_verse_text(const QModelIndex& index);
 
 signals:
-    void verse_display_changed(int verse_id, int num_verses_context);
+    void verse_display_changed(boost::shared_ptr<VerseDisplay> verse);
 
 private:
     boost::shared_ptr<Translation> m_translation;
