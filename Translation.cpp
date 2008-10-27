@@ -79,6 +79,13 @@ bool Translation::Resume(const std::string &filename)
     m_long_name = buffer.long_name();
     m_short_name = buffer.short_name();
 
+    m_meta_data = std::vector< boost::shared_ptr< std::vector<int> > >();
+
+    std::string cur_book;
+    int cur_chapter = 0;
+    int num_verses_in_chapter = 0;
+    boost::shared_ptr< std::vector<int> > cur_book_meta_data;
+
     int num_verses = buffer.verse_size();
     for (int i = 0; i < num_verses; ++i)
     {
@@ -87,9 +94,59 @@ bool Translation::Resume(const std::string &filename)
                                                  verse_buffer.verse(), verse_buffer.text(),
                                                  verse_buffer.unique_id()));
         m_verses.push_back(verse);
+
+        if (cur_book == "" || cur_book != verse_buffer.book())
+        {
+            if (cur_book_meta_data != NULL)
+                m_meta_data.push_back(cur_book_meta_data);
+
+            cur_book_meta_data = boost::shared_ptr< std::vector<int> >(new std::vector<int>());
+            cur_chapter = 0;
+            num_verses_in_chapter = 0;
+         
+            cur_book = verse_buffer.book();
+            cur_chapter++;
+            num_verses_in_chapter++;
+        }
+        else if (cur_chapter == 0 || cur_chapter != verse_buffer.chapter())
+        {
+            if (num_verses_in_chapter != 0)
+                cur_book_meta_data->push_back(num_verses_in_chapter);
+
+            num_verses_in_chapter = 0;
+
+            cur_chapter++;
+            num_verses_in_chapter++;
+        }
+        else
+        {
+            num_verses_in_chapter++;
+        }
     }
 
     return true;
+}
+
+int Translation::num_books() const
+{
+    return static_cast<int>(m_meta_data.size());
+}
+
+int Translation::num_chapters(int book_index) const
+{
+    if (book_index >= 0 && book_index < num_books())
+        return static_cast<int>(m_meta_data[book_index]->size());
+
+    return -1;
+}
+
+int Translation::num_verses(int book_index, int chapter_index) const
+{
+    if (book_index >= 0 && book_index < num_books() &&
+        chapter_index >=0 && chapter_index < m_meta_data[book_index]->size())
+        return m_meta_data[book_index]->at(chapter_index);
+
+    return -1;
 }
 
 // Free functions

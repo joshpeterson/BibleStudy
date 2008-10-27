@@ -25,11 +25,15 @@ public:
 
     std::vector<boost::shared_ptr<const IVerse> > get_entry(int unique_id, int num_entries_context) const;
     bool Import(const std::string& long_name, const std::string& short_name, const std::string& filename);
+    int num_books() const;
+    int num_chapters(int book_index) const;
+    int num_verses(int book_index, int chapter_index) const;
 
 private:
     std::string m_long_name;
     std::string m_short_name;
     std::vector< boost::shared_ptr<IVerse> > m_verses;
+    std::vector< boost::shared_ptr<std::vector<int> > > m_meta_data;
 
     void partial_search(std::vector< boost::shared_ptr<IVerse> >::const_iterator begin, 
                         std::vector< boost::shared_ptr<IVerse> >::const_iterator end,
