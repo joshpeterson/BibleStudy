@@ -33,6 +33,9 @@ private:
         text_column = 4
     };
 
+    IVerse* get_child(IVerse* parentItem, int row, int column) const;
+    IVerse* get_parent(IVerse* childItem, int column) const;
+    int get_row(IVerse* item, int column) const;
 };
 
 #endif //__BROWSE_VERSES_MODEL_H

@@ -80,10 +80,13 @@ bool Translation::Resume(const std::string &filename)
     m_short_name = buffer.short_name();
 
     m_meta_data = std::vector< boost::shared_ptr< std::vector<int> > >();
+    m_verse_meta_data = std::vectoer<VerseMetaData>();
 
     std::string cur_book;
     int cur_chapter = 0;
     int num_verses_in_chapter = 0;
+    int first_verse_in_book = -1;
+    int first_verse_in_chapter = -1;
     boost::shared_ptr< std::vector<int> > cur_book_meta_data;
 
     int num_verses = buffer.verse_size();
@@ -97,6 +100,9 @@ bool Translation::Resume(const std::string &filename)
 
         if (cur_book == "" || cur_book != verse_buffer.book())
         {
+            if (cur_chapter == 1)  // This book only has one chapter.
+                cur_book_meta_data->push_back(num_verses_in_chapter);
+
             if (cur_book_meta_data != NULL)
                 m_meta_data.push_back(cur_book_meta_data);
 
@@ -107,6 +113,9 @@ bool Translation::Resume(const std::string &filename)
             cur_book = verse_buffer.book();
             cur_chapter++;
             num_verses_in_chapter++;
+
+            first_verse_in_book = i;
+            first_verse_in_chapter = i;
         }
         else if (cur_chapter == 0 || cur_chapter != verse_buffer.chapter())
         {
@@ -117,12 +126,21 @@ bool Translation::Resume(const std::string &filename)
 
             cur_chapter++;
             num_verses_in_chapter++;
+
+            first_verse_in_chapter = i;
+
         }
         else
         {
             num_verses_in_chapter++;
         }
+
+        VerseMetaData verse_meta_data = VerseMetaData(first_verse_in_book, first_verse_in_chapter);
+        m_verse_meta_data.push_back(verse_meta_data);
     }
+
+    if (cur_book_meta_data != NULL)
+        m_meta_data.push_back(cur_book_meta_data);
 
     return true;
 }
@@ -145,6 +163,22 @@ int Translation::num_verses(int book_index, int chapter_index) const
     if (book_index >= 0 && book_index < num_books() &&
         chapter_index >=0 && chapter_index < m_meta_data[book_index]->size())
         return m_meta_data[book_index]->at(chapter_index);
+
+    return -1;
+}
+
+int Translation::get_first_verse_in_book(int unique_id) const
+{
+    if (unique_verse_id >= 0 && unique_verse_id < num_entries())
+        return m_verse_meta_data[unique_verse_id].first_verse_in_book;
+
+    return -1;
+}
+
+int Translation::get_first_verse_in_chapter(int unique_id) const
+{
+        if (unique_verse_id >= 0 && unique_verse_id < num_entries())
+        return m_verse_meta_data[unique_verse_id].first_verse_in_chapter;
 
     return -1;
 }
