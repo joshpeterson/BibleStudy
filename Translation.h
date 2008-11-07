@@ -9,6 +9,8 @@
 #include "IDocument.h"
 #include "IVerse.h"
 
+class VerseTreeItem;
+
 class Translation : public IDocument, private boost::noncopyable
 {
 public:
@@ -25,30 +27,13 @@ public:
 
     std::vector<boost::shared_ptr<const IVerse> > get_entry(int unique_id, int num_entries_context) const;
     bool Import(const std::string& long_name, const std::string& short_name, const std::string& filename);
-    int num_books() const;
-    int num_chapters(int book_index) const;
-    int num_verses(int book_index, int chapter_index) const;
-
-    int get_first_verse_in_book(int unique_id) const;
-    int get_first_verse_in_chapter(int unique_id) const;
+    boost::shared_ptr<VerseTreeItem> get_verse_item_tree() const;
 
 private:
-    struct VerseMetaData
-    {
-        VerseMetaData(int verse_in_book, int verse_in_chapter) :
-            first_verse_in_book(verse_in_book),
-            first_verse_in_chapter(verse_in_chapter)
-        {}
-
-        int first_verse_in_book;
-        int first_verse_in_chapter;
-    }
-
     std::string m_long_name;
     std::string m_short_name;
     std::vector< boost::shared_ptr<IVerse> > m_verses;
-    std::vector< boost::shared_ptr<std::vector<int> > > m_meta_data;
-    std::vector<VerseMetaData> m_verse_meta_data;
+    boost::shared_ptr<VerseTreeItem> m_verse_tree;
 
     void partial_search(std::vector< boost::shared_ptr<IVerse> >::const_iterator begin, 
                         std::vector< boost::shared_ptr<IVerse> >::const_iterator end,

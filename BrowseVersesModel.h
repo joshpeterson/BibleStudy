@@ -5,8 +5,9 @@
 #include <QAbstractItemModel>
 
 class Translation;
+class IVerse;
 
-class BrowseVersesModel : QAbstractItemModel
+class BrowseVersesModel : public QAbstractItemModel
 {
     Q_OBJECT
 
@@ -23,19 +24,6 @@ public:
 
 private:
     boost::shared_ptr<Translation> m_translation;
-
-    enum ColumnType
-    {
-        translation_column = 0,
-        book_column = 1,
-        chapter_column = 2,
-        verse_column = 3,
-        text_column = 4
-    };
-
-    IVerse* get_child(IVerse* parentItem, int row, int column) const;
-    IVerse* get_parent(IVerse* childItem, int column) const;
-    int get_row(IVerse* item, int column) const;
 };
 
 #endif //__BROWSE_VERSES_MODEL_H

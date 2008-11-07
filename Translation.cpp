@@ -8,6 +8,7 @@
 #include "Translation.h"
 #include "Verse.h"
 #include "TranslationBufferNoWarnings.pb.h"
+#include "VerseTreeItem.h"
 
 void Translation::search(std::vector<boost::shared_ptr<ISearchResults> >& results) const
 {
@@ -79,15 +80,14 @@ bool Translation::Resume(const std::string &filename)
     m_long_name = buffer.long_name();
     m_short_name = buffer.short_name();
 
-    m_meta_data = std::vector< boost::shared_ptr< std::vector<int> > >();
-    m_verse_meta_data = std::vectoer<VerseMetaData>();
+    m_verse_tree = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(-1));
+
+    boost::shared_ptr<VerseTreeItem> translation_item = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(0));
+    m_verse_tree->add_child(translation_item, VerseTreeItem::ItemType::translation);
+    VerseTreeItem* cur_verse_tree_root = translation_item.get();
 
     std::string cur_book;
     int cur_chapter = 0;
-    int num_verses_in_chapter = 0;
-    int first_verse_in_book = -1;
-    int first_verse_in_chapter = -1;
-    boost::shared_ptr< std::vector<int> > cur_book_meta_data;
 
     int num_verses = buffer.verse_size();
     for (int i = 0; i < num_verses; ++i)
@@ -100,87 +100,53 @@ bool Translation::Resume(const std::string &filename)
 
         if (cur_book == "" || cur_book != verse_buffer.book())
         {
-            if (cur_chapter == 1)  // This book only has one chapter.
-                cur_book_meta_data->push_back(num_verses_in_chapter);
-
-            if (cur_book_meta_data != NULL)
-                m_meta_data.push_back(cur_book_meta_data);
-
-            cur_book_meta_data = boost::shared_ptr< std::vector<int> >(new std::vector<int>());
-            cur_chapter = 0;
-            num_verses_in_chapter = 0;
-         
             cur_book = verse_buffer.book();
-            cur_chapter++;
-            num_verses_in_chapter++;
+            cur_chapter = 1;
 
-            first_verse_in_book = i;
-            first_verse_in_chapter = i;
+            if (cur_verse_tree_root->get_parent() != NULL && cur_verse_tree_root->get_parent()->get_parent() != NULL)
+                cur_verse_tree_root = cur_verse_tree_root->get_parent()->get_parent();
+
+            boost::shared_ptr<VerseTreeItem> book = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            cur_verse_tree_root->add_child(book, VerseTreeItem::ItemType::book);
+
+            cur_verse_tree_root = book.get();
+
+            boost::shared_ptr<VerseTreeItem> chapter = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            cur_verse_tree_root->add_child(chapter, VerseTreeItem::ItemType::chapter);
+            
+            cur_verse_tree_root = chapter.get();
+
+            boost::shared_ptr<VerseTreeItem> verse = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            cur_verse_tree_root->add_child(verse, VerseTreeItem::ItemType::verse);
         }
         else if (cur_chapter == 0 || cur_chapter != verse_buffer.chapter())
         {
-            if (num_verses_in_chapter != 0)
-                cur_book_meta_data->push_back(num_verses_in_chapter);
-
-            num_verses_in_chapter = 0;
-
             cur_chapter++;
-            num_verses_in_chapter++;
 
-            first_verse_in_chapter = i;
+            cur_verse_tree_root = cur_verse_tree_root->get_parent();
+
+            boost::shared_ptr<VerseTreeItem> chapter = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            cur_verse_tree_root->add_child(chapter, VerseTreeItem::ItemType::chapter);
+            
+            cur_verse_tree_root = chapter.get();
+
+            boost::shared_ptr<VerseTreeItem> verse = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            cur_verse_tree_root->add_child(verse, VerseTreeItem::ItemType::verse);
 
         }
         else
         {
-            num_verses_in_chapter++;
+            boost::shared_ptr<VerseTreeItem> verse = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            cur_verse_tree_root->add_child(verse, VerseTreeItem::ItemType::verse);
         }
-
-        VerseMetaData verse_meta_data = VerseMetaData(first_verse_in_book, first_verse_in_chapter);
-        m_verse_meta_data.push_back(verse_meta_data);
     }
-
-    if (cur_book_meta_data != NULL)
-        m_meta_data.push_back(cur_book_meta_data);
 
     return true;
 }
 
-int Translation::num_books() const
+boost::shared_ptr<VerseTreeItem> Translation::get_verse_item_tree() const
 {
-    return static_cast<int>(m_meta_data.size());
-}
-
-int Translation::num_chapters(int book_index) const
-{
-    if (book_index >= 0 && book_index < num_books())
-        return static_cast<int>(m_meta_data[book_index]->size());
-
-    return -1;
-}
-
-int Translation::num_verses(int book_index, int chapter_index) const
-{
-    if (book_index >= 0 && book_index < num_books() &&
-        chapter_index >=0 && chapter_index < m_meta_data[book_index]->size())
-        return m_meta_data[book_index]->at(chapter_index);
-
-    return -1;
-}
-
-int Translation::get_first_verse_in_book(int unique_id) const
-{
-    if (unique_verse_id >= 0 && unique_verse_id < num_entries())
-        return m_verse_meta_data[unique_verse_id].first_verse_in_book;
-
-    return -1;
-}
-
-int Translation::get_first_verse_in_chapter(int unique_id) const
-{
-        if (unique_verse_id >= 0 && unique_verse_id < num_entries())
-        return m_verse_meta_data[unique_verse_id].first_verse_in_chapter;
-
-    return -1;
+    return m_verse_tree;
 }
 
 // Free functions

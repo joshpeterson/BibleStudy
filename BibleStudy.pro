@@ -20,6 +20,8 @@ HEADERS += UIStarredVersesWidget.h
 HEADERS += StarredVersesModel.h
 HEADERS += VerseDisplay.h
 HEADERS += BrowseVersesModel.h
+HEADERS += UIBrowseVersesWidget.h
+HEADERS += VerseTreeItem.h
 
 SOURCES += BibleStudy.cpp
 SOURCES += SearchResultsModel.cpp
@@ -36,6 +38,8 @@ SOURCES += UIStarredVersesWidget.cpp
 SOURCES += StarredVersesModel.cpp
 SOURCES += VerseDisplay.cpp
 SOURCES += BrowseVersesModel.cpp
+SOURCES += UIBrowseVersesWidget.cpp
+SOURCES += VerseTreeItem.cpp
 
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
