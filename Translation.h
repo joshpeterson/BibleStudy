@@ -41,6 +41,7 @@ private:
 
 };
 
+std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection);
 std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection);
 std::string verse_collection_title(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection);
 

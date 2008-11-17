@@ -71,7 +71,7 @@ void SearchResultsModel::SetResults(const IEntry::ISearchResultsPtr results)
         switch (index.column())
         {
             case text_column:
-                return verse_collection_to_string(m_translation->get_entry(m_results->at(index.row()), 2)).c_str();
+                return verse_collection_to_title_and_string_wrapped(m_translation->get_entry(m_results->at(index.row()), 2)).c_str();
             default:
                 return QVariant();
         }

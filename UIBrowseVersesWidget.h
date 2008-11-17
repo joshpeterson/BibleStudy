@@ -2,12 +2,14 @@
 #define __UI_BROWSE_VERSES_WIDGET_H
 
 #include <QWidget>
+#include <QAbstractItemModel>
 #include <boost/shared_ptr.hpp>
 
 class QVBoxLayout;
 class QTreeView;
 class Translation;
 class BrowseVersesModel;
+class VerseDisplay;
 
 class UIBrowseVersesWidget : public QWidget
 {
@@ -16,12 +18,11 @@ class UIBrowseVersesWidget : public QWidget
 public:
     UIBrowseVersesWidget(boost::shared_ptr<BrowseVersesModel> browse_model, QWidget* parent = 0);
 
-//public slots:
-//    void display_search_results(boost::shared_ptr<ISearchResults> query);
-//    void display_verse_text(const QModelIndex& index);
-//
-//signals:
-//    void verse_display_changed(boost::shared_ptr<VerseDisplay> verse);
+public slots:
+    void display_verse_text(const QModelIndex& index);
+
+signals:
+    void verse_display_changed(boost::shared_ptr<VerseDisplay> verse);
 
 private:
     QTreeView* m_browse_view;

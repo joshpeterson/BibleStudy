@@ -150,6 +150,25 @@ boost::shared_ptr<VerseTreeItem> Translation::get_verse_item_tree() const
 }
 
 // Free functions
+std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection)
+{
+    std::string verse_collection_string = verse_collection_to_string(verse_collection);
+
+    int line_length = 80;
+
+    int cur_line_length = line_length;
+    while (verse_collection_string.length() > cur_line_length)
+    {
+        size_t space_pos = verse_collection_string.find_last_of(" ", cur_line_length);
+        if (space_pos != std::string::npos)
+            verse_collection_string.replace(space_pos, 1, "\n");
+
+        cur_line_length += line_length;
+    }
+
+    return verse_collection_title(verse_collection) + "\n\n" + verse_collection_string;
+}
+
 std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection)
 {
     std::string verse_string;

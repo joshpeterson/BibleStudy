@@ -2,6 +2,7 @@
 #include "Translation.h"
 #include "IVerse.h"
 #include "VerseTreeItem.h"
+#include "VerseDisplay.h"
 
 BrowseVersesModel::BrowseVersesModel(boost::shared_ptr<Translation> translation, QObject *parent) :
     QAbstractItemModel(parent),
@@ -37,7 +38,7 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
                     return QString(tr("Chapter ")) + QVariant(m_translation->get_entry(item->get_verse_id())->get_chapter()).toString();
 
                 case VerseTreeItem::ItemType::verse:
-                    return QString(tr("Verse ")) + QVariant(m_translation->get_entry(item->get_verse_id())->get_verse()).toString();
+                    return QVariant(m_translation->get_entry(item->get_verse_id())->get_verse()).toString() + QString(": ") + m_translation->get_entry(item->get_verse_id())->get_text().c_str();
                 
                 default:
                     return QVariant();
@@ -50,9 +51,9 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
     }
     else if (role == Qt::ToolTipRole)
     {
-        if (index.column() == 1 && item->get_item_type() == VerseTreeItem::ItemType::verse)
+        if (item->get_item_type() == VerseTreeItem::ItemType::verse)
         {
-            return verse_collection_to_string(m_translation->get_entry(item->get_verse_id(), 2)).c_str();
+            return verse_collection_to_title_and_string_wrapped(m_translation->get_entry(item->get_verse_id(), 0)).c_str();
         }
     }
     return QVariant();
@@ -137,5 +138,14 @@ int BrowseVersesModel::rowCount(const QModelIndex &parent) const
 
 int BrowseVersesModel::columnCount(const QModelIndex &parent) const
 {
-    return 2;
+    return 1;
+}
+
+boost::shared_ptr<VerseDisplay> BrowseVersesModel::get_verse_display(const QModelIndex &index) const
+{
+    VerseTreeItem* item = static_cast<VerseTreeItem*>(index.internalPointer());
+    if (item->get_item_type() == VerseTreeItem::ItemType::verse)
+        return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", item->get_verse_id(), 2));
+    else
+        return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", -1, -1));
 }

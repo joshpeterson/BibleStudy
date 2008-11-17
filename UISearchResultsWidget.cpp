@@ -15,9 +15,8 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<Translation> tran
     m_layout(new QVBoxLayout),
     m_results_model(results_model)
 {
-    QObject::connect(m_results_view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
+    QObject::connect(m_results_view, SIGNAL(clicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
 
-    m_results_view->setSortingEnabled(true);
     m_results_view->setShowGrid(false);
     QHeaderView* header = m_results_view->horizontalHeader();
     header->setResizeMode(QHeaderView::ResizeToContents);

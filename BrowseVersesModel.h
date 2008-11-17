@@ -6,6 +6,7 @@
 
 class Translation;
 class IVerse;
+class VerseDisplay;
 
 class BrowseVersesModel : public QAbstractItemModel
 {
@@ -21,6 +22,8 @@ public:
     QModelIndex parent(const QModelIndex &index) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
+
+    boost::shared_ptr<VerseDisplay> get_verse_display(const QModelIndex &index) const;
 
 private:
     boost::shared_ptr<Translation> m_translation;
