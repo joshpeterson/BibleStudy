@@ -7,8 +7,7 @@
 #include "SearchResultsModel.h"
 #include "VerseDisplay.h"
 
-UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<Translation> translation, 
-                                             boost::shared_ptr<SearchResultsModel> results_model,
+UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsModel> results_model,
                                              QWidget *parent) :
     QWidget(parent),
     m_results_view(new QTableView),

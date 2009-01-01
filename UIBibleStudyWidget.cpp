@@ -17,7 +17,7 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<Translation> translatio
     m_starred_verses_model(new StarredVersesModel(translation)),
     m_browse_verses_model(new BrowseVersesModel(translation)),
     m_search(new UISearchWidget(translation)),
-    m_results(new UISearchResultsWidget(translation, m_results_model)),
+    m_results(new UISearchResultsWidget(m_results_model)),
     m_starred_verses(new UIStarredVersesWidget(translation, m_starred_verses_model)),
     m_text(new UITextViewWidget(translation, m_starred_verses_model)),
     m_browse(new UIBrowseVersesWidget(m_browse_verses_model))

@@ -4,7 +4,7 @@
 #include <QLabel>
 #include "BrowseVersesModel.h"
 #include "VerseDisplay.h"
-#include "BrowseVersesDelegate.h"
+//#include "BrowseVersesDelegate.h"
 
 UIBrowseVersesWidget::UIBrowseVersesWidget(boost::shared_ptr<BrowseVersesModel> browse_model, QWidget *parent) :
     QWidget(parent),

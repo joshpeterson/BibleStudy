@@ -28,30 +28,30 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
         {
             switch (item->get_item_type())
             {
-                case VerseTreeItem::ItemType::translation:
+                case VerseTreeItem::translation:
                     return QString("Douay-Rheims");
                 
-                case VerseTreeItem::ItemType::book:
+                case VerseTreeItem::book:
                     return m_translation->get_entry(item->get_verse_id())->get_book().c_str();
 
-                case VerseTreeItem::ItemType::chapter:
+                case VerseTreeItem::chapter:
                     return QString(tr("Chapter ")) + QVariant(m_translation->get_entry(item->get_verse_id())->get_chapter()).toString();
 
-                case VerseTreeItem::ItemType::verse:
+                case VerseTreeItem::verse:
                     return QVariant(m_translation->get_entry(item->get_verse_id())->get_verse()).toString() + QString(": ") + m_translation->get_entry(item->get_verse_id())->get_text().c_str();
                 
                 default:
                     return QVariant();
             }
         }
-        else if (index.column() == 1 && item->get_item_type() == VerseTreeItem::ItemType::verse)
+        else if (index.column() == 1 && item->get_item_type() == VerseTreeItem::verse)
         {
             return m_translation->get_entry(item->get_verse_id())->get_text().c_str();
         }
     }
     else if (role == Qt::ToolTipRole)
     {
-        if (item->get_item_type() == VerseTreeItem::ItemType::verse)
+        if (item->get_item_type() == VerseTreeItem::verse)
         {
             return verse_collection_to_title_and_string_wrapped(m_translation->get_entry(item->get_verse_id(), 0)).c_str();
         }
@@ -144,7 +144,7 @@ int BrowseVersesModel::columnCount(const QModelIndex &parent) const
 boost::shared_ptr<VerseDisplay> BrowseVersesModel::get_verse_display(const QModelIndex &index) const
 {
     VerseTreeItem* item = static_cast<VerseTreeItem*>(index.internalPointer());
-    if (item->get_item_type() == VerseTreeItem::ItemType::verse)
+    if (item->get_item_type() == VerseTreeItem::verse)
         return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", item->get_verse_id(), 2));
     else
         return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", -1, -1));
