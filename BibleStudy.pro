@@ -22,7 +22,6 @@ HEADERS += VerseDisplay.h
 HEADERS += BrowseVersesModel.h
 HEADERS += UIBrowseVersesWidget.h
 HEADERS += VerseTreeItem.h
-#HEADERS += BrowseVersesDelegate.h
 
 SOURCES += BibleStudy.cpp
 SOURCES += SearchResultsModel.cpp
@@ -41,7 +40,6 @@ SOURCES += VerseDisplay.cpp
 SOURCES += BrowseVersesModel.cpp
 SOURCES += UIBrowseVersesWidget.cpp
 SOURCES += VerseTreeItem.cpp
-#SOURCES += BrowseVersesDelegate.cpp
 
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"

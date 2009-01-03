@@ -33,8 +33,8 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<Translation> translatio
 
     QVBoxLayout* left_column = new QVBoxLayout();
 
-    left_column->addWidget(m_browse);
-    left_column->addWidget(m_starred_verses);
+    left_column->addWidget(m_browse, 3);
+    left_column->addWidget(m_starred_verses, 1);
 
     QVBoxLayout* right_column = new QVBoxLayout();
 
@@ -44,8 +44,8 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<Translation> translatio
 
     QHBoxLayout* layout = new QHBoxLayout();
 
-    layout->addLayout(left_column);
-    layout->addLayout(right_column);
+    layout->addLayout(left_column, 1);
+    layout->addLayout(right_column, 3);
 
     setLayout(layout);
 }
