@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Verse.h"
 #include "ISearchResults.h"
 
