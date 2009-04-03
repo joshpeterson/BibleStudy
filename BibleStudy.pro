@@ -1,9 +1,6 @@
 CONFIG += qt thread exceptions stl debug_and_release
 
-HEADERS += IDocument.h
-HEADERS += IEntry.h
 HEADERS += ISearchResults.h
-HEADERS += IVerse.h
 HEADERS += ICommand.h
 HEADERS += SearchResultsModel.h
 HEADERS += SearchResultsSerial.h

@@ -15,11 +15,11 @@ void Translation::search(std::vector<boost::shared_ptr<ISearchResults> >& result
     partial_search(m_verses.begin(), m_verses.end(), results[0]);
 }
 
-void Translation::partial_search(std::vector< boost::shared_ptr<IVerse> >::const_iterator begin, 
-                                 std::vector< boost::shared_ptr<IVerse> >::const_iterator end,
+void Translation::partial_search(std::vector< boost::shared_ptr<Verse> >::const_iterator begin, 
+                                 std::vector< boost::shared_ptr<Verse> >::const_iterator end,
                                  boost::shared_ptr<ISearchResults> query) const
 {
-    for (std::vector< boost::shared_ptr<IVerse> >::const_iterator it = begin;
+    for (std::vector< boost::shared_ptr<Verse> >::const_iterator it = begin;
          it != end;
          ++it)
     {
@@ -27,7 +27,7 @@ void Translation::partial_search(std::vector< boost::shared_ptr<IVerse> >::const
     }
 }
 
-std::vector<boost::shared_ptr<const IVerse> > Translation::get_entry(int unique_id, int num_entries_context) const
+std::vector<boost::shared_ptr<const Verse> > Translation::get_entry(int unique_id, int num_entries_context) const
 {
     int requested_lower_bound = unique_id - num_entries_context;
     int lower_bound =  requested_lower_bound >= 0 ? requested_lower_bound : 0;
@@ -35,7 +35,7 @@ std::vector<boost::shared_ptr<const IVerse> > Translation::get_entry(int unique_
     int requested_upper_bound = unique_id + num_entries_context + 1;
     int upper_bound = requested_upper_bound <= static_cast<int>(m_verses.size()-1) ? requested_upper_bound : (m_verses.size()-1);
 
-    std::vector<boost::shared_ptr<const IVerse> > verses;
+    std::vector<boost::shared_ptr<const Verse> > verses;
     std::copy(&m_verses[lower_bound], &m_verses[upper_bound], std::back_inserter(verses));
 
     return verses;
@@ -47,7 +47,7 @@ bool Translation::Save(const std::string &filename)
     buffer.set_long_name(m_long_name);
     buffer.set_short_name(m_short_name);
 
-    for (std::vector< boost::shared_ptr<IVerse> >::const_iterator it = m_verses.begin();
+    for (std::vector< boost::shared_ptr<Verse> >::const_iterator it = m_verses.begin();
          it != m_verses.end();
          ++it)
     {
@@ -150,7 +150,7 @@ boost::shared_ptr<VerseTreeItem> Translation::get_verse_item_tree() const
 }
 
 // Free functions
-std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection)
+std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const Verse> >& verse_collection)
 {
     std::string verse_collection_string = verse_collection_to_string(verse_collection);
 
@@ -169,12 +169,12 @@ std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost
     return verse_collection_title(verse_collection) + "\n\n" + verse_collection_string;
 }
 
-std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection)
+std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const Verse> >& verse_collection)
 {
     std::string verse_string;
 
-    std::vector<boost::shared_ptr<const IVerse> >::const_iterator it = verse_collection.begin();
-    std::vector<boost::shared_ptr<const IVerse> >::const_iterator end = verse_collection.end();
+    std::vector<boost::shared_ptr<const Verse> >::const_iterator it = verse_collection.begin();
+    std::vector<boost::shared_ptr<const Verse> >::const_iterator end = verse_collection.end();
     for (; it != end; ++it)
     {
         verse_string += (*it)->get_text();
@@ -185,7 +185,7 @@ std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const
     return verse_string;
 }
 
-std::string verse_collection_title(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection)
+std::string verse_collection_title(const std::vector<boost::shared_ptr<const Verse> >& verse_collection)
 {
     std::string title;
 
@@ -194,8 +194,8 @@ std::string verse_collection_title(const std::vector<boost::shared_ptr<const IVe
     int cur_verse = 0;
     int last_verse = 0;
 
-    std::vector<boost::shared_ptr<const IVerse> >::const_iterator it = verse_collection.begin();
-    std::vector<boost::shared_ptr<const IVerse> >::const_iterator end = verse_collection.end();
+    std::vector<boost::shared_ptr<const Verse> >::const_iterator it = verse_collection.begin();
+    std::vector<boost::shared_ptr<const Verse> >::const_iterator end = verse_collection.end();
     for (; it != end; ++it)
     {
         if (cur_book.size() == 0)

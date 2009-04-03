@@ -74,7 +74,7 @@ void UITextViewWidget::display_text(boost::shared_ptr<VerseDisplay> verse)
 {
     m_displayed_verse = verse;
 
-    std::vector<boost::shared_ptr<const IVerse> > verses = m_translation->get_entry(m_displayed_verse->get_verse_id(),
+    std::vector<boost::shared_ptr<const Verse> > verses = m_translation->get_entry(m_displayed_verse->get_verse_id(),
                                                                                     m_displayed_verse->get_num_verses_context());
     m_title->setText(verse_collection_title(verses).c_str());
     m_text->setText(verse_collection_to_string(verses).c_str());

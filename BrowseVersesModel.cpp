@@ -1,6 +1,6 @@
 #include "BrowseVersesModel.h"
 #include "Translation.h"
-#include "IVerse.h"
+#include "Verse.h"
 #include "VerseTreeItem.h"
 #include "VerseDisplay.h"
 

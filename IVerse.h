@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include "IEntry.h"
 #include "ISearchResults.h"
 
 class IVerse : public IEntry

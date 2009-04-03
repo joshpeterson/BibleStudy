@@ -11,7 +11,6 @@ Verse::Verse(const std::string& book, int chapter, int verse, const std::string&
 {
 }
 
-// IEntry
 void Verse::match(boost::shared_ptr<ISearchResults> search_string) const
 {
     if (m_text.find(search_string->get_search_string()) != std::string::npos)

@@ -5,7 +5,6 @@
 #include <QAbstractItemModel>
 
 class Translation;
-class IVerse;
 class VerseDisplay;
 
 class BrowseVersesModel : public QAbstractItemModel

@@ -2,7 +2,6 @@
 #define __SEARCH_RESULTS_MODEL_H
 
 #include <QAbstractTableModel>
-#include "IEntry.h"
 #include "Translation.h"
 #include "ISearchResults.h"
 
@@ -12,7 +11,7 @@ class SearchResultsModel : public QAbstractTableModel
 {
 public:
     SearchResultsModel(const Translation* translation, ISearchResults* results, QObject* parent = 0);
-    void SetResults(const IEntry::ISearchResultsPtr results);
+    void SetResults(const boost::shared_ptr<ISearchResults> results);
     boost::shared_ptr<VerseDisplay> get_verse_display(const QModelIndex& index);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -23,7 +22,7 @@ public:
 
 private:
     const Translation* m_translation;
-    IEntry::ISearchResultsPtr m_results;
+    boost::shared_ptr<ISearchResults> m_results;
 
     enum ColumnType
     {

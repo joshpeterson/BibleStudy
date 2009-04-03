@@ -1,7 +1,7 @@
 #include <vector>
 #include <boost/shared_ptr.hpp>
 #include "SearchResultsModel.h"
-#include "IVerse.h"
+#include "Verse.h"
 #include "VerseDisplay.h"
 
 SearchResultsModel::SearchResultsModel(const Translation* translation, 
@@ -13,7 +13,7 @@ SearchResultsModel::SearchResultsModel(const Translation* translation,
 {
 }
 
-void SearchResultsModel::SetResults(const IEntry::ISearchResultsPtr results)
+void SearchResultsModel::SetResults(const boost::shared_ptr<ISearchResults> results)
 {
     m_results = results;
     this->reset();

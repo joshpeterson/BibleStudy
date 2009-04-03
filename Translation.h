@@ -6,12 +6,12 @@
 #include <iostream>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
-#include "IDocument.h"
-#include "IVerse.h"
+#include "ISearchResults.h"
 
+class Verse;
 class VerseTreeItem;
 
-class Translation : public IDocument, private boost::noncopyable
+class Translation : private boost::noncopyable
 {
 public:
     Translation() {};
@@ -20,29 +20,29 @@ public:
     virtual std::string get_long_name() const { return m_long_name; }
     virtual std::string get_short_name() const { return m_short_name; }
     virtual void search(std::vector<boost::shared_ptr<ISearchResults> >& results) const;
-    virtual const IVerse* get_entry(int unique_id) const { return m_verses[unique_id].get(); }
+    virtual const Verse* get_entry(int unique_id) const { return m_verses[unique_id].get(); }
     virtual int num_entries() const { return static_cast<int>(m_verses.size()); }
     virtual bool Save(const std::string& filename);
     virtual bool Resume(const std::string& filename);
 
-    std::vector<boost::shared_ptr<const IVerse> > get_entry(int unique_id, int num_entries_context) const;
+    std::vector<boost::shared_ptr<const Verse> > get_entry(int unique_id, int num_entries_context) const;
     bool Import(const std::string& long_name, const std::string& short_name, const std::string& filename);
     boost::shared_ptr<VerseTreeItem> get_verse_item_tree() const;
 
 private:
     std::string m_long_name;
     std::string m_short_name;
-    std::vector< boost::shared_ptr<IVerse> > m_verses;
+    std::vector< boost::shared_ptr<Verse> > m_verses;
     boost::shared_ptr<VerseTreeItem> m_verse_tree;
 
-    void partial_search(std::vector< boost::shared_ptr<IVerse> >::const_iterator begin, 
-                        std::vector< boost::shared_ptr<IVerse> >::const_iterator end,
+    void partial_search(std::vector< boost::shared_ptr<Verse> >::const_iterator begin, 
+                        std::vector< boost::shared_ptr<Verse> >::const_iterator end,
                         boost::shared_ptr<ISearchResults> query) const;
 
 };
 
-std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection);
-std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection);
-std::string verse_collection_title(const std::vector<boost::shared_ptr<const IVerse> >& verse_collection);
+std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const Verse> >& verse_collection);
+std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const Verse> >& verse_collection);
+std::string verse_collection_title(const std::vector<boost::shared_ptr<const Verse> >& verse_collection);
 
 #endif //__TRANSLATION_H

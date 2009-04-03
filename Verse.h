@@ -5,22 +5,19 @@
 #include <vector>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
-#include "IVerse.h"
 
 class ISearchResults;
 
-class Verse : public IVerse, private boost::noncopyable
+class Verse : private boost::noncopyable
 {
 public:
     Verse(const std::string& book, int chapter, int verse, const std::string& text, int unique_verse_id);
 
-    // IEntry
     virtual void match(boost::shared_ptr<ISearchResults> search_string) const;
     virtual int get_unqiue_id() const {return m_unique_id; }
     virtual std::string get_text() const { return m_text; }
     virtual void display(std::ostream& out) const;
 
-    // IVerse
     virtual std::string get_book() const { return m_book; }
     virtual int get_chapter() const { return m_chapter; }
     virtual int get_verse() const { return m_verse; }
