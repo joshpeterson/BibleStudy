@@ -1,6 +1,7 @@
 #include <boost/shared_ptr.hpp>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QApplication>
 #include "SearchResultsModel.h"
 #include "StarredVersesModel.h"
 #include "BrowseVersesModel.h"
@@ -30,6 +31,11 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<Translation> translatio
     QObject::connect(m_results, SIGNAL(verse_display_changed(boost::shared_ptr<VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<VerseDisplay>)));
     QObject::connect(m_browse, SIGNAL(verse_display_changed(boost::shared_ptr<VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<VerseDisplay>)));
     QObject::connect(m_starred_verses, SIGNAL(verse_display_changed(boost::shared_ptr<VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<VerseDisplay>)));
+
+    QFont app_font = QApplication::font();
+    app_font.setPointSize(12);
+    app_font.setFamily("Bitstream Vera Sans");
+    QApplication::setFont(app_font);
 
     QVBoxLayout* left_column = new QVBoxLayout();
 
