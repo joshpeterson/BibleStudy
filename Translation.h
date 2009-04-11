@@ -16,14 +16,13 @@ class Translation : private boost::noncopyable
 public:
     Translation() {};
 
-    //IDocument
-    virtual std::string get_long_name() const { return m_long_name; }
-    virtual std::string get_short_name() const { return m_short_name; }
-    virtual void search(std::vector<boost::shared_ptr<ISearchResults> >& results) const;
-    virtual const Verse* get_entry(int unique_id) const { return m_verses[unique_id].get(); }
-    virtual int num_entries() const { return static_cast<int>(m_verses.size()); }
-    virtual bool Save(const std::string& filename);
-    virtual bool Resume(const std::string& filename);
+    std::string get_long_name() const { return m_long_name; }
+    std::string get_short_name() const { return m_short_name; }
+    void search(std::vector<boost::shared_ptr<ISearchResults> >& results) const;
+    const Verse* get_entry(int unique_id) const { return m_verses[unique_id].get(); }
+    int num_entries() const { return static_cast<int>(m_verses.size()); }
+    bool Save(const std::string& filename);
+    bool Resume(const std::string& filename);
 
     std::vector<boost::shared_ptr<const Verse> > get_entry(int unique_id, int num_entries_context) const;
     bool Import(const std::string& long_name, const std::string& short_name, const std::string& filename);

@@ -1,7 +1,6 @@
 #include <fstream>
 #include <iostream>
 #include "Translation.h"
-#include "SearchResultsSerial.h"
 #include "UISearchWidget.h"
 #include "SearchResultsModel.h"
 #include "UISearchResultsWidget.h"

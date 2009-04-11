@@ -6,7 +6,6 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "UISearchWidget.h"
-#include "SearchResultsSerial.h"
 #include "Translation.h"
 #include "CommandPerformSearch.h"
 
