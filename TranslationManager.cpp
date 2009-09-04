@@ -13,11 +13,11 @@ const Translation& TranslationManager::operator[](const std::string& translation
 {
     if (this->contains_translation(translation_long_name))
     {
-        return *m_translations[translation_long_name];
+        return *m_translations.find(translation_long_name)->second;
     }
     else
     {
-        // throw exception here
+        throw TranslationNotFound();
     }
 }
 

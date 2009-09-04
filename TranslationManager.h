@@ -21,4 +21,8 @@ private:
     bool contains_translation(const std::string& translation_long_name) const;
 };
 
+class TranslationNotFound : std::exception
+{
+};
+
 #endif // __TRANSLATION_MANAGER_H
