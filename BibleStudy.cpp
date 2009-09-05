@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include "Translation.h"
+#include "TranslationManager.h"
 #include "UISearchWidget.h"
 #include "SearchResultsModel.h"
 #include "UISearchResultsWidget.h"
@@ -27,6 +28,9 @@ int main(int argc, char* argv[])
     //test.Save("c:\\Documents and Settings\\Josh\\Desktop\\DR.buf");
 
     test->Resume("Translations/DR.buf");
+
+    TranslationManager manager;
+    manager.add_translation(test);
     
     UIBibleStudyWidget study(test);
 
