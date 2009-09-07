@@ -1,12 +1,13 @@
 #include "BrowseVersesModel.h"
+#include "TranslationManager.h"
 #include "Translation.h"
 #include "Verse.h"
 #include "VerseTreeItem.h"
 #include "VerseDisplay.h"
 
-BrowseVersesModel::BrowseVersesModel(boost::shared_ptr<Translation> translation, QObject *parent) :
+BrowseVersesModel::BrowseVersesModel(boost::shared_ptr<const TranslationManager> translation_manager, QObject *parent) :
     QAbstractItemModel(parent),
-    m_translation(translation)
+    m_translation_manager(translation_manager)
 {
 }
 
@@ -15,11 +16,12 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
 
-    if (index.row() >= m_translation->num_entries())
-        return QVariant();
-
     VerseTreeItem* item = static_cast<VerseTreeItem*>(index.internalPointer());
     if (!item)
+        return QVariant();
+
+    Translation translation = m_translation_manager[item->get_translation_name()];
+    if (index.row() >= translation.num_entries())
         return QVariant();
 
     if (role == Qt::DisplayRole)
@@ -29,16 +31,16 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
             switch (item->get_item_type())
             {
                 case VerseTreeItem::translation:
-                    return QString("Douay-Rheims");
+                    return translation.get_long_name();
                 
                 case VerseTreeItem::book:
-                    return m_translation->get_entry(item->get_verse_id())->get_book().c_str();
+                    return translation.get_entry(item->get_verse_id())->get_book().c_str();
 
                 case VerseTreeItem::chapter:
-                    return QString(tr("Chapter ")) + QVariant(m_translation->get_entry(item->get_verse_id())->get_chapter()).toString();
+                    return QString(tr("Chapter ")) + QVariant(translation.get_entry(item->get_verse_id())->get_chapter()).toString();
 
                 case VerseTreeItem::verse:
-                    return QVariant(m_translation->get_entry(item->get_verse_id())->get_verse()).toString() + QString(": ") + m_translation->get_entry(item->get_verse_id())->get_text().c_str();
+                    return QVariant(translation.get_entry(item->get_verse_id())->get_verse()).toString() + QString(": ") + translation.get_entry(item->get_verse_id())->get_text().c_str();
                 
                 default:
                     return QVariant();
@@ -46,14 +48,14 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
         }
         else if (index.column() == 1 && item->get_item_type() == VerseTreeItem::verse)
         {
-            return m_translation->get_entry(item->get_verse_id())->get_text().c_str();
+            return translation.get_entry(item->get_verse_id())->get_text().c_str();
         }
     }
     else if (role == Qt::ToolTipRole)
     {
         if (item->get_item_type() == VerseTreeItem::verse)
         {
-            return verse_collection_to_title_and_string_wrapped(m_translation->get_entry(item->get_verse_id(), 0)).c_str();
+            return verse_collection_to_title_and_string_wrapped(.translation.get_entry(item->get_verse_id(), 0)).c_str();
         }
     }
     return QVariant();

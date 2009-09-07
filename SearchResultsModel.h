@@ -10,8 +10,8 @@ class VerseDisplay;
 class SearchResultsModel : public QAbstractTableModel
 {
 public:
-    SearchResultsModel(const Translation* translation, ISearchResults* results, QObject* parent = 0);
-    void SetResults(const boost::shared_ptr<ISearchResults> results);
+    SearchResultsModel(boost::shared_ptr<const TranslationManager> translation_manager, boost::shared_ptr<const ISearchResults> results, QObject* parent = 0);
+    void SetResults(boost::shared_ptr<const ISearchResults> results);
     boost::shared_ptr<VerseDisplay> get_verse_display(const QModelIndex& index);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -21,8 +21,8 @@ public:
                         int role = Qt::DisplayRole) const;
 
 private:
-    const Translation* m_translation;
-    boost::shared_ptr<ISearchResults> m_results;
+    boost::shared_ptr<const TranslationManager> m_translation_manager;
+    boost::shared_ptr<const ISearchResults> m_results;
 
     enum ColumnType
     {

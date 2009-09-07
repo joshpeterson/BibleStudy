@@ -5,7 +5,7 @@
 #include <boost/shared_ptr.hpp>
 
 class QVBoxLayout;
-class Translation;
+class TranslationManager;
 class VerseDisplay;
 class SearchResultsModel;
 class StarredVersesModel;
@@ -21,7 +21,7 @@ class UIBibleStudyWidget : public QWidget
     Q_OBJECT
 
 public:
-    UIBibleStudyWidget(boost::shared_ptr<Translation> translation, QWidget* parent = 0);
+    UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget* parent = 0);
 
 private:
     boost::shared_ptr<SearchResultsModel> m_results_model;

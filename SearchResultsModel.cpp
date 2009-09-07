@@ -4,16 +4,16 @@
 #include "Verse.h"
 #include "VerseDisplay.h"
 
-SearchResultsModel::SearchResultsModel(const Translation* translation, 
-                                       ISearchResults* results,
+SearchResultsModel::SearchResultsModel(boost::shared_ptr<const TranslationManager> translation_manager, 
+                                       boost::shared_ptr<const ISearchResults> results,
                                        QObject* parent) :
     QAbstractTableModel(parent),
-    m_translation(translation),
+    m_translation_manager(translation_manager),
     m_results(results)
 {
 }
 
-void SearchResultsModel::SetResults(const boost::shared_ptr<ISearchResults> results)
+void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> results)
 {
     m_results = results;
     this->reset();
@@ -45,22 +45,23 @@ void SearchResultsModel::SetResults(const boost::shared_ptr<ISearchResults> resu
 
     if (role == Qt::DisplayRole)
     {
+        Translation translation = m_translation_manager[m_results->translation_at(index.row())];
         switch (index.column())
         {
             case translation_column:
-                return QString("Douay-Rheims");
+                return translation.get_long_name().c_str();
             
             case book_column:
-                return m_translation->get_entry(m_results->at(index.row()))->get_book().c_str();
+                return translation.get_entry(m_results->at(index.row()))->get_book().c_str();
 
             case chapter_column:
-                return m_translation->get_entry(m_results->at(index.row()))->get_chapter();
+                return translation.get_entry(m_results->at(index.row()))->get_chapter();
 
             case verse_column:
-                return m_translation->get_entry(m_results->at(index.row()))->get_verse();
+                return translation.get_entry(m_results->at(index.row()))->get_verse();
 
             case text_column:
-                return m_translation->get_entry(m_results->at(index.row()))->get_text().c_str();
+                return translation.get_entry(m_results->at(index.row()))->get_text().c_str();
             
             default:
                 return QVariant();
@@ -71,7 +72,8 @@ void SearchResultsModel::SetResults(const boost::shared_ptr<ISearchResults> resu
         switch (index.column())
         {
             case text_column:
-                return verse_collection_to_title_and_string_wrapped(m_translation->get_entry(m_results->at(index.row()), 2)).c_str();
+                Translation translation = m_translation_manager[m_results->translation_at(index.row())];
+                return verse_collection_to_title_and_string_wrapped(translation.get_entry(m_results->at(index.row()), 2)).c_str();
             default:
                 return QVariant();
         }

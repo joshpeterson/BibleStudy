@@ -23,7 +23,10 @@ void Translation::partial_search(std::vector< boost::shared_ptr<Verse> >::const_
          it != end;
          ++it)
     {
-        (*it)->match(query);
+        if ((*it)->match(query))
+        {
+            query->add_matching_verse(m_long_name, (*it)->get_unique_id());
+        }
     }
 }
 
@@ -82,7 +85,7 @@ bool Translation::Resume(const std::string &filename)
 
     m_verse_tree = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(-1));
 
-    boost::shared_ptr<VerseTreeItem> translation_item = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(0));
+    boost::shared_ptr<VerseTreeItem> translation_item = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, 0));
     m_verse_tree->add_child(translation_item, VerseTreeItem::translation);
     VerseTreeItem* cur_verse_tree_root = translation_item.get();
 
@@ -106,17 +109,17 @@ bool Translation::Resume(const std::string &filename)
             if (cur_verse_tree_root->get_parent() != NULL && cur_verse_tree_root->get_parent()->get_parent() != NULL)
                 cur_verse_tree_root = cur_verse_tree_root->get_parent()->get_parent();
 
-            boost::shared_ptr<VerseTreeItem> book = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            boost::shared_ptr<VerseTreeItem> book = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, i));
             cur_verse_tree_root->add_child(book, VerseTreeItem::book);
 
             cur_verse_tree_root = book.get();
 
-            boost::shared_ptr<VerseTreeItem> chapter = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            boost::shared_ptr<VerseTreeItem> chapter = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, i));
             cur_verse_tree_root->add_child(chapter, VerseTreeItem::chapter);
             
             cur_verse_tree_root = chapter.get();
 
-            boost::shared_ptr<VerseTreeItem> verse = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            boost::shared_ptr<VerseTreeItem> verse = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, i));
             cur_verse_tree_root->add_child(verse, VerseTreeItem::verse);
         }
         else if (cur_chapter == 0 || cur_chapter != verse_buffer.chapter())
@@ -125,18 +128,18 @@ bool Translation::Resume(const std::string &filename)
 
             cur_verse_tree_root = cur_verse_tree_root->get_parent();
 
-            boost::shared_ptr<VerseTreeItem> chapter = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            boost::shared_ptr<VerseTreeItem> chapter = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, i));
             cur_verse_tree_root->add_child(chapter, VerseTreeItem::chapter);
             
             cur_verse_tree_root = chapter.get();
 
-            boost::shared_ptr<VerseTreeItem> verse = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            boost::shared_ptr<VerseTreeItem> verse = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, i));
             cur_verse_tree_root->add_child(verse, VerseTreeItem::verse);
 
         }
         else
         {
-            boost::shared_ptr<VerseTreeItem> verse = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(i));
+            boost::shared_ptr<VerseTreeItem> verse = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, i));
             cur_verse_tree_root->add_child(verse, VerseTreeItem::verse);
         }
     }

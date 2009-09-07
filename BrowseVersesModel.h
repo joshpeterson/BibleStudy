@@ -4,7 +4,7 @@
 #include <boost/shared_ptr.hpp>
 #include <QAbstractItemModel>
 
-class Translation;
+class TranslationManager;
 class VerseDisplay;
 
 class BrowseVersesModel : public QAbstractItemModel
@@ -12,7 +12,7 @@ class BrowseVersesModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    BrowseVersesModel(boost::shared_ptr<Translation> translation, QObject *parent = 0);
+    BrowseVersesModel(boost::shared_ptr<const TranslationManager> translation_manager, QObject *parent = 0);
 
     QVariant data(const QModelIndex &index, int role) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
@@ -25,7 +25,7 @@ public:
     boost::shared_ptr<VerseDisplay> get_verse_display(const QModelIndex &index) const;
 
 private:
-    boost::shared_ptr<Translation> m_translation;
+    boost::shared_ptr<const TranslationManager> m_translation_manager;
 };
 
 #endif //__BROWSE_VERSES_MODEL_H

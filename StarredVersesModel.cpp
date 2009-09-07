@@ -8,8 +8,8 @@
 
 using namespace phoenix;
 
-StarredVersesModel::StarredVersesModel(boost::shared_ptr<Translation> translation) :
-    m_translation(translation)
+StarredVersesModel::StarredVersesModel(boost::shared_ptr<const TranslationManager> translation_manager) :
+    m_translation_manager(translation_manager)
 {
 }
 
@@ -28,8 +28,9 @@ QVariant StarredVersesModel::data(const QModelIndex &index, int role) const
 
     if (role == Qt::DisplayRole)
     {
-        return verse_collection_title(m_translation->get_entry(m_starred_verses[index.row()]->get_verse_id(), 
-                                                               m_starred_verses[index.row()]->get_num_verses_context())).c_str();
+        Translation translation = m_translation_manager[m_starred_verses[index.row()]->get_translation()];
+        return verse_collection_title(translation.get_entry(m_starred_verses[index.row()]->get_verse_id(), 
+                                                            m_starred_verses[index.row()]->get_num_verses_context())).c_str();
     }
 
     return QVariant();

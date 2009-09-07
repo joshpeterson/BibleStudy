@@ -11,7 +11,7 @@ class VerseDisplay;
 class StarredVersesModel : public QAbstractListModel
 {
 public:
-    StarredVersesModel(boost::shared_ptr<Translation> translation);
+    StarredVersesModel(boost::shared_ptr<const TranslationManager> translation_manager);
     void add_starred_verse(boost::shared_ptr<VerseDisplay> verse);
     void remove_starred_verse(boost::shared_ptr<VerseDisplay> verse);
     bool verse_starred(boost::shared_ptr<VerseDisplay> verse);
@@ -22,7 +22,7 @@ public:
 
 
 private:
-    boost::shared_ptr<Translation> m_translation;
+    boost::shared_ptr<const TranslationManager> m_translation_manager;
     std::vector<boost::shared_ptr<VerseDisplay> > m_starred_verses;
 };
 

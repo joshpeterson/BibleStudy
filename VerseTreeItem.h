@@ -15,8 +15,9 @@ public:
         verse = 3
     };
 
-    VerseTreeItem(int verse_id);
+    VerseTreeItem(std::string translation_long_name, int verse_id);
     void add_child(boost::shared_ptr<VerseTreeItem> child, ItemType item_type);
+    std::string get_translation_name() const;
     int get_verse_id() const;
     int get_child_index() const;
     ItemType get_item_type() const;
@@ -25,6 +26,7 @@ public:
     boost::shared_ptr<VerseTreeItem> get_child(int child_index) const;
 
 private:
+    std::string m_translation_long_name;
     int m_verse_id;
     int m_child_index;
     ItemType m_item_type;

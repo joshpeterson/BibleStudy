@@ -12,10 +12,10 @@
 #include "UITextViewWidget.h"
 #include "UIBrowseVersesWidget.h"
 
-UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<Translation> translation, QWidget *parent) :
+UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget *parent) :
     QWidget(parent),
-    m_results_model(new SearchResultsModel(translation.get(), NULL)),
-    m_starred_verses_model(new StarredVersesModel(translation)),
+    m_results_model(new SearchResultsModel(translation_manager, NULL)),
+    m_starred_verses_model(new StarredVersesModel(translation_manager)),
     m_browse_verses_model(new BrowseVersesModel(translation)),
     m_search(new UISearchWidget(translation)),
     m_results(new UISearchResultsWidget(m_results_model)),
