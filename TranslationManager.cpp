@@ -9,11 +9,11 @@ void TranslationManager::add_translation(boost::shared_ptr<const Translation> tr
     }
 }
 
-const Translation& TranslationManager::at(const std::string& translation_long_name) const
+boost::shared_ptr<const Translation> TranslationManager::at(const std::string& translation_long_name) const
 {
     if (this->contains_translation(translation_long_name))
     {
-        return *m_translations.find(translation_long_name)->second;
+        return m_translations.find(translation_long_name)->second;
     }
     else
     {
