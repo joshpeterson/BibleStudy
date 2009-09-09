@@ -2,6 +2,7 @@
 #define __ISEARCH_RESULTS_H
 
 #include <vector>
+#include "VerseDisplay.h"
 
 class ISearchResults
 {
@@ -11,8 +12,8 @@ public:
     virtual int num_results() const = 0;
     virtual int at(int index) const = 0;
     virtual std::string translation_at(int index) const = 0;
-    virtual std::vector<int>::iterator begin() = 0;
-    virtual std::vector<int>::iterator end() = 0;
+    virtual std::vector<VerseDisplay>::iterator begin() = 0;
+    virtual std::vector<VerseDisplay>::iterator end() = 0;
 
 };
 

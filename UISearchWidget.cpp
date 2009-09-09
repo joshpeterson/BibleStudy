@@ -6,12 +6,12 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "UISearchWidget.h"
-#include "Translation.h"
+#include "TranslationManager.h"
 #include "CommandPerformSearch.h"
 
-UISearchWidget::UISearchWidget(boost::shared_ptr<Translation> translation, QWidget* parent) : 
+UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget* parent) : 
     QWidget(parent),
-    m_translation(translation),
+    m_translation_manager(translation_manager),
     m_search_button(new QPushButton(tr("Search"))),
     m_search_input_field(new QLineEdit(tr("Search Text")))
 {
@@ -43,7 +43,7 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<Translation> translation, QWidg
 
 void UISearchWidget::perform_search()
 {
-    CommandPerformSearch search_command(m_translation, m_search_input_field->text().toStdString());
+    CommandPerformSearch search_command(m_translation_manager, m_search_input_field->text().toStdString());
     search_command.Execute();
     emit search_complete(search_command.get_results());
 }

@@ -14,13 +14,13 @@
 
 UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget *parent) :
     QWidget(parent),
-    m_results_model(new SearchResultsModel(translation_manager, NULL)),
+    m_results_model(new SearchResultsModel(translation_manager)),
     m_starred_verses_model(new StarredVersesModel(translation_manager)),
-    m_browse_verses_model(new BrowseVersesModel(translation)),
-    m_search(new UISearchWidget(translation)),
+    m_browse_verses_model(new BrowseVersesModel(translation_manager)),
+    m_search(new UISearchWidget(translation_manager)),
     m_results(new UISearchResultsWidget(m_results_model)),
-    m_starred_verses(new UIStarredVersesWidget(translation, m_starred_verses_model)),
-    m_text(new UITextViewWidget(translation, m_starred_verses_model)),
+    m_starred_verses(new UIStarredVersesWidget(m_starred_verses_model)),
+    m_text(new UITextViewWidget(translation_manager, m_starred_verses_model)),
     m_browse(new UIBrowseVersesWidget(m_browse_verses_model))
 {
     QObject::connect(m_search, SIGNAL(search_complete(boost::shared_ptr<ISearchResults>)),

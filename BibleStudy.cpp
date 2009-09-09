@@ -29,10 +29,10 @@ int main(int argc, char* argv[])
 
     test->Resume("Translations/DR.buf");
 
-    TranslationManager manager;
-    manager.add_translation(test);
+    boost::shared_ptr<TranslationManager> manager(new TranslationManager);
+    manager->add_translation(test);
     
-    UIBibleStudyWidget study(test);
+    UIBibleStudyWidget study(manager);
 
     study.show();
 

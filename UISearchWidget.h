@@ -8,7 +8,7 @@ class QAbstractItemModel;
 class QPushButton;
 class QLineEdit;
 
-class Translation;
+class TranslationManager;
 class ISearchResults;
 
 class UISearchWidget : public QWidget
@@ -16,7 +16,7 @@ class UISearchWidget : public QWidget
     Q_OBJECT
 
 public:
-    UISearchWidget(boost::shared_ptr<Translation> translation, QWidget* parent = 0);
+    UISearchWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget* parent = 0);
 
 signals:
     void search_complete(boost::shared_ptr<ISearchResults> query);
@@ -25,7 +25,7 @@ private slots:
     void perform_search();
 
 private:
-    boost::shared_ptr<Translation> m_translation;
+    boost::shared_ptr<const TranslationManager> m_translation_manager;
     QPushButton* m_search_button;
     QLineEdit* m_search_input_field;
 };

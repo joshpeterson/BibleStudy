@@ -6,13 +6,13 @@
 #include <boost/shared_ptr.hpp>
 #include "ICommand.h"
 
-class Translation;
+class TranslationManager;
 class ISearchResults;
 
 class CommandPerformSearch : public ICommand
 {
 public:
-    CommandPerformSearch(boost::shared_ptr<Translation> translation, std::string search_string);
+    CommandPerformSearch(boost::shared_ptr<const TranslationManager> translation_manager, std::string search_string);
     
     boost::shared_ptr<ISearchResults> get_results();
 
@@ -20,7 +20,7 @@ public:
     void Execute();
 
 private:
-    boost::shared_ptr<Translation> m_translation;
+    boost::shared_ptr<const TranslationManager> m_translation_manager;
     std::string m_search_string;
     boost::shared_ptr<ISearchResults> m_search_results;
     std::vector<boost::shared_ptr<ISearchResults> > m_search_queries;

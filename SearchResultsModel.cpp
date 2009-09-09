@@ -1,15 +1,14 @@
 #include <vector>
 #include <boost/shared_ptr.hpp>
 #include "SearchResultsModel.h"
+#include "TranslationManager.h"
 #include "Verse.h"
 #include "VerseDisplay.h"
 
 SearchResultsModel::SearchResultsModel(boost::shared_ptr<const TranslationManager> translation_manager, 
-                                       boost::shared_ptr<const ISearchResults> results,
                                        QObject* parent) :
     QAbstractTableModel(parent),
-    m_translation_manager(translation_manager),
-    m_results(results)
+    m_translation_manager(translation_manager)
 {
 }
 
@@ -45,7 +44,7 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
 
     if (role == Qt::DisplayRole)
     {
-        Translation translation = m_translation_manager[m_results->translation_at(index.row())];
+        Translation translation = m_translation_manager->at(m_results->translation_at(index.row()));
         switch (index.column())
         {
             case translation_column:
@@ -69,10 +68,11 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
     }
     else if (role == Qt::ToolTipRole)
     {
+        Translation translation;
         switch (index.column())
         {
             case text_column:
-                Translation translation = m_translation_manager[m_results->translation_at(index.row())];
+                translation = m_translation_manager->at(m_results->translation_at(index.row()));
                 return verse_collection_to_title_and_string_wrapped(translation.get_entry(m_results->at(index.row()), 2)).c_str();
             default:
                 return QVariant();
@@ -118,7 +118,7 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
  boost::shared_ptr<VerseDisplay> SearchResultsModel::get_verse_display(const QModelIndex &index)
  {
      if (index.column() == text_column)
-         return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_results->at(index.row()), 2));
+         return boost::shared_ptr<VerseDisplay>(new VerseDisplay(m_results->translation_at(index.row()), m_results->at(index.row()), 2));
      else
-         return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", -1, -1));
+         return boost::shared_ptr<VerseDisplay>(new VerseDisplay(m_results->translation_at(index.row()), -1, -1));
  }

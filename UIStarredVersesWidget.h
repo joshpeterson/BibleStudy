@@ -6,7 +6,6 @@
 #include <boost/shared_ptr.hpp>
 
 class QListView;
-class Translation;
 class StarredVersesModel;
 class VerseDisplay;
 
@@ -15,8 +14,7 @@ class UIStarredVersesWidget : public QWidget
     Q_OBJECT
 
 public:
-    UIStarredVersesWidget(boost::shared_ptr<Translation> translation,
-                          boost::shared_ptr<StarredVersesModel> starred_verses_model, QWidget* parent = 0);
+    UIStarredVersesWidget(boost::shared_ptr<StarredVersesModel> starred_verses_model, QWidget* parent = 0);
 
 public slots:
     void add_starred_verse(boost::shared_ptr<VerseDisplay> verse);
@@ -27,7 +25,6 @@ signals:
     void verse_display_changed(boost::shared_ptr<VerseDisplay> verse);
 
 private:
-    boost::shared_ptr<Translation> m_translation;
     QListView* m_starred_verses_view;
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
 };

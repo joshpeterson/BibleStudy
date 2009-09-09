@@ -83,7 +83,7 @@ bool Translation::Resume(const std::string &filename)
     m_long_name = buffer.long_name();
     m_short_name = buffer.short_name();
 
-    m_verse_tree = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(-1));
+    m_verse_tree = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem("", -1));
 
     boost::shared_ptr<VerseTreeItem> translation_item = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, 0));
     m_verse_tree->add_child(translation_item, VerseTreeItem::translation);

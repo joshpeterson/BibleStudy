@@ -20,7 +20,7 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
     if (!item)
         return QVariant();
 
-    Translation translation = m_translation_manager[item->get_translation_name()];
+    Translation translation = m_translation_manager->at(item->get_translation_name());
     if (index.row() >= translation.num_entries())
         return QVariant();
 
@@ -31,7 +31,7 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
             switch (item->get_item_type())
             {
                 case VerseTreeItem::translation:
-                    return translation.get_long_name();
+                    return translation.get_long_name().c_str();
                 
                 case VerseTreeItem::book:
                     return translation.get_entry(item->get_verse_id())->get_book().c_str();
@@ -55,7 +55,7 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
     {
         if (item->get_item_type() == VerseTreeItem::verse)
         {
-            return verse_collection_to_title_and_string_wrapped(.translation.get_entry(item->get_verse_id(), 0)).c_str();
+            return verse_collection_to_title_and_string_wrapped(translation.get_entry(item->get_verse_id(), 0)).c_str();
         }
     }
     return QVariant();
@@ -99,7 +99,7 @@ QModelIndex BrowseVersesModel::index(int row, int column, const QModelIndex &par
     VerseTreeItem* parentItem;
 
      if (!parent.isValid())
-         parentItem = m_translation->get_verse_item_tree().get();
+         parentItem = (*m_translation_manager->begin()->second).get_verse_item_tree().get();
      else
          parentItem = static_cast<VerseTreeItem*>(parent.internalPointer());
 
@@ -131,7 +131,7 @@ int BrowseVersesModel::rowCount(const QModelIndex &parent) const
 
     VerseTreeItem* parentItem;
     if (!parent.isValid())
-        parentItem = m_translation->get_verse_item_tree().get();
+        parentItem = (*m_translation_manager->begin()->second).get_verse_item_tree().get();
     else
         parentItem = static_cast<VerseTreeItem*>(parent.internalPointer());
 
@@ -147,7 +147,7 @@ boost::shared_ptr<VerseDisplay> BrowseVersesModel::get_verse_display(const QMode
 {
     VerseTreeItem* item = static_cast<VerseTreeItem*>(index.internalPointer());
     if (item->get_item_type() == VerseTreeItem::verse)
-        return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", item->get_verse_id(), 2));
+        return boost::shared_ptr<VerseDisplay>(new VerseDisplay(item->get_translation_name(), item->get_verse_id(), 2));
     else
-        return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", -1, -1));
+        return boost::shared_ptr<VerseDisplay>(new VerseDisplay(item->get_translation_name(), -1, -1));
 }

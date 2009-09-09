@@ -6,11 +6,12 @@
 #include "ISearchResults.h"
 
 class VerseDisplay;
+class TranslationManager;
 
 class SearchResultsModel : public QAbstractTableModel
 {
 public:
-    SearchResultsModel(boost::shared_ptr<const TranslationManager> translation_manager, boost::shared_ptr<const ISearchResults> results, QObject* parent = 0);
+    SearchResultsModel(boost::shared_ptr<const TranslationManager> translation_manager, QObject* parent = 0);
     void SetResults(boost::shared_ptr<const ISearchResults> results);
     boost::shared_ptr<VerseDisplay> get_verse_display(const QModelIndex& index);
 

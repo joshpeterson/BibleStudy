@@ -18,6 +18,11 @@ void VerseTreeItem::add_child(boost::shared_ptr<VerseTreeItem> child, ItemType i
     }
 }
 
+std::string VerseTreeItem::get_translation_name() const
+{
+    return m_translation_long_name;
+}
+
 int VerseTreeItem::get_verse_id() const
 {
     return m_verse_id;

@@ -7,7 +7,7 @@
 class QLabel;
 class QTextEdit;
 class QToolButton;
-class Translation;
+class TranslationManager;
 class VerseDisplay;
 class StarredVersesModel;
 
@@ -16,7 +16,7 @@ class UITextViewWidget : public QWidget
     Q_OBJECT
 
 public:
-    UITextViewWidget(boost::shared_ptr<Translation> translation,
+    UITextViewWidget(boost::shared_ptr<const TranslationManager> translation_manager,
                      boost::shared_ptr<StarredVersesModel> starred_verses_model, QWidget* parent = 0);
 
 signals:
@@ -35,10 +35,10 @@ private slots:
     void change_starred_verse_state();
 
 private:
+    boost::shared_ptr<const TranslationManager> m_translation_manager;
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
     
     boost::shared_ptr<VerseDisplay> m_displayed_verse;
-    boost::shared_ptr<Translation> m_translation;
     QLabel* m_title;
     QTextEdit* m_text;
     QToolButton* m_more_button;

@@ -4,17 +4,18 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "UITextViewWidget.h"
+#include "TranslationManager.h"
 #include "Translation.h"
 #include "VerseDisplay.h"
 #include "StarredVersesModel.h"
 
-UITextViewWidget::UITextViewWidget(boost::shared_ptr<Translation> translation, 
+UITextViewWidget::UITextViewWidget(boost::shared_ptr<const TranslationManager> translation_manager,
                                    boost::shared_ptr<StarredVersesModel> starred_verses_model,
                                    QWidget* parent) :
     QWidget(parent),
+    m_translation_manager(translation_manager),
     m_starred_verses_model(starred_verses_model),
     m_displayed_verse(new VerseDisplay("", -1, -1)),
-    m_translation(translation),
     m_title(new QLabel()),
     m_text(new QTextEdit()),
     m_more_button(new QToolButton()),
@@ -74,8 +75,10 @@ void UITextViewWidget::display_text(boost::shared_ptr<VerseDisplay> verse)
 {
     m_displayed_verse = verse;
 
-    std::vector<boost::shared_ptr<const Verse> > verses = m_translation->get_entry(m_displayed_verse->get_verse_id(),
-                                                                                    m_displayed_verse->get_num_verses_context());
+    Translation translation = m_translation_manager->at(verse->get_translation());
+
+    std::vector<boost::shared_ptr<const Verse> > verses = translation.get_entry(m_displayed_verse->get_verse_id(),
+                                                                                m_displayed_verse->get_num_verses_context());
     m_title->setText(verse_collection_title(verses).c_str());
     m_text->setText(verse_collection_to_string(verses).c_str());
 
@@ -92,7 +95,7 @@ void UITextViewWidget::display_text(boost::shared_ptr<VerseDisplay> verse)
 
 void UITextViewWidget::increase_displayed_context()
 {
-    m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_verse->get_verse_id(), 
+    m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay(m_displayed_verse->get_translation(), m_displayed_verse->get_verse_id(), 
                                                                          m_displayed_verse->get_num_verses_context() + 1));
     
     display_text(m_displayed_verse);
@@ -104,7 +107,7 @@ void UITextViewWidget::decrease_displayed_context()
     
     if (requested_displayed_context >= 0)
     {
-        m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_verse->get_verse_id(), 
+        m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay(m_displayed_verse->get_translation(), m_displayed_verse->get_verse_id(), 
                                                                              requested_displayed_context));
         display_text(m_displayed_verse);
     }
@@ -114,9 +117,10 @@ void UITextViewWidget::display_next_verse()
 {
     int requested_next_verse = m_displayed_verse->get_verse_id() + 1;
 
-    if (requested_next_verse < m_translation->num_entries()-1)
+    Translation translation = m_translation_manager->at(m_displayed_verse->get_translation());
+    if (requested_next_verse < translation.num_entries()-1)
     {
-        m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_verse->get_verse_id() +1, 
+        m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay(m_displayed_verse->get_translation(), m_displayed_verse->get_verse_id() +1, 
                                                                              m_displayed_verse->get_num_verses_context()));
         display_text(m_displayed_verse);
         
@@ -134,7 +138,7 @@ void UITextViewWidget::display_prev_verse()
 
     if (requested_next_verse >= 0)
     {
-        m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_displayed_verse->get_verse_id() - 1, 
+        m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay(m_displayed_verse->get_translation(), m_displayed_verse->get_verse_id() - 1, 
                                                                              m_displayed_verse->get_num_verses_context()));
         display_text(m_displayed_verse);
 
@@ -169,7 +173,8 @@ bool UITextViewWidget::prev_button_should_be_enabled()
 
 bool UITextViewWidget::next_button_should_be_enabled()
 {
-    return m_displayed_verse->get_verse_id() != m_translation->num_entries()-1;
+    Translation translation = m_translation_manager->at(m_displayed_verse->get_translation());
+    return m_displayed_verse->get_verse_id() != translation.num_entries()-1;
 }
 
 bool UITextViewWidget::more_button_should_be_enabled()

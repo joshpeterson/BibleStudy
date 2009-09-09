@@ -2,15 +2,12 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include "UIStarredVersesWidget.h"
-#include "Translation.h"
 #include "StarredVersesModel.h"
 #include "VerseDisplay.h"
 
-UIStarredVersesWidget::UIStarredVersesWidget(boost::shared_ptr<Translation> translation, 
-                                             boost::shared_ptr<StarredVersesModel> starred_verses_model,
+UIStarredVersesWidget::UIStarredVersesWidget(boost::shared_ptr<StarredVersesModel> starred_verses_model,
                                              QWidget* parent) :
     QWidget(parent),
-    m_translation(translation),
     m_starred_verses_view(new QListView()),
     m_starred_verses_model(starred_verses_model)
 {

@@ -3,6 +3,7 @@
 #include <boost/spirit/phoenix/primitives.hpp>
 #include <boost/spirit/phoenix/special_ops.hpp>
 #include "StarredVersesModel.h"
+#include "TranslationManager.h"
 #include "Translation.h"
 #include "VerseDisplay.h"
 
@@ -28,7 +29,7 @@ QVariant StarredVersesModel::data(const QModelIndex &index, int role) const
 
     if (role == Qt::DisplayRole)
     {
-        Translation translation = m_translation_manager[m_starred_verses[index.row()]->get_translation()];
+        Translation translation = m_translation_manager->at(m_starred_verses[index.row()]->get_translation());
         return verse_collection_title(translation.get_entry(m_starred_verses[index.row()]->get_verse_id(), 
                                                             m_starred_verses[index.row()]->get_num_verses_context())).c_str();
     }
@@ -64,7 +65,8 @@ bool StarredVersesModel::verse_starred(boost::shared_ptr<VerseDisplay> verse)
 
 boost::shared_ptr<VerseDisplay> StarredVersesModel::get_verse_display(const QModelIndex &index)
 {
-    return boost::shared_ptr<VerseDisplay>(new VerseDisplay("", m_starred_verses.at(index.row())->get_verse_id(), 
+    Translation translation = m_translation_manager->at(m_starred_verses[index.row()]->get_translation());
+    return boost::shared_ptr<VerseDisplay>(new VerseDisplay(translation.get_long_name(), m_starred_verses.at(index.row())->get_verse_id(), 
                                                             m_starred_verses.at(index.row())->get_num_verses_context()));
 }
 
