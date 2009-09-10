@@ -75,10 +75,10 @@ void UITextViewWidget::display_text(boost::shared_ptr<VerseDisplay> verse)
 {
     m_displayed_verse = verse;
 
-    Translation translation = m_translation_manager->at(verse->get_translation());
+    boost::shared_ptr<const Translation> translation = m_translation_manager->at(verse->get_translation());
 
-    std::vector<boost::shared_ptr<const Verse> > verses = translation.get_entry(m_displayed_verse->get_verse_id(),
-                                                                                m_displayed_verse->get_num_verses_context());
+    std::vector<boost::shared_ptr<const Verse> > verses = translation->get_entry(m_displayed_verse->get_verse_id(),
+                                                                                 m_displayed_verse->get_num_verses_context());
     m_title->setText(verse_collection_title(verses).c_str());
     m_text->setText(verse_collection_to_string(verses).c_str());
 
@@ -117,8 +117,8 @@ void UITextViewWidget::display_next_verse()
 {
     int requested_next_verse = m_displayed_verse->get_verse_id() + 1;
 
-    Translation translation = m_translation_manager->at(m_displayed_verse->get_translation());
-    if (requested_next_verse < translation.num_entries()-1)
+    boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_displayed_verse->get_translation());
+    if (requested_next_verse < translation->num_entries()-1)
     {
         m_displayed_verse = boost::shared_ptr<VerseDisplay>(new VerseDisplay(m_displayed_verse->get_translation(), m_displayed_verse->get_verse_id() +1, 
                                                                              m_displayed_verse->get_num_verses_context()));
@@ -173,8 +173,8 @@ bool UITextViewWidget::prev_button_should_be_enabled()
 
 bool UITextViewWidget::next_button_should_be_enabled()
 {
-    Translation translation = m_translation_manager->at(m_displayed_verse->get_translation());
-    return m_displayed_verse->get_verse_id() != translation.num_entries()-1;
+    boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_displayed_verse->get_translation());
+    return m_displayed_verse->get_verse_id() != translation->num_entries()-1;
 }
 
 bool UITextViewWidget::more_button_should_be_enabled()

@@ -44,23 +44,23 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
 
     if (role == Qt::DisplayRole)
     {
-        Translation translation = m_translation_manager->at(m_results->translation_at(index.row()));
+        boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
         switch (index.column())
         {
             case translation_column:
-                return translation.get_long_name().c_str();
+                return translation->get_long_name().c_str();
             
             case book_column:
-                return translation.get_entry(m_results->at(index.row()))->get_book().c_str();
+                return translation->get_entry(m_results->at(index.row()))->get_book().c_str();
 
             case chapter_column:
-                return translation.get_entry(m_results->at(index.row()))->get_chapter();
+                return translation->get_entry(m_results->at(index.row()))->get_chapter();
 
             case verse_column:
-                return translation.get_entry(m_results->at(index.row()))->get_verse();
+                return translation->get_entry(m_results->at(index.row()))->get_verse();
 
             case text_column:
-                return translation.get_entry(m_results->at(index.row()))->get_text().c_str();
+                return translation->get_entry(m_results->at(index.row()))->get_text().c_str();
             
             default:
                 return QVariant();
@@ -68,12 +68,12 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
     }
     else if (role == Qt::ToolTipRole)
     {
-        Translation translation;
+        boost::shared_ptr<const Translation> translation;
         switch (index.column())
         {
             case text_column:
                 translation = m_translation_manager->at(m_results->translation_at(index.row()));
-                return verse_collection_to_title_and_string_wrapped(translation.get_entry(m_results->at(index.row()), 2)).c_str();
+                return verse_collection_to_title_and_string_wrapped(translation->get_entry(m_results->at(index.row()), 2)).c_str();
             default:
                 return QVariant();
         }

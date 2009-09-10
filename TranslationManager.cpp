@@ -21,18 +21,6 @@ boost::shared_ptr<const Translation> TranslationManager::at(const std::string& t
     }
 }
 
-const Translation& TranslationManager::operator[](const std::string& translation_long_name) const
-{
-    if (this->contains_translation(translation_long_name))
-    {
-        return *m_translations.find(translation_long_name)->second;
-    }
-    else
-    {
-        throw TranslationNotFound();
-    }
-}
-
 bool TranslationManager::contains_translation(const std::string& translation_long_name) const
 {
     return m_translations.find(translation_long_name) != m_translations.end();
