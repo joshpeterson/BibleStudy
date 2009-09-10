@@ -5,12 +5,13 @@
 #include <vector>
 #include <iostream>
 #include <boost/shared_ptr.hpp>
+#include <boost/noncopyable.hpp>
 #include "ISearchResults.h"
 
 class Verse;
 class VerseTreeItem;
 
-class Translation
+class Translation : private boost::noncopyable
 {
 public:
     Translation() {};
