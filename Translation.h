@@ -40,8 +40,8 @@ private:
 
 };
 
-std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const Verse> >& verse_collection);
+std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const Verse> >& verse_collection, boost::shared_ptr<const Translation> translation);
 std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const Verse> >& verse_collection);
-std::string verse_collection_title(const std::vector<boost::shared_ptr<const Verse> >& verse_collection);
+std::string verse_collection_title(const std::vector<boost::shared_ptr<const Verse> >& verse_collection, boost::shared_ptr<const Translation> translation);
 
 #endif //__TRANSLATION_H

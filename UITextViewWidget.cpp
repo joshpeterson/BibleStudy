@@ -79,7 +79,7 @@ void UITextViewWidget::display_text(boost::shared_ptr<VerseDisplay> verse)
 
     std::vector<boost::shared_ptr<const Verse> > verses = translation->get_entry(m_displayed_verse->get_verse_id(),
                                                                                  m_displayed_verse->get_num_verses_context());
-    m_title->setText(verse_collection_title(verses).c_str());
+    m_title->setText(verse_collection_title(verses, translation).c_str());
     m_text->setText(verse_collection_to_string(verses).c_str());
 
     m_star_button->setChecked(m_starred_verses_model->verse_starred(m_displayed_verse));

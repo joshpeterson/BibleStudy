@@ -1,4 +1,3 @@
-#include <fstream>
 #include <iostream>
 #include "Translation.h"
 #include "TranslationManager.h"
@@ -17,20 +16,20 @@ int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
-    //std::ifstream raw_text;
-
-    //raw_text.open("c:\\Documents and Settings\\Josh\\Desktop\\DR.txt");
-
     boost::shared_ptr<Translation> test(new Translation);
 
-    //test.Import("Douay-Rheims", "DR", "c:\\Documents and Settings\\Josh\\Desktop\\DR.txt");
+    //test->Import("Test Translation", "TT", "c:\\Documents and Settings\\Josh\\Desktop\\TT.txt");
 
-    //test.Save("c:\\Documents and Settings\\Josh\\Desktop\\DR.buf");
+    //test->Save("c:\\Documents and Settings\\Josh\\Desktop\\TT.buf");
 
     test->Resume("Translations/DR.buf");
 
+    boost::shared_ptr<Translation> test2(new Translation);
+    test2->Resume("Translations/TT.buf");
+
     boost::shared_ptr<TranslationManager> manager(new TranslationManager);
     manager->add_translation(test);
+    manager->add_translation(test2);
     
     UIBibleStudyWidget study(manager);
 

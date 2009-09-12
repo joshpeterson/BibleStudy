@@ -55,7 +55,7 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
     {
         if (item->get_item_type() == VerseTreeItem::verse)
         {
-            return verse_collection_to_title_and_string_wrapped(translation->get_entry(item->get_verse_id(), 0)).c_str();
+            return verse_collection_to_title_and_string_wrapped(translation->get_entry(item->get_verse_id(), 0), translation).c_str();
         }
     }
     return QVariant();
@@ -99,7 +99,7 @@ QModelIndex BrowseVersesModel::index(int row, int column, const QModelIndex &par
     VerseTreeItem* parentItem;
 
      if (!parent.isValid())
-         parentItem = (*m_translation_manager->begin()->second).get_verse_item_tree().get();
+         parentItem = m_translation_manager->get_verse_item_tree().get();
      else
          parentItem = static_cast<VerseTreeItem*>(parent.internalPointer());
 
@@ -131,7 +131,7 @@ int BrowseVersesModel::rowCount(const QModelIndex &parent) const
 
     VerseTreeItem* parentItem;
     if (!parent.isValid())
-        parentItem = (*m_translation_manager->begin()->second).get_verse_item_tree().get();
+        parentItem = m_translation_manager->get_verse_item_tree().get();
     else
         parentItem = static_cast<VerseTreeItem*>(parent.internalPointer());
 

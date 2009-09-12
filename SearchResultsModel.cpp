@@ -73,7 +73,7 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
         {
             case text_column:
                 translation = m_translation_manager->at(m_results->translation_at(index.row()));
-                return verse_collection_to_title_and_string_wrapped(translation->get_entry(m_results->at(index.row()), 2)).c_str();
+                return verse_collection_to_title_and_string_wrapped(translation->get_entry(m_results->at(index.row()), 2), translation).c_str();
             default:
                 return QVariant();
         }

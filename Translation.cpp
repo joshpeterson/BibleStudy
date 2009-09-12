@@ -83,11 +83,13 @@ bool Translation::Resume(const std::string &filename)
     m_long_name = buffer.long_name();
     m_short_name = buffer.short_name();
 
-    m_verse_tree = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem("", -1));
+    m_verse_tree = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, 0));
+    VerseTreeItem* cur_verse_tree_root = m_verse_tree.get();
+    //m_verse_tree = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem("", -1));
 
-    boost::shared_ptr<VerseTreeItem> translation_item = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, 0));
-    m_verse_tree->add_child(translation_item, VerseTreeItem::translation);
-    VerseTreeItem* cur_verse_tree_root = translation_item.get();
+    //boost::shared_ptr<VerseTreeItem> translation_item = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem(m_long_name, 0));
+    //m_verse_tree->add_child(translation_item, VerseTreeItem::translation);
+    //VerseTreeItem* cur_verse_tree_root = translation_item.get();
 
     std::string cur_book;
     int cur_chapter = 0;
@@ -147,13 +149,37 @@ bool Translation::Resume(const std::string &filename)
     return true;
 }
 
+bool Translation::Import(const std::string& long_name, const std::string& short_name, const std::string& filename)
+{
+    this->m_long_name = long_name;
+    this->m_short_name = short_name;
+    std::ifstream raw_text;
+
+    raw_text.open(filename.c_str());
+
+    std::string line;
+    while (getline(raw_text, line))
+    {
+        std::vector<std::string> parts;
+        boost::algorithm::split(parts, line, boost::algorithm::is_any_of("*"));
+
+        boost::shared_ptr<Verse> verse(new Verse(parts[1], boost::lexical_cast<int>(parts[2]),
+                                                 boost::lexical_cast<int>(parts[3]), parts[4],
+                                                 boost::lexical_cast<int>(parts[0])));
+        m_verses.push_back(verse);
+    }
+
+    return true;
+}
+
+
 boost::shared_ptr<VerseTreeItem> Translation::get_verse_item_tree() const
 {
     return m_verse_tree;
 }
 
 // Free functions
-std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const Verse> >& verse_collection)
+std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const Verse> >& verse_collection, boost::shared_ptr<const Translation> translation)
 {
     std::string verse_collection_string = verse_collection_to_string(verse_collection);
 
@@ -169,7 +195,7 @@ std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost
         cur_line_length += line_length;
     }
 
-    return verse_collection_title(verse_collection) + "\n\n" + verse_collection_string;
+    return verse_collection_title(verse_collection, translation) + "\n\n" + verse_collection_string;
 }
 
 std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const Verse> >& verse_collection)
@@ -188,7 +214,7 @@ std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const
     return verse_string;
 }
 
-std::string verse_collection_title(const std::vector<boost::shared_ptr<const Verse> >& verse_collection)
+std::string verse_collection_title(const std::vector<boost::shared_ptr<const Verse> >& verse_collection, boost::shared_ptr<const Translation> translation)
 {
     std::string title;
 
@@ -256,6 +282,10 @@ std::string verse_collection_title(const std::vector<boost::shared_ptr<const Ver
             title += boost::lexical_cast<std::string>((*--it)->get_verse());
         }
     }
+
+    title += " (";
+    title += translation->get_short_name();
+    title += ")";
 
     return title;
 }

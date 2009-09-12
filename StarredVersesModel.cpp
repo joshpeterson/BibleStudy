@@ -31,7 +31,7 @@ QVariant StarredVersesModel::data(const QModelIndex &index, int role) const
     {
         boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_starred_verses[index.row()]->get_translation());
         return verse_collection_title(translation->get_entry(m_starred_verses[index.row()]->get_verse_id(), 
-                                                             m_starred_verses[index.row()]->get_num_verses_context())).c_str();
+                                                             m_starred_verses[index.row()]->get_num_verses_context()), translation).c_str();
     }
 
     return QVariant();
