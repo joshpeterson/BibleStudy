@@ -11,14 +11,26 @@
 class Verse;
 class VerseTreeItem;
 
+//! A specific translation of the Bible
+/*!
+    A Translation object is a list of verses with given long and short names that can imported from a text file,
+    saved to and resumed from a binary buffer, directly indexed, and searched.
+*/
 class Translation : private boost::noncopyable
 {
 public:
     Translation() {};
 
+    //! Get the full name of the translation.
     std::string get_long_name() const { return m_long_name; }
+
+    //! Get the abbreviated name of the translation.
     std::string get_short_name() const { return m_short_name; }
+
+    //! Iterate the verses in this translation and add the ones which match the query to the results object.
     void search(std::vector<boost::shared_ptr<ISearchResults> >& results) const;
+
+    //! Get a specific verse from the translation based on its verse ID.
     const Verse* get_entry(int unique_id) const { return m_verses[unique_id].get(); }
     int num_entries() const { return static_cast<int>(m_verses.size()); }
     bool Save(const std::string& filename);
