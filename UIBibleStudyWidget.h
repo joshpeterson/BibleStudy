@@ -16,11 +16,17 @@ class UIStarredVersesWidget;
 class UITextViewWidget;
 class UIBrowseVersesWidget;
 
+//! This class is the GUI respresentation of the top level widget for the application.
+/*!
+    This widget owns all of the other widgets in the application.  It also defines the layout
+    of the application.
+*/
 class UIBibleStudyWidget : public QWidget
 {
     Q_OBJECT
 
 public:
+    //! Create a new instance of the UIBibleStudyWidget class.
     UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget* parent = 0);
 
 private:

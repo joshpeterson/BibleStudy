@@ -8,15 +8,26 @@
 class Translation;
 class VerseTreeItem;
 
+//! This class represents a collection of read-only translations.
 class TranslationManager : private boost::noncopyable
 {
 public:
+    //! Create a new instance of the TranslationManager class.
     TranslationManager();
 
+    //! Add a translation to the TranslationManager.
     void add_translation(boost::shared_ptr<const Translation> translation);
+
+    //! Get the Translation with the given name.
     boost::shared_ptr<const Translation> at(const std::string& translation_long_name) const;
+
+    //! Get the VerseTreeItem for the TranslationManager.  This object represents the root of the verse tree used for browsing.
     boost::shared_ptr<VerseTreeItem> get_verse_item_tree() const;
+
+    //! Get the starting iterator in the collection of Translation objects.
     std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator begin() const;
+
+    //! Get the end iterator in the collection of Translation objects.
     std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator end() const;
 
 private:

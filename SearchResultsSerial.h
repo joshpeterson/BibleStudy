@@ -7,9 +7,14 @@
 #include "ISearchResults.h"
 #include "VerseDisplay.h"
 
+//! This class implements the ISearchResults interface using a serial linear search.
+/*!
+    See the document for ISearchResults for details about the individual members of this class.
+*/
 class SearchResultsSerial : public ISearchResults, private boost::noncopyable
 {
 public:
+    //! Create a new instance of the SearchResultsSerial class.
     SearchResultsSerial(std::string search_string);
 
     // ISearchResults

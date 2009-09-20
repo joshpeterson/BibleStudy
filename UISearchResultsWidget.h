@@ -13,6 +13,7 @@ class ISearchResults;
 class SearchResultsModel;
 class VerseDisplay;
 
+//! This class is an implementation of a view from the Qt Model/View framework for a table view which displays the results of a text search.
 class UISearchResultsWidget : public QWidget
 {
     Q_OBJECT
