@@ -2,6 +2,7 @@
 #define __VERSE_TREE_ITEM_H
 
 #include <vector>
+#include <string>
 #include <boost/shared_ptr.hpp>
 
 class VerseTreeItem
