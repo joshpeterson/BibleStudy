@@ -12,6 +12,8 @@
 #include <QHeaderView>
 #include <QVBoxLayout>
 
+using namespace BibleStudy;
+
 int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);

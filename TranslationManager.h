@@ -5,6 +5,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
 
+namespace BibleStudy
+{
+
 class Translation;
 class VerseTreeItem;
 
@@ -41,5 +44,7 @@ private:
 class TranslationNotFound : std::exception
 {
 };
+
+}
 
 #endif // __TRANSLATION_MANAGER_H

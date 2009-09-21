@@ -4,6 +4,9 @@
 #include <vector>
 #include "VerseDisplay.h"
 
+namespace BibleStudy
+{
+
 //! This class represents an interface for accumulating translation search results.
 class ISearchResults
 {
@@ -30,5 +33,7 @@ public:
     virtual std::vector<VerseDisplay>::iterator end() = 0;
 
 };
+
+}
 
 #endif // __ISEARCH_RESULTS_H

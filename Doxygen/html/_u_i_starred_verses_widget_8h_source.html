@@ -31,34 +31,40 @@
 <a name="l00006"></a>00006 <span class="preprocessor">#include &lt;boost/shared_ptr.hpp&gt;</span>
 <a name="l00007"></a>00007 
 <a name="l00008"></a>00008 <span class="keyword">class </span>QListView;
-<a name="l00009"></a>00009 <span class="keyword">class </span><a class="code" href="class_starred_verses_model.html" title="This class is an implementation of a model from the Qt Model/View framework for a...">StarredVersesModel</a>;
-<a name="l00010"></a>00010 <span class="keyword">class </span><a class="code" href="class_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a>;
-<a name="l00011"></a>00011 
-<a name="l00013"></a><a class="code" href="class_u_i_starred_verses_widget.html">00013</a> <span class="keyword">class </span><a class="code" href="class_u_i_starred_verses_widget.html" title="This class is an implementation of a view from the Qt Model/View framework for a...">UIStarredVersesWidget</a> : <span class="keyword">public</span> QWidget
-<a name="l00014"></a>00014 {
-<a name="l00015"></a>00015     Q_OBJECT
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017 <span class="keyword">public</span>:
-<a name="l00019"></a>00019     <a class="code" href="class_u_i_starred_verses_widget.html#a5f1725295d058f7d39a4c3abd46ab653" title="Create a new instance of the UIStarredVersesWidget class.">UIStarredVersesWidget</a>(boost::shared_ptr&lt;StarredVersesModel&gt; starred_verses_model, QWidget* parent = 0);
+<a name="l00009"></a>00009 
+<a name="l00010"></a>00010 <span class="keyword">namespace </span>BibleStudy
+<a name="l00011"></a>00011 {
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 <span class="keyword">class </span>StarredVersesModel;
+<a name="l00014"></a>00014 <span class="keyword">class </span>VerseDisplay;
+<a name="l00015"></a>00015 
+<a name="l00017"></a><a class="code" href="class_bible_study_1_1_u_i_starred_verses_widget.html">00017</a> <span class="keyword">class </span><a class="code" href="class_bible_study_1_1_u_i_starred_verses_widget.html" title="This class is an implementation of a view from the Qt Model/View framework for a...">UIStarredVersesWidget</a> : <span class="keyword">public</span> QWidget
+<a name="l00018"></a>00018 {
+<a name="l00019"></a>00019     Q_OBJECT
 <a name="l00020"></a>00020 
-<a name="l00021"></a>00021 <span class="keyword">public</span> slots:
-<a name="l00023"></a>00023     <span class="keywordtype">void</span> <a class="code" href="class_u_i_starred_verses_widget.html#ad8546b4fbcc7efb7b71635f82a423b12" title="Add a verse to the collection of starred verses.">add_starred_verse</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
+<a name="l00021"></a>00021 <span class="keyword">public</span>:
+<a name="l00023"></a>00023     <a class="code" href="class_bible_study_1_1_u_i_starred_verses_widget.html#a5f1725295d058f7d39a4c3abd46ab653" title="Create a new instance of the UIStarredVersesWidget class.">UIStarredVersesWidget</a>(boost::shared_ptr&lt;StarredVersesModel&gt; starred_verses_model, QWidget* parent = 0);
 <a name="l00024"></a>00024 
-<a name="l00026"></a>00026     <span class="keywordtype">void</span> <a class="code" href="class_u_i_starred_verses_widget.html#a7caa429c09f218e17a48bca917ed04a0" title="Remove a verse from the collection of starred verses.">remove_starred_verse</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
-<a name="l00027"></a>00027 
-<a name="l00029"></a>00029     <span class="keywordtype">void</span> <a class="code" href="class_u_i_starred_verses_widget.html#af2e7163ea07e9f2f766fa595929c552e" title="Get the verse at the given index and emit the verse_display_changed signal for that...">display_verse_text</a>(<span class="keyword">const</span> QModelIndex&amp; index);
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031 signals:
-<a name="l00033"></a>00033     <span class="keywordtype">void</span> <a class="code" href="class_u_i_starred_verses_widget.html#a7657ba09d4261cc9dfb7756a5a9d7ca0" title="Signal other widgets that a new verse should be displayed.">verse_display_changed</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
+<a name="l00025"></a>00025 <span class="keyword">public</span> slots:
+<a name="l00027"></a>00027     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_1_1_u_i_starred_verses_widget.html#ad8546b4fbcc7efb7b71635f82a423b12" title="Add a verse to the collection of starred verses.">add_starred_verse</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
+<a name="l00028"></a>00028 
+<a name="l00030"></a>00030     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_1_1_u_i_starred_verses_widget.html#a7caa429c09f218e17a48bca917ed04a0" title="Remove a verse from the collection of starred verses.">remove_starred_verse</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
+<a name="l00031"></a>00031 
+<a name="l00033"></a>00033     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_1_1_u_i_starred_verses_widget.html#af2e7163ea07e9f2f766fa595929c552e" title="Get the verse at the given index and emit the verse_display_changed signal for that...">display_verse_text</a>(<span class="keyword">const</span> QModelIndex&amp; index);
 <a name="l00034"></a>00034 
-<a name="l00035"></a>00035 <span class="keyword">private</span>:
-<a name="l00036"></a>00036     QListView* m_starred_verses_view;
-<a name="l00037"></a>00037     boost::shared_ptr&lt;StarredVersesModel&gt; m_starred_verses_model;
-<a name="l00038"></a>00038 };
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040 <span class="preprocessor">#endif // __UI_STARRED_VERSES_WIDGET_H</span>
+<a name="l00035"></a>00035 signals:
+<a name="l00037"></a>00037     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_1_1_u_i_starred_verses_widget.html#acfa82e2a51fd3fa103a5c0d7343b3735" title="Signal other widgets that a new verse should be displayed.">verse_display_changed</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="keyword">private</span>:
+<a name="l00040"></a>00040     QListView* m_starred_verses_view;
+<a name="l00041"></a>00041     boost::shared_ptr&lt;StarredVersesModel&gt; m_starred_verses_model;
+<a name="l00042"></a>00042 };
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 }
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 <span class="preprocessor">#endif // __UI_STARRED_VERSES_WIDGET_H</span>
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Sep 21 07:45:53 2009 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Sep 21 08:17:05 2009 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

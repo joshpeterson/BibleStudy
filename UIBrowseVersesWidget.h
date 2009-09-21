@@ -7,6 +7,10 @@
 
 class QVBoxLayout;
 class QTreeView;
+
+namespace BibleStudy
+{
+
 class Translation;
 class BrowseVersesModel;
 class VerseDisplay;
@@ -33,5 +37,7 @@ private:
     QVBoxLayout* m_layout;
     boost::shared_ptr<BrowseVersesModel> m_browse_model;
 };
+
+}
 
 #endif // __UI_BROWSE_VERSES_WIDGET_H

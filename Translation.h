@@ -8,6 +8,9 @@
 #include <boost/noncopyable.hpp>
 #include "ISearchResults.h"
 
+namespace BibleStudy
+{
+
 class Verse;
 class VerseTreeItem;
 
@@ -86,5 +89,7 @@ std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const
 
 //! Get the title of a collection of verses.
 std::string verse_collection_title(const std::vector<boost::shared_ptr<const Verse> >& verse_collection, boost::shared_ptr<const Translation> translation);
+
+}
 
 #endif //__TRANSLATION_H

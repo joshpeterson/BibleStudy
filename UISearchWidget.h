@@ -8,6 +8,9 @@ class QAbstractItemModel;
 class QPushButton;
 class QLineEdit;
 
+namespace BibleStudy
+{
+
 class TranslationManager;
 class ISearchResults;
 
@@ -33,5 +36,7 @@ private:
     QPushButton* m_search_button;
     QLineEdit* m_search_input_field;
 };
+
+}
 
 #endif //__UI_SEARCH_WIDGET_H

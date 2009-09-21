@@ -5,6 +5,10 @@
 #include <boost/shared_ptr.hpp>
 
 class QVBoxLayout;
+
+namespace BibleStudy
+{
+
 class TranslationManager;
 class VerseDisplay;
 class SearchResultsModel;
@@ -40,6 +44,8 @@ private:
     UITextViewWidget* m_text;
     UIBrowseVersesWidget* m_browse;
 };
+
+}
 
 #endif //__UI_BIBLE_STUDY_WIDGET
 

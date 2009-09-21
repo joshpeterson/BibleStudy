@@ -9,6 +9,8 @@
 #include "VerseDisplay.h"
 #include "StarredVersesModel.h"
 
+using namespace BibleStudy;
+
 UITextViewWidget::UITextViewWidget(boost::shared_ptr<const TranslationManager> translation_manager,
                                    boost::shared_ptr<StarredVersesModel> starred_verses_model,
                                    QWidget* parent) :

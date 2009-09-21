@@ -4,6 +4,9 @@
 #include <boost/shared_ptr.hpp>
 #include <QAbstractItemModel>
 
+namespace BibleStudy
+{
+
 class TranslationManager;
 class VerseDisplay;
 
@@ -44,4 +47,5 @@ private:
     boost::shared_ptr<const TranslationManager> m_translation_manager;
 };
 
+}
 #endif //__BROWSE_VERSES_MODEL_H

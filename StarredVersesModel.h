@@ -5,6 +5,9 @@
 #include <boost/shared_ptr.hpp>
 #include <vector>
 
+namespace BibleStudy
+{
+
 class TranslationManager;
 class VerseDisplay;
 
@@ -37,5 +40,7 @@ private:
     boost::shared_ptr<const TranslationManager> m_translation_manager;
     std::vector<boost::shared_ptr<VerseDisplay> > m_starred_verses;
 };
+
+}
 
 #endif // __STARRED_VERSES_MODEL_H

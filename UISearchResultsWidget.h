@@ -8,6 +8,10 @@
 class QAbstractItemModel;
 class QTableView;
 class QVBoxLayout;
+
+namespace BibleStudy
+{
+
 class Translation;
 class ISearchResults;
 class SearchResultsModel;
@@ -38,5 +42,7 @@ private:
     QVBoxLayout* m_layout;
     boost::shared_ptr<SearchResultsModel> m_results_model;
 };
+
+}
 
 #endif //__UI_SEARCH_RESULTS_WIDGET

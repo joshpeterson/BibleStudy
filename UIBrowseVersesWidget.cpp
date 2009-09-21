@@ -6,6 +6,8 @@
 #include "VerseDisplay.h"
 //#include "BrowseVersesDelegate.h"
 
+using namespace BibleStudy;
+
 UIBrowseVersesWidget::UIBrowseVersesWidget(boost::shared_ptr<BrowseVersesModel> browse_model, QWidget *parent) :
     QWidget(parent),
     m_browse_view(new QTreeView()),

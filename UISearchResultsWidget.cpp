@@ -7,6 +7,8 @@
 #include "SearchResultsModel.h"
 #include "VerseDisplay.h"
 
+using namespace BibleStudy;
+
 UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsModel> results_model,
                                              QWidget *parent) :
     QWidget(parent),

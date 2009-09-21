@@ -2,6 +2,8 @@
 #include "Translation.h"
 #include "VerseTreeItem.h"
 
+using namespace BibleStudy;
+
 TranslationManager::TranslationManager()
 {
     m_verse_tree = boost::shared_ptr<VerseTreeItem>(new VerseTreeItem("", -1));

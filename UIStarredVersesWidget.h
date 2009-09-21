@@ -6,6 +6,10 @@
 #include <boost/shared_ptr.hpp>
 
 class QListView;
+
+namespace BibleStudy
+{
+
 class StarredVersesModel;
 class VerseDisplay;
 
@@ -36,5 +40,7 @@ private:
     QListView* m_starred_verses_view;
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
 };
+
+}
 
 #endif // __UI_STARRED_VERSES_WIDGET_H

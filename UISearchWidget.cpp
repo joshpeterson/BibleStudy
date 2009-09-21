@@ -9,6 +9,8 @@
 #include "TranslationManager.h"
 #include "CommandPerformSearch.h"
 
+using namespace BibleStudy;
+
 UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget* parent) : 
     QWidget(parent),
     m_translation_manager(translation_manager),

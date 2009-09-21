@@ -5,6 +5,8 @@
 #include "StarredVersesModel.h"
 #include "VerseDisplay.h"
 
+using namespace BibleStudy;
+
 UIStarredVersesWidget::UIStarredVersesWidget(boost::shared_ptr<StarredVersesModel> starred_verses_model,
                                              QWidget* parent) :
     QWidget(parent),

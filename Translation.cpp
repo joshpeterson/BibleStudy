@@ -10,6 +10,8 @@
 #include "TranslationBufferNoWarnings.pb.h"
 #include "VerseTreeItem.h"
 
+using namespace BibleStudy;
+
 void Translation::search(std::vector<boost::shared_ptr<ISearchResults> >& results) const
 {
     partial_search(m_verses.begin(), m_verses.end(), results[0]);
@@ -178,6 +180,9 @@ boost::shared_ptr<VerseTreeItem> Translation::get_verse_item_tree() const
     return m_verse_tree;
 }
 
+namespace BibleStudy
+{
+
 // Free functions
 std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const Verse> >& verse_collection, boost::shared_ptr<const Translation> translation)
 {
@@ -290,3 +295,4 @@ std::string verse_collection_title(const std::vector<boost::shared_ptr<const Ver
     return title;
 }
 
+}

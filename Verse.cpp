@@ -2,6 +2,8 @@
 #include "Verse.h"
 #include "ISearchResults.h"
 
+using namespace BibleStudy;
+
 Verse::Verse(const std::string& book, int chapter, int verse, const std::string& text,
              int unqiue_verse_id) :
     m_book(book),

@@ -6,6 +6,9 @@
 #include <boost/shared_ptr.hpp>
 #include "ICommand.h"
 
+namespace BibleStudy
+{
+
 class TranslationManager;
 class ISearchResults;
 
@@ -32,5 +35,7 @@ private:
 
     void parse_search_string();
 };
+
+}
 
 #endif // __COMMAND_PERFORM_SEARCH_H

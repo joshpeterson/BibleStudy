@@ -3,6 +3,8 @@
 #include "Translation.h"
 #include "SearchResultsSerial.h"
 
+using namespace BibleStudy;
+
 CommandPerformSearch::CommandPerformSearch(boost::shared_ptr<const TranslationManager> translation_manager, std::string search_string) :
     m_translation_manager(translation_manager),
     m_search_string(search_string)

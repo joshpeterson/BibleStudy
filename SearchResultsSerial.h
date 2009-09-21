@@ -7,6 +7,9 @@
 #include "ISearchResults.h"
 #include "VerseDisplay.h"
 
+namespace BibleStudy
+{
+
 //! This class implements the ISearchResults interface using a serial linear search.
 /*!
     See the document for ISearchResults for details about the individual members of this class.
@@ -33,4 +36,7 @@ private:
     SearchResultsSerial() {};
 
 };
+
+}
+
 #endif // __SEARCH_RESULTS_SERIAL_H

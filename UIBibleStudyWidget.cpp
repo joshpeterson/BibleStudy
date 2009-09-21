@@ -12,6 +12,8 @@
 #include "UITextViewWidget.h"
 #include "UIBrowseVersesWidget.h"
 
+using namespace BibleStudy;
+
 UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget *parent) :
     QWidget(parent),
     m_results_model(new SearchResultsModel(translation_manager)),

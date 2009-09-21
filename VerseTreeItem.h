@@ -5,6 +5,9 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 
+namespace BibleStudy
+{
+
 //! This class is used to represent a verse and its relationship to other verses in a Translation object that allow it to be displayed in a tree view.
 class VerseTreeItem
 {
@@ -52,5 +55,7 @@ private:
     //! Set the parent node for this node.
     void set_parent(VerseTreeItem* parent);
 };
+
+}
 
 #endif // __VERSE_TREE_ITEM_H

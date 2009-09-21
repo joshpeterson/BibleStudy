@@ -5,6 +5,9 @@
 #include "Translation.h"
 #include "ISearchResults.h"
 
+namespace BibleStudy
+{
+
 class VerseDisplay;
 class TranslationManager;
 
@@ -47,5 +50,7 @@ private:
         text_column = 4
     };
 };
+
+}
 
 #endif // __SEARCH_RESULTS_MODEL_H

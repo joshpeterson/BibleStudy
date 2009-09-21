@@ -1,5 +1,7 @@
 #include "VerseDisplay.h"    
 
+using namespace BibleStudy;
+
 VerseDisplay::VerseDisplay(std::string translation, int verse_id, int num_verses_context) :
     m_translation(translation),
     m_verse_id(verse_id),

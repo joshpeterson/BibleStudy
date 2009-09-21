@@ -1,5 +1,7 @@
 #include "VerseTreeItem.h"
 
+using namespace BibleStudy;
+
 VerseTreeItem::VerseTreeItem(std::string translation_long_name, int verse_id) :
     m_translation_long_name(translation_long_name),
     m_verse_id(verse_id),

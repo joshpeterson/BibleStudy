@@ -5,6 +5,8 @@
 #include "Verse.h"
 #include "VerseDisplay.h"
 
+using namespace BibleStudy;
+
 SearchResultsModel::SearchResultsModel(boost::shared_ptr<const TranslationManager> translation_manager, 
                                        QObject* parent) :
     QAbstractTableModel(parent),

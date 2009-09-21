@@ -8,6 +8,7 @@
 #include "VerseDisplay.h"
 
 using namespace phoenix;
+using namespace BibleStudy;
 
 StarredVersesModel::StarredVersesModel(boost::shared_ptr<const TranslationManager> translation_manager) :
     m_translation_manager(translation_manager)

@@ -5,6 +5,8 @@
 #include "VerseTreeItem.h"
 #include "VerseDisplay.h"
 
+using namespace BibleStudy;
+
 BrowseVersesModel::BrowseVersesModel(boost::shared_ptr<const TranslationManager> translation_manager, QObject *parent) :
     QAbstractItemModel(parent),
     m_translation_manager(translation_manager)

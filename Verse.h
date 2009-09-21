@@ -6,6 +6,9 @@
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 
+namespace BibleStudy
+{
+
 class ISearchResults;
 
 //! This class represents a single verse in a Translation object.
@@ -47,6 +50,8 @@ private:
     Verse() {};
 
 };
+
+}
 
 #endif // __VERSE_H
 

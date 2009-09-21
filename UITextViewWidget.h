@@ -7,6 +7,10 @@
 class QLabel;
 class QTextEdit;
 class QToolButton;
+
+namespace BibleStudy
+{
+
 class TranslationManager;
 class VerseDisplay;
 class StarredVersesModel;
@@ -59,6 +63,8 @@ private:
     bool less_button_should_be_enabled();
     bool star_button_should_be_enabled();
 };
+
+}
 
 #endif // __UI_TEXT_VIEW_WIDGET_H
 
