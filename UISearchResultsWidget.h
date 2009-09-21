@@ -19,13 +19,18 @@ class UISearchResultsWidget : public QWidget
     Q_OBJECT
 
 public:
+    //! Create a new instance of the UISearchResultsWidget class.
     UISearchResultsWidget(boost::shared_ptr<SearchResultsModel> results_model, QWidget* parent = 0);
 
 public slots:
+    //! Set the results object which the widget should display.
     void display_search_results(boost::shared_ptr<ISearchResults> query);
+
+    //! Get the verse at the given index and emit the verse_display_changed signal for that verse.
     void display_verse_text(const QModelIndex& index);
 
 signals:
+    //! Signal other widgets that a new verse should be displayed.
     void verse_display_changed(boost::shared_ptr<VerseDisplay> verse);
 
 private:

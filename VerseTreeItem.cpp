@@ -12,7 +12,6 @@ void VerseTreeItem::add_child(boost::shared_ptr<VerseTreeItem> child, ItemType i
     if (child != NULL)
     {
         child->set_parent(this);
-        child->m_child_index = static_cast<int>(m_children.size());
         child->m_item_type = item_type;
         m_children.push_back(child);
     }
@@ -26,11 +25,6 @@ std::string VerseTreeItem::get_translation_name() const
 int VerseTreeItem::get_verse_id() const
 {
     return m_verse_id;
-}
-
-int VerseTreeItem::get_child_index() const
-{
-    return m_child_index;
 }
 
 VerseTreeItem::ItemType VerseTreeItem::get_item_type() const

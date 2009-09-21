@@ -11,17 +11,21 @@ class QLineEdit;
 class TranslationManager;
 class ISearchResults;
 
+//! This class represents a collection of widgets which provide a text input field to input a search string and a button to start the search.
 class UISearchWidget : public QWidget
 {
     Q_OBJECT
 
 public:
+    //! Create a new instance of the UISearchWidget class.
     UISearchWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget* parent = 0);
 
 signals:
+    //! Inform other widgets that a search has finished.
     void search_complete(boost::shared_ptr<ISearchResults> query);
 
 private slots:
+    //! Execute the search.  Note that this is a private slot and cannot be used by other widgets.
     void perform_search();
 
 private:

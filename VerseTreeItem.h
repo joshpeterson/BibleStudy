@@ -5,9 +5,11 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 
+//! This class is used to represent a verse and its relationship to other verses in a Translation object that allow it to be displayed in a tree view.
 class VerseTreeItem
 {
 public:
+    //! This is the type of this VerseTreeItem.
     enum ItemType
     {
         translation = 0,
@@ -16,24 +18,38 @@ public:
         verse = 3
     };
 
+    //! Create a new instance of the VerseTreeItem class. The translation_long_name should be an empty string and the verse_id -1 for a root node in the tree.
     VerseTreeItem(std::string translation_long_name, int verse_id);
+
+    //! Add a child item to this node.
     void add_child(boost::shared_ptr<VerseTreeItem> child, ItemType item_type);
+
+    //! Get the long name of the Translation object for this node.
     std::string get_translation_name() const;
+
+    //! Get the verse ID for this node.
     int get_verse_id() const;
-    int get_child_index() const;
+
+    //! Get the type of item for this node.
     ItemType get_item_type() const;
+
+    //! Get the parent of this node.
     VerseTreeItem* get_parent() const;
+
+    //! Get the number of children for this node.
     int num_children() const;
+
+    //! Get the child node at the given index.
     boost::shared_ptr<VerseTreeItem> get_child(int child_index) const;
 
 private:
     std::string m_translation_long_name;
     int m_verse_id;
-    int m_child_index;
     ItemType m_item_type;
     VerseTreeItem* m_parent;
     std::vector< boost::shared_ptr<VerseTreeItem> > m_children;
 
+    //! Set the parent node for this node.
     void set_parent(VerseTreeItem* parent);
 };
 

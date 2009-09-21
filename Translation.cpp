@@ -59,7 +59,7 @@ bool Translation::Save(const std::string &filename)
         verse_buffer->set_chapter((*it)->get_chapter());
         verse_buffer->set_verse((*it)->get_verse());
         verse_buffer->set_text((*it)->get_text());
-        verse_buffer->set_unique_id((*it)->get_unqiue_id());
+        verse_buffer->set_unique_id((*it)->get_unique_id());
     }
 
     std::fstream output(filename.c_str(), std::ios::out | std::ios::trunc | std::ios::binary);

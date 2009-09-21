@@ -37,6 +37,7 @@ private:
     bool contains_translation(const std::string& translation_long_name) const;
 };
 
+//! This class represents an exception that is thrown when a Translation object of the given name is not found in the TranslationManager.
 class TranslationNotFound : std::exception
 {
 };
