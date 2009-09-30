@@ -8,6 +8,7 @@
 #include "UISearchWidget.h"
 #include "TranslationManager.h"
 #include "CommandPerformSearch.h"
+#include "Translation.h"
 
 using namespace BibleStudy;
 
@@ -24,17 +25,12 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
     search_field_row->addWidget(m_search_input_field);
     search_field_row->addWidget(m_search_button);
 
-    QCheckBox* dr_check_box = new QCheckBox(tr("DR"));
-    QCheckBox* ltv_check_box = new QCheckBox(tr("LTV"));
-    QCheckBox* rsv_check_box = new QCheckBox(tr("RSV"));
-    QCheckBox* nab_check_box = new QCheckBox(tr("NAB"));
-
     QHBoxLayout* translation_selection_row = new QHBoxLayout;
 
-    translation_selection_row->addWidget(dr_check_box);
-    translation_selection_row->addWidget(ltv_check_box);
-    translation_selection_row->addWidget(rsv_check_box);
-    translation_selection_row->addWidget(nab_check_box);
+    for (std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator it = translation_manager->begin(); it != translation_manager->end(); ++it)
+    {
+        this->add_translation_check_box(translation_selection_row, it->second);
+    }
     
     QVBoxLayout* layout = new QVBoxLayout;
 
@@ -50,3 +46,8 @@ void UISearchWidget::perform_search()
     emit search_complete(search_command.get_results());
 }
 
+void UISearchWidget::add_translation_check_box(QHBoxLayout* translation_selection_row, boost::shared_ptr<const Translation> translation)
+{
+    QCheckBox* translation_check_box = new QCheckBox(translation->get_short_name().c_str());
+    translation_selection_row->addWidget(translation_check_box);
+}

@@ -7,12 +7,14 @@
 class QAbstractItemModel;
 class QPushButton;
 class QLineEdit;
+class QHBoxLayout;
 
 namespace BibleStudy
 {
 
 class TranslationManager;
 class ISearchResults;
+class Translation;
 
 //! This class represents a collection of widgets which provide a text input field to input a search string and a button to start the search.
 class UISearchWidget : public QWidget
@@ -35,6 +37,8 @@ private:
     boost::shared_ptr<const TranslationManager> m_translation_manager;
     QPushButton* m_search_button;
     QLineEdit* m_search_input_field;
+
+    void add_translation_check_box(QHBoxLayout* translation_selection_row, boost::shared_ptr<const Translation> translation);
 };
 
 }
