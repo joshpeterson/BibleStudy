@@ -1,7 +1,7 @@
 #include <limits.h>
-#include <boost/spirit/phoenix/operators.hpp>
-#include <boost/spirit/phoenix/primitives.hpp>
-#include <boost/spirit/phoenix/special_ops.hpp>
+#include <boost/spirit/include/phoenix1_operators.hpp>
+#include <boost/spirit/include/phoenix1_primitives.hpp>
+#include <boost/spirit/include/phoenix1_special_ops.hpp>
 #include "StarredVersesModel.h"
 #include "TranslationManager.h"
 #include "Translation.h"
@@ -17,6 +17,7 @@ StarredVersesModel::StarredVersesModel(boost::shared_ptr<const TranslationManage
 
 int StarredVersesModel::rowCount(const QModelIndex& parent) const
 {
+    parent; // Reference this parameter to prevent a compiler warning (this should be optimized away)
     return m_starred_verses.size();
 }
 

@@ -22,14 +22,16 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
 
  int SearchResultsModel::rowCount(const QModelIndex &parent) const
  {
-     if (m_results)
+    parent; // Reference this parameter to prevent a compiler warning (this should be optimized away)
+    if (m_results)
         return m_results->num_results();
-     else
-         return 0;
+    else
+       return 0;
  }
 
  int SearchResultsModel::columnCount(const QModelIndex &parent) const
  {
+    parent; // Reference this parameter to prevent a compiler warning (this should be optimized away)
     return 5;
  }
 
