@@ -51,3 +51,4 @@ void UISearchWidget::add_translation_check_box(QHBoxLayout* translation_selectio
     QCheckBox* translation_check_box = new QCheckBox(translation->get_short_name().c_str());
     translation_selection_row->addWidget(translation_check_box);
 }
+

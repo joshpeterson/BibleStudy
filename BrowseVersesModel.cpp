@@ -140,9 +140,8 @@ int BrowseVersesModel::rowCount(const QModelIndex &parent) const
     return parentItem->num_children();
 }
 
-int BrowseVersesModel::columnCount(const QModelIndex &parent) const
+int BrowseVersesModel::columnCount(const QModelIndex &/*parent*/) const
 {
-    parent; // Reference this parameter to prevent a compiler warning (this should be optimized away)
     return 1;
 }
 

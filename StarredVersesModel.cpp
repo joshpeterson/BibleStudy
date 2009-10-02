@@ -15,9 +15,8 @@ StarredVersesModel::StarredVersesModel(boost::shared_ptr<const TranslationManage
 {
 }
 
-int StarredVersesModel::rowCount(const QModelIndex& parent) const
+int StarredVersesModel::rowCount(const QModelIndex& /*parent*/) const
 {
-    parent; // Reference this parameter to prevent a compiler warning (this should be optimized away)
     return m_starred_verses.size();
 }
 
