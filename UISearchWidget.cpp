@@ -16,7 +16,7 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
     QWidget(parent),
     m_translation_manager(translation_manager),
     m_search_button(new QPushButton(tr("Search"))),
-    m_search_input_field(new QLineEdit(tr("Search Text")))
+    m_search_input_field(new QLineEdit())
 {
     QObject::connect(m_search_button, SIGNAL(clicked()), this, SLOT(perform_search()));
     QObject::connect(m_search_input_field, SIGNAL(returnPressed()), this, SLOT(perform_search()));
