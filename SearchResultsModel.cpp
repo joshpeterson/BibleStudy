@@ -30,7 +30,7 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
 
  int SearchResultsModel::columnCount(const QModelIndex &/*parent*/) const
  {
-    return 5;
+    return 3;
  }
 
  QVariant SearchResultsModel::data(const QModelIndex &index, int role) const
@@ -46,38 +46,49 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
 
     if (role == Qt::DisplayRole)
     {
-        boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
-        switch (index.column())
+        int column = index.column();
+        if (column == translation_column)
         {
-            case translation_column:
-                return translation->get_long_name().c_str();
-            
-            case book_column:
-                return translation->get_entry(m_results->at(index.row()))->get_book().c_str();
-
-            case chapter_column:
-                return translation->get_entry(m_results->at(index.row()))->get_chapter();
-
-            case verse_column:
-                return translation->get_entry(m_results->at(index.row()))->get_verse();
-
-            case text_column:
-                return translation->get_entry(m_results->at(index.row()))->get_text().c_str();
-            
-            default:
-                return QVariant();
+            boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
+            return translation->get_short_name().c_str();
+        }
+        else if (column == location_column)
+        {
+            boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
+            QString location(translation->get_entry(m_results->at(index.row()))->get_book().c_str());
+            location += " ";
+            location += QString::number(translation->get_entry(m_results->at(index.row()))->get_chapter());
+            location += ":";
+            location += QString::number(translation->get_entry(m_results->at(index.row()))->get_verse());
+            return location;
+        }
+        else if (column == text_column)
+        {
+            boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
+            return translation->get_entry(m_results->at(index.row()))->get_text().c_str();
+        }
+        else
+        {
+            return QVariant();
         }
     }
     else if (role == Qt::ToolTipRole)
     {
         boost::shared_ptr<const Translation> translation;
-        switch (index.column())
+        int column = index.column();
+        if (column == translation_column)
         {
-            case text_column:
-                translation = m_translation_manager->at(m_results->translation_at(index.row()));
-                return verse_collection_to_title_and_string_wrapped(translation->get_entry(m_results->at(index.row()), 2), translation).c_str();
-            default:
-                return QVariant();
+            boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
+            return translation->get_long_name().c_str();
+        }
+        else if (column == text_column)
+        {
+            translation = m_translation_manager->at(m_results->translation_at(index.row()));
+            return verse_collection_to_title_and_string_wrapped(translation->get_entry(m_results->at(index.row()), 2), translation).c_str();
+        }
+        else
+        {
+            return QVariant();
         }
     }
     else
@@ -98,14 +109,8 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
             case translation_column:
                 return tr("Translation");
             
-            case book_column:
-                return tr("Book");
-
-            case chapter_column:
-                return tr("Chapter");
-
-            case verse_column:
-                return tr("Verse");
+            case location_column:
+                return tr("Location");
 
             case text_column:
                 return tr("Text");
