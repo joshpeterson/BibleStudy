@@ -30,7 +30,7 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
 
  int SearchResultsModel::columnCount(const QModelIndex &/*parent*/) const
  {
-    return 3;
+    return 5;
  }
 
  QVariant SearchResultsModel::data(const QModelIndex &index, int role) const
@@ -52,15 +52,20 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
             boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
             return translation->get_short_name().c_str();
         }
-        else if (column == location_column)
+        else if (column == book_column)
         {
             boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
-            QString location(translation->get_entry(m_results->at(index.row()))->get_book().c_str());
-            location += " ";
-            location += QString::number(translation->get_entry(m_results->at(index.row()))->get_chapter());
-            location += ":";
-            location += QString::number(translation->get_entry(m_results->at(index.row()))->get_verse());
-            return location;
+            return translation->get_entry(m_results->at(index.row()))->get_book().c_str();;
+        }
+        else if (column == chapter_column)
+        {
+            boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
+            return translation->get_entry(m_results->at(index.row()))->get_chapter();
+        }
+        else if (column == verse_column)
+        {
+            boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
+            return translation->get_entry(m_results->at(index.row()))->get_verse();
         }
         else if (column == text_column)
         {
@@ -74,7 +79,6 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
     }
     else if (role == Qt::ToolTipRole)
     {
-        boost::shared_ptr<const Translation> translation;
         int column = index.column();
         if (column == translation_column)
         {
@@ -83,6 +87,7 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
         }
         else if (column == text_column)
         {
+            boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
             translation = m_translation_manager->at(m_results->translation_at(index.row()));
             return verse_collection_to_title_and_string_wrapped(translation->get_entry(m_results->at(index.row()), 2), translation).c_str();
         }
@@ -100,26 +105,52 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
  QVariant SearchResultsModel::headerData(int section, Qt::Orientation orientation,
                                          int role) const
  {
-    if (role != Qt::DisplayRole)
-        return QVariant();
+    if (role == Qt::DisplayRole)
+    {
+        if (orientation == Qt::Horizontal)
+            switch (section)
+            {
+                case translation_column:
+                    return tr("T");
+                
+                case book_column:
+                    return tr("Book");
+                
+                case chapter_column:
+                    return tr("C");
 
-    if (orientation == Qt::Horizontal)
-        switch (section)
-        {
-            case translation_column:
-                return tr("Translation");
-            
-            case location_column:
-                return tr("Location");
+                case verse_column:
+                    return tr("V");
 
-            case text_column:
-                return tr("Text");
+                case text_column:
+                    return tr("Verse Text");
 
-            default:
-                return QVariant();
-        }
-    else
-        return QString("%1").arg(section);
+                default:
+                    return QVariant();
+            }
+        else
+            return QString("%1").arg(section);
+    }
+    else if (role == Qt::ToolTipRole)
+    {
+        if (orientation == Qt::Horizontal)
+            switch (section)
+            {
+                case translation_column:
+                    return tr("Translation");
+                
+                case chapter_column:
+                    return tr("Chapter");
+
+                case verse_column:
+                    return tr("Verse");
+
+                default:
+                    return QVariant();
+            }
+    }
+
+    return QVariant();
  }
 
  boost::shared_ptr<VerseDisplay> SearchResultsModel::get_verse_display(const QModelIndex &index)

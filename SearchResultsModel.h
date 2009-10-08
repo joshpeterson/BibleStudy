@@ -44,8 +44,10 @@ private:
     enum ColumnType
     {
         translation_column = 0,
-        location_column = 1,
-        text_column = 2
+        book_column = 1,
+        chapter_column = 2,
+        verse_column = 3,
+        text_column = 4
     };
 };
 
