@@ -117,7 +117,7 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
                     return tr("Book");
                 
                 case chapter_column:
-                    return tr("C");
+                    return tr("Ch");
 
                 case verse_column:
                     return tr("V");

@@ -14,16 +14,22 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsMode
     QWidget(parent),
     m_results_view(new QTableView),
     m_layout(new QVBoxLayout),
+    m_proxy_model(new QSortFilterProxyModel(this)),
     m_results_model(results_model)
 {
     QObject::connect(m_results_view, SIGNAL(clicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
 
-    m_results_view->setShowGrid(false);
     QHeaderView* header = m_results_view->horizontalHeader();
     header->setResizeMode(QHeaderView::ResizeToContents);
     header->setStretchLastSection(true);
 
-    m_results_view->setModel(m_results_model.get());
+    m_results_view->setShowGrid(false);
+    m_results_view->setTextElideMode(Qt::ElideNone);
+    m_results_view->setSortingEnabled(true);
+    
+    m_proxy_model->setDynamicSortFilter(true);
+    m_proxy_model->setSourceModel(m_results_model.get());
+    m_results_view->setModel(m_proxy_model);
     
     QLabel* title = new QLabel(tr("Search Results"));
 
@@ -36,6 +42,7 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsMode
 void UISearchResultsWidget::display_search_results(boost::shared_ptr<ISearchResults> query)
 {
     m_results_model->SetResults(query);
+    m_results_view->resizeRowsToContents();
 }
 
 void UISearchResultsWidget::display_verse_text(const QModelIndex& index)

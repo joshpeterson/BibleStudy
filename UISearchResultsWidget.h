@@ -3,11 +3,13 @@
 
 #include <QWidget>
 #include <QAbstractItemModel>
+#include <QSortFilterProxyModel>
 #include <boost/shared_ptr.hpp>
 
 class QAbstractItemModel;
 class QTableView;
 class QVBoxLayout;
+class QSortFilterProxyModel;
 
 namespace BibleStudy
 {
@@ -40,6 +42,7 @@ signals:
 private:
     QTableView* m_results_view;
     QVBoxLayout* m_layout;
+    QSortFilterProxyModel* m_proxy_model;
     boost::shared_ptr<SearchResultsModel> m_results_model;
 };
 
