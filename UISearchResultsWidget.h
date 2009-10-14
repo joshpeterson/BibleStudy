@@ -8,8 +8,9 @@
 
 class QAbstractItemModel;
 class QTableView;
-class QVBoxLayout;
+class QLineEdit;
 class QSortFilterProxyModel;
+class QTimer;
 
 namespace BibleStudy
 {
@@ -35,15 +36,24 @@ public slots:
     //! Get the verse at the given index and emit the verse_display_changed signal for that verse.
     void display_verse_text(const QModelIndex& index);
 
+    //! When the user types text in the search results filter, restart the timer which waits for the typing to be complete.
+    void update_search_results_filter_delay_timer();
+
+    //! Get the new filter text and apply it to the search results.
+    void change_search_results_filter();
+
 signals:
     //! Signal other widgets that a new verse should be displayed.
     void verse_display_changed(boost::shared_ptr<VerseDisplay> verse);
 
 private:
     QTableView* m_results_view;
-    QVBoxLayout* m_layout;
+    QLineEdit* m_filter_text;
     QSortFilterProxyModel* m_proxy_model;
+    QTimer* m_filter_delay_timer;
     boost::shared_ptr<SearchResultsModel> m_results_model;
+
+    const int m_filter_delay_typing_timeout_ms;
 };
 
 }

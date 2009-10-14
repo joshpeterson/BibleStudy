@@ -37,10 +37,6 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation,
                         int role = Qt::DisplayRole) const;
 
-private:
-    boost::shared_ptr<const TranslationManager> m_translation_manager;
-    boost::shared_ptr<const ISearchResults> m_results;
-
     enum ColumnType
     {
         translation_column = 0,
@@ -49,6 +45,10 @@ private:
         verse_column = 3,
         text_column = 4
     };
+
+private:
+    boost::shared_ptr<const TranslationManager> m_translation_manager;
+    boost::shared_ptr<const ISearchResults> m_results;
 };
 
 }
