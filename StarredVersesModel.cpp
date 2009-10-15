@@ -1,13 +1,11 @@
 #include <limits.h>
-#include <boost/spirit/include/phoenix1_operators.hpp>
-#include <boost/spirit/include/phoenix1_primitives.hpp>
-#include <boost/spirit/include/phoenix1_special_ops.hpp>
+#include <boost/lambda/lambda.hpp>
 #include "StarredVersesModel.h"
 #include "TranslationManager.h"
 #include "Translation.h"
 #include "VerseDisplay.h"
 
-using namespace phoenix;
+using namespace boost::lambda;
 using namespace BibleStudy;
 
 StarredVersesModel::StarredVersesModel(boost::shared_ptr<const TranslationManager> translation_manager) :
@@ -40,7 +38,7 @@ QVariant StarredVersesModel::data(const QModelIndex &index, int role) const
 
 void StarredVersesModel::add_starred_verse(boost::shared_ptr<VerseDisplay> verse)
 {
-    if (std::find_if(m_starred_verses.begin(), m_starred_verses.end(), *arg1 == *verse) == m_starred_verses.end())
+    if (std::find_if(m_starred_verses.begin(), m_starred_verses.end(), *_1 == *verse) == m_starred_verses.end())
     {
         m_starred_verses.push_back(verse);
         reset();
@@ -51,7 +49,7 @@ void StarredVersesModel::remove_starred_verse(boost::shared_ptr<VerseDisplay> ve
 {
     std::vector<boost::shared_ptr<VerseDisplay> >::iterator verse_it = std::find_if(m_starred_verses.begin(), 
                                                                                     m_starred_verses.end(), 
-                                                                                    *arg1 == *verse);
+                                                                                    *_1 == *verse);
     if (verse_it != m_starred_verses.end())
     {
         m_starred_verses.erase(verse_it);
@@ -61,7 +59,7 @@ void StarredVersesModel::remove_starred_verse(boost::shared_ptr<VerseDisplay> ve
 
 bool StarredVersesModel::verse_starred(boost::shared_ptr<VerseDisplay> verse)
 {
-    return std::find_if(m_starred_verses.begin(), m_starred_verses.end(), *arg1 == *verse) != m_starred_verses.end();
+    return std::find_if(m_starred_verses.begin(), m_starred_verses.end(), *_1 == *verse) != m_starred_verses.end();
 }
 
 boost::shared_ptr<VerseDisplay> StarredVersesModel::get_verse_display(const QModelIndex &index)
