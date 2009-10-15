@@ -11,6 +11,7 @@ class QTableView;
 class QLineEdit;
 class QSortFilterProxyModel;
 class QTimer;
+class QLabel;
 
 namespace BibleStudy
 {
@@ -48,12 +49,14 @@ signals:
 
 private:
     QTableView* m_results_view;
+    QLabel* m_results_status;
     QLineEdit* m_filter_text;
-    QSortFilterProxyModel* m_proxy_model;
     QTimer* m_filter_delay_timer;
+    const int m_filter_delay_typing_timeout_ms;
+    QSortFilterProxyModel* m_proxy_model;
     boost::shared_ptr<SearchResultsModel> m_results_model;
 
-    const int m_filter_delay_typing_timeout_ms;
+    void update_results_status();
 };
 
 }
