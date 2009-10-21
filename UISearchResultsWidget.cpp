@@ -6,12 +6,10 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QTimer>
-#include <boost/format.hpp>
 #include "UISearchResultsWidget.h"
 #include "SearchResultsModel.h"
 #include "VerseDisplay.h"
 
-using boost::format;
 using namespace BibleStudy;
 
 UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsModel> results_model,
@@ -98,22 +96,22 @@ void UISearchResultsWidget::update_results_status()
     {
         if (numberOfRowsFound != numberOfRowsDisplayed)
         {
-            m_results_status->setText(str(format("(%1% of %2% match)") % numberOfRowsDisplayed % numberOfRowsFound).c_str());
+            m_results_status->setText(tr("(%1 of %2 match)").arg(numberOfRowsDisplayed).arg(numberOfRowsFound));
         }
         else
         {
-            m_results_status->setText(str(format("(%1% match)") % numberOfRowsFound).c_str());
+            m_results_status->setText(tr("(%1 match)").arg(numberOfRowsFound));
         }
     }
     else
     {
         if (numberOfRowsFound != numberOfRowsDisplayed)
         {
-            m_results_status->setText(str(format("(%1% of %2% matches)") % numberOfRowsDisplayed % numberOfRowsFound).c_str());
+            m_results_status->setText(tr("(%1 of %2 matches)").arg(numberOfRowsDisplayed).arg(numberOfRowsFound));
         }
         else
         {
-            m_results_status->setText(str(format("(%1% matches)") % numberOfRowsFound).c_str());
+            m_results_status->setText(tr("(%1 matches)").arg(numberOfRowsFound));
         }
     }
 }
