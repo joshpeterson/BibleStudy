@@ -12,6 +12,7 @@ class QLineEdit;
 class QSortFilterProxyModel;
 class QTimer;
 class QLabel;
+class QKeyEvent;
 
 namespace BibleStudy
 {
@@ -29,6 +30,8 @@ class UISearchResultsWidget : public QWidget
 public:
     //! Create a new instance of the UISearchResultsWidget class.
     UISearchResultsWidget(boost::shared_ptr<SearchResultsModel> results_model, QWidget* parent = 0);
+
+    void keyPressEvent(QKeyEvent *event);
 
 public slots:
     //! Set the results object which the widget should display.

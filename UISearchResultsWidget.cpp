@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <QAbstractItemModel>
 #include <QTableView>
 #include <QHeaderView>
@@ -6,6 +7,9 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QTimer>
+#include <QKeyEvent>
+#include <QApplication>
+#include <QClipboard>
 #include "UISearchResultsWidget.h"
 #include "SearchResultsModel.h"
 #include "VerseDisplay.h"
@@ -55,6 +59,44 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsMode
     layout->addWidget(m_results_view);
 
     setLayout(layout);
+}
+
+void UISearchResultsWidget::keyPressEvent(QKeyEvent *event)
+{
+    if ((event->key() == Qt::Key_C) && (event->modifiers() & Qt::ControlModifier))
+    {
+        QItemSelectionModel* selection = m_results_view->selectionModel();
+        if (selection)
+        {
+            QModelIndexList selected_indexes = selection->selectedIndexes();
+
+            std::sort(selected_indexes.begin(), selected_indexes.end());
+            
+            QModelIndex previous_index;
+            QString text_to_paste;
+
+            foreach (const QModelIndex& current_index, selected_indexes)
+            {
+                if (previous_index.row() != -1)
+                {
+                    if (current_index.row() == previous_index.row())
+                    {
+                        text_to_paste.append("\t");
+                    }
+                    else
+                    {
+                        text_to_paste.append("\n");
+                    }
+                }
+
+                QVariant data = m_results_model->data(current_index, Qt::DisplayRole);
+                text_to_paste.append(data.toString());
+                
+                previous_index = current_index;
+            }
+            QApplication::clipboard()->setText(text_to_paste);
+        }
+    }
 }
 
 void UISearchResultsWidget::display_search_results(boost::shared_ptr<ISearchResults> query)
