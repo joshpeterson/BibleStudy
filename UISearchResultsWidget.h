@@ -13,6 +13,7 @@ class QSortFilterProxyModel;
 class QTimer;
 class QLabel;
 class QKeyEvent;
+class QPoint;
 
 namespace BibleStudy
 {
@@ -31,7 +32,8 @@ public:
     //! Create a new instance of the UISearchResultsWidget class.
     UISearchResultsWidget(boost::shared_ptr<SearchResultsModel> results_model, QWidget* parent = 0);
 
-    void keyPressEvent(QKeyEvent *event);
+    //! Listen to and process key presses.
+    void keyPressEvent(QKeyEvent* key_event);
 
 public slots:
     //! Set the results object which the widget should display.
@@ -45,6 +47,15 @@ public slots:
 
     //! Get the new filter text and apply it to the search results.
     void change_search_results_filter();
+
+    //! Copies the selected cells in the search results to the clipboard in format which can be pasted into Excel.
+    void copy_selected_search_results();
+
+    //! Select all cells in the current search results view.
+    void select_all_search_results();
+
+    //! Build and display context menu when the user right clicks on the search results.
+    void display_results_context_menu(const QPoint& position);
 
 signals:
     //! Signal other widgets that a new verse should be displayed.

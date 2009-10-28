@@ -10,6 +10,9 @@
 #include <QKeyEvent>
 #include <QApplication>
 #include <QClipboard>
+#include <QPoint>
+#include <QMenu>
+#include <QKeySequence>
 #include "UISearchResultsWidget.h"
 #include "SearchResultsModel.h"
 #include "VerseDisplay.h"
@@ -27,7 +30,8 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsMode
     m_proxy_model(new QSortFilterProxyModel(this)),
     m_results_model(results_model)
 {
-    QObject::connect(m_results_view, SIGNAL(clicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
+    QObject::connect(m_results_view, SIGNAL(clicked(const QModelIndex&)), this, SLOT(display_verse_text(const QModelIndex&)));
+    QObject::connect(m_results_view, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(display_results_context_menu(const QPoint&)));
     QObject::connect(m_filter_text, SIGNAL(textChanged(QString)), this, SLOT(update_search_results_filter_delay_timer()));
     QObject::connect(m_filter_delay_timer, SIGNAL(timeout()), this, SLOT(change_search_results_filter()));
 
@@ -38,6 +42,7 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsMode
     m_results_view->setShowGrid(false);
     m_results_view->setTextElideMode(Qt::ElideNone);
     m_results_view->setSortingEnabled(true);
+    m_results_view->setContextMenuPolicy(Qt::CustomContextMenu);
     
     m_proxy_model->setDynamicSortFilter(true);
     m_proxy_model->setFilterKeyColumn(SearchResultsModel::text_column);
@@ -61,41 +66,15 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsMode
     setLayout(layout);
 }
 
-void UISearchResultsWidget::keyPressEvent(QKeyEvent *event)
+void UISearchResultsWidget::keyPressEvent(QKeyEvent* key_event)
 {
-    if ((event->key() == Qt::Key_C) && (event->modifiers() & Qt::ControlModifier))
+    if ((key_event->key() == Qt::Key_C) && (key_event->modifiers() & Qt::ControlModifier))
     {
-        QItemSelectionModel* selection = m_results_view->selectionModel();
-        if (selection)
-        {
-            QModelIndexList selected_indexes = selection->selectedIndexes();
-
-            std::sort(selected_indexes.begin(), selected_indexes.end());
-            
-            QModelIndex previous_index;
-            QString text_to_paste;
-
-            foreach (const QModelIndex& current_index, selected_indexes)
-            {
-                if (previous_index.row() != -1)
-                {
-                    if (current_index.row() == previous_index.row())
-                    {
-                        text_to_paste.append("\t");
-                    }
-                    else
-                    {
-                        text_to_paste.append("\n");
-                    }
-                }
-
-                QVariant data = m_results_model->data(current_index, Qt::DisplayRole);
-                text_to_paste.append(data.toString());
-                
-                previous_index = current_index;
-            }
-            QApplication::clipboard()->setText(text_to_paste);
-        }
+        copy_selected_search_results();
+    }
+    else
+    {
+        QWidget::keyPressEvent(key_event);
     }
 }
 
@@ -124,6 +103,55 @@ void UISearchResultsWidget::change_search_results_filter()
     m_proxy_model->setFilterRegExp(QRegExp(m_filter_text->text()));
     m_results_view->resizeRowsToContents();
     update_results_status();
+}
+
+void UISearchResultsWidget::copy_selected_search_results()
+{
+    QItemSelectionModel* selection = m_results_view->selectionModel();
+    if (selection)
+    {
+        QModelIndexList selected_indexes = selection->selectedIndexes();
+
+        std::sort(selected_indexes.begin(), selected_indexes.end());
+        
+        QModelIndex previous_index;
+        QString text_to_paste;
+
+        foreach (const QModelIndex& current_index, selected_indexes)
+        {
+            if (previous_index.row() != -1)
+            {
+                if (current_index.row() == previous_index.row())
+                {
+                    text_to_paste.append("\t");
+                }
+                else
+                {
+                    text_to_paste.append("\n");
+                }
+            }
+
+            QVariant data = m_results_model->data(current_index, Qt::DisplayRole);
+            text_to_paste.append(data.toString());
+            
+            previous_index = current_index;
+        }
+        QApplication::clipboard()->setText(text_to_paste);
+    }
+}
+
+void UISearchResultsWidget::select_all_search_results()
+{
+    m_results_view->selectAll();
+}
+
+void UISearchResultsWidget::display_results_context_menu(const QPoint& position)
+{
+    QMenu *menu = new QMenu;
+    menu->addAction(tr("Copy"), this, SLOT(copy_selected_search_results()), QKeySequence::Copy);
+    menu->addSeparator();
+    menu->addAction(tr("Select All"), this, SLOT(select_all_search_results()), QKeySequence::SelectAll);
+    menu->exec(m_results_view->mapToGlobal(position));
 }
 
 void UISearchResultsWidget::update_results_status()
@@ -157,3 +185,4 @@ void UISearchResultsWidget::update_results_status()
         }
     }
 }
+
