@@ -151,7 +151,7 @@ void UISearchResultsWidget::display_results_context_menu(const QPoint& position)
     menu->addAction(tr("Copy"), this, SLOT(copy_selected_search_results()), QKeySequence::Copy);
     menu->addSeparator();
     menu->addAction(tr("Select All"), this, SLOT(select_all_search_results()), QKeySequence::SelectAll);
-    menu->exec(m_results_view->mapToGlobal(position));
+    menu->exec(m_results_view->mapToGlobal(position + QPoint(42,30)));
 }
 
 void UISearchResultsWidget::update_results_status()
