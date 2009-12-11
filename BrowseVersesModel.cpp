@@ -123,7 +123,7 @@ QModelIndex BrowseVersesModel::parent(const QModelIndex &index) const
      if (parentItem->get_verse_id() == -1)
          return QModelIndex();
 
-     return createIndex(parentItem->num_children(), 0, parentItem);
+     return createIndex(parentItem->row(), 0, parentItem);
 }
 
 int BrowseVersesModel::rowCount(const QModelIndex &parent) const

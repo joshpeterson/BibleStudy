@@ -45,6 +45,9 @@ public:
     //! Get the child node at the given index.
     boost::shared_ptr<VerseTreeItem> get_child(int child_index) const;
 
+    //! Get the row of this element in its parent node.
+    int row() const;
+
 private:
     std::string m_translation_long_name;
     int m_verse_id;

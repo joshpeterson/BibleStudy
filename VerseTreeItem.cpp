@@ -1,5 +1,7 @@
+#include <boost/lambda/lambda.hpp>
 #include "VerseTreeItem.h"
 
+using namespace boost::lambda;
 using namespace BibleStudy;
 
 VerseTreeItem::VerseTreeItem(std::string translation_long_name, int verse_id) :
@@ -55,4 +57,14 @@ boost::shared_ptr<VerseTreeItem> VerseTreeItem::get_child(int child_index) const
 void VerseTreeItem::set_parent(VerseTreeItem* parent)
 {
     m_parent = parent;
+}
+
+int VerseTreeItem::row() const
+{
+    if (m_parent)
+    {
+        return std::distance(m_parent->m_children.begin(), std::find_if(m_parent->m_children.begin(), m_parent->m_children.end(), &(*_1) == this));
+    }
+
+    return 0;
 }
