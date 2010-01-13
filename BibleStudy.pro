@@ -20,6 +20,7 @@ HEADERS += BrowseVersesModel.h
 HEADERS += UIBrowseVersesWidget.h
 HEADERS += VerseTreeItem.h
 HEADERS += TranslationManager.h
+HEADERS += TranslationIterator.h
 
 SOURCES += BibleStudy.cpp
 SOURCES += SearchResultsModel.cpp

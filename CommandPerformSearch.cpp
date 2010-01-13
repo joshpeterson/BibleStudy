@@ -2,6 +2,7 @@
 #include "TranslationManager.h"
 #include "Translation.h"
 #include "SearchResultsSerial.h"
+#include "TranslationIterator.h"
 
 using namespace BibleStudy;
 

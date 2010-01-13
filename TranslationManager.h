@@ -34,6 +34,8 @@ public:
     std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator end() const;
 
 private:
+    friend class TranslationIterator;
+
     std::map<std::string, boost::shared_ptr<const Translation> > m_translations;
     boost::shared_ptr<VerseTreeItem> m_verse_tree;
 
