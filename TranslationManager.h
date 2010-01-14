@@ -10,6 +10,7 @@ namespace BibleStudy
 
 class Translation;
 class VerseTreeItem;
+class TranslationIterator;
 
 //! This class represents a collection of read-only translations.
 class TranslationManager : private boost::noncopyable
@@ -28,14 +29,12 @@ public:
     boost::shared_ptr<VerseTreeItem> get_verse_item_tree() const;
 
     //! Get the starting iterator in the collection of Translation objects.
-    std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator begin() const;
+    TranslationIterator begin() const;
 
     //! Get the end iterator in the collection of Translation objects.
-    std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator end() const;
+    TranslationIterator end() const;
 
 private:
-    friend class TranslationIterator;
-
     std::map<std::string, boost::shared_ptr<const Translation> > m_translations;
     boost::shared_ptr<VerseTreeItem> m_verse_tree;
 

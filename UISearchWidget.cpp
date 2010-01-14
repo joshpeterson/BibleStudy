@@ -9,6 +9,7 @@
 #include "TranslationManager.h"
 #include "CommandPerformSearch.h"
 #include "Translation.h"
+#include "TranslationIterator.h"
 
 using namespace BibleStudy;
 
@@ -27,9 +28,9 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
 
     QHBoxLayout* translation_selection_row = new QHBoxLayout;
 
-    for (std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator it = translation_manager->begin(); it != translation_manager->end(); ++it)
+    for (TranslationIterator it = translation_manager->begin(); it != translation_manager->end(); ++it)
     {
-        this->add_translation_check_box(translation_selection_row, it->second);
+        this->add_translation_check_box(translation_selection_row, *it);
     }
     
     QVBoxLayout* layout = new QVBoxLayout;

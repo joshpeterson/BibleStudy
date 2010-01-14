@@ -16,9 +16,9 @@ void CommandPerformSearch::Execute()
 {
     parse_search_string();
 
-    for (std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator it = m_translation_manager->begin(); it != m_translation_manager->end(); ++it)
+    for (TranslationIterator it = m_translation_manager->begin(); it != m_translation_manager->end(); ++it)
     {
-        (*it->second).search(m_search_queries);
+        (*it)->search(m_search_queries);
     }
 
     std::vector<boost::shared_ptr<ISearchResults> >::const_iterator end = m_search_queries.end();

@@ -1,6 +1,7 @@
 #include "TranslationManager.h"
 #include "Translation.h"
 #include "VerseTreeItem.h"
+#include "TranslationIterator.h"
 
 using namespace BibleStudy;
 
@@ -40,14 +41,13 @@ bool TranslationManager::contains_translation(const std::string& translation_lon
     return m_translations.find(translation_long_name) != m_translations.end();
 }
 
-// This should really use boost iterator adpater to only return the Translation objects.
-std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator TranslationManager::begin() const
+TranslationIterator TranslationManager::begin() const
 {
-    return m_translations.begin();
+    return TranslationIterator(m_translations.begin());
 }
 
-std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator TranslationManager::end() const
+TranslationIterator TranslationManager::end() const
 {
-    return m_translations.end();
+    return TranslationIterator(m_translations.end());
 }
 
