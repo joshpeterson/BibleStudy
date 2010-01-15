@@ -10,7 +10,7 @@ namespace BibleStudy
 class Translation;
 
 //! This class represents an iterator which is used to iterate the translations in the translation manager.
-class TranslationIterator : public boost::iterator_facade<TranslationIterator, boost::shared_ptr<const Translation>, boost::forward_traversal_tag, boost::shared_ptr<const Translation> >
+class TranslationIterator : public boost::iterator_facade<TranslationIterator, boost::shared_ptr<const Translation>, boost::bidirectional_traversal_tag, boost::shared_ptr<const Translation> >
 {
 public:
     //! Create a new instance of the TranslationIterator class.
@@ -26,6 +26,11 @@ private:
         ++m_translation_iterator;
     }
 
+    void decrement()
+    {
+        --m_translation_iterator;
+    }
+
     bool equal(TranslationIterator const& other) const
     {
         return this->m_translation_iterator == other.m_translation_iterator;
@@ -37,7 +42,6 @@ private:
     }
 
     std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator m_translation_iterator;
-    std::vector<std::string> m_translation_names;
 };
 
 }
