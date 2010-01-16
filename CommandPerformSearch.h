@@ -29,11 +29,7 @@ public:
 
 private:
     boost::shared_ptr<const TranslationManager> m_translation_manager;
-    std::string m_search_string;
-    boost::shared_ptr<ISearchResults> m_search_results;
-    std::vector<boost::shared_ptr<ISearchResults> > m_search_queries;
-
-    void parse_search_string();
+    boost::shared_ptr<ISearchResults> m_search_query;
 };
 
 }

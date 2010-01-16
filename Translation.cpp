@@ -12,18 +12,16 @@
 
 using namespace BibleStudy;
 
-void Translation::search(std::vector<boost::shared_ptr<ISearchResults> >& results) const
+void Translation::search(boost::shared_ptr<ISearchResults> query) const
 {
-    partial_search(m_verses.begin(), m_verses.end(), results[0]);
+    partial_search(m_verses.begin(), m_verses.end(), query);
 }
 
 void Translation::partial_search(std::vector< boost::shared_ptr<Verse> >::const_iterator begin, 
                                  std::vector< boost::shared_ptr<Verse> >::const_iterator end,
                                  boost::shared_ptr<ISearchResults> query) const
 {
-    for (std::vector< boost::shared_ptr<Verse> >::const_iterator it = begin;
-         it != end;
-         ++it)
+    for (std::vector<boost::shared_ptr<Verse> >::const_iterator it = begin; it != end; ++it)
     {
         if ((*it)->match(query))
         {

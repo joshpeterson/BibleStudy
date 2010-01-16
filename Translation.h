@@ -28,8 +28,8 @@ public:
     //! Get the abbreviated name of the translation.
     std::string get_short_name() const { return m_short_name; }
 
-    //! Iterate the verses in this translation and add the ones which match the query to the results object.
-    void search(std::vector<boost::shared_ptr<ISearchResults> >& results) const;
+    //! Iterate the verses in this translation and add the ones which match the query to the query object.
+    void search(boost::shared_ptr<ISearchResults> query) const;
 
     //! Get a specific verse from the translation based on its verse ID.
     const Verse* get_entry(int unique_id) const { return m_verses[unique_id].get(); }
