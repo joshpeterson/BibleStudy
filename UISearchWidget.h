@@ -1,6 +1,7 @@
 #ifndef __UI_SEARCH_WIDGET_H
 #define __UI_SEARCH_WIDGET_H
 
+#include <vector>
 #include <QWidget>
 #include <boost/shared_ptr.hpp>
 
@@ -8,6 +9,7 @@ class QAbstractItemModel;
 class QPushButton;
 class QLineEdit;
 class QHBoxLayout;
+class QCheckBox;
 
 namespace BibleStudy
 {
@@ -37,6 +39,7 @@ private:
     boost::shared_ptr<const TranslationManager> m_translation_manager;
     QPushButton* m_search_button;
     QLineEdit* m_search_input_field;
+    std::vector<QCheckBox*> m_translation_checkboxes;
 
     void add_translation_check_box(QHBoxLayout* translation_selection_row, boost::shared_ptr<const Translation> translation);
 };

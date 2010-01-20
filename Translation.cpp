@@ -14,13 +14,9 @@ using namespace BibleStudy;
 
 void Translation::search(boost::shared_ptr<ISearchResults> query) const
 {
-    partial_search(m_verses.begin(), m_verses.end(), query);
-}
+    std::vector<boost::shared_ptr<Verse> >::const_iterator begin = m_verses.begin();
+    std::vector<boost::shared_ptr<Verse> >::const_iterator end = m_verses.end();
 
-void Translation::partial_search(std::vector< boost::shared_ptr<Verse> >::const_iterator begin, 
-                                 std::vector< boost::shared_ptr<Verse> >::const_iterator end,
-                                 boost::shared_ptr<ISearchResults> query) const
-{
     for (std::vector<boost::shared_ptr<Verse> >::const_iterator it = begin; it != end; ++it)
     {
         if ((*it)->match(query))
@@ -30,7 +26,7 @@ void Translation::partial_search(std::vector< boost::shared_ptr<Verse> >::const_
     }
 }
 
-std::vector<boost::shared_ptr<const Verse> > Translation::get_entry(int unique_id, int num_entries_context) const
+std::vector<boost::shared_ptr<const Verse> > Translation::get_verse(int unique_id, int num_entries_context) const
 {
     int requested_lower_bound = unique_id - num_entries_context;
     int lower_bound =  requested_lower_bound >= 0 ? requested_lower_bound : 0;

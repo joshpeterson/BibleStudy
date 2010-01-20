@@ -17,7 +17,7 @@ class CommandPerformSearch : public ICommand
 {
 public:
     //! Create a new instance of the CommandPerformSearch command.
-    CommandPerformSearch(boost::shared_ptr<const TranslationManager> translation_manager, std::string search_string);
+    CommandPerformSearch(boost::shared_ptr<const TranslationManager> translation_manager, const std::vector<std::string>& translations_to_search, std::string search_string);
     
     //! Get the results of the search.
     boost::shared_ptr<ISearchResults> get_results();
@@ -29,6 +29,7 @@ public:
 
 private:
     boost::shared_ptr<const TranslationManager> m_translation_manager;
+    std::vector<std::string> m_translations_to_search;
     boost::shared_ptr<ISearchResults> m_search_query;
 };
 

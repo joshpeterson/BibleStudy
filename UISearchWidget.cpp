@@ -42,7 +42,17 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
 
 void UISearchWidget::perform_search()
 {
-    CommandPerformSearch search_command(m_translation_manager, m_search_input_field->text().toStdString());
+    std::vector<std::string> selected_translations;
+
+    for (std::vector<QCheckBox*>::const_iterator it = m_translation_checkboxes.begin(); it != m_translation_checkboxes.end(); ++it)
+    {
+        if ((*it)->isChecked())
+        {
+            selected_translations.push_back((*it)->text().toStdString());
+        }
+    }
+
+    CommandPerformSearch search_command(m_translation_manager, selected_translations, m_search_input_field->text().toStdString());
     search_command.Execute();
     emit search_complete(search_command.get_results());
 }
@@ -51,5 +61,6 @@ void UISearchWidget::add_translation_check_box(QHBoxLayout* translation_selectio
 {
     QCheckBox* translation_check_box = new QCheckBox(translation->get_short_name().c_str());
     translation_selection_row->addWidget(translation_check_box);
+    m_translation_checkboxes.push_back(translation_check_box);
 }
 

@@ -32,10 +32,10 @@ public:
     void search(boost::shared_ptr<ISearchResults> query) const;
 
     //! Get a specific verse from the translation based on its verse ID.
-    const Verse* get_entry(int unique_id) const { return m_verses[unique_id].get(); }
+    const Verse* get_verse(int unique_id) const { return m_verses[unique_id].get(); }
     
     //! Get a specific verse and a given number of context verses (both before and after the desired verse) from the translation.
-    std::vector<boost::shared_ptr<const Verse> > get_entry(int unique_id, int num_entries_context) const;
+    std::vector<boost::shared_ptr<const Verse> > get_verse(int unique_id, int num_entries_context) const;
 
     //! Get the number of verses in the translation.
     int num_entries() const { return static_cast<int>(m_verses.size()); }
@@ -73,12 +73,6 @@ private:
     std::string m_short_name;
     std::vector< boost::shared_ptr<Verse> > m_verses;
     boost::shared_ptr<VerseTreeItem> m_verse_tree;
-
-    //! Add the verses in the range that match the search query to the query object.
-    void partial_search(std::vector< boost::shared_ptr<Verse> >::const_iterator begin, 
-                        std::vector< boost::shared_ptr<Verse> >::const_iterator end,
-                        boost::shared_ptr<ISearchResults> query) const;
-
 };
 
 //! Get the text representation and title of a collection of verses.

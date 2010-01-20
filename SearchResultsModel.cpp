@@ -55,22 +55,22 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
         else if (column == book_column)
         {
             boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
-            return translation->get_entry(m_results->at(index.row()))->get_book().c_str();;
+            return translation->get_verse(m_results->at(index.row()))->get_book().c_str();;
         }
         else if (column == chapter_column)
         {
             boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
-            return translation->get_entry(m_results->at(index.row()))->get_chapter();
+            return translation->get_verse(m_results->at(index.row()))->get_chapter();
         }
         else if (column == verse_column)
         {
             boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
-            return translation->get_entry(m_results->at(index.row()))->get_verse();
+            return translation->get_verse(m_results->at(index.row()))->get_verse();
         }
         else if (column == text_column)
         {
             boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
-            return translation->get_entry(m_results->at(index.row()))->get_text().c_str();
+            return translation->get_verse(m_results->at(index.row()))->get_text().c_str();
         }
         else
         {
@@ -89,7 +89,7 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
         {
             boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
             translation = m_translation_manager->at(m_results->translation_at(index.row()));
-            return verse_collection_to_title_and_string_wrapped(translation->get_entry(m_results->at(index.row()), 2), translation).c_str();
+            return verse_collection_to_title_and_string_wrapped(translation->get_verse(m_results->at(index.row()), 2), translation).c_str();
         }
         else
         {

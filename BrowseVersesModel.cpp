@@ -36,13 +36,13 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
                     return translation->get_long_name().c_str();
                 
                 case VerseTreeItem::book:
-                    return translation->get_entry(item->get_verse_id())->get_book().c_str();
+                    return translation->get_verse(item->get_verse_id())->get_book().c_str();
 
                 case VerseTreeItem::chapter:
-                    return QString(tr("Chapter ")) + QVariant(translation->get_entry(item->get_verse_id())->get_chapter()).toString();
+                    return QString(tr("Chapter ")) + QVariant(translation->get_verse(item->get_verse_id())->get_chapter()).toString();
 
                 case VerseTreeItem::verse:
-                    return QVariant(translation->get_entry(item->get_verse_id())->get_verse()).toString() + QString(": ") + translation->get_entry(item->get_verse_id())->get_text().c_str();
+                    return QVariant(translation->get_verse(item->get_verse_id())->get_verse()).toString() + QString(": ") + translation->get_verse(item->get_verse_id())->get_text().c_str();
                 
                 default:
                     return QVariant();
@@ -50,14 +50,14 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
         }
         else if (index.column() == 1 && item->get_item_type() == VerseTreeItem::verse)
         {
-            return translation->get_entry(item->get_verse_id())->get_text().c_str();
+            return translation->get_verse(item->get_verse_id())->get_text().c_str();
         }
     }
     else if (role == Qt::ToolTipRole)
     {
         if (item->get_item_type() == VerseTreeItem::verse)
         {
-            return verse_collection_to_title_and_string_wrapped(translation->get_entry(item->get_verse_id(), 0), translation).c_str();
+            return verse_collection_to_title_and_string_wrapped(translation->get_verse(item->get_verse_id(), 0), translation).c_str();
         }
     }
     return QVariant();
