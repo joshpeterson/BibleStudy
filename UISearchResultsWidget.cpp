@@ -87,7 +87,8 @@ void UISearchResultsWidget::display_search_results(boost::shared_ptr<ISearchResu
 
 void UISearchResultsWidget::display_verse_text(const QModelIndex& index)
 {
-    boost::shared_ptr<VerseDisplay> verse_to_display = m_results_model->get_verse_display(index);
+    QModelIndex actualIndex = m_proxy_model->mapToSource(index);
+    boost::shared_ptr<VerseDisplay> verse_to_display = m_results_model->get_verse_display(actualIndex);
     if (verse_to_display->get_verse_id() != -1)
         emit verse_display_changed(verse_to_display);
 }
@@ -107,10 +108,11 @@ void UISearchResultsWidget::change_search_results_filter()
 
 void UISearchResultsWidget::copy_selected_search_results()
 {
-    QItemSelectionModel* selection = m_results_view->selectionModel();
-    if (selection)
+    QItemSelectionModel* selection_model = m_results_view->selectionModel();
+    if (selection_model)
     {
-        QModelIndexList selected_indexes = selection->selectedIndexes();
+        QItemSelection item_selection = m_proxy_model->mapSelectionToSource(selection_model->selection());
+        QModelIndexList selected_indexes = item_selection.indexes();
 
         std::sort(selected_indexes.begin(), selected_indexes.end());
         
