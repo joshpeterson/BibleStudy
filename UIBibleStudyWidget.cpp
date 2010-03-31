@@ -2,6 +2,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QApplication>
+#include <QDockWidget>
 #include "SearchResultsModel.h"
 #include "StarredVersesModel.h"
 #include "BrowseVersesModel.h"
@@ -14,16 +15,19 @@
 
 using namespace BibleStudy;
 
-UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget *parent) :
-    QWidget(parent),
+UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager) :
     m_results_model(new SearchResultsModel(translation_manager)),
     m_starred_verses_model(new StarredVersesModel(translation_manager)),
     m_browse_verses_model(new BrowseVersesModel(translation_manager)),
     m_search(new UISearchWidget(translation_manager)),
-    m_results(new UISearchResultsWidget(m_results_model)),
-    m_starred_verses(new UIStarredVersesWidget(m_starred_verses_model)),
-    m_text(new UITextViewWidget(translation_manager, m_starred_verses_model)),
-    m_browse(new UIBrowseVersesWidget(m_browse_verses_model))
+    m_results_dock(new QDockWidget(tr("Results"), this)),
+    m_results(new UISearchResultsWidget(m_results_model, m_results_dock)),
+    m_starred_verses_dock(new QDockWidget(tr("Starred Verses"), this)),
+    m_starred_verses(new UIStarredVersesWidget(m_starred_verses_model, m_starred_verses_dock)),
+    m_text_dock(new QDockWidget(tr("Text View"), this)),
+    m_text(new UITextViewWidget(translation_manager, m_starred_verses_model, m_text_dock)),
+    m_browse_dock(new QDockWidget(tr("Verse Browser"), this)),
+    m_browse(new UIBrowseVersesWidget(m_browse_verses_model, m_browse_dock))
 {
     QObject::connect(m_search, SIGNAL(search_complete(boost::shared_ptr<ISearchResults>)),
                      m_results, SLOT(display_search_results(boost::shared_ptr<ISearchResults>)));
@@ -39,21 +43,14 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManage
     app_font.setFamily("Bitstream Vera Sans");
     QApplication::setFont(app_font);
 
-    QVBoxLayout* left_column = new QVBoxLayout();
+    m_results_dock->setWidget(m_results);
+    m_starred_verses_dock->setWidget(m_starred_verses);
+    m_text_dock->setWidget(m_text);
+    m_browse_dock->setWidget(m_browse);
+    this->addDockWidget(Qt::BottomDockWidgetArea, m_browse_dock);
+    this->addDockWidget(Qt::BottomDockWidgetArea, m_starred_verses_dock);
+    this->addDockWidget(Qt::BottomDockWidgetArea, m_results_dock);
+    this->addDockWidget(Qt::RightDockWidgetArea, m_text_dock);
 
-    left_column->addWidget(m_browse, 3);
-    left_column->addWidget(m_starred_verses, 1);
-
-    QVBoxLayout* right_column = new QVBoxLayout();
-
-    right_column->addWidget(m_search);
-    right_column->addWidget(m_results);
-    right_column->addWidget(m_text);
-
-    QHBoxLayout* layout = new QHBoxLayout();
-
-    layout->addLayout(left_column, 1);
-    layout->addLayout(right_column, 3);
-
-    setLayout(layout);
+    this->setCentralWidget(m_search);
 }

@@ -1,10 +1,10 @@
 #ifndef __UI_BIBLE_STUDY_WIDGET
 #define __UI_BIBLE_STUDY_WIDGET
 
-#include <QWidget>
+#include <QMainWindow>
 #include <boost/shared_ptr.hpp>
 
-class QVBoxLayout;
+class QDockWidget;
 
 namespace BibleStudy
 {
@@ -25,13 +25,13 @@ class UIBrowseVersesWidget;
     This widget owns all of the other widgets in the application.  It also defines the layout
     of the application.
 */
-class UIBibleStudyWidget : public QWidget
+class UIBibleStudyWidget : public QMainWindow
 {
     Q_OBJECT
 
 public:
     //! Create a new instance of the UIBibleStudyWidget class.
-    UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget* parent = 0);
+    UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager);
 
 private:
     boost::shared_ptr<SearchResultsModel> m_results_model;
@@ -39,9 +39,13 @@ private:
     boost::shared_ptr<BrowseVersesModel> m_browse_verses_model;
 
     UISearchWidget* m_search;
+    QDockWidget* m_results_dock;
     UISearchResultsWidget* m_results;
+    QDockWidget* m_starred_verses_dock;
     UIStarredVersesWidget* m_starred_verses;
+    QDockWidget* m_text_dock;
     UITextViewWidget* m_text;
+    QDockWidget* m_browse_dock;
     UIBrowseVersesWidget* m_browse;
 };
 
