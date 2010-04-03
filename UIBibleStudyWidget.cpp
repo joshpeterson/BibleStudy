@@ -47,10 +47,13 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManage
     m_starred_verses_dock->setWidget(m_starred_verses);
     m_text_dock->setWidget(m_text);
     m_browse_dock->setWidget(m_browse);
-    this->addDockWidget(Qt::BottomDockWidgetArea, m_browse_dock);
-    this->addDockWidget(Qt::BottomDockWidgetArea, m_starred_verses_dock);
-    this->addDockWidget(Qt::BottomDockWidgetArea, m_results_dock);
+    
+    this->setCorner(Qt::BottomLeftCorner, Qt::RightDockWidgetArea);
     this->addDockWidget(Qt::RightDockWidgetArea, m_text_dock);
-
+    
+    this->addDockWidget(Qt::BottomDockWidgetArea, m_browse_dock);
+    this->tabifyDockWidget(m_browse_dock, m_starred_verses_dock);
+    this->tabifyDockWidget(m_browse_dock, m_results_dock);
+    
     this->setCentralWidget(m_search);
 }
