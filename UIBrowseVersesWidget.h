@@ -5,7 +5,6 @@
 #include <QAbstractItemModel>
 #include <boost/shared_ptr.hpp>
 
-class QVBoxLayout;
 class QTreeView;
 
 namespace BibleStudy
@@ -34,7 +33,6 @@ signals:
 
 private:
     QTreeView* m_browse_view;
-    QVBoxLayout* m_layout;
     boost::shared_ptr<BrowseVersesModel> m_browse_model;
 };
 

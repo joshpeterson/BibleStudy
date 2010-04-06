@@ -13,15 +13,12 @@ UIStarredVersesWidget::UIStarredVersesWidget(boost::shared_ptr<StarredVersesMode
     m_starred_verses_view(new QListView()),
     m_starred_verses_model(starred_verses_model)
 {
-    QObject::connect(m_starred_verses_view, SIGNAL(clicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
-
-    QLabel* title = new QLabel(tr("Starred Verses"));
+    QObject::connect(m_starred_verses_view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
 
     m_starred_verses_view->setModel(m_starred_verses_model.get());
 
     QVBoxLayout* layout = new QVBoxLayout();
 
-    layout->addWidget(title);
     layout->addWidget(m_starred_verses_view);
 
     setLayout(layout);

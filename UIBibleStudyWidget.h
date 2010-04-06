@@ -33,6 +33,13 @@ public:
     //! Create a new instance of the UIBibleStudyWidget class.
     UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager);
 
+private slots:
+    //! Bring the verse text view dock widget to the top.
+    void raise_text();
+
+    //! Bring the search results dock widget to the top.
+    void raise_results();
+
 private:
     boost::shared_ptr<SearchResultsModel> m_results_model;
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;

@@ -30,7 +30,7 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsMode
     m_proxy_model(new QSortFilterProxyModel(this)),
     m_results_model(results_model)
 {
-    QObject::connect(m_results_view, SIGNAL(clicked(const QModelIndex&)), this, SLOT(display_verse_text(const QModelIndex&)));
+    QObject::connect(m_results_view, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(display_verse_text(const QModelIndex&)));
     QObject::connect(m_results_view, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(display_results_context_menu(const QPoint&)));
     QObject::connect(m_filter_text, SIGNAL(textChanged(QString)), this, SLOT(update_search_results_filter_delay_timer()));
     QObject::connect(m_filter_delay_timer, SIGNAL(timeout()), this, SLOT(change_search_results_filter()));
@@ -48,14 +48,14 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsMode
     m_proxy_model->setFilterKeyColumn(SearchResultsModel::text_column);
     m_proxy_model->setSourceModel(m_results_model.get());
     m_results_view->setModel(m_proxy_model);
+
+    m_results_status->setText(tr("No matches"));
     
-    QLabel* results_title = new QLabel(tr("Search Results"));
     QLabel* filter_title = new QLabel(tr("Filter results:"));
 
     QGridLayout* top_line = new QGridLayout;
     top_line->setColumnMinimumWidth(1, 250);
-    top_line->addWidget(results_title, 0, 0);
-    top_line->addWidget(m_results_status, 0, 1);
+    top_line->addWidget(m_results_status, 0, 0);
     top_line->addWidget(filter_title, 0, 2);
     top_line->addWidget(m_filter_text, 0, 3);
 
@@ -162,28 +162,28 @@ void UISearchResultsWidget::update_results_status()
     int numberOfRowsDisplayed = m_proxy_model->rowCount();
     if (numberOfRowsFound == 0)
     {
-        m_results_status->setText(tr("(No matches)"));
+        m_results_status->setText(tr("No matches"));
     }
     else if (numberOfRowsFound == 1)
     {
         if (numberOfRowsFound != numberOfRowsDisplayed)
         {
-            m_results_status->setText(tr("(%1 of %2 match)").arg(numberOfRowsDisplayed).arg(numberOfRowsFound));
+            m_results_status->setText(tr("%1 of %2 match").arg(numberOfRowsDisplayed).arg(numberOfRowsFound));
         }
         else
         {
-            m_results_status->setText(tr("(%1 match)").arg(numberOfRowsFound));
+            m_results_status->setText(tr("%1 match").arg(numberOfRowsFound));
         }
     }
     else
     {
         if (numberOfRowsFound != numberOfRowsDisplayed)
         {
-            m_results_status->setText(tr("(%1 of %2 matches)").arg(numberOfRowsDisplayed).arg(numberOfRowsFound));
+            m_results_status->setText(tr("%1 of %2 matches").arg(numberOfRowsDisplayed).arg(numberOfRowsFound));
         }
         else
         {
-            m_results_status->setText(tr("(%1 matches)").arg(numberOfRowsFound));
+            m_results_status->setText(tr("%1 matches").arg(numberOfRowsFound));
         }
     }
 }

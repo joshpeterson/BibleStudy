@@ -11,22 +11,19 @@ using namespace BibleStudy;
 UIBrowseVersesWidget::UIBrowseVersesWidget(boost::shared_ptr<BrowseVersesModel> browse_model, QWidget *parent) :
     QWidget(parent),
     m_browse_view(new QTreeView()),
-    m_layout(new QVBoxLayout()),
     m_browse_model(browse_model)
 {
-    QObject::connect(m_browse_view, SIGNAL(clicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
+    QObject::connect(m_browse_view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
 
     m_browse_view->setModel(m_browse_model.get());
 
     /*BrowseVersesDelegate* browse_delegate = new BrowseVersesDelegate(this);
     m_browse_view->setItemDelegate(browse_delegate);*/
-    
-    QLabel* title = new QLabel(tr("Browse Verses"));
 
-    m_layout->addWidget(title);
-    m_layout->addWidget(m_browse_view);
+    QVBoxLayout* layout = new QVBoxLayout();
+    layout->addWidget(m_browse_view);
 
-    setLayout(m_layout);
+    setLayout(layout);
 }
 
 void UIBrowseVersesWidget::display_verse_text(const QModelIndex& index)
