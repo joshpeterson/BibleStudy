@@ -35,8 +35,11 @@ public:
     UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager);
 
 private slots:
-    //! Bring the search results dock widget to the top.
+    //! Bring the search results widget to the top of the tab widgets.
     void raise_results();
+
+    //! Bring the starred verses widget to the top of the tab widgets.
+    void raise_starred_verses();
 
 private:
     boost::shared_ptr<SearchResultsModel> m_results_model;
@@ -50,6 +53,11 @@ private:
     UIStarredVersesWidget* m_starred_verses;
     UITextViewWidget* m_text;
     UIBrowseVersesWidget* m_browse;
+
+    void connect_signals();
+    void set_font();
+    void initialize_widgets();
+    void initialize_status_bar();
 };
 
 }
