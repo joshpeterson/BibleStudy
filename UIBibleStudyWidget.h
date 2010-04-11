@@ -6,6 +6,8 @@
 
 class QWidget;
 class QTabWidget;
+class QAction;
+class QMenu;
 
 namespace BibleStudy
 {
@@ -41,6 +43,9 @@ private slots:
     //! Bring the starred verses widget to the top of the tab widgets.
     void raise_starred_verses();
 
+    //! Show the About box for the application.
+    void about();
+
 private:
     boost::shared_ptr<SearchResultsModel> m_results_model;
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
@@ -54,10 +59,18 @@ private:
     UITextViewWidget* m_text;
     UIBrowseVersesWidget* m_browse;
 
+    QAction* m_exit_action;
+    QAction* m_about_action;
+
+    QMenu* m_file_menu;
+    QMenu* m_help_menu;
+
     void connect_signals();
     void set_font();
     void initialize_widgets();
     void initialize_status_bar();
+    void initialize_actions();
+    void initialize_menus();
 };
 
 }
