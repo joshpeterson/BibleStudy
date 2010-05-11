@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Test HTML5 Page</title>
+		<script type="text/javascript">
+			var buttons = [
+			["Old Testament", ""],
+			["Genesis", "test1.html"],
+			["Exodus", "test2.html"],
+			["Leviticus", "test3.html"],
+			["Numbers", "test4.html"],
+			["Deuteronomy", "test5.html"],
+			["New Testament", ""],
+			["Matthew", "test6.html"]
+			];
+
+			window.onload = window.onresize = function()
+			{
+				for (var i = 0; i < buttons.length; i++)
+				{
+					if (buttons[i][1] != "")
+					{
+						drawListButton(buttons[i][0], false);
+					}
+					else
+					{
+						drawListButton(buttons[i][0], true);
+					}
+				}
+			}
+
+			function drawListButton(text, isHeader)
+			{
+				var C = 0.97;        // canvas width to viewport width ratio
+				var W_TO_H = 2*1.61;   // canvas width to canvas height ratio
+				var el = document.getElementById(text + "Button");
+				if (isHeader)
+				{
+					W_TO_H = 4*1.61;   // canvas width to canvas height ratio
+					el = document.getElementById(text + "Header");
+				}
+
+				// For IE compatibility http://www.google.com/search?q=get+viewport+size+js
+				var viewportWidth = window.innerWidth;
+				var viewportHeight = window.innerHeight;
+
+				var canvasWidth = viewportWidth * C;
+				var canvasHeight = canvasWidth / W_TO_H;
+				el.setAttribute("width", canvasWidth);
+				el.setAttribute("height", canvasHeight);
+
+				window.context = el.getContext("2d");
+
+				var gradient = context.createLinearGradient(0, 0, canvasWidth, canvasHeight);
+
+				if (isHeader)
+				{
+					gradient.addColorStop(0, "#6495ED");
+					gradient.addColorStop(1, "E0E0E0");
+				}
+				else
+				{
+					gradient.addColorStop(0, "white");
+					gradient.addColorStop(1, "#E0E0E0");
+				}
+
+				context.fillStyle = gradient;
+				context.fillRect(0,0,canvasWidth,canvasHeight);
+
+				context.textBaseline = "middle";
+
+				if (isHeader)
+				{
+					context.fillStyle = "white";
+					context.textAlign = "left"
+				}
+				else
+				{
+					context.fillStyle = "black";
+					context.textAlign = "center"
+				}
+
+				var pixelSize = computePixelSize(text, context, canvasWidth*0.8);
+				context.font = "bold" + pixelSize + "px sans-serif";
+
+				if (isHeader)
+				{
+					context.fillText(text, canvasWidth*0.025, canvasHeight/2);
+				}
+				else
+				{
+					context.fillText(text, canvasWidth/2, canvasHeight/2);
+				}
+			}
+
+			function computePixelSize(text, context, desiredWidth)
+			{
+				var lastAcceptablePixelSize = pixelSize = 100;
+				context.font = "bold " + pixelSize + "px sans-serif";
+				var textWidth = context.measureText(text);
+
+				var numberOfTries = 0;
+				while (textWidth.width > desiredWidth || textWidth.width < 0.8*desiredWidth)
+				{
+					widthDifference = desiredWidth - textWidth.width;
+					if (widthDifference == 0)
+					{
+						lastAcceptablePixelSize = pixelSize;
+						break;
+					}
+					else if (widthDifference < 0)
+					{
+						lastAcceptablePixelSize = pixelSize;
+						if (widthDifference > 10)
+						{
+							pixelSize -= 0.25*widthDifference;
+						}
+						else
+						{
+							pixelSize -= 10;
+						}
+					}
+					else
+					{
+						if (widthDifference > 10)
+						{
+							pixelSize += 0.25*widthDifference;
+						}
+						else
+						{
+							pixelSize += 10;
+						}
+					}
+
+					context.font = "bold " + pixelSize + "px sans-serif";
+					textWidth = context.measureText(text);
+
+					numberOfTries += 1;
+					if (numberOfTries > 10)
+					{
+						break;
+					}
+				}
+
+				return lastAcceptablePixelSize;
+			}
+
+			function navigate(buttonIndex)
+			{
+				window.location = buttons[parseInt(buttonIndex)][1];
+			}
+		</script>
+	</head>
+	<body>
+		<canvas id="0" style="border-width: 1px; border-style: solid;"></canvas>
+		<br>
+		<canvas id="1" onclick="navigate('1');" style="border-width: 1px; border-style: solid;"></canvas>
+		<br>
+		<canvas id="2" onclick="navigate('2');" style="border-width: 1px; border-style: solid;"></canvas>
+		<br>
+		<canvas id="3" onclick="navigate('3');" style="border-width: 1px; border-style: solid;"></canvas>
+		<br>
+		<canvas id="4" onclick="navigate('4');" style="border-width: 1px; border-style: solid;"></canvas>
+		<br>
+		<canvas id="5" onclick="navigate('5');" style="border-width: 1px; border-style: solid;"></canvas>
+		<br>
+		<canvas id="6" style="border-width: 1px; border-style: solid;"></canvas>
+		<br>
+		<canvas id="7" onclick="navigate('7');" style="border-width: 1px; border-style: solid;"></canvas>
+	</body>
+</html>
