@@ -24,7 +24,6 @@ for relativeBookUrl in indexSoup.findAll(href=re.compile("^/cgi.*")):
     lines[0] = lines[0].split("</h2>")[1]
     chapter = 0
     for line in lines:
-        verseNumber = verseNumber + 1
         if line.count("<h3>") > 0:
             chapter = chapter + 1
             verse = 0
@@ -35,6 +34,7 @@ for relativeBookUrl in indexSoup.findAll(href=re.compile("^/cgi.*")):
 
             verseEntry = str(verseNumber) + "*" + book + "*" + str(chapter) + "*" + str(verse) + "*" + verseText
             bible.append(verseEntry)
+            verseNumber = verseNumber + 1
 
 for line in bible:
     bibleFile.write(line + "\n")
