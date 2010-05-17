@@ -32,6 +32,8 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
     {
         this->add_translation_check_box(translation_selection_row, *it);
     }
+
+    translation_selection_row->addStretch(1);
     
     QVBoxLayout* layout = new QVBoxLayout;
 
@@ -60,6 +62,7 @@ void UISearchWidget::perform_search()
 void UISearchWidget::add_translation_check_box(QHBoxLayout* translation_selection_row, boost::shared_ptr<const Translation> translation)
 {
     QCheckBox* translation_check_box = new QCheckBox(translation->get_short_name().c_str());
+    translation_check_box->setCheckState(Qt::Checked);
     translation_selection_row->addWidget(translation_check_box);
     m_translation_checkboxes.push_back(translation_check_box);
 }
