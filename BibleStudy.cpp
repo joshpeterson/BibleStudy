@@ -20,14 +20,14 @@ int main(int argc, char* argv[])
 
     boost::shared_ptr<Translation> test(new Translation);
 
-    //test->Import("Test Translation", "TT", "c:\\Documents and Settings\\Josh\\Desktop\\TT.txt");
+    //test->Import("King James Version", "KJV", "c:\\Documents and Settings\\Josh\\Desktop\\KJV.txt");
 
-    //test->Save("c:\\Documents and Settings\\Josh\\Desktop\\TT.buf");
+    //test->Save("c:\\Documents and Settings\\Josh\\Desktop\\KJV.buf");
 
     test->Resume("Translations/DR.buf");
 
     boost::shared_ptr<Translation> test2(new Translation);
-    test2->Resume("Translations/TT.buf");
+    test2->Resume("Translations/KJV.buf");
 
     boost::shared_ptr<TranslationManager> manager(new TranslationManager);
     manager->add_translation(test);
