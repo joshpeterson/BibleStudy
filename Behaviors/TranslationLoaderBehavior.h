@@ -1,4 +1,11 @@
+#ifndef __TRANSLATION_LOADER_BEHAVIOR_H
+#define __TRANSLATION_LOADER_BEHAVIOR_H
+
 #include <cppunit/extensions/HelperMacros.h>
+#include "BehaviorDrivenDesign.h"
+
+namespace BibleStudyBehaviors
+{
 
 class TranslationLoaderBehavior : public CppUnit::TestFixture
 {
@@ -21,3 +28,5 @@ public:
     }
 };
 
+}
+#endif // __TRANSLATION_LOADER_BEHAVIOR_H

@@ -3,6 +3,8 @@
 
 #include "TranslationLoaderBehavior.h"
 
+using namespace BibleStudyBehaviors;
+
 CPPUNIT_TEST_SUITE_REGISTRATION(TranslationLoaderBehavior);
 
 int main()
