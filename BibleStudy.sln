@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual C++ Express 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BibleStudy", "BibleStudy.vcproj", "{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BibleStudyBehaviors", "BibleStudyBehaviors.vcproj", "{4BFDD568-0F80-320E-8A86-355689368524}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6} = {AB4F659B-2ADF-4350-ACF1-0745AEA289D6}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +18,10 @@ Global
 		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Debug|Win32.Build.0 = Debug|Win32
 		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Release|Win32.ActiveCfg = Release|Win32
 		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Release|Win32.Build.0 = Release|Win32
+		{4BFDD568-0F80-320E-8A86-355689368524}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4BFDD568-0F80-320E-8A86-355689368524}.Debug|Win32.Build.0 = Debug|Win32
+		{4BFDD568-0F80-320E-8A86-355689368524}.Release|Win32.ActiveCfg = Release|Win32
+		{4BFDD568-0F80-320E-8A86-355689368524}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

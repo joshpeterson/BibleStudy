@@ -4,7 +4,6 @@ class TranslationLoaderBehavior : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(TranslationLoaderBehavior);
     CPPUNIT_TEST(shouldPass);
-    CPPUNIT_TEST(shouldFail);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -18,12 +17,7 @@ public:
 
     void shouldPass()
     {
-	CPPUNIT_ASSERT(1 == 1);
-    }
-
-    void shouldFail()
-    {
-	CPPUNIT_ASSERT(1 == 0);
+	    CPPUNIT_ASSERT(1 == 1);
     }
 };
 
