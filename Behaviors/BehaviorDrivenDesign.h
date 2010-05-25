@@ -52,9 +52,9 @@ public:
     }
 
     template<typename GivenType>
-    boost::shared_ptr<const IGiven> GetGiven() const
+    boost::shared_ptr<const GivenType> GetGiven() const
     {
-        boost::shared_ptr<const IGiven> given = this->FindGiven<GivenType>();
+        boost::shared_ptr<const GivenType> given = this->FindGiven<GivenType>();
         if (given)
         {
             return given;
@@ -86,9 +86,9 @@ public:
     }
 
     template<typename WhenType>
-    boost::shared_ptr<const IWhen> GetWhen() const
+    boost::shared_ptr<const WhenType> GetWhen() const
     {
-        boost::shared_ptr<const IWhen> when = this->FindWhen<WhenType>();
+        boost::shared_ptr<const WhenType> when = this->FindWhen<WhenType>();
         if (when)
         {
             return when;
@@ -113,7 +113,7 @@ private:
     std::vector<boost::shared_ptr<const IWhen> > m_whens;
 
     template <typename GivenType>
-    boost::shared_ptr<const IGiven> FindGiven()
+    boost::shared_ptr<const GivenType> FindGiven()
     {
         for (std::vector<boost::shared_ptr<const IGiven> >::iterator it = m_givens.begin(); it != m_givens.end(); ++it)
         {
@@ -128,7 +128,7 @@ private:
     }
 
     template <typename WhenType>
-    boost::shared_ptr<const IWhen> FindWhen()
+    boost::shared_ptr<const GivenType> FindWhen()
     {
         for (std::vector<boost::shared_ptr<const IWhen> >::iterator it = m_whens.begin(); it != m_whens.end(); ++it)
         {
