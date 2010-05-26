@@ -1,10 +1,12 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/ui/text/TestRunner.h>
 
+#include "BehaviorDrivenDesignTest.h"
 #include "TranslationLoaderBehavior.h"
 
 using namespace BibleStudyBehaviors;
 
+CPPUNIT_TEST_SUITE_REGISTRATION(BehaviorDrivenDesignTest);
 CPPUNIT_TEST_SUITE_REGISTRATION(TranslationLoaderBehavior);
 
 int main()

@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdexcept>
 #include <string>
+#include <typeinfo>
 #include <boost/shared_ptr.hpp>
 
 namespace BehaviorDrivenDesign
@@ -32,80 +33,84 @@ class World
 {
 public:
     template <typename GivenType>
-    void Given()
+    World& Given()
     {
-        boost::shared_ptr<const IGiven> current_given = this->FindGiven<GivenType>();
+        const GivenType* current_given = this->FindGiven<GivenType>();
         if (!current_given)
         {
             boost::shared_ptr<IGiven> given = boost::shared_ptr<IGiven>(new GivenType());
             given->setup(*this);
-            m_givens.push_pack(given);
+            m_givens.push_back(given);
 
-            return;
+            return *this;
         }
 
-        GivenType given;
+        GivenType given_error;
         std::stringstream error_message;
-        error_message << "A given of type " << typeid(given).name() << "already exists";
+        error_message << "A given of type " << typeid(given_error).name() << "already exists";
 
         throw std::logic_error(error_message.str().c_str());
     }
 
     template<typename GivenType>
-    boost::shared_ptr<const GivenType> GetGiven() const
+    const GivenType* GetGiven() const
     {
-        boost::shared_ptr<const GivenType> given = this->FindGiven<GivenType>();
+        const GivenType* given = this->FindGiven<GivenType>();
         if (given)
         {
             return given;
         }
 
-        GivenType given;
+        GivenType given_error;
         std::stringstream error_message;
-        error_message << "Unable to find a given of type " << typeid(given).name();
+        error_message << "Unable to find a given of type " << typeid(given_error).name();
 
         throw std::logic_error(error_message.str().c_str());
     }
 
     template <typename WhenType>
-    void When()
+    World& When()
     {
-        boost::shared_ptr<const IWhen> current_when = this->FindWhen<WhenType>();
+        const WhenType* current_when = this->FindWhen<WhenType>();
         if (!current_when)
         {
             boost::shared_ptr<IWhen> when = boost::shared_ptr<IWhen>(new WhenType());
             when->occurs(*this);
-            m_whens.push_pack(when);
+            m_whens.push_back(when);
+
+            return *this;
         }
 
-        WhenType when;
+        WhenType when_error;
         std::stringstream error_message;
-        error_message << "A when of type " << typeid(when).name() << "already exists";
+        error_message << "A when of type " << typeid(when_error).name() << "already exists";
 
         throw std::logic_error(error_message.str().c_str());
     }
 
     template<typename WhenType>
-    boost::shared_ptr<const WhenType> GetWhen() const
+    const WhenType* GetWhen() const
     {
-        boost::shared_ptr<const WhenType> when = this->FindWhen<WhenType>();
+        const WhenType* when = this->FindWhen<WhenType>();
         if (when)
         {
             return when;
         }
 
-        WhenType when;
+        WhenType when_error;
         std::stringstream error_message;
-        error_message << "Unable to find a when of type " << typeid(when).name();
+        error_message << "Unable to find a when of type " << typeid(when_error).name();
 
         throw std::logic_error(error_message.str().c_str());
     }
 
     template <typename ThenType>
-    void Then()
+    World& Then()
     {
         boost::shared_ptr<IThen> then = boost::shared_ptr<IThen>(new ThenType());
         then->ensure_that(*this);
+        
+        return *this;
     }
 
 private:
@@ -113,14 +118,14 @@ private:
     std::vector<boost::shared_ptr<const IWhen> > m_whens;
 
     template <typename GivenType>
-    boost::shared_ptr<const GivenType> FindGiven()
+    const GivenType* FindGiven() const
     {
-        for (std::vector<boost::shared_ptr<const IGiven> >::iterator it = m_givens.begin(); it != m_givens.end(); ++it)
+        for (std::vector<boost::shared_ptr<const IGiven> >::const_iterator it = m_givens.begin(); it != m_givens.end(); ++it)
         {
             GivenType given;
-            if (typeid(*it) == typeid(given))
+            if (typeid(*(it->get())) == typeid(given))
             {
-                return *it;
+                return static_cast<const GivenType*>(it->get());
             }
         }
 
@@ -128,14 +133,14 @@ private:
     }
 
     template <typename WhenType>
-    boost::shared_ptr<const GivenType> FindWhen()
+    const WhenType* FindWhen() const
     {
-        for (std::vector<boost::shared_ptr<const IWhen> >::iterator it = m_whens.begin(); it != m_whens.end(); ++it)
+        for (std::vector<boost::shared_ptr<const IWhen> >::const_iterator it = m_whens.begin(); it != m_whens.end(); ++it)
         {
             WhenType when;
-            if (typeid(*it) == typeid(when))
+            if (typeid(*(it->get())) == typeid(when))
             {
-                return *it;
+                return static_cast<const WhenType*>(it->get());
             }
         }
 
