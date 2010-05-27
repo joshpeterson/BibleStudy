@@ -21,6 +21,7 @@ HEADERS += UIBrowseVersesWidget.h
 HEADERS += VerseTreeItem.h
 HEADERS += TranslationManager.h
 HEADERS += TranslationIterator.h
+HEADERS += TranslationLoader.h
 
 SOURCES += BibleStudy.cpp
 SOURCES += SearchResultsModel.cpp
@@ -40,6 +41,7 @@ SOURCES += BrowseVersesModel.cpp
 SOURCES += UIBrowseVersesWidget.cpp
 SOURCES += VerseTreeItem.cpp
 SOURCES += TranslationManager.cpp
+SOURCES += TranslationLoader.cpp
 
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
