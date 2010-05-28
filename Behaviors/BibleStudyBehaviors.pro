@@ -1,3 +1,4 @@
+template = app
 CONFIG += console qt thread exceptions stl debug_and_release
 
 HEADERS += BehaviorDrivenDesign.h
