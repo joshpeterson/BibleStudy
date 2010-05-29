@@ -5,6 +5,7 @@
 #include <vector>
 #include <boost/shared_ptr.hpp>
 #include "ICommand.h"
+#include "BibleDatabaseExporter.h"
 
 namespace BibleStudy
 {
@@ -17,15 +18,15 @@ class CommandPerformSearch : public ICommand
 {
 public:
     //! Create a new instance of the CommandPerformSearch command.
-    CommandPerformSearch(boost::shared_ptr<const TranslationManager> translation_manager, const std::vector<std::string>& translations_to_search, std::string search_string);
+    BIBLE_DATABASE_EXPORT CommandPerformSearch(boost::shared_ptr<const TranslationManager> translation_manager, const std::vector<std::string>& translations_to_search, std::string search_string);
     
     //! Get the results of the search.
-    boost::shared_ptr<ISearchResults> get_results();
+    BIBLE_DATABASE_EXPORT boost::shared_ptr<ISearchResults> get_results();
 
     // ICommand
     
     //! Execute the search.
-    void Execute();
+    BIBLE_DATABASE_EXPORT void Execute();
 
 private:
     boost::shared_ptr<const TranslationManager> m_translation_manager;

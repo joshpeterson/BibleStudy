@@ -15,6 +15,7 @@ HEADERS += VerseDisplay.h
 HEADERS += VerseTreeItem.h
 HEADERS += TranslationManager.h
 HEADERS += TranslationIterator.h
+HEADERS += BibleDatabaseExporter.h
 
 SOURCES += SearchResultsSerial.cpp
 SOURCES += Translation.cpp
