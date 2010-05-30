@@ -14,18 +14,16 @@ win32 {
 
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
-	LIBS += "$$(CPPUNIT_DIR)\lib\cppunitd.lib"
-        LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotoc.lib"
-        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotobuf.lib"
+	    LIBS += "$$(CPPUNIT_DIR)\lib\cppunitd.lib"
+        LIBS += -L"debug"
+	    LIBS += "BibleDatabase.lib"
      }
 
 # Release mode specific settings
     build_pass:CONFIG(release, debug|release){
-	LIBS += "$$(CPPUNIT_DIR)\lib\cppunit.lib"
-        LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotoc.lib"
-        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotobuf.lib"
+	    LIBS += "$$(CPPUNIT_DIR)\lib\cppunit.lib"
+        LIBS += -L"release"
+	    LIBS += "BibleDatabase.lib"
     }
 
     QMAKE_POST_LINK = '"$(TargetPath)"'

@@ -77,13 +77,13 @@ private:
 };
 
 //! Get the text representation and title of a collection of verses.
-std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const Verse> >& verse_collection, boost::shared_ptr<const Translation> translation);
+BIBLE_DATABASE_EXPORT std::string verse_collection_to_title_and_string_wrapped(const std::vector<boost::shared_ptr<const Verse> >& verse_collection, boost::shared_ptr<const Translation> translation);
 
 //! Get the text representation of a collection of verses.
-std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const Verse> >& verse_collection);
+BIBLE_DATABASE_EXPORT std::string verse_collection_to_string(const std::vector<boost::shared_ptr<const Verse> >& verse_collection);
 
 //! Get the title of a collection of verses.
-std::string verse_collection_title(const std::vector<boost::shared_ptr<const Verse> >& verse_collection, boost::shared_ptr<const Translation> translation);
+BIBLE_DATABASE_EXPORT std::string verse_collection_title(const std::vector<boost::shared_ptr<const Verse> >& verse_collection, boost::shared_ptr<const Translation> translation);
 
 }
 

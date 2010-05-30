@@ -28,12 +28,14 @@ win32 {
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
         LIBS += -L"$$(BOOST_DIR)\lib"
-	LIBS += "BibleDatabase.lib"
+        LIBS += -L"debug"
+	    LIBS += "BibleDatabase.lib"
      }
 
 # Release mode specific settings
     build_pass:CONFIG(release, debug|release){
         LIBS += -L"$$(BOOST_DIR)\lib"
-	LIBS += "BibleDatabase.lib"
+        LIBS += -L"release"
+	    LIBS += "BibleDatabase.lib"
     }
 }
