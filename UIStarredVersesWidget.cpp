@@ -3,7 +3,7 @@
 #include <QLabel>
 #include "UIStarredVersesWidget.h"
 #include "StarredVersesModel.h"
-#include "VerseDisplay.h"
+#include "BibleDatabase/VerseDisplay.h"
 
 using namespace BibleStudy;
 

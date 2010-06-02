@@ -1,4 +1,4 @@
-template = app
+TEMPLATE = app
 CONFIG += console qt thread exceptions stl debug_and_release
 
 HEADERS += BehaviorDrivenDesign.h
@@ -30,8 +30,6 @@ win32 {
 }
 
 unix {
-    LIBS+=-l"protoc"
-    LIBS+=-l"protobuf"
     LIBS+=-l"cppunit"
 }
 

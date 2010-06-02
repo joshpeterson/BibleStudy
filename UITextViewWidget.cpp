@@ -4,9 +4,9 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "UITextViewWidget.h"
-#include "TranslationManager.h"
-#include "Translation.h"
-#include "VerseDisplay.h"
+#include "BibleDatabase/TranslationManager.h"
+#include "BibleDatabase/Translation.h"
+#include "BibleDatabase/VerseDisplay.h"
 #include "StarredVersesModel.h"
 
 using namespace BibleStudy;
