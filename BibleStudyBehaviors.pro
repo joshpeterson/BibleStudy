@@ -1,11 +1,11 @@
 TEMPLATE = app
 CONFIG += console qt thread exceptions stl debug_and_release
 
-HEADERS += BehaviorDrivenDesign.h
-HEADERS += BehaviorDrivenDesignTest.h
-HEADERS += TranslationLoaderBehavior.h
+HEADERS += BibleStudyBehaviors/BehaviorDrivenDesign.h
+HEADERS += BibleStudyBehaviors/BehaviorDrivenDesignTest.h
+HEADERS += BibleStudyBehaviors/TranslationLoaderBehavior.h
 
-SOURCES += BibleStudyBehaviors.cpp
+SOURCES += BibleStudyBehaviors/BibleStudyBehaviors.cpp
 
 win32 {
     INCLUDEPATH += "$$(CPPUNIT_DIR)\include"
