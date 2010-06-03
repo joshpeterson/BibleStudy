@@ -10,6 +10,7 @@
 #include "StarredVersesModel.h"
 
 using namespace BibleStudy;
+using namespace BibleDatabase;
 
 UITextViewWidget::UITextViewWidget(boost::shared_ptr<const TranslationManager> translation_manager,
                                    boost::shared_ptr<StarredVersesModel> starred_verses_model,

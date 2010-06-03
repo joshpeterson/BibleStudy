@@ -9,7 +9,7 @@
 #include "ISearchResults.h"
 #include "BibleDatabaseExporter.h"
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 
 class Verse;

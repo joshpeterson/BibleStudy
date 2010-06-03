@@ -6,7 +6,7 @@
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format_inl.h>
 
-namespace BibleStudy {
+namespace BibleDatabase {
 
 namespace {
 
@@ -29,12 +29,12 @@ void protobuf_BuildDesc_TranslationBuffer_2eproto() {
     ::google::protobuf::DescriptorPool::internal_generated_pool();
 
   const ::google::protobuf::FileDescriptor* file = pool->InternalBuildGeneratedFile(
-    "\n\027TranslationBuffer.proto\022\nBibleStudy\"\\\n"
-    "\013VerseBuffer\022\014\n\004book\030\001 \002(\t\022\017\n\007chapter\030\002 "
-    "\002(\005\022\r\n\005verse\030\003 \002(\005\022\014\n\004text\030\004 \002(\t\022\021\n\tuniq"
-    "ue_id\030\005 \002(\005\"b\n\021TranslationBuffer\022\021\n\tlong"
-    "_name\030\001 \002(\t\022\022\n\nshort_name\030\002 \002(\t\022&\n\005verse"
-    "\030\003 \003(\0132\027.BibleStudy.VerseBuffer", 231);
+    "\n\027TranslationBuffer.proto\022\rBibleDatabase"
+    "\"\\\n\013VerseBuffer\022\014\n\004book\030\001 \002(\t\022\017\n\007chapter"
+    "\030\002 \002(\005\022\r\n\005verse\030\003 \002(\005\022\014\n\004text\030\004 \002(\t\022\021\n\tu"
+    "nique_id\030\005 \002(\005\"e\n\021TranslationBuffer\022\021\n\tl"
+    "ong_name\030\001 \002(\t\022\022\n\nshort_name\030\002 \002(\t\022)\n\005ve"
+    "rse\030\003 \003(\0132\032.BibleDatabase.VerseBuffer", 237);
   VerseBuffer_descriptor_ = file->message_type(0);
   VerseBuffer_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -197,4 +197,4 @@ const ::google::protobuf::Reflection* TranslationBuffer::GetReflection() const {
   return TranslationBuffer_reflection_;
 }
 
-}  // namespace BibleStudy
+}  // namespace BibleDatabase

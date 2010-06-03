@@ -8,11 +8,12 @@ class QLabel;
 class QTextEdit;
 class QToolButton;
 
+class TranslationManager;
+class VerseDisplay;
+
 namespace BibleStudy
 {
 
-class TranslationManager;
-class VerseDisplay;
 class StarredVersesModel;
 
 //! This class respresents a text box that displays a collection of verses and allows the user to star, unstar a verse and navigate a translation.

@@ -22,7 +22,7 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 
-namespace BibleStudy {
+namespace BibleDatabase {
 
 // Internal implementation detail -- do not call this.
 void protobuf_BuildDesc_TranslationBuffer_2eproto();
@@ -194,14 +194,14 @@ class TranslationBuffer : public ::google::protobuf::Message {
   inline void set_short_name(const char* value);
   inline ::std::string* mutable_short_name();
   
-  // repeated .BibleStudy.VerseBuffer verse = 3;
+  // repeated .BibleDatabase.VerseBuffer verse = 3;
   inline int verse_size() const;
   inline void clear_verse();
-  inline const ::google::protobuf::RepeatedPtrField< ::BibleStudy::VerseBuffer >& verse() const;
-  inline ::google::protobuf::RepeatedPtrField< ::BibleStudy::VerseBuffer >* mutable_verse();
-  inline const ::BibleStudy::VerseBuffer& verse(int index) const;
-  inline ::BibleStudy::VerseBuffer* mutable_verse(int index);
-  inline ::BibleStudy::VerseBuffer* add_verse();
+  inline const ::google::protobuf::RepeatedPtrField< ::BibleDatabase::VerseBuffer >& verse() const;
+  inline ::google::protobuf::RepeatedPtrField< ::BibleDatabase::VerseBuffer >* mutable_verse();
+  inline const ::BibleDatabase::VerseBuffer& verse(int index) const;
+  inline ::BibleDatabase::VerseBuffer* mutable_verse(int index);
+  inline ::BibleDatabase::VerseBuffer* add_verse();
   
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -211,7 +211,7 @@ class TranslationBuffer : public ::google::protobuf::Message {
   static const ::std::string _default_long_name_;
   ::std::string* short_name_;
   static const ::std::string _default_short_name_;
-  ::google::protobuf::RepeatedPtrField< ::BibleStudy::VerseBuffer > verse_;
+  ::google::protobuf::RepeatedPtrField< ::BibleDatabase::VerseBuffer > verse_;
   friend void protobuf_BuildDesc_TranslationBuffer_2eproto();
   static const TranslationBuffer default_instance_;
   static const int _offsets_[3];
@@ -431,31 +431,31 @@ inline ::std::string* TranslationBuffer::mutable_short_name() {
   return short_name_;
 }
 
-// repeated .BibleStudy.VerseBuffer verse = 3;
+// repeated .BibleDatabase.VerseBuffer verse = 3;
 inline int TranslationBuffer::verse_size() const {
   return verse_.size();
 }
 inline void TranslationBuffer::clear_verse() {
   verse_.Clear();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::BibleStudy::VerseBuffer >&
+inline const ::google::protobuf::RepeatedPtrField< ::BibleDatabase::VerseBuffer >&
 TranslationBuffer::verse() const {
   return verse_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::BibleStudy::VerseBuffer >*
+inline ::google::protobuf::RepeatedPtrField< ::BibleDatabase::VerseBuffer >*
 TranslationBuffer::mutable_verse() {
   return &verse_;
 }
-inline const ::BibleStudy::VerseBuffer& TranslationBuffer::verse(int index) const {
+inline const ::BibleDatabase::VerseBuffer& TranslationBuffer::verse(int index) const {
   return verse_.Get(index);
 }
-inline ::BibleStudy::VerseBuffer* TranslationBuffer::mutable_verse(int index) {
+inline ::BibleDatabase::VerseBuffer* TranslationBuffer::mutable_verse(int index) {
   return verse_.Mutable(index);
 }
-inline ::BibleStudy::VerseBuffer* TranslationBuffer::add_verse() {
+inline ::BibleDatabase::VerseBuffer* TranslationBuffer::add_verse() {
   return verse_.Add();
 }
 
 
-}  // namespace BibleStudy
+}  // namespace BibleDatabase
 #endif  // PROTOBUF_TranslationBuffer_2eproto__INCLUDED

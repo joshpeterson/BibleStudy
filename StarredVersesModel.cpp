@@ -7,6 +7,7 @@
 
 using namespace boost::lambda;
 using namespace BibleStudy;
+using namespace BibleDatabase;
 
 StarredVersesModel::StarredVersesModel(boost::shared_ptr<const TranslationManager> translation_manager) :
     m_translation_manager(translation_manager)

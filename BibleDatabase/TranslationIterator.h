@@ -6,7 +6,7 @@
 #include <boost/shared_ptr.hpp>
 #include "BibleDatabaseExporter.h"
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 class Translation;
 

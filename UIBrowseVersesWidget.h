@@ -7,12 +7,12 @@
 
 class QTreeView;
 
+class BibleDatabase::VerseDisplay;
+
 namespace BibleStudy
 {
 
-class Translation;
 class BrowseVersesModel;
-class VerseDisplay;
 
 //! This class is an implementation of a view from the Qt Model/View framework for a tree view that allows the user to browse the verses of all Translation objects.
 class UIBrowseVersesWidget : public QWidget
@@ -29,7 +29,7 @@ public slots:
 
 signals:
     //! Signal other widgets that a new verse should be displayed.
-    void verse_display_changed(boost::shared_ptr<VerseDisplay> verse);
+    void verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
 
 private:
     QTreeView* m_browse_view;

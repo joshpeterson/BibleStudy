@@ -6,7 +6,7 @@
 #include <boost/shared_ptr.hpp>
 #include "BibleDatabaseExporter.h"
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 
 //! This class is used to represent a verse and its relationship to other verses in a Translation object that allow it to be displayed in a tree view.

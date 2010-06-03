@@ -13,6 +13,7 @@
 #include <QVBoxLayout>
 
 using namespace BibleStudy;
+using namespace BibleDatabase;
 
 int main(int argc, char* argv[])
 {

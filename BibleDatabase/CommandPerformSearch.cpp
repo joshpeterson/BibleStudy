@@ -4,7 +4,7 @@
 #include "SearchResultsSerial.h"
 #include "TranslationIterator.h"
 
-using namespace BibleStudy;
+using namespace BibleDatabase;
 
 CommandPerformSearch::CommandPerformSearch(boost::shared_ptr<const TranslationManager> translation_manager, const std::vector<std::string>& translations_to_search, std::string search_string) :
     m_translation_manager(translation_manager),

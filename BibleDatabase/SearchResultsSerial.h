@@ -8,7 +8,7 @@
 #include "VerseDisplay.h"
 #include "BibleDatabaseExporter.h"
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 
 //! This class implements the ISearchResults interface using a serial linear search.

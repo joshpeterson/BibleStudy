@@ -18,6 +18,7 @@
 #include "BibleDatabase/VerseDisplay.h"
 
 using namespace BibleStudy;
+using namespace BibleDatabase;
 
 UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsModel> results_model,
                                              QWidget *parent) :

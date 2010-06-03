@@ -5,24 +5,24 @@
 #include "BibleDatabase/Translation.h"
 #include "BibleDatabase/ISearchResults.h"
 
+class BibleDatase::VerseDisplay;
+class BibleDatase::TranslationManager;
+
 namespace BibleStudy
 {
-
-class VerseDisplay;
-class TranslationManager;
 
 //! This class is an implementation of a model from the Qt Model/View framework for a table view which displays the results of a search.
 class SearchResultsModel : public QAbstractTableModel
 {
 public:
     //! Create a new instance of the SearchResultsModel class.
-    SearchResultsModel(boost::shared_ptr<const TranslationManager> translation_manager, QObject* parent = 0);
+    SearchResultsModel(boost::shared_ptr<const BibleDatase::TranslationManager> translation_manager, QObject* parent = 0);
 
     //! Set the ISearchResults object that this model should use to obtain data.
-    void SetResults(boost::shared_ptr<const ISearchResults> results);
+    void SetResults(boost::shared_ptr<const BibleDatase::ISearchResults> results);
 
     //! Get a VerseDisplay object corresponding to the verse at the given index.
-    boost::shared_ptr<VerseDisplay> get_verse_display(const QModelIndex& index);
+    boost::shared_ptr<BibleDatase::VerseDisplay> get_verse_display(const QModelIndex& index);
 
     //! Get the number of rows for the given parent index.  This should be the number of verses in the results.
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -47,8 +47,8 @@ public:
     };
 
 private:
-    boost::shared_ptr<const TranslationManager> m_translation_manager;
-    boost::shared_ptr<const ISearchResults> m_results;
+    boost::shared_ptr<const BibleDatase::TranslationManager> m_translation_manager;
+    boost::shared_ptr<const BibleDatase::ISearchResults> m_results;
 };
 
 }

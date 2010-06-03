@@ -7,11 +7,12 @@
 
 class QListView;
 
+class BibleDatabase::VerseDisplay;
+
 namespace BibleStudy
 {
 
 class StarredVersesModel;
-class VerseDisplay;
 
 //! This class is an implementation of a view from the Qt Model/View framework for a list view which represents the verses the user has starred.
 class UIStarredVersesWidget : public QWidget
@@ -24,10 +25,10 @@ public:
 
 public slots:
     //! Add a verse to the collection of starred verses.
-    void add_starred_verse(boost::shared_ptr<VerseDisplay> verse);
+    void add_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
 
     //! Remove a verse from the collection of starred verses.
-    void remove_starred_verse(boost::shared_ptr<VerseDisplay> verse);
+    void remove_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
 
     //! Get the verse at the given index and emit the verse_display_changed signal for that verse.
     void display_verse_text(const QModelIndex& index);

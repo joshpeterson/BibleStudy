@@ -4,7 +4,7 @@
 #include <string>
 #include "BibleDatabaseExporter.h"
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 
 //! This class respresents the information necessary to display a given verse.  This include the verse ID, the number of context verses, and Translation object.

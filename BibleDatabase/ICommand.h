@@ -1,7 +1,7 @@
 #ifndef __ICOMMAND_H
 #define __ICOMMAND_H
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 
 //! This class represents a generic command interface.

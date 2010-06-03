@@ -6,7 +6,7 @@
 #include <boost/noncopyable.hpp>
 #include "BibleDatabaseExporter.h"
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 
 class Translation;

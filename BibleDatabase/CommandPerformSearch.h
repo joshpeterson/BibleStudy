@@ -7,7 +7,7 @@
 #include "ICommand.h"
 #include "BibleDatabaseExporter.h"
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 
 class TranslationManager;
