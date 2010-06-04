@@ -7,7 +7,10 @@
 
 class QTreeView;
 
-class BibleDatabase::VerseDisplay;
+namespace BibleDatabase
+{
+class VerseDisplay;
+}
 
 namespace BibleStudy
 {

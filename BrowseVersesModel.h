@@ -4,8 +4,11 @@
 #include <boost/shared_ptr.hpp>
 #include <QAbstractItemModel>
 
-class BibleDatase::TranslationManager;
-class BibleDatase::VerseDisplay;
+namespace BibleDatabase
+{
+class TranslationManager;
+class VerseDisplay;
+}
 
 namespace BibleStudy
 {
@@ -17,7 +20,7 @@ class BrowseVersesModel : public QAbstractItemModel
 
 public:
     //! Create a new instance of the BrowseVerseModel, using a given TranslationManager.
-    BrowseVersesModel(boost::shared_ptr<const BibleDatase::TranslationManager> translation_manager, QObject *parent = 0);
+    BrowseVersesModel(boost::shared_ptr<const BibleDatabase::TranslationManager> translation_manager, QObject *parent = 0);
 
     //! Get the data that should be displayed in the view for the given index.
     QVariant data(const QModelIndex &index, int role) const;
@@ -41,10 +44,10 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
     //! Get the VerseDisplay object corresponding to the given index in the model.
-    boost::shared_ptr<BibleDatase::VerseDisplay> get_verse_display(const QModelIndex &index) const;
+    boost::shared_ptr<BibleDatabase::VerseDisplay> get_verse_display(const QModelIndex &index) const;
 
 private:
-    boost::shared_ptr<const BibleDatase::TranslationManager> m_translation_manager;
+    boost::shared_ptr<const BibleDatabase::TranslationManager> m_translation_manager;
 };
 
 }

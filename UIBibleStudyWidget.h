@@ -9,8 +9,11 @@ class QTabWidget;
 class QAction;
 class QMenu;
 
-class BibleDatabase::TranslationManager;
-class BibleDatabase::VerseDisplay;
+namespace BibleDatabase
+{
+class TranslationManager;
+class VerseDisplay;
+}
 
 namespace BibleStudy
 {

@@ -11,9 +11,12 @@ class QLineEdit;
 class QHBoxLayout;
 class QCheckBox;
 
-class BibleDatabase::TranslationManager;
-class BibleDatabase::ISearchResults;
-class BibleDatabase::Translation;
+namespace BibleDatabase
+{
+class TranslationManager;
+class ISearchResults;
+class Translation;
+}
 
 namespace BibleStudy
 {

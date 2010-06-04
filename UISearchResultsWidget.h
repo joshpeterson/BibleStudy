@@ -15,8 +15,11 @@ class QLabel;
 class QKeyEvent;
 class QPoint;
 
-class BibleDatabase::ISearchResults;
-class BibleDatabase::VerseDisplay;
+namespace BibleDatabase
+{
+class ISearchResults;
+class VerseDisplay;
+}
 
 namespace BibleStudy
 {

@@ -7,7 +7,10 @@
 
 class QListView;
 
-class BibleDatabase::VerseDisplay;
+namespace BibleDatabase
+{
+class VerseDisplay;
+}
 
 namespace BibleStudy
 {
@@ -35,7 +38,7 @@ public slots:
 
 signals:
     //! Signal other widgets that a new verse should be displayed.
-    void verse_display_changed(boost::shared_ptr<VerseDisplay> verse);
+    void verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
 
 private:
     QListView* m_starred_verses_view;
