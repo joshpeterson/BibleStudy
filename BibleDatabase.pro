@@ -26,7 +26,15 @@ SOURCES += BibleDatabase/VerseDisplay.cpp
 SOURCES += BibleDatabase/VerseTreeItem.cpp
 SOURCES += BibleDatabase/TranslationManager.cpp
 
-win32 {
+win32 {  
+    QMAKE_CXXFLAGS_DEBUG += /wd4996
+    QMAKE_CXXFLAGS_DEBUG += /wd4251
+    QMAKE_CXXFLAGS_DEBUG += /wd4100
+    
+    QMAKE_CXXFLAGS_RELEASE += /wd4996
+    QMAKE_CXXFLAGS_RELEASE += /wd4251
+    QMAKE_CXXFLAGS_RELEASE += /wd4100
+    
     INCLUDEPATH += "$$(BOOST_DIR)"
     INCLUDEPATH += "$$(GOOGLE_PROTOBUF_DIR)\include"
 

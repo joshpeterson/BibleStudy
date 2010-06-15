@@ -8,6 +8,10 @@ HEADERS += BibleStudyBehaviors/TranslationLoaderBehavior.h
 SOURCES += BibleStudyBehaviors/BibleStudyBehaviors.cpp
 
 win32 {
+    QMAKE_CXXFLAGS_DEBUG += /wd4100
+    
+    QMAKE_CXXFLAGS_RELEASE += /wd4100
+    
     INCLUDEPATH += "$$(CPPUNIT_DIR)\include"
     INCLUDEPATH += "$$(BOOST_DIR)"
     INCLUDEPATH += "$$(GOOGLE_PROTOBUF_DIR)\include"

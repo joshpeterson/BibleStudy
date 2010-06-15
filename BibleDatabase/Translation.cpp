@@ -168,7 +168,6 @@ bool Translation::Import(const std::string& long_name, const std::string& short_
     return true;
 }
 
-
 boost::shared_ptr<VerseTreeItem> Translation::get_verse_item_tree() const
 {
     return m_verse_tree;
