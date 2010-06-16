@@ -6,12 +6,13 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "UISearchWidget.h"
-#include "TranslationManager.h"
-#include "CommandPerformSearch.h"
-#include "Translation.h"
-#include "TranslationIterator.h"
+#include "BibleDatabase/TranslationManager.h"
+#include "BibleDatabase/CommandPerformSearch.h"
+#include "BibleDatabase/Translation.h"
+#include "BibleDatabase/TranslationIterator.h"
 
 using namespace BibleStudy;
+using namespace BibleDatabase;
 
 UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget* parent) : 
     QWidget(parent),

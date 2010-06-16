@@ -1,11 +1,12 @@
 #include <vector>
 #include <boost/shared_ptr.hpp>
 #include "SearchResultsModel.h"
-#include "TranslationManager.h"
-#include "Verse.h"
-#include "VerseDisplay.h"
+#include "BibleDatabase/TranslationManager.h"
+#include "BibleDatabase/Verse.h"
+#include "BibleDatabase/VerseDisplay.h"
 
 using namespace BibleStudy;
+using namespace BibleDatabase;
 
 SearchResultsModel::SearchResultsModel(boost::shared_ptr<const TranslationManager> translation_manager, 
                                        QObject* parent) :

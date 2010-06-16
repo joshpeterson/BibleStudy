@@ -1,6 +1,6 @@
 #include "SearchResultsSerial.h"
 
-using namespace BibleStudy;
+using namespace BibleDatabase;
 
 SearchResultsSerial::SearchResultsSerial(std::string search_string) :
     m_search_string(search_string)

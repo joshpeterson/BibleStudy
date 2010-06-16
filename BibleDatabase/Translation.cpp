@@ -10,7 +10,7 @@
 #include "TranslationBufferNoWarnings.pb.h"
 #include "VerseTreeItem.h"
 
-using namespace BibleStudy;
+using namespace BibleDatabase;
 
 void Translation::search(boost::shared_ptr<ISearchResults> query) const
 {
@@ -42,7 +42,7 @@ std::vector<boost::shared_ptr<const Verse> > Translation::get_verse(int unique_i
 
 bool Translation::Save(const std::string &filename)
 {
-    BibleStudy::TranslationBuffer buffer;
+    TranslationBuffer buffer;
     buffer.set_long_name(m_long_name);
     buffer.set_short_name(m_short_name);
 
@@ -50,7 +50,7 @@ bool Translation::Save(const std::string &filename)
          it != m_verses.end();
          ++it)
     {
-        BibleStudy::VerseBuffer* verse_buffer = buffer.add_verse();
+        VerseBuffer* verse_buffer = buffer.add_verse();
         verse_buffer->set_book((*it)->get_book());
         verse_buffer->set_chapter((*it)->get_chapter());
         verse_buffer->set_verse((*it)->get_verse());
@@ -68,7 +68,7 @@ bool Translation::Save(const std::string &filename)
 
 bool Translation::Resume(const std::string &filename)
 {
-    BibleStudy::TranslationBuffer buffer;
+    TranslationBuffer buffer;
 
     std::fstream input(filename.c_str(), std::ios::in | std::ios::binary);
     if (!input || !buffer.ParseFromIstream(&input)) 
@@ -93,7 +93,7 @@ bool Translation::Resume(const std::string &filename)
     int num_verses = buffer.verse_size();
     for (int i = 0; i < num_verses; ++i)
     {
-        BibleStudy::VerseBuffer verse_buffer = buffer.verse(i);
+        VerseBuffer verse_buffer = buffer.verse(i);
         boost::shared_ptr<Verse> verse(new Verse(verse_buffer.book(), verse_buffer.chapter(),
                                                  verse_buffer.verse(), verse_buffer.text(),
                                                  verse_buffer.unique_id()));
@@ -168,13 +168,12 @@ bool Translation::Import(const std::string& long_name, const std::string& short_
     return true;
 }
 
-
 boost::shared_ptr<VerseTreeItem> Translation::get_verse_item_tree() const
 {
     return m_verse_tree;
 }
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 
 // Free functions

@@ -15,9 +15,10 @@
 #include <QKeySequence>
 #include "UISearchResultsWidget.h"
 #include "SearchResultsModel.h"
-#include "VerseDisplay.h"
+#include "BibleDatabase/VerseDisplay.h"
 
 using namespace BibleStudy;
+using namespace BibleDatabase;
 
 UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsModel> results_model,
                                              QWidget *parent) :

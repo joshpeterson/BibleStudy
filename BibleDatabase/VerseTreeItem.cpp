@@ -2,7 +2,7 @@
 #include "VerseTreeItem.h"
 
 using namespace boost::lambda;
-using namespace BibleStudy;
+using namespace BibleDatabase;
 
 VerseTreeItem::VerseTreeItem(std::string translation_long_name, int verse_id) :
     m_translation_long_name(translation_long_name),

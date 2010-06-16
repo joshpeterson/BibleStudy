@@ -2,7 +2,7 @@
 #include "Verse.h"
 #include "ISearchResults.h"
 
-using namespace BibleStudy;
+using namespace BibleDatabase;
 
 Verse::Verse(const std::string& book, int chapter, int verse, const std::string& text,
              int unqiue_verse_id) :

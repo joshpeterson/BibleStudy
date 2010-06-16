@@ -15,13 +15,16 @@ class QLabel;
 class QKeyEvent;
 class QPoint;
 
+namespace BibleDatabase
+{
+class ISearchResults;
+class VerseDisplay;
+}
+
 namespace BibleStudy
 {
 
-class Translation;
-class ISearchResults;
 class SearchResultsModel;
-class VerseDisplay;
 
 //! This class is an implementation of a view from the Qt Model/View framework for a table view which displays the results of a text search.
 class UISearchResultsWidget : public QWidget
@@ -37,7 +40,7 @@ public:
 
 public slots:
     //! Set the results object which the widget should display.
-    void display_search_results(boost::shared_ptr<ISearchResults> query);
+    void display_search_results(boost::shared_ptr<BibleDatabase::ISearchResults> query);
 
     //! Get the verse at the given index and emit the verse_display_changed signal for that verse.
     void display_verse_text(const QModelIndex& index);
@@ -59,7 +62,7 @@ public slots:
 
 signals:
     //! Signal other widgets that a new verse should be displayed.
-    void verse_display_changed(boost::shared_ptr<VerseDisplay> verse);
+    void verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
 
 private:
     QTableView* m_results_view;

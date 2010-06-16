@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Translation.h"
-#include "TranslationManager.h"
+#include "BibleDatabase/Translation.h"
+#include "BibleDatabase/TranslationManager.h"
 #include "UISearchWidget.h"
 #include "SearchResultsModel.h"
 #include "UISearchResultsWidget.h"
@@ -13,6 +13,7 @@
 #include <QVBoxLayout>
 
 using namespace BibleStudy;
+using namespace BibleDatabase;
 
 int main(int argc, char* argv[])
 {

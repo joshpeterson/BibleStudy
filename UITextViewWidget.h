@@ -8,11 +8,15 @@ class QLabel;
 class QTextEdit;
 class QToolButton;
 
+namespace BibleDatabase
+{
+class TranslationManager;
+class VerseDisplay;
+}
+
 namespace BibleStudy
 {
 
-class TranslationManager;
-class VerseDisplay;
 class StarredVersesModel;
 
 //! This class respresents a text box that displays a collection of verses and allows the user to star, unstar a verse and navigate a translation.
@@ -22,19 +26,19 @@ class UITextViewWidget : public QWidget
 
 public:
     //! Create a new instance of the UITextViewWidget class.
-    UITextViewWidget(boost::shared_ptr<const TranslationManager> translation_manager,
+    UITextViewWidget(boost::shared_ptr<const BibleDatabase::TranslationManager> translation_manager,
                      boost::shared_ptr<StarredVersesModel> starred_verses_model, QWidget* parent = 0);
 
 signals:
     //! Let other widgets know that the user has starred a verse.
-    void verse_starred(boost::shared_ptr<VerseDisplay> verse);
+    void verse_starred(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
 
     //! Let other widgets know that the user has removed the star from a starred verse.
-    void verse_unstarred(boost::shared_ptr<VerseDisplay> verse);
+    void verse_unstarred(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
 
 public slots:
     //! Display a new verse.
-    void display_text(boost::shared_ptr<VerseDisplay> verse);
+    void display_text(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
 
 private slots:
     void increase_displayed_context();
@@ -45,10 +49,10 @@ private slots:
     void change_starred_verse_state();
 
 private:
-    boost::shared_ptr<const TranslationManager> m_translation_manager;
+    boost::shared_ptr<const BibleDatabase::TranslationManager> m_translation_manager;
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
     
-    boost::shared_ptr<VerseDisplay> m_displayed_verse;
+    boost::shared_ptr<BibleDatabase::VerseDisplay> m_displayed_verse;
     QLabel* m_title;
     QTextEdit* m_text;
     QToolButton* m_more_button;
