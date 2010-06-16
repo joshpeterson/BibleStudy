@@ -9,11 +9,15 @@ class QTabWidget;
 class QAction;
 class QMenu;
 
+namespace BibleDatabase
+{
+class TranslationManager;
+class VerseDisplay;
+}
+
 namespace BibleStudy
 {
 
-class TranslationManager;
-class VerseDisplay;
 class SearchResultsModel;
 class StarredVersesModel;
 class BrowseVersesModel;
@@ -34,7 +38,7 @@ class UIBibleStudyWidget : public QMainWindow
 
 public:
     //! Create a new instance of the UIBibleStudyWidget class.
-    UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager);
+    UIBibleStudyWidget(boost::shared_ptr<const BibleDatabase::TranslationManager> translation_manager);
 
 private slots:
     //! Bring the search results widget to the top of the tab widgets.

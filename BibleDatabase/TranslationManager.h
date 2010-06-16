@@ -4,8 +4,9 @@
 #include <map>
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
+#include "BibleDatabaseExporter.h"
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 
 class Translation;
@@ -17,22 +18,22 @@ class TranslationManager : private boost::noncopyable
 {
 public:
     //! Create a new instance of the TranslationManager class.
-    TranslationManager();
+    BIBLE_DATABASE_EXPORT TranslationManager();
 
     //! Add a translation to the TranslationManager.
-    void add_translation(boost::shared_ptr<const Translation> translation);
+    BIBLE_DATABASE_EXPORT void add_translation(boost::shared_ptr<const Translation> translation);
 
     //! Get the Translation with the given name.
-    boost::shared_ptr<const Translation> at(const std::string& translation_long_name) const;
+    BIBLE_DATABASE_EXPORT boost::shared_ptr<const Translation> at(const std::string& translation_long_name) const;
 
     //! Get the VerseTreeItem for the TranslationManager.  This object represents the root of the verse tree used for browsing.
-    boost::shared_ptr<VerseTreeItem> get_verse_item_tree() const;
+    BIBLE_DATABASE_EXPORT boost::shared_ptr<VerseTreeItem> get_verse_item_tree() const;
 
     //! Get the starting iterator in the collection of Translation objects.
-    TranslationIterator begin() const;
+    BIBLE_DATABASE_EXPORT TranslationIterator begin() const;
 
     //! Get the end iterator in the collection of Translation objects.
-    TranslationIterator end() const;
+    BIBLE_DATABASE_EXPORT TranslationIterator end() const;
 
 private:
     std::map<std::string, boost::shared_ptr<const Translation> > m_translations;
@@ -42,7 +43,7 @@ private:
 };
 
 //! This class represents an exception that is thrown when a Translation object of the given name is not found in the TranslationManager.
-class TranslationNotFound : std::exception
+class TranslationNotFound : public std::exception
 {
 };
 

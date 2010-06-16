@@ -1,4 +1,4 @@
-package BibleStudy;
+package BibleDatabase;
 
 message VerseBuffer
 {

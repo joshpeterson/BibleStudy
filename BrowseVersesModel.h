@@ -4,11 +4,14 @@
 #include <boost/shared_ptr.hpp>
 #include <QAbstractItemModel>
 
-namespace BibleStudy
+namespace BibleDatabase
 {
-
 class TranslationManager;
 class VerseDisplay;
+}
+
+namespace BibleStudy
+{
 
 //! This class is an implementation of a model from the Qt Model/View framework for a tree view that is used to browse the verses of multiple translations.
 class BrowseVersesModel : public QAbstractItemModel
@@ -17,7 +20,7 @@ class BrowseVersesModel : public QAbstractItemModel
 
 public:
     //! Create a new instance of the BrowseVerseModel, using a given TranslationManager.
-    BrowseVersesModel(boost::shared_ptr<const TranslationManager> translation_manager, QObject *parent = 0);
+    BrowseVersesModel(boost::shared_ptr<const BibleDatabase::TranslationManager> translation_manager, QObject *parent = 0);
 
     //! Get the data that should be displayed in the view for the given index.
     QVariant data(const QModelIndex &index, int role) const;
@@ -41,10 +44,10 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
     //! Get the VerseDisplay object corresponding to the given index in the model.
-    boost::shared_ptr<VerseDisplay> get_verse_display(const QModelIndex &index) const;
+    boost::shared_ptr<BibleDatabase::VerseDisplay> get_verse_display(const QModelIndex &index) const;
 
 private:
-    boost::shared_ptr<const TranslationManager> m_translation_manager;
+    boost::shared_ptr<const BibleDatabase::TranslationManager> m_translation_manager;
 };
 
 }

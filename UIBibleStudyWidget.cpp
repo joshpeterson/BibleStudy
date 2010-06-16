@@ -21,6 +21,7 @@
 #include "UIBrowseVersesWidget.h"
 
 using namespace BibleStudy;
+using namespace BibleDatabase;
 
 UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager) :
     m_results_model(new SearchResultsModel(translation_manager)),

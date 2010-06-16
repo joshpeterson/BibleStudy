@@ -4,12 +4,13 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "UITextViewWidget.h"
-#include "TranslationManager.h"
-#include "Translation.h"
-#include "VerseDisplay.h"
+#include "BibleDatabase/TranslationManager.h"
+#include "BibleDatabase/Translation.h"
+#include "BibleDatabase/VerseDisplay.h"
 #include "StarredVersesModel.h"
 
 using namespace BibleStudy;
+using namespace BibleDatabase;
 
 UITextViewWidget::UITextViewWidget(boost::shared_ptr<const TranslationManager> translation_manager,
                                    boost::shared_ptr<StarredVersesModel> starred_verses_model,

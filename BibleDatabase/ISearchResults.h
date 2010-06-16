@@ -4,7 +4,7 @@
 #include <vector>
 #include "VerseDisplay.h"
 
-namespace BibleStudy
+namespace BibleDatabase
 {
 
 //! This class represents an interface for accumulating translation search results.

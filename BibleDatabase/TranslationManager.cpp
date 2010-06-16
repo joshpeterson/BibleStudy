@@ -3,7 +3,7 @@
 #include "VerseTreeItem.h"
 #include "TranslationIterator.h"
 
-using namespace BibleStudy;
+using namespace BibleDatabase;
 
 TranslationManager::TranslationManager()
 {
