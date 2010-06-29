@@ -19,6 +19,7 @@ win32 {
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
 	    LIBS += "$$(CPPUNIT_DIR)\lib\cppunitd.lib"
+	    LIBS += -L"$$(BOOST_DIR)\lib"
         LIBS += -L"debug"
 	    LIBS += "BibleDatabase.lib"
      }
@@ -26,6 +27,7 @@ win32 {
 # Release mode specific settings
     build_pass:CONFIG(release, debug|release){
 	    LIBS += "$$(CPPUNIT_DIR)\lib\cppunit.lib"
+	    LIBS += -L"$$(BOOST_DIR)\lib"
         LIBS += -L"release"
 	    LIBS += "BibleDatabase.lib"
     }
