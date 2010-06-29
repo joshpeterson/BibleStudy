@@ -39,6 +39,8 @@ win32 {
     
     INCLUDEPATH += "$$(BOOST_DIR)"
     INCLUDEPATH += "$$(GOOGLE_PROTOBUF_DIR)\include"
+    
+    DEFINES += _EXPORTING
 
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
