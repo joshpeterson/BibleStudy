@@ -2,11 +2,13 @@
 #define __TRANSLATION_LOADER_BEHAVIOR_H
 
 #include <string>
+#include <boost/shared_ptr.hpp>
 #include <cppunit/extensions/HelperMacros.h>
 #include "BehaviorDrivenDesign.h"
-#include "TranslationLoader.h"
+#include "BibleDatabase/TranslationLoader.h"
 
-using namespace BibleStudy;
+using namespace BehaviorDrivenDesign;
+using namespace BibleDatabase;
 
 namespace BibleStudyBehaviors
 {
@@ -33,7 +35,24 @@ class TranslationLoaderIsCreated : public IWhen
 public:
     void occurs(const World& world)
     {
-        TranslationLoader* loader = new TranslationLoader(world.GetGiven<ExecutableDirectory>()->get_directory_name());
+        m_loader = boost::shared_ptr<TranslationLoader>(new TranslationLoader(world.GetGiven<ExecutableDirectory>()->get_directory_name()));
+    }
+
+    boost::shared_ptr<const TranslationLoader> get_loader() const
+    {
+        return m_loader;
+    }
+
+private:
+    boost::shared_ptr<TranslationLoader> m_loader;
+};
+
+class ExecutableDirectoryIsSet : public IThen
+{
+public:
+    void ensure_that(const World& world)
+    {
+        CPPUNIT_ASSERT_EQUAL(world.GetGiven<ExecutableDirectory>()->get_directory_name(), world.GetWhen<TranslationLoaderIsCreated>()->get_loader()->get_executable_directory());
     }
 };
 
@@ -58,6 +77,7 @@ public:
 
         world.Given<ExecutableDirectory>();
         world.When<TranslationLoaderIsCreated>();
+        world.Then<ExecutableDirectoryIsSet>();
     }
 };
 

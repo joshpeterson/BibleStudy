@@ -16,6 +16,7 @@ HEADERS += BibleDatabase/VerseTreeItem.h
 HEADERS += BibleDatabase/TranslationManager.h
 HEADERS += BibleDatabase/TranslationIterator.h
 HEADERS += BibleDatabase/BibleDatabaseExporter.h
+HEADERS += BibleDatabase/TranslationLoader.h
 
 SOURCES += BibleDatabase/SearchResultsSerial.cpp
 SOURCES += BibleDatabase/Translation.cpp
@@ -25,6 +26,7 @@ SOURCES += BibleDatabase/CommandPerformSearch.cpp
 SOURCES += BibleDatabase/VerseDisplay.cpp
 SOURCES += BibleDatabase/VerseTreeItem.cpp
 SOURCES += BibleDatabase/TranslationManager.cpp
+SOURCES += BibleDatabase/TranslationLoader.cpp
 
 win32 {  
     QMAKE_CXXFLAGS_DEBUG += /wd4996
