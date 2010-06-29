@@ -81,8 +81,10 @@ void UISearchResultsWidget::keyPressEvent(QKeyEvent* key_event)
 
 void UISearchResultsWidget::display_search_results(boost::shared_ptr<ISearchResults> query)
 {
+    m_filter_text->setText(QString());
     m_results_model->SetResults(query);
     m_results_view->resizeRowsToContents();
+    m_proxy_model->clear();
     update_results_status();
 }
 
