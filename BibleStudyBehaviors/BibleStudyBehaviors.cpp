@@ -5,6 +5,7 @@
 #include "TranslationLoaderBehavior.h"
 
 using namespace BibleStudyBehaviors;
+using namespace BibleDatabase;
 
 CPPUNIT_TEST_SUITE_REGISTRATION(BehaviorDrivenDesignTest);
 CPPUNIT_TEST_SUITE_REGISTRATION(TranslationLoaderBehavior);

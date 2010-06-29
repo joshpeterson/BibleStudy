@@ -1,6 +1,7 @@
 #include <iostream>
 #include "BibleDatabase/Translation.h"
 #include "BibleDatabase/TranslationManager.h"
+#include "BibleDatabase/TranslationLoader.h"
 #include "UISearchWidget.h"
 #include "SearchResultsModel.h"
 #include "UISearchResultsWidget.h"
@@ -19,20 +20,14 @@ int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
-    boost::shared_ptr<Translation> test(new Translation);
+    boost::shared_ptr<const TranslationLoader> translation_loader = boost::shared_ptr<const TranslationLoader>(new TranslationLoader(QCoreApplication::applicationDirPath().toStdString()));
 
-    //test->Import("King James Version", "KJV", "c:\\Documents and Settings\\Josh\\Desktop\\KJV.txt");
-
-    //test->Save("c:\\Documents and Settings\\Josh\\Desktop\\KJV.buf");
-
-    test->Resume("Translations/DR.buf");
-
-    boost::shared_ptr<Translation> test2(new Translation);
-    test2->Resume("Translations/KJV.buf");
-
+    boost::shared_ptr<const Translation> dr = translation_loader->create_translation("../Translations/DR.buf");
+    boost::shared_ptr<const Translation> kjv = translation_loader->create_translation("../Translations/KJV.buf");
+    
     boost::shared_ptr<TranslationManager> manager(new TranslationManager);
-    manager->add_translation(test);
-    manager->add_translation(test2);
+    manager->add_translation(dr);
+    manager->add_translation(kjv);
     
     UIBibleStudyWidget study(manager);
 
