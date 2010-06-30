@@ -42,7 +42,7 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsMode
 
     m_results_view->setShowGrid(false);
     m_results_view->setTextElideMode(Qt::ElideNone);
-    m_results_view->setSortingEnabled(true);
+    m_results_view->setSortingEnabled(false);
     m_results_view->setContextMenuPolicy(Qt::CustomContextMenu);
     
     m_proxy_model->setDynamicSortFilter(true);
@@ -81,10 +81,12 @@ void UISearchResultsWidget::keyPressEvent(QKeyEvent* key_event)
 
 void UISearchResultsWidget::display_search_results(boost::shared_ptr<ISearchResults> query)
 {
-    m_filter_text->setText(QString());
+    if (!m_filter_text->text().isEmpty())
+    {
+        m_filter_text->setText(QString());
+    }
     m_results_model->SetResults(query);
     m_results_view->resizeRowsToContents();
-    m_proxy_model->clear();
     update_results_status();
 }
 

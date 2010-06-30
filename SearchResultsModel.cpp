@@ -90,7 +90,7 @@ void SearchResultsModel::SetResults(boost::shared_ptr<const ISearchResults> resu
         {
             boost::shared_ptr<const Translation> translation = m_translation_manager->at(m_results->translation_at(index.row()));
             translation = m_translation_manager->at(m_results->translation_at(index.row()));
-            return verse_collection_to_title_and_string_wrapped(translation->get_verse(m_results->at(index.row()), 2), translation).c_str();
+            return verse_collection_to_title_and_string_wrapped(translation->get_verse(m_results->at(index.row()), 0), translation).c_str();
         }
         else
         {
