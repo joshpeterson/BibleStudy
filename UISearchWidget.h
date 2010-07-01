@@ -31,6 +31,9 @@ public:
     UISearchWidget(boost::shared_ptr<const BibleDatabase::TranslationManager> translation_manager, QWidget* parent = 0);
 
 signals:
+    //! Inform other widegst that a searcg has started.
+    void search_started(QString search_text);
+
     //! Inform other widgets that a search has finished.
     void search_complete(boost::shared_ptr<BibleDatabase::ISearchResults> query);
 

@@ -4,6 +4,7 @@
 #include "UIStarredVersesWidget.h"
 #include "StarredVersesModel.h"
 #include "BibleDatabase/VerseDisplay.h"
+#include "QtConnectHelper.h"
 
 using namespace BibleStudy;
 using namespace BibleDatabase;
@@ -14,7 +15,7 @@ UIStarredVersesWidget::UIStarredVersesWidget(boost::shared_ptr<StarredVersesMode
     m_starred_verses_view(new QListView()),
     m_starred_verses_model(starred_verses_model)
 {
-    QObject::connect(m_starred_verses_view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
+    QT_CONNECT(m_starred_verses_view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
 
     m_starred_verses_view->setModel(m_starred_verses_model.get());
 

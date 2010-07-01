@@ -64,6 +64,12 @@ signals:
     //! Signal other widgets that a new verse should be displayed.
     void verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
 
+    //! Inform other widgets that the search results filtering process has started.
+    void results_filter_started(QString filter_text);
+
+    //! Inform other widgets that the search results filtering process has completed.
+    void results_filter_completed();
+
 private:
     QTableView* m_results_view;
     QLabel* m_results_status;

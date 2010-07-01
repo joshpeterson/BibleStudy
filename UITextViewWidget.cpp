@@ -8,6 +8,7 @@
 #include "BibleDatabase/Translation.h"
 #include "BibleDatabase/VerseDisplay.h"
 #include "StarredVersesModel.h"
+#include "QtConnectHelper.h"
 
 using namespace BibleStudy;
 using namespace BibleDatabase;
@@ -27,12 +28,12 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<const TranslationManager> t
     m_prev_button(new QToolButton()),
     m_next_button(new QToolButton())
 {
-    QObject::connect(m_more_button, SIGNAL(clicked()), this, SLOT(increase_displayed_context()));
-    QObject::connect(m_less_button, SIGNAL(clicked()), this, SLOT(decrease_displayed_context()));
-    QObject::connect(m_next_button, SIGNAL(clicked()), this, SLOT(display_next_verse()));
-    QObject::connect(m_prev_button, SIGNAL(clicked()), this, SLOT(display_prev_verse()));
-    QObject::connect(m_star_button, SIGNAL(clicked()), this, SLOT(change_star_button_icon()));
-    QObject::connect(m_star_button, SIGNAL(clicked()), this, SLOT(change_starred_verse_state()));
+    QT_CONNECT(m_more_button, SIGNAL(clicked()), this, SLOT(increase_displayed_context()));
+    QT_CONNECT(m_less_button, SIGNAL(clicked()), this, SLOT(decrease_displayed_context()));
+    QT_CONNECT(m_next_button, SIGNAL(clicked()), this, SLOT(display_next_verse()));
+    QT_CONNECT(m_prev_button, SIGNAL(clicked()), this, SLOT(display_prev_verse()));
+    QT_CONNECT(m_star_button, SIGNAL(clicked()), this, SLOT(change_star_button_icon()));
+    QT_CONNECT(m_star_button, SIGNAL(clicked()), this, SLOT(change_starred_verse_state()));
 
     m_star_button->setEnabled(false);
     m_star_button->setIcon(QIcon("icons/star_off.png"));

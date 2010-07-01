@@ -10,6 +10,7 @@
 #include "BibleDatabase/CommandPerformSearch.h"
 #include "BibleDatabase/Translation.h"
 #include "BibleDatabase/TranslationIterator.h"
+#include "QtConnectHelper.h"
 
 using namespace BibleStudy;
 using namespace BibleDatabase;
@@ -20,8 +21,8 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
     m_search_button(new QPushButton(tr("Search"))),
     m_search_input_field(new QLineEdit())
 {
-    QObject::connect(m_search_button, SIGNAL(clicked()), this, SLOT(perform_search()));
-    QObject::connect(m_search_input_field, SIGNAL(returnPressed()), this, SLOT(perform_search()));
+    QT_CONNECT(m_search_button, SIGNAL(clicked()), this, SLOT(perform_search()));
+    QT_CONNECT(m_search_input_field, SIGNAL(returnPressed()), this, SLOT(perform_search()));
 
     QHBoxLayout* search_field_row = new QHBoxLayout;
     search_field_row->addWidget(m_search_input_field);
@@ -45,19 +46,25 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
 
 void UISearchWidget::perform_search()
 {
-    std::vector<std::string> selected_translations;
-
-    for (std::vector<QCheckBox*>::const_iterator it = m_translation_checkboxes.begin(); it != m_translation_checkboxes.end(); ++it)
+    if (!m_search_input_field->text().isEmpty())
     {
-        if ((*it)->isChecked())
-        {
-            selected_translations.push_back((*it)->text().toStdString());
-        }
-    }
+        emit search_started(m_search_input_field->text());
 
-    CommandPerformSearch search_command(m_translation_manager, selected_translations, m_search_input_field->text().toStdString());
-    search_command.Execute();
-    emit search_complete(search_command.get_results());
+        std::vector<std::string> selected_translations;
+
+        for (std::vector<QCheckBox*>::const_iterator it = m_translation_checkboxes.begin(); it != m_translation_checkboxes.end(); ++it)
+        {
+            if ((*it)->isChecked())
+            {
+                selected_translations.push_back((*it)->text().toStdString());
+            }
+        }
+
+        CommandPerformSearch search_command(m_translation_manager, selected_translations, m_search_input_field->text().toStdString());
+        search_command.Execute();
+
+        emit search_complete(search_command.get_results());
+    }
 }
 
 void UISearchWidget::add_translation_check_box(QHBoxLayout* translation_selection_row, boost::shared_ptr<const Translation> translation)
