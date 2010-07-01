@@ -30,6 +30,10 @@ public:
     //! Create a new instance of the UISearchWidget class.
     UISearchWidget(boost::shared_ptr<const BibleDatabase::TranslationManager> translation_manager, QWidget* parent = 0);
 
+public slots:
+    //! Display the translation check boxes in the UI
+    void display_translation_check_boxes();
+
 signals:
     //! Inform other widegst that a searcg has started.
     void search_started(QString search_text);
@@ -45,9 +49,10 @@ private:
     boost::shared_ptr<const BibleDatabase::TranslationManager> m_translation_manager;
     QPushButton* m_search_button;
     QLineEdit* m_search_input_field;
+    QHBoxLayout* m_translation_selection_row;
     std::vector<QCheckBox*> m_translation_checkboxes;
 
-    void add_translation_check_box(QHBoxLayout* translation_selection_row, boost::shared_ptr<const BibleDatabase::Translation> translation);
+    void add_translation_check_box(boost::shared_ptr<const BibleDatabase::Translation> translation);
 };
 
 }

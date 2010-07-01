@@ -27,6 +27,9 @@ public:
     UIBrowseVersesWidget(boost::shared_ptr<BrowseVersesModel> browse_model, QWidget* parent = 0);
 
 public slots:
+    //! Intialize the tree view with the browse verses model.
+    void set_browse_verses_model();
+
     //! Get the verse at the given index and emit the verse_display_changed signal for that verse.
     void display_verse_text(const QModelIndex& index);
 

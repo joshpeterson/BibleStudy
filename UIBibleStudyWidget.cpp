@@ -10,6 +10,10 @@
 #include <QMenuBar>
 #include <QKeySequence>
 #include <QMessageBox>
+#include <QTimer>
+#include "BibleDatabase/Translation.h"
+#include "BibleDatabase/TranslationManager.h"
+#include "BibleDatabase/TranslationLoader.h"
 #include "SearchResultsModel.h"
 #include "StarredVersesModel.h"
 #include "BrowseVersesModel.h"
@@ -24,7 +28,11 @@
 using namespace BibleStudy;
 using namespace BibleDatabase;
 
-UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManager> translation_manager) :
+UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> translation_manager, boost::shared_ptr<const BibleDatabase::TranslationLoader> translation_loader) :
+    m_translation_manager(translation_manager),
+    m_translation_loader(translation_loader),
+    m_translation_load_timer(new QTimer),
+    m_translation_load_timeout_ms(500),
     m_results_model(new SearchResultsModel(translation_manager)),
     m_starred_verses_model(new StarredVersesModel(translation_manager)),
     m_browse_verses_model(new BrowseVersesModel(translation_manager)),
@@ -44,21 +52,37 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManage
     this->initialize_status_bar();
     this->initialize_actions();
     this->initialize_menus();
+
+    m_translation_load_timer->start(m_translation_load_timeout_ms);
 }
 
 void UIBibleStudyWidget::connect_signals()
 {
+    // Translation loading connections
+    QT_CONNECT(m_translation_load_timer, SIGNAL(timeout()), this, SLOT(load_translations()));
+    QT_CONNECT(this, SIGNAL(translations_loaded()), m_search, SLOT(display_translation_check_boxes()));
+    QT_CONNECT(this, SIGNAL(translations_loaded()), m_browse, SLOT(set_browse_verses_model()));
+
+    // UISearchWidget connections
     QT_CONNECT(m_search, SIGNAL(search_started(QString)), this, SLOT(display_search_status_bar_message(QString)));
     QT_CONNECT(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), m_results, SLOT(display_search_results(boost::shared_ptr<BibleDatabase::ISearchResults>)));
     QT_CONNECT(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), this, SLOT(raise_results()));
     QT_CONNECT(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), this, SLOT(pop_status_bar_message()));
+
+    // UITextViewWidget connections
     QT_CONNECT(m_text, SIGNAL(verse_starred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_starred_verses, SLOT(add_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
     QT_CONNECT(m_text, SIGNAL(verse_starred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), this, SLOT(raise_starred_verses()));
     QT_CONNECT(m_text, SIGNAL(verse_unstarred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_starred_verses, SLOT(remove_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
+
+    // UISearchResultsWidget connections
     QT_CONNECT(m_results, SIGNAL(verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
     QT_CONNECT(m_results, SIGNAL(results_filter_started(QString)), this, SLOT(display_search_results_filter_status_bar_message(QString)));
     QT_CONNECT(m_results, SIGNAL(results_filter_completed()), this, SLOT(pop_status_bar_message()));
+
+    // UIBrowseVersesWidget connections
     QT_CONNECT(m_browse, SIGNAL(verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
+
+    // UIStarredVersesWidget connections
     QT_CONNECT(m_starred_verses, SIGNAL(verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
 }
 
@@ -132,18 +156,18 @@ void UIBibleStudyWidget::about()
 
 void UIBibleStudyWidget::display_search_status_bar_message(QString search_text)
 {
-    this->push_status_bar_message(tr("Searching for ") + search_text + tr("..."));
+    this->push_status_bar_message(tr("Searching for ") + search_text);
 }
 
 void UIBibleStudyWidget::display_search_results_filter_status_bar_message(QString filter_text)
 {
     if (!filter_text.isEmpty())
     {
-        this->push_status_bar_message(tr("Filtering search results based on ") + filter_text + tr("..."));
+        this->push_status_bar_message(tr("Filtering search results based on ") + filter_text);
     }
     else
     {
-        this->push_status_bar_message(tr("Removing search results filter..."));
+        this->push_status_bar_message(tr("Removing search results filter"));
     }
 }
 
@@ -164,4 +188,21 @@ void UIBibleStudyWidget::pop_status_bar_message()
     {
         this->statusBar()->clearMessage();
     }
+}
+
+void UIBibleStudyWidget::load_translations()
+{
+    m_translation_load_timer->stop();
+
+    this->push_status_bar_message(tr("Loading translation ") + tr("Douay-Rheims"));
+    boost::shared_ptr<const Translation> dr = m_translation_loader->create_translation("../Translations/DR.buf");
+    m_translation_manager->add_translation(dr);
+    this->pop_status_bar_message();
+
+    this->push_status_bar_message(tr("Loading translation ") + tr("King James Version"));
+    boost::shared_ptr<const Translation> kjv = m_translation_loader->create_translation("../Translations/KJV.buf");
+    m_translation_manager->add_translation(kjv);
+    this->pop_status_bar_message();
+
+    emit translations_loaded();
 }

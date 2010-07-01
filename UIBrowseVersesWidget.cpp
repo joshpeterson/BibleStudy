@@ -17,8 +17,6 @@ UIBrowseVersesWidget::UIBrowseVersesWidget(boost::shared_ptr<BrowseVersesModel> 
 {
     QT_CONNECT(m_browse_view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
 
-    m_browse_view->setModel(m_browse_model.get());
-
     /*BrowseVersesDelegate* browse_delegate = new BrowseVersesDelegate(this);
     m_browse_view->setItemDelegate(browse_delegate);*/
 
@@ -26,6 +24,11 @@ UIBrowseVersesWidget::UIBrowseVersesWidget(boost::shared_ptr<BrowseVersesModel> 
     layout->addWidget(m_browse_view);
 
     setLayout(layout);
+}
+
+void UIBrowseVersesWidget::set_browse_verses_model()
+{
+    m_browse_view->setModel(m_browse_model.get());
 }
 
 void UIBrowseVersesWidget::display_verse_text(const QModelIndex& index)
