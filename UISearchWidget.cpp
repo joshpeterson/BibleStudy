@@ -19,7 +19,8 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
     QWidget(parent),
     m_translation_manager(translation_manager),
     m_search_button(new QPushButton(tr("Search"))),
-    m_search_input_field(new QLineEdit())
+    m_search_input_field(new QLineEdit()),
+    m_translation_selection_row(new QHBoxLayout)
 {
     QT_CONNECT(m_search_button, SIGNAL(clicked()), this, SLOT(perform_search()));
     QT_CONNECT(m_search_input_field, SIGNAL(returnPressed()), this, SLOT(perform_search()));
@@ -28,20 +29,21 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
     search_field_row->addWidget(m_search_input_field);
     search_field_row->addWidget(m_search_button);
 
-    QHBoxLayout* translation_selection_row = new QHBoxLayout;
-
-    for (TranslationIterator it = translation_manager->begin(); it != translation_manager->end(); ++it)
-    {
-        this->add_translation_check_box(translation_selection_row, *it);
-    }
-
-    translation_selection_row->addStretch(1);
-    
     QVBoxLayout* layout = new QVBoxLayout;
 
     layout->addLayout(search_field_row);
-    layout->addLayout(translation_selection_row);
+    layout->addLayout(m_translation_selection_row);
     setLayout(layout);
+}
+
+void UISearchWidget::display_translation_check_boxes()
+{
+    for (TranslationIterator it = m_translation_manager->begin(); it != m_translation_manager->end(); ++it)
+    {
+        this->add_translation_check_box(*it);
+    }
+ 
+    m_translation_selection_row->addStretch(1);
 }
 
 void UISearchWidget::perform_search()
@@ -67,11 +69,11 @@ void UISearchWidget::perform_search()
     }
 }
 
-void UISearchWidget::add_translation_check_box(QHBoxLayout* translation_selection_row, boost::shared_ptr<const Translation> translation)
+void UISearchWidget::add_translation_check_box(boost::shared_ptr<const Translation> translation)
 {
     QCheckBox* translation_check_box = new QCheckBox(translation->get_short_name().c_str());
     translation_check_box->setCheckState(Qt::Checked);
-    translation_selection_row->addWidget(translation_check_box);
+    m_translation_selection_row->addWidget(translation_check_box);
     m_translation_checkboxes.push_back(translation_check_box);
 }
 

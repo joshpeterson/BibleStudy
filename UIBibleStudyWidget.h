@@ -9,10 +9,12 @@ class QWidget;
 class QTabWidget;
 class QAction;
 class QMenu;
+class QTimer;
 
 namespace BibleDatabase
 {
 class TranslationManager;
+class TranslationLoader;
 class VerseDisplay;
 }
 
@@ -39,7 +41,7 @@ class UIBibleStudyWidget : public QMainWindow
 
 public:
     //! Create a new instance of the UIBibleStudyWidget class.
-    UIBibleStudyWidget(boost::shared_ptr<const BibleDatabase::TranslationManager> translation_manager);
+    UIBibleStudyWidget(boost::shared_ptr<BibleDatabase::TranslationManager> translation_manager, boost::shared_ptr<const BibleDatabase::TranslationLoader> translation_loader);
 
 private slots:
     //! Bring the search results widget to the top of the tab widgets.
@@ -63,7 +65,20 @@ private slots:
     //! Pop the last status bar message off the stack, and write the new message on the top of the stack to the status bar.
     void pop_status_bar_message(); 
 
+    //! Load the translations from the bible database.
+    void load_translations();
+
+signals:
+    //! Inform other widgets that all translations have been loaded.
+    void translations_loaded();
+
 private:
+    boost::shared_ptr<BibleDatabase::TranslationManager> m_translation_manager;
+    boost::shared_ptr<const BibleDatabase::TranslationLoader> m_translation_loader;
+
+    QTimer* m_translation_load_timer;
+    const int m_translation_load_timeout_ms;
+
     boost::shared_ptr<SearchResultsModel> m_results_model;
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
     boost::shared_ptr<BrowseVersesModel> m_browse_verses_model;

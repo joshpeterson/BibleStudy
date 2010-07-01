@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "BibleDatabase/Translation.h"
 #include "BibleDatabase/TranslationManager.h"
 #include "BibleDatabase/TranslationLoader.h"
@@ -18,22 +19,23 @@ using namespace BibleDatabase;
 
 int main(int argc, char* argv[])
 {
-    QApplication app(argc, argv);
+    try
+    {
+        QApplication app(argc, argv);
 
-    boost::shared_ptr<const TranslationLoader> translation_loader = boost::shared_ptr<const TranslationLoader>(new TranslationLoader(QCoreApplication::applicationDirPath().toStdString()));
+        boost::shared_ptr<const TranslationLoader> translation_loader = boost::shared_ptr<const TranslationLoader>(new TranslationLoader(QCoreApplication::applicationDirPath().toStdString()));
+        boost::shared_ptr<TranslationManager> manager(new TranslationManager);
+        
+        UIBibleStudyWidget study(manager, translation_loader);
 
-    boost::shared_ptr<const Translation> dr = translation_loader->create_translation("../Translations/DR.buf");
-    boost::shared_ptr<const Translation> kjv = translation_loader->create_translation("../Translations/KJV.buf");
-    
-    boost::shared_ptr<TranslationManager> manager(new TranslationManager);
-    manager->add_translation(dr);
-    manager->add_translation(kjv);
-    
-    UIBibleStudyWidget study(manager);
+        study.show();
 
-    study.show();
-
-    return app.exec();
-
+        return app.exec();
+    }
+    catch (std::exception& e)
+    {
+        std::cout << "Uh-oh, something very bad happened." << std::endl;
+        std::cout << "These details might help (or they might not):\n\n" << e.what() << std::endl;
+    }
 }
 
