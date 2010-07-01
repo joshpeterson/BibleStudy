@@ -10,6 +10,7 @@ HEADERS += UIStarredVersesWidget.h
 HEADERS += StarredVersesModel.h
 HEADERS += BrowseVersesModel.h
 HEADERS += UIBrowseVersesWidget.h
+HEADERS += QtConnectHelper.h
 
 SOURCES += BibleStudy.cpp
 SOURCES += SearchResultsModel.cpp

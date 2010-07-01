@@ -19,6 +19,7 @@
 #include "UIStarredVersesWidget.h"
 #include "UITextViewWidget.h"
 #include "UIBrowseVersesWidget.h"
+#include "QtConnectHelper.h"
 
 using namespace BibleStudy;
 using namespace BibleDatabase;
@@ -47,14 +48,18 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<const TranslationManage
 
 void UIBibleStudyWidget::connect_signals()
 {
-    QObject::connect(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), m_results, SLOT(display_search_results(boost::shared_ptr<BibleDatabase::ISearchResults>)));
-    QObject::connect(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), this, SLOT(raise_results()));
-    QObject::connect(m_text, SIGNAL(verse_starred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_starred_verses, SLOT(add_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
-    QObject::connect(m_text, SIGNAL(verse_starred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), this, SLOT(raise_starred_verses()));
-    QObject::connect(m_text, SIGNAL(verse_unstarred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_starred_verses, SLOT(remove_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
-    QObject::connect(m_results, SIGNAL(verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
-    QObject::connect(m_browse, SIGNAL(verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
-    QObject::connect(m_starred_verses, SIGNAL(verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
+    QT_CONNECT(m_search, SIGNAL(search_started(QString)), this, SLOT(display_search_status_bar_message(QString)));
+    QT_CONNECT(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), m_results, SLOT(display_search_results(boost::shared_ptr<BibleDatabase::ISearchResults>)));
+    QT_CONNECT(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), this, SLOT(raise_results()));
+    QT_CONNECT(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), this, SLOT(pop_status_bar_message()));
+    QT_CONNECT(m_text, SIGNAL(verse_starred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_starred_verses, SLOT(add_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
+    QT_CONNECT(m_text, SIGNAL(verse_starred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), this, SLOT(raise_starred_verses()));
+    QT_CONNECT(m_text, SIGNAL(verse_unstarred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_starred_verses, SLOT(remove_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
+    QT_CONNECT(m_results, SIGNAL(verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
+    QT_CONNECT(m_results, SIGNAL(results_filter_started(QString)), this, SLOT(display_search_results_filter_status_bar_message(QString)));
+    QT_CONNECT(m_results, SIGNAL(results_filter_completed()), this, SLOT(pop_status_bar_message()));
+    QT_CONNECT(m_browse, SIGNAL(verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
+    QT_CONNECT(m_starred_verses, SIGNAL(verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
 }
 
 void UIBibleStudyWidget::set_font()
@@ -86,7 +91,7 @@ void UIBibleStudyWidget::initialize_widgets()
 
 void UIBibleStudyWidget::initialize_status_bar()
 {
-    this->statusBar()->showMessage(tr("Ready"));
+    this->push_status_bar_message(tr("Ready"));
 }
 
 void UIBibleStudyWidget::initialize_actions()
@@ -123,4 +128,40 @@ void UIBibleStudyWidget::raise_starred_verses()
 void UIBibleStudyWidget::about()
 {
     QMessageBox::about(this, tr("About BibleStudy"), tr("This is the About box."));
+}
+
+void UIBibleStudyWidget::display_search_status_bar_message(QString search_text)
+{
+    this->push_status_bar_message(tr("Searching for ") + search_text + tr("..."));
+}
+
+void UIBibleStudyWidget::display_search_results_filter_status_bar_message(QString filter_text)
+{
+    if (!filter_text.isEmpty())
+    {
+        this->push_status_bar_message(tr("Filtering search results based on ") + filter_text + tr("..."));
+    }
+    else
+    {
+        this->push_status_bar_message(tr("Removing search results filter..."));
+    }
+}
+
+void UIBibleStudyWidget::push_status_bar_message(QString message)
+{
+    m_status_bar_messages.push(message);
+    this->statusBar()->showMessage(message);
+}
+
+void UIBibleStudyWidget::pop_status_bar_message()
+{
+    if (!m_status_bar_messages.empty())
+    {
+        m_status_bar_messages.pop();
+        this->statusBar()->showMessage(m_status_bar_messages.top());
+    }
+    else
+    {
+        this->statusBar()->clearMessage();
+    }
 }

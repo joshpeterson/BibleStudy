@@ -16,6 +16,7 @@
 #include "UISearchResultsWidget.h"
 #include "SearchResultsModel.h"
 #include "BibleDatabase/VerseDisplay.h"
+#include "QtConnectHelper.h"
 
 using namespace BibleStudy;
 using namespace BibleDatabase;
@@ -31,10 +32,10 @@ UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsMode
     m_proxy_model(new QSortFilterProxyModel(this)),
     m_results_model(results_model)
 {
-    QObject::connect(m_results_view, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(display_verse_text(const QModelIndex&)));
-    QObject::connect(m_results_view, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(display_results_context_menu(const QPoint&)));
-    QObject::connect(m_filter_text, SIGNAL(textChanged(QString)), this, SLOT(update_search_results_filter_delay_timer()));
-    QObject::connect(m_filter_delay_timer, SIGNAL(timeout()), this, SLOT(change_search_results_filter()));
+    QT_CONNECT(m_results_view, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(display_verse_text(const QModelIndex&)));
+    QT_CONNECT(m_results_view, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(display_results_context_menu(const QPoint&)));
+    QT_CONNECT(m_filter_text, SIGNAL(textChanged(QString)), this, SLOT(update_search_results_filter_delay_timer()));
+    QT_CONNECT(m_filter_delay_timer, SIGNAL(timeout()), this, SLOT(change_search_results_filter()));
 
     QHeaderView* header = m_results_view->horizontalHeader();
     header->setResizeMode(QHeaderView::ResizeToContents);
@@ -105,10 +106,14 @@ void UISearchResultsWidget::update_search_results_filter_delay_timer()
 
 void UISearchResultsWidget::change_search_results_filter()
 {
+    emit results_filter_started(m_filter_text->text());
+
     m_filter_delay_timer->stop();
     m_proxy_model->setFilterRegExp(QRegExp(m_filter_text->text()));
     m_results_view->resizeRowsToContents();
     update_results_status();
+
+    emit results_filter_completed();
 }
 
 void UISearchResultsWidget::copy_selected_search_results()

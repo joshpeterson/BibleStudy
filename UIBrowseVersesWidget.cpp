@@ -4,6 +4,7 @@
 #include <QLabel>
 #include "BrowseVersesModel.h"
 #include "BibleDatabase/VerseDisplay.h"
+#include "QtConnectHelper.h"
 //#include "BrowseVersesDelegate.h"
 
 using namespace BibleStudy;
@@ -14,7 +15,7 @@ UIBrowseVersesWidget::UIBrowseVersesWidget(boost::shared_ptr<BrowseVersesModel> 
     m_browse_view(new QTreeView()),
     m_browse_model(browse_model)
 {
-    QObject::connect(m_browse_view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
+    QT_CONNECT(m_browse_view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(display_verse_text(QModelIndex)));
 
     m_browse_view->setModel(m_browse_model.get());
 

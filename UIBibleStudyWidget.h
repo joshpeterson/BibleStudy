@@ -1,6 +1,7 @@
 #ifndef __UI_BIBLE_STUDY_WIDGET
 #define __UI_BIBLE_STUDY_WIDGET
 
+#include <stack>
 #include <QMainWindow>
 #include <boost/shared_ptr.hpp>
 
@@ -50,6 +51,18 @@ private slots:
     //! Show the About box for the application.
     void about();
 
+    //! Display a specific status bar message when a search starts.
+    void display_search_status_bar_message(QString search_text);
+
+    //! Display a specific status bar message when a search results filter starts.
+    void display_search_results_filter_status_bar_message(QString filter_text);
+
+    //! Put the given message on the status bar and add it to the status bar message stack.
+    void push_status_bar_message(QString message);
+
+    //! Pop the last status bar message off the stack, and write the new message on the top of the stack to the status bar.
+    void pop_status_bar_message(); 
+
 private:
     boost::shared_ptr<SearchResultsModel> m_results_model;
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
@@ -68,6 +81,8 @@ private:
 
     QMenu* m_file_menu;
     QMenu* m_help_menu;
+
+    std::stack<QString> m_status_bar_messages;
 
     void connect_signals();
     void set_font();
