@@ -4,6 +4,7 @@ CONFIG += console qt thread exceptions stl debug_and_release
 HEADERS += BibleStudyBehaviors/BehaviorDrivenDesign.h
 HEADERS += BibleStudyBehaviors/BehaviorDrivenDesignTest.h
 HEADERS += BibleStudyBehaviors/TranslationLoaderBehavior.h
+HEADERS += BibleStudyBehaviors/TranslationBehavior.h
 
 SOURCES += BibleStudyBehaviors/BibleStudyBehaviors.cpp
 
