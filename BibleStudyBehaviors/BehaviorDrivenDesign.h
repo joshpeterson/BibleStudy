@@ -32,6 +32,14 @@ public:
 class World
 {
 public:
+    World() {}
+
+    World(const World& other)
+    {
+        std::copy(other.m_givens.begin(), other.m_givens.end(), std::back_inserter(m_givens));
+        std::copy(other.m_whens.begin(), other.m_whens.end(), std::back_inserter(m_whens));
+    }
+
     template <typename GivenType>
     World& Given()
     {
@@ -39,6 +47,26 @@ public:
         if (!current_given)
         {
             boost::shared_ptr<IGiven> given = boost::shared_ptr<IGiven>(new GivenType());
+            given->setup(*this);
+            m_givens.push_back(given);
+
+            return *this;
+        }
+
+        GivenType given_error;
+        std::stringstream error_message;
+        error_message << "A given of type " << typeid(given_error).name() << "already exists";
+
+        throw std::logic_error(error_message.str().c_str());
+    }
+
+    template <typename GivenType, typename GivenTypeConstructorArugmentType>
+    World& Given(GivenTypeConstructorArugmentType argument)
+    {
+        const GivenType* current_given = this->FindGiven<GivenType>();
+        if (!current_given)
+        {
+            boost::shared_ptr<IGiven> given = boost::shared_ptr<IGiven>(new GivenType(argument));
             given->setup(*this);
             m_givens.push_back(given);
 
@@ -88,6 +116,26 @@ public:
         throw std::logic_error(error_message.str().c_str());
     }
 
+    template <typename WhenType, typename WhenTypeConstructorArgumentType>
+    World& When(WhenTypeConstructorArgumentType argument)
+    {
+        const WhenType* current_when = this->FindWhen<WhenType>();
+        if (!current_when)
+        {
+            boost::shared_ptr<IWhen> when = boost::shared_ptr<IWhen>(new WhenType(argument));
+            when->occurs(*this);
+            m_whens.push_back(when);
+
+            return *this;
+        }
+
+        WhenType when_error;
+        std::stringstream error_message;
+        error_message << "A when of type " << typeid(when_error).name() << "already exists";
+
+        throw std::logic_error(error_message.str().c_str());
+    }
+
     template<typename WhenType>
     const WhenType* GetWhen() const
     {
@@ -108,6 +156,15 @@ public:
     World& Then()
     {
         boost::shared_ptr<IThen> then = boost::shared_ptr<IThen>(new ThenType());
+        then->ensure_that(*this);
+        
+        return *this;
+    }
+
+    template <typename ThenType, typename ThenTypeConstructorArgumentType>
+    World& Then(ThenTypeConstructorArgumentType argument)
+    {
+        boost::shared_ptr<IThen> then = boost::shared_ptr<IThen>(new ThenType(argument));
         then->ensure_that(*this);
         
         return *this;

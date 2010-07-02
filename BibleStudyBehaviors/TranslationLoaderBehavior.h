@@ -31,7 +31,7 @@ private:
     std::string m_directory_name;
 };
 
-class NonExistentExecutableDirectory : public ExecutableDirectory
+class NonExistentExecutableDirectory : public IGiven
 {
 public:
     void setup(const World& /*world*/)
