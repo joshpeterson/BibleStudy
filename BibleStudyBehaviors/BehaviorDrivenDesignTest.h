@@ -31,6 +31,28 @@ private:
     bool m_setup_called;
 };
 
+class TestGivenWithOneArgumentConstructor : public IGiven
+{
+public:
+    TestGivenWithOneArgumentConstructor() {}
+
+    TestGivenWithOneArgumentConstructor(int argument) : m_argument(argument)
+    {
+    }
+
+    void setup(const World&)
+    {
+    }
+
+    int get_argument() const
+    {
+        return m_argument;
+    }
+
+private:
+    int m_argument;
+};
+
 class EmptyTestGiven : public IGiven
 {
     void setup(const World&)
@@ -66,6 +88,28 @@ class EmptyTestWhen : public IWhen
     }
 };
 
+class TestWhenWithOneArgumentConstructor : public IWhen
+{
+public:
+    TestWhenWithOneArgumentConstructor() {}
+
+    TestWhenWithOneArgumentConstructor(int argument) : m_argument(argument)
+    {
+    }
+
+    void occurs(const World&)
+    {
+    }
+
+    int get_argument() const
+    {
+        return m_argument;
+    }
+
+private:
+    int m_argument;
+};
+
 class TestThen : public IThen
 {
 public:
@@ -87,6 +131,28 @@ private:
     bool m_ensure_that_called;
 };
 
+class TestThenWithOneArgumentConstructor : public IThen
+{
+public:
+    TestThenWithOneArgumentConstructor() {}
+
+    TestThenWithOneArgumentConstructor(int argument) : m_argument(argument)
+    {
+    }
+
+    void ensure_that(const World&)
+    {
+    }
+
+    int get_argument() const
+    {
+        return m_argument;
+    }
+
+private:
+    int m_argument;
+};
+
 class BehaviorDrivenDesignTest : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(BehaviorDrivenDesignTest);
@@ -97,6 +163,10 @@ class BehaviorDrivenDesignTest : public CppUnit::TestFixture
     CPPUNIT_TEST_EXCEPTION(testGivenThrowsLogicErrorWhenInvalidGivenRequested, std::logic_error);
     CPPUNIT_TEST_EXCEPTION(testWhenThrowsLogicErrorWhenTwoGivensOfTheSameTypeAreDefined, std::logic_error);
     CPPUNIT_TEST_EXCEPTION(testWhenThrowsLogicErrorWhenInvalidGivenRequested, std::logic_error);
+    CPPUNIT_TEST(testWorldCopyConstructor);
+    CPPUNIT_TEST(testGivenWithOneArgumentConstructor);
+    CPPUNIT_TEST(testWhenWithOneArgumentConstructor);
+    CPPUNIT_TEST(testThenWithOneArgumentConstructor);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -115,7 +185,7 @@ public:
         world.Given<TestGiven>();
 
         const TestGiven* testGiven = world.GetGiven<TestGiven>();
-	    CPPUNIT_ASSERT(testGiven->get_setup_called() == true);
+	    CPPUNIT_ASSERT_EQUAL(true, testGiven->get_setup_called());
     }
 
     void testWhenOccursCalled()
@@ -125,7 +195,7 @@ public:
         world.When<TestWhen>();
 
         const TestWhen* testWhen = world.GetWhen<TestWhen>();
-	    CPPUNIT_ASSERT(testWhen->get_occurs_called() == true);
+	    CPPUNIT_ASSERT_EQUAL(true, testWhen->get_occurs_called());
     }
 
     void testThenEnsureThatCalled()
@@ -165,6 +235,41 @@ public:
 
         world.When<TestWhen>();
         world.GetWhen<EmptyTestWhen>();
+    }
+
+    void testWorldCopyConstructor()
+    {
+        World world;
+
+        world.Given<TestGiven>();
+        world.When<TestWhen>();
+
+        World worldCopy(world);
+        CPPUNIT_ASSERT(worldCopy.GetGiven<TestGiven>() != NULL);
+        CPPUNIT_ASSERT(worldCopy.GetWhen<TestWhen>() != NULL);
+    }
+
+    void testGivenWithOneArgumentConstructor()
+    {
+        World world;
+
+        world.Given<TestGivenWithOneArgumentConstructor, int>(42);
+        CPPUNIT_ASSERT_EQUAL(42, world.GetGiven<TestGivenWithOneArgumentConstructor>()->get_argument());
+    }
+
+    void testWhenWithOneArgumentConstructor()
+    {
+        World world;
+
+        world.When<TestWhenWithOneArgumentConstructor, int>(42);
+        CPPUNIT_ASSERT_EQUAL(42, world.GetWhen<TestWhenWithOneArgumentConstructor>()->get_argument());
+    }
+
+    void testThenWithOneArgumentConstructor()
+    {
+        World world;
+
+        world.Then<TestThenWithOneArgumentConstructor, int>(42);
     }
 };
 
