@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Verse.h"
-#include "ISearchResults.h"
 
 using namespace BibleDatabase;
 
@@ -14,9 +13,9 @@ Verse::Verse(const std::string& book, int chapter, int verse, const std::string&
 {
 }
 
-bool Verse::match(boost::shared_ptr<ISearchResults> search_string) const
+    bool Verse::match(std::string search_string) const
 {
-    return m_text.find(search_string->get_search_string()) != std::string::npos;
+    return m_text.find(search_string) != std::string::npos;
 }
 
 void Verse::display(std::ostream& out) const

@@ -14,15 +14,44 @@ using namespace BibleDatabase;
 
 void Translation::search(boost::shared_ptr<ISearchResults> query) const
 {
+    std::vector<std::string> search_terms;
+    boost::algorithm::split(search_terms, query->get_search_string(), boost::algorithm::is_any_of(" "));
+
+    std::vector<std::string>::const_iterator search_term = search_terms.begin();
+
+    // Prime the matching verses vector by searching for the first term in the entire translation.
     std::vector<boost::shared_ptr<Verse> >::const_iterator begin = m_verses.begin();
     std::vector<boost::shared_ptr<Verse> >::const_iterator end = m_verses.end();
 
-    for (std::vector<boost::shared_ptr<Verse> >::const_iterator it = begin; it != end; ++it)
+    std::vector<int> matching_verses;
+    for (std::vector<boost::shared_ptr<Verse> >::const_iterator verse = begin; verse != end; ++verse)
     {
-        if ((*it)->match(query))
+        if ((*verse)->match(*search_term))
         {
-            query->add_matching_verse(m_long_name, (*it)->get_unique_id());
+            matching_verses.push_back((*verse)->get_unique_id());
         }
+    }
+
+
+    // Now search only the primed results for the rest of the search terms (if any exist).
+    for (++search_term; search_term != search_terms.end(); ++search_term)
+    {
+        std::vector<int> filtered_matching_verses;
+        for (std::vector<int>::const_iterator verse_id = matching_verses.begin(); verse_id != matching_verses.end(); ++verse_id)
+        {
+            if (m_verses[*verse_id]->match(*search_term))
+            {
+                filtered_matching_verses.push_back(*verse_id);
+            }
+        }
+
+        matching_verses = filtered_matching_verses;
+    }
+
+    // Finally add the verses that matched all of the terms to the results.
+    for (std::vector<int>::const_iterator verse_id = matching_verses.begin(); verse_id != matching_verses.end(); ++verse_id)
+    {
+        query->add_matching_verse(m_long_name, *verse_id);
     }
 }
 

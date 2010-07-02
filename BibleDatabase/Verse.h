@@ -10,8 +10,6 @@
 namespace BibleDatabase
 {
 
-class ISearchResults;
-
 //! This class represents a single verse in a Translation object.
 class Verse : private boost::noncopyable
 {
@@ -19,8 +17,8 @@ public:
     //! Create a new instance of the Verse class.
     BIBLE_DATABASE_EXPORT Verse(const std::string& book, int chapter, int verse, const std::string& text, int unique_verse_id);
 
-    //! Determine whether or not this verse matches the given query.
-    BIBLE_DATABASE_EXPORT virtual bool match(boost::shared_ptr<ISearchResults> search_string) const;
+    //! Determine whether or not this verse matches the given string.
+    BIBLE_DATABASE_EXPORT virtual bool match(std::string search_string) const;
 
     //! Get the ID for this verse, which is unique to the Translation where the verse lives.
     BIBLE_DATABASE_EXPORT virtual int get_unique_id() const {return m_unique_id; }
