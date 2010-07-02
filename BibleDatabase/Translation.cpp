@@ -31,11 +31,19 @@ std::vector<boost::shared_ptr<const Verse> > Translation::get_verse(int unique_i
     int requested_lower_bound = unique_id - num_entries_context;
     int lower_bound =  requested_lower_bound >= 0 ? requested_lower_bound : 0;
  
+    int last_verse_index = m_verses.size() - 1;
+
     int requested_upper_bound = unique_id + num_entries_context + 1;
-    int upper_bound = requested_upper_bound <= static_cast<int>(m_verses.size()-1) ? requested_upper_bound : (m_verses.size()-1);
+    int upper_bound = requested_upper_bound <= last_verse_index ? requested_upper_bound : last_verse_index;
 
     std::vector<boost::shared_ptr<const Verse> > verses;
+    
     std::copy(&m_verses[lower_bound], &m_verses[upper_bound], std::back_inserter(verses));
+
+    if (unique_id == last_verse_index)
+    {
+        verses.push_back(m_verses[last_verse_index]);
+    }
 
     return verses;
 }
