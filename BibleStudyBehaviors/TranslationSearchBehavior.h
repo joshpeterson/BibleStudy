@@ -52,21 +52,20 @@ class TranslationSearchBehavior : public CppUnit::TestFixture
     CPPUNIT_TEST_SUITE_END();
 
 public:
-    void setUp()
-    {
-        m_world.Given<TestTranslation>();
-    }
-
     void shouldTreatSpacesInSearchStringAsAndOperators()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<SearchForTwoWords>();
         world.Then<CorrectResultsAreReturned>();
     }
 
 private:
-    World m_world;
+    const World& get_world_with_test_translation_given()
+    {
+        static WorldWithTestTranslationGiven world_with_test_translation;
+        return world_with_test_translation.get_world();
+    }
 };
 
 }

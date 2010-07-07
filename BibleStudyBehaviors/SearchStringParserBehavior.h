@@ -16,7 +16,7 @@ class DefaultSearchStringParser : public IGiven
 public:
     void setup(const World&)
     {
-        m_search_string_parser = boost::shared_ptr<SearchStringParserBehavior>(new SearchStringParser());
+        m_search_string_parser = boost::shared_ptr<SearchStringParser>(new SearchStringParser());
     }
 
     boost::shared_ptr<SearchStringParser> get_search_string_parser() const

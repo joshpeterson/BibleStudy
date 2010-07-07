@@ -127,14 +127,9 @@ class TranslationFirstAndLastVerseBehavior : public CppUnit::TestFixture
     CPPUNIT_TEST_SUITE_END();
 
 public:
-    void setUp()
-    {
-        m_world.Given<TestTranslation>();
-    }
-
     void shouldGetSingleFirstVerseCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithNoContext, int>(0);
         world.Then<VerseIsCorrectWithNoContext>(0);
@@ -142,7 +137,7 @@ public:
 
     void shouldGetSingleMiddleVerseCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithNoContext, int>(1024);
         world.Then<VerseIsCorrectWithNoContext>(1024);
@@ -150,7 +145,7 @@ public:
 
     void shouldGetSingleSecondToLastVerseCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithNoContext, int>(2739);
         world.Then<VerseIsCorrectWithNoContext>(2739);
@@ -158,7 +153,7 @@ public:
 
     void shouldGetSingleLastVerseCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithNoContext, int>(2740);
         world.Then<VerseIsCorrectWithNoContext>(2740);
@@ -166,7 +161,7 @@ public:
 
     void shouldGetFirstVerseWithContextCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithContext, int>(0);
         world.Then<VerseIsCorrectWithNoContextWithContext>(0);
@@ -174,7 +169,7 @@ public:
 
     void shouldGetMiddleVerseWithContextCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithContext, int>(816);
         world.Then<VerseIsCorrectWithNoContextWithContext>(816);
@@ -182,14 +177,18 @@ public:
 
     void shouldGetLastVerseWithContextCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithContext, int>(2740);
         world.Then<VerseIsCorrectWithNoContextWithContext>(2740);
     }
 
 private:
-    World m_world;
+    const World& get_world_with_test_translation_given()
+    {
+        static WorldWithTestTranslationGiven world_with_test_translation;
+        return world_with_test_translation.get_world();
+    }
 };
 
 }

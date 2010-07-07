@@ -32,6 +32,23 @@ private:
     boost::shared_ptr<Translation> m_translation;
 };
 
+class WorldWithTestTranslationGiven
+{
+public:
+    WorldWithTestTranslationGiven()
+    {
+        m_world.Given<TestTranslation>();
+    }
+
+    const World& get_world() const
+    {
+        return m_world;
+    }
+
+private:
+    World m_world;
+};
+
 }
 
 #endif // __TRANSLATION_BEHAVIOR_GIVENS

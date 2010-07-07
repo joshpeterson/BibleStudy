@@ -1,13 +1,15 @@
 #ifndef __SEARCH_STRING_PARSER_H
 #define __SEARCH_STRING_PARSER_H
 
+#include "BibleDatabaseExporter.h"
+
 namespace BibleDatabase
 {
 
 class SearchStringParser
 {
 public:
-    SearchStringParser();
+    BIBLE_DATABASE_EXPORT SearchStringParser();
 };
 
 }
