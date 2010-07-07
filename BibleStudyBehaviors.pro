@@ -7,6 +7,7 @@ HEADERS += BibleStudyBehaviors/TranslationLoaderBehavior.h
 HEADERS += BibleStudyBehaviors/TranslationBehaviorGivens.h
 HEADERS += BibleStudyBehaviors/TranslationFirstAndLastVerseBehavior.h
 HEADERS += BibleStudyBehaviors/TranslationSearchBehavior.h
+HEADERS += BibleStudyBehaviors/SearchStringParserBehavior.h
 
 SOURCES += BibleStudyBehaviors/BibleStudyBehaviors.cpp
 
