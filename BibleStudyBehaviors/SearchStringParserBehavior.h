@@ -64,6 +64,23 @@ private:
     std::vector<std::string> m_search_terms;
 };
 
+class SearchStringHasQuotedAndUnquotedStrings : public IWhen
+{
+public:
+    void occurs(const World& world)
+    {
+        m_search_terms = world.GetGiven<DefaultSearchStringParser>()->get_search_string_parser()->parse("test \"Foo bar\" yes");
+    }
+
+    const std::vector<std::string>& get_search_terms() const
+    {
+        return m_search_terms;
+    }
+
+private:
+    std::vector<std::string> m_search_terms;
+};
+
 class TwoValidSearchTermsAreReturned : public IThen
 {
 public:
@@ -87,11 +104,25 @@ public:
     }
 };
 
+class ThreeValidSearchTermsAreReturned : public IThen
+{
+public:
+    void ensure_that(const World& world)
+    {
+        std::vector<std::string> search_terms = world.GetWhen<SearchStringHasQuotedAndUnquotedStrings>()->get_search_terms();
+        CPPUNIT_ASSERT_EQUAL(3, static_cast<int>(search_terms.size()));
+        CPPUNIT_ASSERT_EQUAL(std::string("test"), search_terms[0]);
+        CPPUNIT_ASSERT_EQUAL(std::string("Foo bar"), search_terms[1]);
+        CPPUNIT_ASSERT_EQUAL(std::string("yes"), search_terms[2]);
+    }
+};
+
 class SearchStringParserBehavior : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(SearchStringParserBehavior);
     CPPUNIT_TEST(shouldTreatSpacesInSearchStringAsAndOperators);
     CPPUNIT_TEST(shouldTreatQuotedStringsInSearchStringAsOneTerm);
+    CPPUNIT_TEST(shouldParseStringWithQuotedAndUnquotedStrings);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -111,6 +142,15 @@ public:
         world.Given<DefaultSearchStringParser>();
         world.When<SearchStringIsOneQuotedString>();
         world.Then<OneValidSearchTermIsReturned>();
+    }
+
+    void shouldParseStringWithQuotedAndUnquotedStrings()
+    {
+        World world;
+
+        world.Given<DefaultSearchStringParser>();
+        world.When<SearchStringHasQuotedAndUnquotedStrings>();
+        world.Then<ThreeValidSearchTermsAreReturned>();
     }
 };
 
