@@ -12,6 +12,7 @@ std::vector<std::string> SearchStringParser::parse(std::string search_string) co
     
     bool start_new_term = true;
     bool in_quoted_string = false;
+    bool quoted_string_just_completed = false;
     std::string::const_iterator start_of_term;
     std::string::const_iterator end_of_term;
 
@@ -27,19 +28,22 @@ std::vector<std::string> SearchStringParser::parse(std::string search_string) co
                 std::string term = std::string(start_of_term, end_of_term);
                 search_terms.push_back(term);
                 start_new_term = true;
+                quoted_string_just_completed = true;
             }
 
             in_quoted_string = !in_quoted_string;
         }
         else if (*character == ' ')
         {
-            if (!in_quoted_string)
+            if (!in_quoted_string && !quoted_string_just_completed)
             {
                 end_of_term = character;
                 std::string term = std::string(start_of_term, end_of_term);
                 search_terms.push_back(term);
                 start_new_term = true;
             }
+            
+            quoted_string_just_completed = false;
         }
         else if ((character + 1) == end_of_search_string)
         {
@@ -50,12 +54,17 @@ std::vector<std::string> SearchStringParser::parse(std::string search_string) co
                 search_terms.push_back(term);
                 break;
             }
+            
+            quoted_string_just_completed = false;
         }
         else if (start_new_term)
         {
             start_of_term = character;
             start_new_term = false;
+            
+            quoted_string_just_completed = false;
         }
+
     }
     
     return search_terms;

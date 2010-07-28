@@ -30,12 +30,16 @@ private:
     boost::shared_ptr<SearchStringParser> m_search_string_parser;
 };
 
-class SearchStringHasTwoWords : public IWhen
+class SearchStringIs : public IWhen
 {
 public:
+    SearchStringIs() {}
+
+    SearchStringIs(std::string search_string) : m_search_string(search_string) {}
+
     void occurs(const World& world)
     {
-        m_search_terms = world.GetGiven<DefaultSearchStringParser>()->get_search_string_parser()->parse("Foo bar");
+        m_search_terms = world.GetGiven<DefaultSearchStringParser>()->get_search_string_parser()->parse(m_search_string);
     }
 
     const std::vector<std::string>& get_search_terms() const
@@ -44,77 +48,34 @@ public:
     }
 
 private:
+    std::string m_search_string;
     std::vector<std::string> m_search_terms;
 };
 
-class SearchStringIsOneQuotedString : public IWhen
+class ValidSearchTermsAreReturned : public IThen
 {
 public:
-    void occurs(const World& world)
-    {
-        m_search_terms = world.GetGiven<DefaultSearchStringParser>()->get_search_string_parser()->parse("\"Foo bar\"");
-    }
+    ValidSearchTermsAreReturned() {}
 
-    const std::vector<std::string>& get_search_terms() const
+    ValidSearchTermsAreReturned(std::vector<std::string> expected_search_terms) : m_expected_search_terms(expected_search_terms) {}
+
+    void ensure_that(const World& world)
     {
-        return m_search_terms;
+        std::vector<std::string> actual_search_terms = world.GetWhen<SearchStringIs>()->get_search_terms();
+
+        CPPUNIT_ASSERT_EQUAL(m_expected_search_terms.size(), actual_search_terms.size());
+
+        std::vector<std::string>::const_iterator expected_term = m_expected_search_terms.begin();
+        std::vector<std::string>::const_iterator actual_term = actual_search_terms.begin();
+
+        for (; expected_term != m_expected_search_terms.end(); ++expected_term, ++actual_term)
+        {
+            CPPUNIT_ASSERT_EQUAL(*expected_term, *actual_term);
+        }
     }
 
 private:
-    std::vector<std::string> m_search_terms;
-};
-
-class SearchStringHasQuotedAndUnquotedStrings : public IWhen
-{
-public:
-    void occurs(const World& world)
-    {
-        m_search_terms = world.GetGiven<DefaultSearchStringParser>()->get_search_string_parser()->parse("test \"Foo bar\" yes");
-    }
-
-    const std::vector<std::string>& get_search_terms() const
-    {
-        return m_search_terms;
-    }
-
-private:
-    std::vector<std::string> m_search_terms;
-};
-
-class TwoValidSearchTermsAreReturned : public IThen
-{
-public:
-    void ensure_that(const World& world)
-    {
-        std::vector<std::string> search_terms = world.GetWhen<SearchStringHasTwoWords>()->get_search_terms();
-        CPPUNIT_ASSERT_EQUAL(2, static_cast<int>(search_terms.size()));
-        CPPUNIT_ASSERT_EQUAL(std::string("Foo"), search_terms[0]);
-        CPPUNIT_ASSERT_EQUAL(std::string("bar"), search_terms[1]);
-    }
-};
-
-class OneValidSearchTermIsReturned : public IThen
-{
-public:
-    void ensure_that(const World& world)
-    {
-        std::vector<std::string> search_terms = world.GetWhen<SearchStringIsOneQuotedString>()->get_search_terms();
-        CPPUNIT_ASSERT_EQUAL(1, static_cast<int>(search_terms.size()));
-        CPPUNIT_ASSERT_EQUAL(std::string("Foo bar"), search_terms[0]);
-    }
-};
-
-class ThreeValidSearchTermsAreReturned : public IThen
-{
-public:
-    void ensure_that(const World& world)
-    {
-        std::vector<std::string> search_terms = world.GetWhen<SearchStringHasQuotedAndUnquotedStrings>()->get_search_terms();
-        CPPUNIT_ASSERT_EQUAL(3, static_cast<int>(search_terms.size()));
-        CPPUNIT_ASSERT_EQUAL(std::string("test"), search_terms[0]);
-        CPPUNIT_ASSERT_EQUAL(std::string("Foo bar"), search_terms[1]);
-        CPPUNIT_ASSERT_EQUAL(std::string("yes"), search_terms[2]);
-    }
+    std::vector<std::string> m_expected_search_terms;
 };
 
 class SearchStringParserBehavior : public CppUnit::TestFixture
@@ -123,6 +84,8 @@ class SearchStringParserBehavior : public CppUnit::TestFixture
     CPPUNIT_TEST(shouldTreatSpacesInSearchStringAsAndOperators);
     CPPUNIT_TEST(shouldTreatQuotedStringsInSearchStringAsOneTerm);
     CPPUNIT_TEST(shouldParseStringWithQuotedAndUnquotedStrings);
+    CPPUNIT_TEST(shouldParseStringWithConsecutiveQuotedStrings);
+    CPPUNIT_TEST(shouldRemoveLeadingAndTrailingWhitespace);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -130,27 +93,66 @@ public:
     {
         World world;
 
+        std::vector<std::string> expected_search_terms;
+        expected_search_terms.push_back("Foo");
+        expected_search_terms.push_back("bar");
+        expected_search_terms.push_back("yes");
+        expected_search_terms.push_back("no");
+
         world.Given<DefaultSearchStringParser>();
-        world.When<SearchStringHasTwoWords>();
-        world.Then<TwoValidSearchTermsAreReturned>();
+        world.When<SearchStringIs>("Foo bar yes no");
+        world.Then<ValidSearchTermsAreReturned>(expected_search_terms);
     }
 
     void shouldTreatQuotedStringsInSearchStringAsOneTerm()
     {
         World world;
 
+        std::vector<std::string> expected_search_terms;
+        expected_search_terms.push_back("Foo bar");
+
         world.Given<DefaultSearchStringParser>();
-        world.When<SearchStringIsOneQuotedString>();
-        world.Then<OneValidSearchTermIsReturned>();
+        world.When<SearchStringIs>("\"Foo bar\"");
+        world.Then<ValidSearchTermsAreReturned>(expected_search_terms);
     }
 
     void shouldParseStringWithQuotedAndUnquotedStrings()
     {
         World world;
 
+        std::vector<std::string> expected_search_terms;
+        expected_search_terms.push_back("test");
+        expected_search_terms.push_back("Foo bar");
+        expected_search_terms.push_back("yes");
+
         world.Given<DefaultSearchStringParser>();
-        world.When<SearchStringHasQuotedAndUnquotedStrings>();
-        world.Then<ThreeValidSearchTermsAreReturned>();
+        world.When<SearchStringIs>("test \"Foo bar\" yes");
+        world.Then<ValidSearchTermsAreReturned>(expected_search_terms);
+    }
+
+    void shouldParseStringWithConsecutiveQuotedStrings()
+    {
+        World world;
+
+        std::vector<std::string> expected_search_terms;
+        expected_search_terms.push_back("Foo bar");
+        expected_search_terms.push_back("yes no");
+
+        world.Given<DefaultSearchStringParser>();
+        world.When<SearchStringIs>("\"Foo bar\"\"yes no\"");
+        world.Then<ValidSearchTermsAreReturned>(expected_search_terms);
+    }
+
+    void shouldRemoveLeadingAndTrailingWhitespace()
+    {
+        World world;
+
+        std::vector<std::string> expected_search_terms;
+        expected_search_terms.push_back("Foo bar");
+
+        world.Given<DefaultSearchStringParser>();
+        world.When<SearchStringIs>("   \"Foo bar\"     ");
+        world.Then<ValidSearchTermsAreReturned>(expected_search_terms);
     }
 };
 
