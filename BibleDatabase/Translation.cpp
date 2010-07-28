@@ -9,13 +9,15 @@
 #include "Verse.h"
 #include "TranslationBufferNoWarnings.pb.h"
 #include "VerseTreeItem.h"
+#include "SearchStringParser.h"
 
 using namespace BibleDatabase;
 
 void Translation::search(boost::shared_ptr<ISearchResults> query) const
 {
-    std::vector<std::string> search_terms;
-    boost::algorithm::split(search_terms, query->get_search_string(), boost::algorithm::is_any_of(" "));
+    SearchStringParser parser;
+
+    std::vector<std::string> search_terms = parser.parse(query->get_search_string());
 
     std::vector<std::string>::const_iterator search_term = search_terms.begin();
 
