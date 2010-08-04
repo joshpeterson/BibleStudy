@@ -13,22 +13,31 @@
 
 using namespace BibleDatabase;
 
-void Translation::search(boost::shared_ptr<ISearchResults> query) const
+void Translation::search(boost::shared_ptr<ISearchResults> query, SearchOption search_option) const
 {
-    SearchStringParser parser;
+    boost::shared_ptr<VerseMatcher> verse_matcher;
+    if (search_option == CaseInsensitiveSearch)
+    {
+        verse_matcher = boost::shared_ptr<VerseMatcher>(new CaseInsensitiveVerseMatcher);
+    }
+    else
+    {
+        verse_matcher = boost::shared_ptr<VerseMatcher>(new CaseSensitiveVerseMatcher);
+    }
 
+    SearchStringParser parser;
     std::vector<std::string> search_terms = parser.parse(query->get_search_string());
 
     std::vector<std::string>::const_iterator search_term = search_terms.begin();
 
     // Prime the matching verses vector by searching for the first term in the entire translation.
-    std::vector<boost::shared_ptr<Verse> >::const_iterator begin = m_verses.begin();
-    std::vector<boost::shared_ptr<Verse> >::const_iterator end = m_verses.end();
+    std::vector<boost::shared_ptr<const Verse> >::const_iterator begin = m_verses.begin();
+    std::vector<boost::shared_ptr<const Verse> >::const_iterator end = m_verses.end();
 
     std::vector<int> matching_verses;
-    for (std::vector<boost::shared_ptr<Verse> >::const_iterator verse = begin; verse != end; ++verse)
+    for (std::vector<boost::shared_ptr<const Verse> >::const_iterator verse = begin; verse != end; ++verse)
     {
-        if ((*verse)->match(*search_term))
+        if (verse_matcher->is_match(*verse, *search_term))
         {
             matching_verses.push_back((*verse)->get_unique_id());
         }
@@ -41,7 +50,7 @@ void Translation::search(boost::shared_ptr<ISearchResults> query) const
         std::vector<int> filtered_matching_verses;
         for (std::vector<int>::const_iterator verse_id = matching_verses.begin(); verse_id != matching_verses.end(); ++verse_id)
         {
-            if (m_verses[*verse_id]->match(*search_term))
+            if (verse_matcher->is_match(m_verses[*verse_id], *search_term))
             {
                 filtered_matching_verses.push_back(*verse_id);
             }
@@ -85,7 +94,7 @@ bool Translation::Save(const std::string &filename)
     buffer.set_long_name(m_long_name);
     buffer.set_short_name(m_short_name);
 
-    for (std::vector< boost::shared_ptr<Verse> >::const_iterator it = m_verses.begin();
+    for (std::vector< boost::shared_ptr<const Verse> >::const_iterator it = m_verses.begin();
          it != m_verses.end();
          ++it)
     {
@@ -198,7 +207,7 @@ bool Translation::Import(const std::string& long_name, const std::string& short_
         std::vector<std::string> parts;
         boost::algorithm::split(parts, line, boost::algorithm::is_any_of("*"));
 
-        boost::shared_ptr<Verse> verse(new Verse(parts[1], boost::lexical_cast<int>(parts[2]),
+        boost::shared_ptr<const Verse> verse(new Verse(parts[1], boost::lexical_cast<int>(parts[2]),
                                                  boost::lexical_cast<int>(parts[3]), parts[4],
                                                  boost::lexical_cast<int>(parts[0])));
         m_verses.push_back(verse);
@@ -325,6 +334,16 @@ std::string verse_collection_title(const std::vector<boost::shared_ptr<const Ver
     title += ")";
 
     return title;
+}
+
+bool Translation::CaseSensitiveVerseMatcher::is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const
+{
+    return verse->case_sensitive_match(search_string);
+}
+
+bool Translation::CaseInsensitiveVerseMatcher::is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const
+{
+    return verse->case_insensitive_match(search_string);
 }
 
 }

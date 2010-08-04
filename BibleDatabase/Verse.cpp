@@ -1,4 +1,5 @@
 #include <iostream>
+#include <boost/algorithm/string.hpp>
 #include "Verse.h"
 
 using namespace BibleDatabase;
@@ -13,9 +14,14 @@ Verse::Verse(const std::string& book, int chapter, int verse, const std::string&
 {
 }
 
-    bool Verse::match(std::string search_string) const
+bool Verse::case_sensitive_match(std::string search_string) const
 {
     return m_text.find(search_string) != std::string::npos;
+}
+
+bool Verse::case_insensitive_match(std::string search_string) const
+{
+    return boost::algorithm::iequals(m_text, search_string);
 }
 
 void Verse::display(std::ostream& out) const

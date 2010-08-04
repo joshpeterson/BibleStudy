@@ -25,7 +25,31 @@ public:
     {
         m_query = boost::shared_ptr<ISearchResults>(new SearchResultsSerial(m_search_string));
         boost::shared_ptr<const Translation> translation = world.GetGiven<TestTranslation>()->get_translation();        
-        translation->search(m_query);
+        translation->search(m_query, CaseSensitiveSearch);
+    }
+
+    boost::shared_ptr<ISearchResults> get_search_results() const
+    {
+        return m_query;
+    }
+
+private:
+    boost::shared_ptr<ISearchResults> m_query;
+    std::string m_search_string;
+};
+
+class CaseInsensitiveSearchIs : public IWhen
+{
+public:
+    CaseInsensitiveSearchIs() {}
+
+    CaseInsensitiveSearchIs(std::string search_string) : m_search_string(search_string) {}
+
+    void occurs(const World& world)
+    {
+        m_query = boost::shared_ptr<ISearchResults>(new SearchResultsSerial(m_search_string));
+        boost::shared_ptr<const Translation> translation = world.GetGiven<TestTranslation>()->get_translation();        
+        translation->search(m_query, CaseInsensitiveSearch);
     }
 
     boost::shared_ptr<ISearchResults> get_search_results() const
@@ -47,7 +71,15 @@ public:
 
     void ensure_that(const World& world)
     {
-        boost::shared_ptr<ISearchResults> actual_results = world.GetWhen<SearchIs>()->get_search_results();
+        boost::shared_ptr<ISearchResults> actual_results;
+        try
+        {
+            actual_results = world.GetWhen<CaseSensitiveSearchIs>()->get_search_results();
+        }
+        catch (std::logic_error)
+        {
+            actual_results = world.GetWhen<CaseInsensitiveSearchIs>()->get_search_results();
+        }
 
         int number_of_expected_results = static_cast<int>(m_expected_results.size());
 
@@ -72,7 +104,15 @@ public:
 
     void ensure_that(const World& world)
     {
-        boost::shared_ptr<ISearchResults> actual_results = world.GetWhen<SearchIs>()->get_search_results();
+        boost::shared_ptr<ISearchResults> actual_results;
+        try
+        {
+            actual_results = world.GetWhen<CaseSensitiveSearchIs>()->get_search_results();
+        }
+        catch (std::logic_error)
+        {
+            actual_results = world.GetWhen<CaseInsensitiveSearchIs>()->get_search_results();
+        }
 
         CPPUNIT_ASSERT_EQUAL(m_expected_number_of_results, actual_results->num_results());
     }

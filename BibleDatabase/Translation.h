@@ -15,6 +15,13 @@ namespace BibleDatabase
 class Verse;
 class VerseTreeItem;
 
+//! This enum represents the options available for a search of the Translation.
+enum SearchOption
+{
+    CaseSensitiveSearch = 0,
+    CaseInsensitiveSearch = 1
+};
+
 //! This class represents a specific translation of the Bible.
 /*!
     A Translation object is a list of verses with given long and short names that can imported from a text file,
@@ -30,7 +37,7 @@ public:
     BIBLE_DATABASE_EXPORT std::string get_short_name() const { return m_short_name; }
 
     //! Iterate the verses in this translation and add the ones which match the query to the query object.
-    BIBLE_DATABASE_EXPORT void search(boost::shared_ptr<ISearchResults> query) const;
+    BIBLE_DATABASE_EXPORT void search(boost::shared_ptr<ISearchResults> query, SearchOption search_option) const;
 
     //! Get a specific verse from the translation based on its verse ID.
     BIBLE_DATABASE_EXPORT const Verse* get_verse(int unique_id) const { return m_verses[unique_id].get(); }
@@ -72,8 +79,26 @@ public:
 private:
     std::string m_long_name;
     std::string m_short_name;
-    std::vector< boost::shared_ptr<Verse> > m_verses;
+    std::vector< boost::shared_ptr<const Verse> > m_verses;
     boost::shared_ptr<VerseTreeItem> m_verse_tree;
+
+    class VerseMatcher
+    {
+    public:
+        virtual bool is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const = 0;
+    };
+
+    class CaseSensitiveVerseMatcher : public VerseMatcher
+    {
+    public:
+        bool is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const;
+    };
+
+    class CaseInsensitiveVerseMatcher : public VerseMatcher
+    {
+    public:
+        bool is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const;
+    };
 };
 
 //! Get the text representation and title of a collection of verses.

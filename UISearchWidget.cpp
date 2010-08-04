@@ -62,7 +62,7 @@ void UISearchWidget::perform_search()
             }
         }
 
-        CommandPerformSearch search_command(m_translation_manager, selected_translations, m_search_input_field->text().toStdString());
+        CommandPerformSearch search_command(m_translation_manager, selected_translations, m_search_input_field->text().toStdString(), CaseSensitiveSearch);
         search_command.Execute();
 
         emit search_complete(search_command.get_results());
