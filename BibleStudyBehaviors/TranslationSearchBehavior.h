@@ -155,7 +155,7 @@ public:
         World world(get_world_with_test_translation_given());
 
         world.When<CaseInsensitiveSearchIs>("god");
-        world.Then<CorrectNumberOfResultsAreReturned>(286);
+        world.Then<CorrectNumberOfResultsAreReturned>(310);
     }
 
 private:

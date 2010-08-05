@@ -10,6 +10,8 @@
 namespace BibleDatabase
 {
 
+bool case_insensitive_character_comparison(char character1, char character2);
+
 //! This class represents a single verse in a Translation object.
 class Verse : private boost::noncopyable
 {

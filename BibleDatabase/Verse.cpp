@@ -1,8 +1,19 @@
 #include <iostream>
-#include <boost/algorithm/string.hpp>
+#include <algorithm>
+#include <cctype>
 #include "Verse.h"
 
 using namespace BibleDatabase;
+
+namespace BibleDatabase
+{
+
+bool case_insensitive_character_comparison(char character1, char character2)
+{
+    return std::toupper(character1) == std::toupper(character2);
+}
+
+}
 
 Verse::Verse(const std::string& book, int chapter, int verse, const std::string& text,
              int unqiue_verse_id) :
@@ -21,7 +32,7 @@ bool Verse::case_sensitive_match(std::string search_string) const
 
 bool Verse::case_insensitive_match(std::string search_string) const
 {
-    return boost::algorithm::iequals(m_text, search_string);
+    return std::search(m_text.begin(), m_text.end(), search_string.begin(), search_string.end(), case_insensitive_character_comparison) != m_text.end();
 }
 
 void Verse::display(std::ostream& out) const
