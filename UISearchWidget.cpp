@@ -20,14 +20,18 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
     m_translation_manager(translation_manager),
     m_search_button(new QPushButton(tr("Search"))),
     m_search_input_field(new QLineEdit()),
-    m_translation_selection_row(new QHBoxLayout)
+    m_translation_selection_row(new QHBoxLayout),
+    m_match_case_checkbox(new QCheckBox(tr("Match case")))
 {
     QT_CONNECT(m_search_button, SIGNAL(clicked()), this, SLOT(perform_search()));
     QT_CONNECT(m_search_input_field, SIGNAL(returnPressed()), this, SLOT(perform_search()));
 
+    m_match_case_checkbox->setChecked(true);
+
     QHBoxLayout* search_field_row = new QHBoxLayout;
     search_field_row->addWidget(m_search_input_field);
     search_field_row->addWidget(m_search_button);
+    search_field_row->addWidget(m_match_case_checkbox);
 
     QVBoxLayout* layout = new QVBoxLayout;
 
@@ -62,7 +66,13 @@ void UISearchWidget::perform_search()
             }
         }
 
-        CommandPerformSearch search_command(m_translation_manager, selected_translations, m_search_input_field->text().toStdString(), CaseSensitiveSearch);
+        SearchOption search_option = CaseSensitiveSearch;
+        if (m_match_case_checkbox->checkState() == Qt::Unchecked)
+        {
+            search_option = CaseInsensitiveSearch;
+        }
+
+        CommandPerformSearch search_command(m_translation_manager, selected_translations, m_search_input_field->text().toStdString(), search_option);
         search_command.Execute();
 
         emit search_complete(search_command.get_results());

@@ -50,6 +50,7 @@ private:
     QPushButton* m_search_button;
     QLineEdit* m_search_input_field;
     QHBoxLayout* m_translation_selection_row;
+    QCheckBox* m_match_case_checkbox;
     std::vector<QCheckBox*> m_translation_checkboxes;
 
     void add_translation_check_box(boost::shared_ptr<const BibleDatabase::Translation> translation);
