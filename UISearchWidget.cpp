@@ -21,17 +21,23 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
     m_search_button(new QPushButton(tr("Search"))),
     m_search_input_field(new QLineEdit()),
     m_translation_selection_row(new QHBoxLayout),
-    m_match_case_checkbox(new QCheckBox(tr("Match case")))
+    m_match_case_checkbox(new QCheckBox(tr("Match case"))),
+    m_match_whole_word_checkbox(new QCheckBox(tr("Whole words")))
 {
     QT_CONNECT(m_search_button, SIGNAL(clicked()), this, SLOT(perform_search()));
     QT_CONNECT(m_search_input_field, SIGNAL(returnPressed()), this, SLOT(perform_search()));
 
     m_match_case_checkbox->setChecked(true);
+    m_match_whole_word_checkbox->setChecked(false);
+
+    QVBoxLayout* search_options = new QVBoxLayout;
+    search_options->addWidget(m_match_case_checkbox);
+    search_options->addWidget(m_match_whole_word_checkbox);
 
     QHBoxLayout* search_field_row = new QHBoxLayout;
     search_field_row->addWidget(m_search_input_field);
     search_field_row->addWidget(m_search_button);
-    search_field_row->addWidget(m_match_case_checkbox);
+    search_field_row->addLayout(search_options);
 
     QVBoxLayout* layout = new QVBoxLayout;
 
@@ -66,10 +72,15 @@ void UISearchWidget::perform_search()
             }
         }
 
-        SearchOption search_option = CaseSensitive;
+        int search_option = CaseSensitive;
         if (m_match_case_checkbox->checkState() == Qt::Unchecked)
         {
             search_option = CaseInsensitive;
+        }
+
+        if (m_match_whole_word_checkbox->checkState() == Qt::Checked)
+        {
+            search_option |= MatchWholeWord;
         }
 
         CommandPerformSearch search_command(m_translation_manager, selected_translations, m_search_input_field->text().toStdString(), search_option);

@@ -6,7 +6,7 @@
 
 using namespace BibleDatabase;
 
-CommandPerformSearch::CommandPerformSearch(boost::shared_ptr<const TranslationManager> translation_manager, const std::vector<std::string>& translations_to_search, std::string search_string, SearchOption search_option) :
+CommandPerformSearch::CommandPerformSearch(boost::shared_ptr<const TranslationManager> translation_manager, const std::vector<std::string>& translations_to_search, std::string search_string, int search_option) :
     m_translation_manager(translation_manager),
     m_translations_to_search(translations_to_search),
     m_search_query(new SearchResultsSerial(search_string)),
