@@ -13,16 +13,30 @@
 
 using namespace BibleDatabase;
 
-void Translation::search(boost::shared_ptr<ISearchResults> query, SearchOption search_option) const
+void Translation::search(boost::shared_ptr<ISearchResults> query, int search_option) const
 {
     boost::shared_ptr<VerseMatcher> verse_matcher;
-    if (search_option == CaseInsensitiveSearch)
+    if ((search_option & CaseInsensitive) == CaseInsensitive)
     {
-        verse_matcher = boost::shared_ptr<VerseMatcher>(new CaseInsensitiveVerseMatcher);
+        if ((search_option & MatchWholeWord) == MatchWholeWord)
+        {
+            verse_matcher = boost::shared_ptr<VerseMatcher>(new CaseInsensitiveWholeWordVerseMatcher);
+        }
+        else
+        {
+            verse_matcher = boost::shared_ptr<VerseMatcher>(new CaseInsensitiveVerseMatcher);
+        }
     }
     else
     {
-        verse_matcher = boost::shared_ptr<VerseMatcher>(new CaseSensitiveVerseMatcher);
+        if ((search_option & MatchWholeWord) == MatchWholeWord)
+        {
+            verse_matcher = boost::shared_ptr<VerseMatcher>(new CaseSensitiveWholeWordVerseMatcher);
+        }
+        else
+        {
+            verse_matcher = boost::shared_ptr<VerseMatcher>(new CaseSensitiveVerseMatcher);
+        }
     }
 
     SearchStringParser parser;
@@ -341,9 +355,19 @@ bool Translation::CaseSensitiveVerseMatcher::is_match(boost::shared_ptr<const Ve
     return verse->case_sensitive_match(search_string);
 }
 
+bool Translation::CaseSensitiveWholeWordVerseMatcher::is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const
+{
+    return verse->case_sensitive_whole_word_match(search_string);
+}
+
 bool Translation::CaseInsensitiveVerseMatcher::is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const
 {
     return verse->case_insensitive_match(search_string);
+}
+
+bool Translation::CaseInsensitiveWholeWordVerseMatcher::is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const
+{
+    return verse->case_insensitive_whole_word_match(search_string);
 }
 
 }

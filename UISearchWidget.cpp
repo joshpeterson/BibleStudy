@@ -66,10 +66,10 @@ void UISearchWidget::perform_search()
             }
         }
 
-        SearchOption search_option = CaseSensitiveSearch;
+        SearchOption search_option = CaseSensitive;
         if (m_match_case_checkbox->checkState() == Qt::Unchecked)
         {
-            search_option = CaseInsensitiveSearch;
+            search_option = CaseInsensitive;
         }
 
         CommandPerformSearch search_command(m_translation_manager, selected_translations, m_search_input_field->text().toStdString(), search_option);

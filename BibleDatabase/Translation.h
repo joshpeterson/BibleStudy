@@ -15,11 +15,12 @@ namespace BibleDatabase
 class Verse;
 class VerseTreeItem;
 
-//! This enum represents the options available for a search of the Translation.
+//! This enum represents the options available for a search of the Translation.  It is used as a bit field.
 enum SearchOption
 {
-    CaseSensitiveSearch = 0,
-    CaseInsensitiveSearch = 1
+    CaseSensitive = 0,
+    CaseInsensitive = 1,
+    MatchWholeWord = 2
 };
 
 //! This class represents a specific translation of the Bible.
@@ -37,7 +38,7 @@ public:
     BIBLE_DATABASE_EXPORT std::string get_short_name() const { return m_short_name; }
 
     //! Iterate the verses in this translation and add the ones which match the query to the query object.
-    BIBLE_DATABASE_EXPORT void search(boost::shared_ptr<ISearchResults> query, SearchOption search_option) const;
+    BIBLE_DATABASE_EXPORT void search(boost::shared_ptr<ISearchResults> query, int search_option) const;
 
     //! Get a specific verse from the translation based on its verse ID.
     BIBLE_DATABASE_EXPORT const Verse* get_verse(int unique_id) const { return m_verses[unique_id].get(); }
@@ -94,7 +95,19 @@ private:
         bool is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const;
     };
 
+    class CaseSensitiveWholeWordVerseMatcher : public VerseMatcher
+    {
+    public:
+        bool is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const;
+    };
+
     class CaseInsensitiveVerseMatcher : public VerseMatcher
+    {
+    public:
+        bool is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const;
+    };
+
+    class CaseInsensitiveWholeWordVerseMatcher : public VerseMatcher
     {
     public:
         bool is_match(boost::shared_ptr<const Verse> verse, std::string search_string) const;
