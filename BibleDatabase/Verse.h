@@ -10,7 +10,7 @@
 namespace BibleDatabase
 {
 
-class ISearchResults;
+bool case_insensitive_character_comparison(char character1, char character2);
 
 //! This class represents a single verse in a Translation object.
 class Verse : private boost::noncopyable
@@ -19,8 +19,17 @@ public:
     //! Create a new instance of the Verse class.
     BIBLE_DATABASE_EXPORT Verse(const std::string& book, int chapter, int verse, const std::string& text, int unique_verse_id);
 
-    //! Determine whether or not this verse matches the given query.
-    BIBLE_DATABASE_EXPORT virtual bool match(boost::shared_ptr<ISearchResults> search_string) const;
+    //! Determine whether or not this verse matches the given string, including the casing of the string.
+    BIBLE_DATABASE_EXPORT virtual bool case_sensitive_match(std::string search_string) const;
+
+    //! Determine whether or not this verse matches the given string, using whole words only and including the casing of the string.
+    BIBLE_DATABASE_EXPORT virtual bool case_sensitive_whole_word_match(std::string search_string) const;
+
+    //! Determine whether or not this verse matches the given string, not including the casing of the string.
+    BIBLE_DATABASE_EXPORT virtual bool case_insensitive_match(std::string search_string) const;
+
+    //! Determine whether or not this verse matches the given string, using whole words only and not including the casing of the string.
+    BIBLE_DATABASE_EXPORT virtual bool case_insensitive_whole_word_match(std::string search_string) const;
 
     //! Get the ID for this verse, which is unique to the Translation where the verse lives.
     BIBLE_DATABASE_EXPORT virtual int get_unique_id() const {return m_unique_id; }
@@ -46,6 +55,8 @@ private:
     int m_verse;
     std::string m_text;
     int m_unique_id;
+
+    bool is_word_delimiter(char character) const;
 
     //! Prevent default construction of Verse objects.
     Verse() {};

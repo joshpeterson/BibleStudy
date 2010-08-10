@@ -53,6 +53,34 @@ private:
     int m_argument;
 };
 
+class TestGivenWithTwoArgumentConstructor : public IGiven
+{
+public:
+    TestGivenWithTwoArgumentConstructor() {}
+
+    TestGivenWithTwoArgumentConstructor(int argument1, int argument2) : m_argument1(argument1), m_argument2(argument2)
+    {
+    }
+
+    void setup(const World&)
+    {
+    }
+
+    int get_argument1() const
+    {
+        return m_argument1;
+    }
+
+    int get_argument2() const
+    {
+        return m_argument2;
+    }
+
+private:
+    int m_argument1;
+    int m_argument2;
+};
+
 class EmptyTestGiven : public IGiven
 {
     void setup(const World&)
@@ -110,6 +138,34 @@ private:
     int m_argument;
 };
 
+class TestWhenWithTwoArgumentConstructor : public IWhen
+{
+public:
+    TestWhenWithTwoArgumentConstructor() {}
+
+    TestWhenWithTwoArgumentConstructor(int argument1, int argument2) : m_argument1(argument1), m_argument2(argument2)
+    {
+    }
+
+    void occurs(const World&)
+    {
+    }
+
+    int get_argument1() const
+    {
+        return m_argument1;
+    }
+
+    int get_argument2() const
+    {
+        return m_argument2;
+    }
+
+private:
+    int m_argument1;
+    int m_argument2;
+};
+
 class TestThen : public IThen
 {
 public:
@@ -153,6 +209,34 @@ private:
     int m_argument;
 };
 
+class TestThenWithTwoArgumentConstructor : public IThen
+{
+public:
+    TestThenWithTwoArgumentConstructor() {}
+
+    TestThenWithTwoArgumentConstructor(int argument1, int argument2) : m_argument1(argument1), m_argument2(argument2)
+    {
+    }
+
+    void ensure_that(const World&)
+    {
+    }
+
+    int get_argument1() const
+    {
+        return m_argument1;
+    }
+
+    int get_argument2() const
+    {
+        return m_argument2;
+    }
+
+private:
+    int m_argument1;
+    int m_argument2;
+};
+
 class BehaviorDrivenDesignTest : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(BehaviorDrivenDesignTest);
@@ -167,6 +251,9 @@ class BehaviorDrivenDesignTest : public CppUnit::TestFixture
     CPPUNIT_TEST(testGivenWithOneArgumentConstructor);
     CPPUNIT_TEST(testWhenWithOneArgumentConstructor);
     CPPUNIT_TEST(testThenWithOneArgumentConstructor);
+    CPPUNIT_TEST(testGivenWithTwoArgumentConstructor);
+    CPPUNIT_TEST(testWhenWithTwoArgumentConstructor);
+    CPPUNIT_TEST(testThenWithTwoArgumentConstructor);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -270,6 +357,31 @@ public:
         World world;
 
         world.Then<TestThenWithOneArgumentConstructor, int>(42);
+    }
+
+    void testGivenWithTwoArgumentConstructor()
+    {
+        World world;
+
+        world.Given<TestGivenWithTwoArgumentConstructor, int>(42, 43);
+        CPPUNIT_ASSERT_EQUAL(42, world.GetGiven<TestGivenWithTwoArgumentConstructor>()->get_argument1());
+        CPPUNIT_ASSERT_EQUAL(43, world.GetGiven<TestGivenWithTwoArgumentConstructor>()->get_argument2());
+    }
+
+    void testWhenWithTwoArgumentConstructor()
+    {
+        World world;
+
+        world.When<TestWhenWithTwoArgumentConstructor, int>(42, 43);
+        CPPUNIT_ASSERT_EQUAL(42, world.GetWhen<TestWhenWithTwoArgumentConstructor>()->get_argument1());
+        CPPUNIT_ASSERT_EQUAL(43, world.GetWhen<TestWhenWithTwoArgumentConstructor>()->get_argument2());
+    }
+
+    void testThenWithTwoArgumentConstructor()
+    {
+        World world;
+
+        world.Then<TestThenWithTwoArgumentConstructor, int>(42, 43);
     }
 };
 

@@ -3,14 +3,18 @@
 
 #include "BehaviorDrivenDesignTest.h"
 #include "TranslationLoaderBehavior.h"
-#include "TranslationBehavior.h"
+#include "TranslationFirstAndLastVerseBehavior.h"
+#include "TranslationSearchBehavior.h"
+#include "SearchStringParserBehavior.h"
 
 using namespace BibleStudyBehaviors;
 using namespace BibleDatabase;
 
 CPPUNIT_TEST_SUITE_REGISTRATION(BehaviorDrivenDesignTest);
 CPPUNIT_TEST_SUITE_REGISTRATION(TranslationLoaderBehavior);
-CPPUNIT_TEST_SUITE_REGISTRATION(TranslationBehavior);
+CPPUNIT_TEST_SUITE_REGISTRATION(TranslationFirstAndLastVerseBehavior);
+CPPUNIT_TEST_SUITE_REGISTRATION(TranslationSearchBehavior);
+CPPUNIT_TEST_SUITE_REGISTRATION(SearchStringParserBehavior);
 
 int main()
 {

@@ -1,9 +1,9 @@
-#ifndef __TRANSLATION_BEHAVIOR_H
-#define __TRANSLATION_BEHAVIOR_H
+#ifndef __TRANSLATION_FIRST_AND_LAST_VERSE_BEHAVIOR_H
+#define __TRANSLATION_FIRST_AND_LAST_VERSE_BEHAVIOR_H
 
 #include <boost/shared_ptr.hpp>
-#include <boost/filesystem.hpp>
 #include "BehaviorDrivenDesign.h"
+#include "TranslationBehaviorGivens.h"
 #include "BibleDatabase/Translation.h"
 #include "BibleDatabase/Verse.h"
 
@@ -12,28 +12,6 @@ using namespace BibleDatabase;
 
 namespace BibleStudyBehaviors
 {
-
-class TestTranslation : public IGiven
-{
-public:
-    void setup(const World& /*world*/)
-    {
-        m_translation = boost::shared_ptr<Translation>(new Translation());
-
-        boost::filesystem::path translation_file = boost::filesystem::initial_path();
-        translation_file /= "Translations/TT.buf";
-
-        m_translation->Resume(translation_file.file_string());
-    }
-
-    boost::shared_ptr<const Translation> get_translation() const
-    {
-        return m_translation;
-    }
-
-private:
-    boost::shared_ptr<Translation> m_translation;
-};
 
 class VerseIsObtainedWithNoContext : public IWhen
 {
@@ -136,9 +114,9 @@ private:
     int m_verse_id;
 };
 
-class TranslationBehavior : public CppUnit::TestFixture
+class TranslationFirstAndLastVerseBehavior : public CppUnit::TestFixture
 {
-    CPPUNIT_TEST_SUITE(TranslationBehavior);
+    CPPUNIT_TEST_SUITE(TranslationFirstAndLastVerseBehavior);
     CPPUNIT_TEST(shouldGetSingleFirstVerseCorrectly);
     CPPUNIT_TEST(shouldGetSingleMiddleVerseCorrectly);
     CPPUNIT_TEST(shouldGetSingleSecondToLastVerseCorrectly);
@@ -149,18 +127,9 @@ class TranslationBehavior : public CppUnit::TestFixture
     CPPUNIT_TEST_SUITE_END();
 
 public:
-    void setUp()
-    {
-        m_world.Given<TestTranslation>();
-    }
-
-    void tearDown()
-    {
-    }
-
     void shouldGetSingleFirstVerseCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithNoContext, int>(0);
         world.Then<VerseIsCorrectWithNoContext>(0);
@@ -168,7 +137,7 @@ public:
 
     void shouldGetSingleMiddleVerseCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithNoContext, int>(1024);
         world.Then<VerseIsCorrectWithNoContext>(1024);
@@ -176,7 +145,7 @@ public:
 
     void shouldGetSingleSecondToLastVerseCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithNoContext, int>(2739);
         world.Then<VerseIsCorrectWithNoContext>(2739);
@@ -184,7 +153,7 @@ public:
 
     void shouldGetSingleLastVerseCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithNoContext, int>(2740);
         world.Then<VerseIsCorrectWithNoContext>(2740);
@@ -192,7 +161,7 @@ public:
 
     void shouldGetFirstVerseWithContextCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithContext, int>(0);
         world.Then<VerseIsCorrectWithNoContextWithContext>(0);
@@ -200,7 +169,7 @@ public:
 
     void shouldGetMiddleVerseWithContextCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithContext, int>(816);
         world.Then<VerseIsCorrectWithNoContextWithContext>(816);
@@ -208,16 +177,20 @@ public:
 
     void shouldGetLastVerseWithContextCorrectly()
     {
-        World world(m_world);
+        World world(get_world_with_test_translation_given());
 
         world.When<VerseIsObtainedWithContext, int>(2740);
         world.Then<VerseIsCorrectWithNoContextWithContext>(2740);
     }
 
 private:
-    World m_world;
+    const World& get_world_with_test_translation_given()
+    {
+        static WorldWithTestTranslationGiven world_with_test_translation;
+        return world_with_test_translation.get_world();
+    }
 };
 
 }
 
-#endif // __TRANSLATION_BEHAVIOR_H
+#endif // __TRANSLATION_FIRST_AND_LAST_VERSE_BEHAVIOR_H
