@@ -1,4 +1,5 @@
 #include <boost/scoped_ptr.hpp>
+#include <boost/make_shared.hpp>
 #include <QPushButton>
 #include <QLineEdit>
 #include <QCheckBox>
@@ -11,6 +12,7 @@
 #include "BibleDatabase/Translation.h"
 #include "BibleDatabase/TranslationIterator.h"
 #include "QtConnectHelper.h"
+#include "BackgroundWorker.h"
 
 using namespace BibleStudy;
 using namespace BibleDatabase;
@@ -83,11 +85,20 @@ void UISearchWidget::perform_search()
             search_option |= MatchWholeWord;
         }
 
-        CommandPerformSearch search_command(m_translation_manager, selected_translations, m_search_input_field->text().toStdString(), search_option);
-        search_command.Execute();
+        m_command_perform_search = boost::make_shared<CommandPerformSearch>(m_translation_manager, selected_translations, m_search_input_field->text().toStdString(), search_option);
+        m_search_worker = boost::make_shared<BackgroundWorker>(m_command_perform_search.get());
 
-        emit search_complete(search_command.get_results());
+        QT_CONNECT(m_search_worker.get(), SIGNAL(finished()), this, SLOT(search_worker_finished()));
+        
+        m_search_worker->start();
     }
+}
+
+void UISearchWidget::search_worker_finished()
+{
+    QT_DISCONNECT(m_search_worker.get(), SIGNAL(finished()), this, SLOT(search_worker_finished()));
+
+    emit search_complete(m_command_perform_search->get_results());
 }
 
 void UISearchWidget::add_translation_check_box(boost::shared_ptr<const Translation> translation)

@@ -11,6 +11,7 @@ HEADERS += StarredVersesModel.h
 HEADERS += BrowseVersesModel.h
 HEADERS += UIBrowseVersesWidget.h
 HEADERS += QtConnectHelper.h
+HEADERS += BackgroundWorker.h
 
 SOURCES += BibleStudy.cpp
 SOURCES += SearchResultsModel.cpp
@@ -22,6 +23,7 @@ SOURCES += UIStarredVersesWidget.cpp
 SOURCES += StarredVersesModel.cpp
 SOURCES += BrowseVersesModel.cpp
 SOURCES += UIBrowseVersesWidget.cpp
+SOURCES += BackgroundWorker.cpp
 
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
