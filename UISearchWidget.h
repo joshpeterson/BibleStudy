@@ -16,7 +16,7 @@ namespace BibleDatabase
 class TranslationManager;
 class ISearchResults;
 class Translation;
-class CommandPerformSearch;
+class ICommand;
 }
 
 namespace BibleStudy
@@ -59,7 +59,7 @@ private:
     QCheckBox* m_match_case_checkbox;
     QCheckBox* m_match_whole_word_checkbox;
     std::vector<QCheckBox*> m_translation_checkboxes;
-    boost::shared_ptr<BibleDatabase::CommandPerformSearch> m_command_perform_search;
+    boost::shared_ptr<BibleDatabase::ICommand> m_command_perform_search;
     boost::shared_ptr<BackgroundWorker> m_search_worker;
 
     void add_translation_check_box(boost::shared_ptr<const BibleDatabase::Translation> translation);

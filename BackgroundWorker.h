@@ -19,7 +19,7 @@ class BackgroundWorker : public QThread
 
 public:
     //! Create a new instance of the BackgroundWorker class.
-    BackgroundWorker(BibleDatabase::ICommand* command);
+    BackgroundWorker(boost::shared_ptr<BibleDatabase::ICommand> command);
 
     //! Execute the given command.  This method should be called by Qt.
     void run();

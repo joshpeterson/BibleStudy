@@ -4,7 +4,7 @@
 using namespace BibleStudy;
 using namespace BibleDatabase;
 
-BackgroundWorker::BackgroundWorker(ICommand* command) : m_command(command)
+BackgroundWorker::BackgroundWorker(boost::shared_ptr<ICommand> command) : m_command(command)
 {
 }
 
