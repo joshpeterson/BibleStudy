@@ -2,6 +2,7 @@
 #define __UI_BIBLE_STUDY_WIDGET
 
 #include <stack>
+#include <deque>
 #include <QMainWindow>
 #include <boost/shared_ptr.hpp>
 
@@ -16,6 +17,7 @@ namespace BibleDatabase
 class TranslationManager;
 class TranslationLoader;
 class VerseDisplay;
+class ICommand;
 }
 
 namespace BibleStudy
@@ -29,6 +31,7 @@ class UISearchResultsWidget;
 class UIStarredVersesWidget;
 class UITextViewWidget;
 class UIBrowseVersesWidget;
+class BackgroundWorker;
 
 //! This class is the GUI respresentation of the top level widget for the application.
 /*!
@@ -68,6 +71,9 @@ private slots:
     //! Load the translations from the bible database.
     void load_translations();
 
+    //! One translation has been loaded.
+    void translation_loaded();
+
 signals:
     //! Inform other widgets that all translations have been loaded.
     void translations_loaded();
@@ -99,12 +105,24 @@ private:
 
     std::stack<QString> m_status_bar_messages;
 
+    struct TranslationLoadInformation
+    {
+        std::string translation_long_name;
+        std::string translation_file;
+    };
+
+    std::deque<TranslationLoadInformation> m_translations_to_load;
+
+    boost::shared_ptr<BibleDatabase::ICommand> m_command_load_translation;
+    boost::shared_ptr<BackgroundWorker> m_load_translation_worker;
+
     void connect_signals();
     void set_font();
     void initialize_widgets();
     void initialize_status_bar();
     void initialize_actions();
     void initialize_menus();
+    void start_next_translation_load();
 };
 
 }

@@ -1,4 +1,6 @@
 #include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/pointer_cast.hpp>
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -14,6 +16,8 @@
 #include "BibleDatabase/Translation.h"
 #include "BibleDatabase/TranslationManager.h"
 #include "BibleDatabase/TranslationLoader.h"
+#include "BibleDatabase/ICommand.h"
+#include "BibleDatabase/CommandLoadTranslation.h"
 #include "SearchResultsModel.h"
 #include "StarredVersesModel.h"
 #include "BrowseVersesModel.h"
@@ -24,6 +28,7 @@
 #include "UITextViewWidget.h"
 #include "UIBrowseVersesWidget.h"
 #include "QtConnectHelper.h"
+#include "BackgroundWorker.h"
 
 using namespace BibleStudy;
 using namespace BibleDatabase;
@@ -194,15 +199,47 @@ void UIBibleStudyWidget::load_translations()
 {
     m_translation_load_timer->stop();
 
-    this->push_status_bar_message(tr("Loading translation ") + tr("Douay-Rheims"));
-    boost::shared_ptr<const Translation> dr = m_translation_loader->create_translation("../Translations/DR.buf");
-    m_translation_manager->add_translation(dr);
+    TranslationLoadInformation dr_load_information = {"Douay-Rheims", "../Translations/DR.buf" };
+    TranslationLoadInformation kjv_load_information = {"King James Version", "../Translations/KJV.buf" };
+    
+    m_translations_to_load.push_back(dr_load_information);
+    m_translations_to_load.push_back(kjv_load_information);
+
+    if (!m_translations_to_load.empty())
+    {
+        start_next_translation_load();
+    }
+}
+
+void UIBibleStudyWidget::translation_loaded()
+{
+    QT_DISCONNECT(m_load_translation_worker.get(), SIGNAL(finished()), this, SLOT(translation_loaded()));
+
+    boost::shared_ptr<CommandLoadTranslation> command_load_translation = boost::dynamic_pointer_cast<CommandLoadTranslation>(m_command_load_translation);
+    boost::shared_ptr<const Translation> translation = command_load_translation->get_translation();
+    m_translation_manager->add_translation(translation);
     this->pop_status_bar_message();
 
-    this->push_status_bar_message(tr("Loading translation ") + tr("King James Version"));
-    boost::shared_ptr<const Translation> kjv = m_translation_loader->create_translation("../Translations/KJV.buf");
-    m_translation_manager->add_translation(kjv);
-    this->pop_status_bar_message();
+    if (!m_translations_to_load.empty())
+    {
+        start_next_translation_load();
+    }
+    else
+    {
+        emit translations_loaded();
+    }
+}
 
-    emit translations_loaded();
+void UIBibleStudyWidget::start_next_translation_load()
+{
+    TranslationLoadInformation load_information = m_translations_to_load.front();
+    m_translations_to_load.pop_front();
+
+    this->push_status_bar_message(tr("Loading translation ") + tr(load_information.translation_long_name.c_str()));
+    m_command_load_translation = boost::shared_ptr<ICommand>(new CommandLoadTranslation(m_translation_loader, load_information.translation_file));
+    m_load_translation_worker = boost::make_shared<BackgroundWorker>(m_command_load_translation);
+
+    QT_CONNECT(m_load_translation_worker.get(), SIGNAL(finished()), this, SLOT(translation_loaded()));
+
+    m_load_translation_worker->start();
 }
