@@ -102,7 +102,7 @@ std::vector<boost::shared_ptr<const Verse> > Translation::get_verse(int unique_i
     return verses;
 }
 
-bool Translation::Save(const std::string &filename)
+bool Translation::save(const std::string &filename)
 {
     TranslationBuffer buffer;
     buffer.set_long_name(m_long_name);
@@ -128,7 +128,7 @@ bool Translation::Save(const std::string &filename)
     return true;
 }
 
-bool Translation::Resume(const std::string &filename)
+bool Translation::resume(const std::string &filename)
 {
     TranslationBuffer buffer;
 
@@ -207,7 +207,7 @@ bool Translation::Resume(const std::string &filename)
     return true;
 }
 
-bool Translation::Import(const std::string& long_name, const std::string& short_name, const std::string& filename)
+bool Translation::import(const std::string& long_name, const std::string& short_name, const std::string& filename)
 {
     this->m_long_name = long_name;
     this->m_short_name = short_name;

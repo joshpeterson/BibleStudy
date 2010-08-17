@@ -53,10 +53,10 @@ public:
     BIBLE_DATABASE_EXPORT boost::shared_ptr<VerseTreeItem> get_verse_item_tree() const;
 
     //! Save the translation to a platform independent binary file.
-    BIBLE_DATABASE_EXPORT bool Save(const std::string& filename);
+    BIBLE_DATABASE_EXPORT bool save(const std::string& filename);
 
     //! Resume the translation from a platform independent binary file.
-    BIBLE_DATABASE_EXPORT bool Resume(const std::string& filename);
+    BIBLE_DATABASE_EXPORT bool resume(const std::string& filename);
     
     //! Import a translation of a given name from a text file.
     /*!
@@ -75,7 +75,7 @@ public:
 
         Note that after an import, a translation is not ready to be used.  It must be saved to and resumed from a binary file first.
     */
-    BIBLE_DATABASE_EXPORT bool Import(const std::string& long_name, const std::string& short_name, const std::string& filename);
+    BIBLE_DATABASE_EXPORT bool import(const std::string& long_name, const std::string& short_name, const std::string& filename);
 
 private:
     std::string m_long_name;

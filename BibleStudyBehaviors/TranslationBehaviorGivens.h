@@ -20,7 +20,7 @@ public:
         boost::filesystem::path translation_file = boost::filesystem::initial_path();
         translation_file /= "Translations/TT.buf";
 
-        m_translation->Resume(translation_file.file_string());
+        m_translation->resume(translation_file.file_string());
     }
 
     boost::shared_ptr<const Translation> get_translation() const

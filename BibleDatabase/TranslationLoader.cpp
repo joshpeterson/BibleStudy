@@ -19,7 +19,7 @@ boost::shared_ptr<const Translation> TranslationLoader::create_translation(std::
     translation_path /= translation_file;
 
     boost::shared_ptr<Translation> translation(new Translation);
-    if (translation->Resume(translation_path.string()))
+    if (translation->resume(translation_path.string()))
     {
         return translation;
     }
