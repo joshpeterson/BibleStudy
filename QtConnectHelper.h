@@ -12,4 +12,13 @@
         throw std::logic_error(error.str());\
     }\
 
+#define QT_DISCONNECT(sender, signal, receiver, slot)\
+    if (!QObject::disconnect(sender, signal, receiver, slot))\
+    {\
+        std::stringstream error;\
+        error << "Unable to cdisconnect signal " << signal << " from sender " << sender << " to slot " << slot << " on receiver " << receiver;\
+        throw std::logic_error(error.str());\
+    }\
+
+
 #endif  // __QT_SIGNAL_CONNECT_HELPER_H
