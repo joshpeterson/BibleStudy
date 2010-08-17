@@ -207,6 +207,7 @@ void UIBibleStudyWidget::load_translations()
 
     if (!m_translations_to_load.empty())
     {
+        this->setEnabled(false);
         start_next_translation_load();
     }
 }
@@ -226,6 +227,7 @@ void UIBibleStudyWidget::translation_loaded()
     }
     else
     {
+        this->setEnabled(true);
         emit translations_loaded();
     }
 }
