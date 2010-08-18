@@ -26,6 +26,9 @@ public:
     //! Create a new instance of the UIStarredVersesWidget class.
     UIStarredVersesWidget(boost::shared_ptr<StarredVersesModel> starred_verses_model, QWidget* parent = 0);
 
+    //! Listen to and process key presses.
+    void keyPressEvent(QKeyEvent* key_event);
+
 public slots:
     //! Add a verse to the collection of starred verses.
     void add_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
@@ -35,6 +38,15 @@ public slots:
 
     //! Get the verse at the given index and emit the verse_display_changed signal for that verse.
     void display_verse_text(const QModelIndex& index);
+
+    //! Copies the selected verses in the starred verses to the clipboard.
+    void copy_selected_verses();
+
+    //! Select all starred verses.
+    void select_all_verses();
+
+    //! Build and display context menu when the user right clicks on the search results.
+    void display_starred_verses_context_menu(const QPoint& position);
 
 signals:
     //! Signal other widgets that a new verse should be displayed.
