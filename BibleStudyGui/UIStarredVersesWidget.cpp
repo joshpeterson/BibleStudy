@@ -9,7 +9,7 @@
 #include <QApplication>
 #include "UIStarredVersesWidget.h"
 #include "StarredVersesModel.h"
-#include "BibleDatabase/VerseDisplay.h"
+#include "../BibleDatabase/VerseDisplay.h"
 #include "QtConnectHelper.h"
 
 using namespace BibleStudy;

@@ -1,9 +1,9 @@
 #include "BrowseVersesModel.h"
-#include "BibleDatabase/TranslationManager.h"
-#include "BibleDatabase/Translation.h"
-#include "BibleDatabase/Verse.h"
-#include "BibleDatabase/VerseTreeItem.h"
-#include "BibleDatabase/VerseDisplay.h"
+#include "../BibleDatabase/TranslationManager.h"
+#include "../BibleDatabase/Translation.h"
+#include "../BibleDatabase/Verse.h"
+#include "../BibleDatabase/VerseTreeItem.h"
+#include "../BibleDatabase/VerseDisplay.h"
 
 using namespace BibleStudy;
 using namespace BibleDatabase;

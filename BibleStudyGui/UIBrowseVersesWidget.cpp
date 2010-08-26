@@ -3,7 +3,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include "BrowseVersesModel.h"
-#include "BibleDatabase/VerseDisplay.h"
+#include "../BibleDatabase/VerseDisplay.h"
 #include "QtConnectHelper.h"
 //#include "BrowseVersesDelegate.h"
 

@@ -1,5 +1,5 @@
 #include "BackgroundWorker.h"
-#include "BibleDatabase/ICommand.h"
+#include "../BibleDatabase/ICommand.h"
 
 using namespace BibleStudy;
 using namespace BibleDatabase;

@@ -1,9 +1,9 @@
 #include <vector>
 #include <boost/shared_ptr.hpp>
 #include "SearchResultsModel.h"
-#include "BibleDatabase/TranslationManager.h"
-#include "BibleDatabase/Verse.h"
-#include "BibleDatabase/VerseDisplay.h"
+#include "../BibleDatabase/TranslationManager.h"
+#include "../BibleDatabase/Verse.h"
+#include "../BibleDatabase/VerseDisplay.h"
 
 using namespace BibleStudy;
 using namespace BibleDatabase;

@@ -2,8 +2,8 @@
 #define __SEARCH_RESULTS_MODEL_H
 
 #include <QAbstractTableModel>
-#include "BibleDatabase/Translation.h"
-#include "BibleDatabase/ISearchResults.h"
+#include "../BibleDatabase/Translation.h"
+#include "../BibleDatabase/ISearchResults.h"
 
 namespace BibleDatabase
 {
