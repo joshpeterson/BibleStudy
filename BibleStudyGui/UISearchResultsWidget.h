@@ -21,7 +21,7 @@ class ISearchResults;
 class VerseDisplay;
 }
 
-namespace BibleStudy
+namespace BibleStudyGui
 {
 
 class SearchResultsModel;

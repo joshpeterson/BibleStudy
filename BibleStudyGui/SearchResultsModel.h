@@ -11,7 +11,7 @@ class VerseDisplay;
 class TranslationManager;
 }
 
-namespace BibleStudy
+namespace BibleStudyGui
 {
 
 //! This class is an implementation of a model from the Qt Model/View framework for a table view which displays the results of a search.

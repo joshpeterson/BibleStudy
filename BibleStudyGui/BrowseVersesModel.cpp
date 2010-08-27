@@ -5,7 +5,7 @@
 #include "../BibleDatabase/VerseTreeItem.h"
 #include "../BibleDatabase/VerseDisplay.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 BrowseVersesModel::BrowseVersesModel(boost::shared_ptr<const TranslationManager> translation_manager, QObject *parent) :

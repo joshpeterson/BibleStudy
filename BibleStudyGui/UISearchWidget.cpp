@@ -15,7 +15,7 @@
 #include "QtConnectHelper.h"
 #include "BackgroundWorker.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> translation_manager, QWidget* parent) : 

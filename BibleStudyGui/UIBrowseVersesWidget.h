@@ -12,7 +12,7 @@ namespace BibleDatabase
 class VerseDisplay;
 }
 
-namespace BibleStudy
+namespace BibleStudyGui
 {
 
 class BrowseVersesModel;

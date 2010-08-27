@@ -20,7 +20,7 @@ class VerseDisplay;
 class ICommand;
 }
 
-namespace BibleStudy
+namespace BibleStudyGui
 {
 
 class SearchResultsModel;
@@ -38,7 +38,7 @@ class BackgroundWorker;
     This widget owns all of the other widgets in the application.  It also defines the layout
     of the application.
 */
-class UIBibleStudyWidget : public QMainWindow
+class Q_DECL_EXPORT UIBibleStudyWidget : public QMainWindow
 {
     Q_OBJECT
 

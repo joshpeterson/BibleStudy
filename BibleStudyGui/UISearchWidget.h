@@ -19,7 +19,7 @@ class Translation;
 class ICommand;
 }
 
-namespace BibleStudy
+namespace BibleStudyGui
 {
 
 class BackgroundWorker;

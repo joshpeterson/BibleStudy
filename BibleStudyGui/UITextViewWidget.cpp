@@ -10,7 +10,7 @@
 #include "StarredVersesModel.h"
 #include "QtConnectHelper.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 UITextViewWidget::UITextViewWidget(boost::shared_ptr<const TranslationManager> translation_manager,

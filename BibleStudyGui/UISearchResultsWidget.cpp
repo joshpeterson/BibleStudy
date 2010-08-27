@@ -18,7 +18,7 @@
 #include "../BibleDatabase/VerseDisplay.h"
 #include "QtConnectHelper.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 UISearchResultsWidget::UISearchResultsWidget(boost::shared_ptr<SearchResultsModel> results_model,

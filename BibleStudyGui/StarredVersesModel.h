@@ -11,7 +11,7 @@ class TranslationManager;
 class VerseDisplay;
 }
 
-namespace BibleStudy
+namespace BibleStudyGui
 {
 
 //! This class is an implementation of a model from the Qt Model/View framework for a list view which represents the verses the user has starred.

@@ -30,7 +30,7 @@
 #include "QtConnectHelper.h"
 #include "BackgroundWorker.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> translation_manager, boost::shared_ptr<const BibleDatabase::TranslationLoader> translation_loader) :
