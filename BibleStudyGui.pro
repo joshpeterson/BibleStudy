@@ -24,6 +24,8 @@ SOURCES += BibleStudyGui/BrowseVersesModel.cpp
 SOURCES += BibleStudyGui/UIBrowseVersesWidget.cpp
 SOURCES += BibleStudyGui/BackgroundWorker.cpp
 
+DEFINES += _EXPORTING_BIBLE_STUDY_GUI
+
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
 
