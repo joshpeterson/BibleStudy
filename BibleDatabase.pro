@@ -32,6 +32,8 @@ SOURCES += BibleDatabase/TranslationLoader.cpp
 SOURCES += BibleDatabase/SearchStringParser.cpp
 SOURCES += BibleDatabase/CommandLoadTranslation.cpp
 
+DEFINES += _EXPORTING_BIBLE_DATABASE
+
 win32 {  
     QMAKE_CXXFLAGS_DEBUG += /wd4996
     QMAKE_CXXFLAGS_DEBUG += /wd4251
@@ -44,8 +46,6 @@ win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
     INCLUDEPATH += "$$(GOOGLE_PROTOBUF_DIR)\include"
     
-    DEFINES += _EXPORTING
-
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
         LIBS += -L"$$(BOOST_DIR)\lib"

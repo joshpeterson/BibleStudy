@@ -9,7 +9,7 @@ namespace BibleDatabase
     class ICommand;
 }
 
-namespace BibleStudy
+namespace BibleStudyGui
 {
 
 //! This class executes a given command on a background thread.  Call QThread::start() to start the worker.

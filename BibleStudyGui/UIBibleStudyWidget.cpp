@@ -13,11 +13,11 @@
 #include <QKeySequence>
 #include <QMessageBox>
 #include <QTimer>
-#include "BibleDatabase/Translation.h"
-#include "BibleDatabase/TranslationManager.h"
-#include "BibleDatabase/TranslationLoader.h"
-#include "BibleDatabase/ICommand.h"
-#include "BibleDatabase/CommandLoadTranslation.h"
+#include "../BibleDatabase/Translation.h"
+#include "../BibleDatabase/TranslationManager.h"
+#include "../BibleDatabase/TranslationLoader.h"
+#include "../BibleDatabase/ICommand.h"
+#include "../BibleDatabase/CommandLoadTranslation.h"
 #include "SearchResultsModel.h"
 #include "StarredVersesModel.h"
 #include "BrowseVersesModel.h"
@@ -30,7 +30,7 @@
 #include "QtConnectHelper.h"
 #include "BackgroundWorker.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> translation_manager, boost::shared_ptr<const BibleDatabase::TranslationLoader> translation_loader) :

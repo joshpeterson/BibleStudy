@@ -1,12 +1,12 @@
 #include <limits.h>
 #include <boost/lambda/lambda.hpp>
 #include "StarredVersesModel.h"
-#include "BibleDatabase/TranslationManager.h"
-#include "BibleDatabase/Translation.h"
-#include "BibleDatabase/VerseDisplay.h"
+#include "../BibleDatabase/TranslationManager.h"
+#include "../BibleDatabase/Translation.h"
+#include "../BibleDatabase/VerseDisplay.h"
 
 using namespace boost::lambda;
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 StarredVersesModel::StarredVersesModel(boost::shared_ptr<const TranslationManager> translation_manager) :

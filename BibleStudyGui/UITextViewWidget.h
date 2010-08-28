@@ -14,7 +14,7 @@ class TranslationManager;
 class VerseDisplay;
 }
 
-namespace BibleStudy
+namespace BibleStudyGui
 {
 
 class StarredVersesModel;

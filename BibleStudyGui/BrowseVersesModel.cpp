@@ -1,11 +1,11 @@
 #include "BrowseVersesModel.h"
-#include "BibleDatabase/TranslationManager.h"
-#include "BibleDatabase/Translation.h"
-#include "BibleDatabase/Verse.h"
-#include "BibleDatabase/VerseTreeItem.h"
-#include "BibleDatabase/VerseDisplay.h"
+#include "../BibleDatabase/TranslationManager.h"
+#include "../BibleDatabase/Translation.h"
+#include "../BibleDatabase/Verse.h"
+#include "../BibleDatabase/VerseTreeItem.h"
+#include "../BibleDatabase/VerseDisplay.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 BrowseVersesModel::BrowseVersesModel(boost::shared_ptr<const TranslationManager> translation_manager, QObject *parent) :

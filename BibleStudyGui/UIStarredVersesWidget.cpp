@@ -9,10 +9,10 @@
 #include <QApplication>
 #include "UIStarredVersesWidget.h"
 #include "StarredVersesModel.h"
-#include "BibleDatabase/VerseDisplay.h"
+#include "../BibleDatabase/VerseDisplay.h"
 #include "QtConnectHelper.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 UIStarredVersesWidget::UIStarredVersesWidget(boost::shared_ptr<StarredVersesModel> starred_verses_model,

@@ -1,20 +1,17 @@
 #include <iostream>
 #include <stdexcept>
-#include "BibleDatabase/Translation.h"
-#include "BibleDatabase/TranslationManager.h"
-#include "BibleDatabase/TranslationLoader.h"
-#include "UISearchWidget.h"
-#include "SearchResultsModel.h"
-#include "UISearchResultsWidget.h"
-#include "UIBibleStudyWidget.h"
 #include <QApplication>
 #include <QPushButton>
 #include <QAbstractItemModel>
 #include <QTableView>
 #include <QHeaderView>
 #include <QVBoxLayout>
+#include "BibleDatabase/Translation.h"
+#include "BibleDatabase/TranslationManager.h"
+#include "BibleDatabase/TranslationLoader.h"
+#include "BibleStudyGui/UIBibleStudyWidget.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 int main(int argc, char* argv[])

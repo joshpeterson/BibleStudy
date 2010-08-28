@@ -3,11 +3,11 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include "BrowseVersesModel.h"
-#include "BibleDatabase/VerseDisplay.h"
+#include "../BibleDatabase/VerseDisplay.h"
 #include "QtConnectHelper.h"
 //#include "BrowseVersesDelegate.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
 using namespace BibleDatabase;
 
 UIBrowseVersesWidget::UIBrowseVersesWidget(boost::shared_ptr<BrowseVersesModel> browse_model, QWidget *parent) :

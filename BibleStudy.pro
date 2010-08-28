@@ -1,29 +1,7 @@
 TEMPLATE = app
 CONFIG += windows qt thread exceptions stl debug_and_release
 
-HEADERS += SearchResultsModel.h
-HEADERS += UISearchWidget.h
-HEADERS += UISearchResultsWidget.h
-HEADERS += UIBibleStudyWidget.h
-HEADERS += UITextViewWidget.h
-HEADERS += UIStarredVersesWidget.h
-HEADERS += StarredVersesModel.h
-HEADERS += BrowseVersesModel.h
-HEADERS += UIBrowseVersesWidget.h
-HEADERS += QtConnectHelper.h
-HEADERS += BackgroundWorker.h
-
 SOURCES += BibleStudy.cpp
-SOURCES += SearchResultsModel.cpp
-SOURCES += UISearchWidget.cpp
-SOURCES += UISearchResultsWidget.cpp
-SOURCES += UIBibleStudyWidget.cpp
-SOURCES += UITextViewWidget.cpp
-SOURCES += UIStarredVersesWidget.cpp
-SOURCES += StarredVersesModel.cpp
-SOURCES += BrowseVersesModel.cpp
-SOURCES += UIBrowseVersesWidget.cpp
-SOURCES += BackgroundWorker.cpp
 
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
@@ -33,6 +11,7 @@ win32 {
         LIBS += -L"$$(BOOST_DIR)\lib"
         LIBS += -L"debug"
 	    LIBS += "BibleDatabase.lib"
+	    LIBS += BibleStudyGui.lib"
      }
 
 # Release mode specific settings
@@ -40,5 +19,6 @@ win32 {
         LIBS += -L"$$(BOOST_DIR)\lib"
         LIBS += -L"release"
 	    LIBS += "BibleDatabase.lib"
+	    LIBS += "BibleStudyGui.lib"
     }
 }

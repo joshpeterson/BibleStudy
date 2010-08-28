@@ -2,8 +2,8 @@
 #define __SEARCH_RESULTS_MODEL_H
 
 #include <QAbstractTableModel>
-#include "BibleDatabase/Translation.h"
-#include "BibleDatabase/ISearchResults.h"
+#include "../BibleDatabase/Translation.h"
+#include "../BibleDatabase/ISearchResults.h"
 
 namespace BibleDatabase
 {
@@ -11,7 +11,7 @@ class VerseDisplay;
 class TranslationManager;
 }
 
-namespace BibleStudy
+namespace BibleStudyGui
 {
 
 //! This class is an implementation of a model from the Qt Model/View framework for a table view which displays the results of a search.
