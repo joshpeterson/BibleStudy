@@ -5,7 +5,7 @@ if "%BOOST_DIR%" == "" goto :boosterror
 if "%GOOGLE_PROTOBUF_DIR%" == "" goto :protobuferror
 
 set PATH=%QT_DIR%\bin;%PATH%
-set QMAKESPEC=win32-msvc2005
+set QMAKESPEC=win32-msvc2008
 
 qmake -Wall -tp vc BibleDatabase.pro
 qmake -Wall -tp vc BibleDatabaseBehaviors.pro
