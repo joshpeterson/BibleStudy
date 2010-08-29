@@ -1,5 +1,7 @@
 TEMPLATE = app
-CONFIG += console qt thread exceptions stl debug_and_release
+CONFIG += console exceptions stl debug_and_release
+CONFIG -= qt
+QT -= core gui
 
 HEADERS += BibleDatabaseBehaviors/BehaviorDrivenDesign.h
 HEADERS += BibleDatabaseBehaviors/BehaviorDrivenDesignTest.h
