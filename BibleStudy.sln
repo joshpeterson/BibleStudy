@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual C++ Express 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BibleStudy", "BibleStudy.vcproj", "{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}"
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BibleStudy", "BibleStudy.vcproj", "{5604AA47-C821-3811-9C8E-904C90F17F3C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2C7C276B-5AF6-3783-8061-AF01895828B8} = {2C7C276B-5AF6-3783-8061-AF01895828B8}
 		{CF62A85A-EDA4-3913-B6F1-76AF0AB100F8} = {CF62A85A-EDA4-3913-B6F1-76AF0AB100F8}
@@ -29,18 +29,18 @@ Global
 		Static-Release|Win32 = Static-Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Debug|Win32.ActiveCfg = Debug|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Debug|Win32.Build.0 = Debug|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Release|Win32.ActiveCfg = Release|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Release|Win32.Build.0 = Release|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Shared-Debug|Win32.ActiveCfg = Debug|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Shared-Debug|Win32.Build.0 = Debug|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Shared-Release|Win32.ActiveCfg = Release|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Shared-Release|Win32.Build.0 = Release|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Static-Debug|Win32.ActiveCfg = Debug|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Static-Debug|Win32.Build.0 = Debug|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Static-Release|Win32.ActiveCfg = Release|Win32
-		{AB4F659B-2ADF-4350-ACF1-0745AEA289D6}.Static-Release|Win32.Build.0 = Release|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Debug|Win32.Build.0 = Debug|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Release|Win32.ActiveCfg = Release|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Release|Win32.Build.0 = Release|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Shared-Debug|Win32.ActiveCfg = Debug|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Shared-Debug|Win32.Build.0 = Debug|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Shared-Release|Win32.ActiveCfg = Release|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Shared-Release|Win32.Build.0 = Release|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Static-Debug|Win32.ActiveCfg = Debug|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Static-Debug|Win32.Build.0 = Debug|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Static-Release|Win32.ActiveCfg = Release|Win32
+		{5604AA47-C821-3811-9C8E-904C90F17F3C}.Static-Release|Win32.Build.0 = Release|Win32
 		{CF62A85A-EDA4-3913-B6F1-76AF0AB100F8}.Debug|Win32.ActiveCfg = Debug|Win32
 		{CF62A85A-EDA4-3913-B6F1-76AF0AB100F8}.Debug|Win32.Build.0 = Debug|Win32
 		{CF62A85A-EDA4-3913-B6F1-76AF0AB100F8}.Release|Win32.ActiveCfg = Release|Win32
