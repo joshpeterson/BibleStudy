@@ -7,7 +7,7 @@
 
 using namespace BehaviorDrivenDesign;
 
-namespace BibleStudyBehaviors
+namespace BibleDatabaseBehaviors
 {
 
 class TestGiven : public IGiven

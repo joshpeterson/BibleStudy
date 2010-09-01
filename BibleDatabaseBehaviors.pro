@@ -1,15 +1,17 @@
 TEMPLATE = app
-CONFIG += console qt thread exceptions stl debug_and_release
+CONFIG += console exceptions stl debug_and_release
+CONFIG -= qt
+QT -= core gui
 
-HEADERS += BibleStudyBehaviors/BehaviorDrivenDesign.h
-HEADERS += BibleStudyBehaviors/BehaviorDrivenDesignTest.h
-HEADERS += BibleStudyBehaviors/TranslationLoaderBehavior.h
-HEADERS += BibleStudyBehaviors/TranslationBehaviorGivens.h
-HEADERS += BibleStudyBehaviors/TranslationFirstAndLastVerseBehavior.h
-HEADERS += BibleStudyBehaviors/TranslationSearchBehavior.h
-HEADERS += BibleStudyBehaviors/SearchStringParserBehavior.h
+HEADERS += BibleDatabaseBehaviors/BehaviorDrivenDesign.h
+HEADERS += BibleDatabaseBehaviors/BehaviorDrivenDesignTest.h
+HEADERS += BibleDatabaseBehaviors/TranslationLoaderBehavior.h
+HEADERS += BibleDatabaseBehaviors/TranslationBehaviorGivens.h
+HEADERS += BibleDatabaseBehaviors/TranslationFirstAndLastVerseBehavior.h
+HEADERS += BibleDatabaseBehaviors/TranslationSearchBehavior.h
+HEADERS += BibleDatabaseBehaviors/SearchStringParserBehavior.h
 
-SOURCES += BibleStudyBehaviors/BibleStudyBehaviors.cpp
+SOURCES += BibleDatabaseBehaviors/BibleDatabaseBehaviors.cpp
 
 win32 {
     QMAKE_CXXFLAGS_DEBUG += /wd4100

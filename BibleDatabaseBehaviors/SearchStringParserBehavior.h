@@ -10,7 +10,7 @@
 using namespace BehaviorDrivenDesign;
 using namespace BibleDatabase;
 
-namespace BibleStudyBehaviors
+namespace BibleDatabaseBehaviors
 {
 
 class DefaultSearchStringParser : public IGiven

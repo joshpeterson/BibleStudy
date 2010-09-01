@@ -1,5 +1,5 @@
 TEMPLATE = lib
-CONFIG += dll stl debug_and_release
+CONFIG += dll stl debug_and_release console
 CONFIG -= qt
 QT -= core gui
 

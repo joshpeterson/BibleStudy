@@ -7,7 +7,7 @@
 #include "TranslationSearchBehavior.h"
 #include "SearchStringParserBehavior.h"
 
-using namespace BibleStudyBehaviors;
+using namespace BibleDatabaseBehaviors;
 using namespace BibleDatabase;
 
 CPPUNIT_TEST_SUITE_REGISTRATION(BehaviorDrivenDesignTest);
