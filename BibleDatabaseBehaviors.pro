@@ -10,6 +10,7 @@ HEADERS += BibleDatabaseBehaviors/TranslationBehaviorGivens.h
 HEADERS += BibleDatabaseBehaviors/TranslationFirstAndLastVerseBehavior.h
 HEADERS += BibleDatabaseBehaviors/TranslationSearchBehavior.h
 HEADERS += BibleDatabaseBehaviors/SearchStringParserBehavior.h
+HEADERS += BibleDatabaseBehaviors/VerseDisplayBehavior.h
 
 SOURCES += BibleDatabaseBehaviors/BibleDatabaseBehaviors.cpp
 

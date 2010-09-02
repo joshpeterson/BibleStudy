@@ -6,6 +6,7 @@
 #include "TranslationFirstAndLastVerseBehavior.h"
 #include "TranslationSearchBehavior.h"
 #include "SearchStringParserBehavior.h"
+#include "VerseDisplayBehavior.h"
 
 using namespace BibleDatabaseBehaviors;
 using namespace BibleDatabase;
@@ -15,6 +16,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(TranslationLoaderBehavior);
 CPPUNIT_TEST_SUITE_REGISTRATION(TranslationFirstAndLastVerseBehavior);
 CPPUNIT_TEST_SUITE_REGISTRATION(TranslationSearchBehavior);
 CPPUNIT_TEST_SUITE_REGISTRATION(SearchStringParserBehavior);
+CPPUNIT_TEST_SUITE_REGISTRATION(VerseDisplayBehavior);
 
 int main()
 {
