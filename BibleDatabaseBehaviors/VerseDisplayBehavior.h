@@ -1,6 +1,8 @@
 #ifndef __VERSE_DISPLAY_BEHAVIOR_H
 #define __VERSE_DISPLAY_BEHAVIOR_H
 
+#include <string>
+#include <sstream>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include "BehaviorDrivenDesign.h"
@@ -51,6 +53,23 @@ private:
 	bool m_comparison_result;
 };
 
+class VerseDisplayIsSerialized : public IWhen
+{
+public:
+	void occurs(const World& world)
+	{
+		world.GetGiven<VerseDisplayObject>()->get_verse_display()->serialize(m_serialized_verse);
+	}
+
+	std::string get_serialized_verse_display() const
+	{
+		return m_serialized_verse.str();
+	}
+
+private:
+	std::stringstream m_serialized_verse;
+};
+
 class VerseDisplayObjectsAreEqual : public IThen
 {
 public:
@@ -80,6 +99,15 @@ public:
 	}
 };
 
+class VerseSerializationIsCorrect : public IThen
+{
+public:
+	void ensure_that(const World& world)
+	{
+		CPPUNIT_ASSERT_EQUAL(std::string("Test Translation:101:3"), world.GetWhen<VerseDisplayIsSerialized>()->get_serialized_verse_display());
+	}
+};
+
 class VerseDisplayBehavior : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(VerseDisplayBehavior);
@@ -88,6 +116,7 @@ class VerseDisplayBehavior : public CppUnit::TestFixture
     CPPUNIT_TEST(shouldTreatVerseDisplayObjectsWithDifferentTranslationsAsNotEqual);
     CPPUNIT_TEST(shouldTreatVerseDisplayObjectsWithDifferentVerseIdsAsNotEqual);
     CPPUNIT_TEST(shouldTreatVerseDisplayObjectsWithDifferentContextsAsEqual);
+    CPPUNIT_TEST(shouldSerializeVerseDisplayObject);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -139,6 +168,15 @@ public:
         world.Given<VerseDisplayObject>();
 		world.When<ComparedTo>(verse_display);
         world.Then<VerseDisplayObjectsAreEqual>();
+    }
+
+	void shouldSerializeVerseDisplayObject()
+    {
+        World world;
+
+        world.Given<VerseDisplayObject>();
+		world.When<VerseDisplayIsSerialized>();
+        world.Then<VerseSerializationIsCorrect>();
     }
 };
 

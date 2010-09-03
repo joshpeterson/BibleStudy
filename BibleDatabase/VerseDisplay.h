@@ -2,6 +2,7 @@
 #define __VERSE_DISPLAY_H
 
 #include <string>
+#include <ostream>
 #include "BibleDatabaseExporter.h"
 
 namespace BibleDatabase
@@ -25,6 +26,9 @@ public:
 
     //! Determine if this VerseDisplay instance has the same data as another instance.  Note that this does not test the number of context verses.
     BIBLE_DATABASE_EXPORT bool operator==(const VerseDisplay& other) const;
+
+	//! Serialize this VerseDisplay object to a stream.
+	BIBLE_DATABASE_EXPORT void serialize(std::ostream& stream) const;
 
 private:
     std::string m_translation;

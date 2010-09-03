@@ -28,3 +28,8 @@ bool VerseDisplay::operator==(const VerseDisplay& other) const
     return m_verse_id == other.get_verse_id() && m_translation == other.get_translation();
 }
 
+void VerseDisplay::serialize(std::ostream& stream) const
+{
+	stream << m_translation << ":" << m_verse_id << ":" << m_num_verses_context;
+}
+
