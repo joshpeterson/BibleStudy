@@ -60,6 +60,17 @@ public:
 	}
 };
 
+class VerseDisplayHasCorrectProperties : public IThen
+{
+public:
+	void ensure_that(const World& world)
+	{
+		CPPUNIT_ASSERT_EQUAL(std::string("Test Translation"), world.GetGiven<VerseDisplayObject>()->get_verse_display()->get_translation());
+		CPPUNIT_ASSERT_EQUAL(101, world.GetGiven<VerseDisplayObject>()->get_verse_display()->get_verse_id());
+		CPPUNIT_ASSERT_EQUAL(3, world.GetGiven<VerseDisplayObject>()->get_verse_display()->get_num_verses_context());
+	}
+};
+
 class VerseDisplayObjectsAreNotEqual : public IThen
 {
 public:
@@ -72,6 +83,7 @@ public:
 class VerseDisplayBehavior : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(VerseDisplayBehavior);
+    CPPUNIT_TEST(shouldSetPropertiesCorrectly);
     CPPUNIT_TEST(shouldTreatTheSameVerseDisplayObjectsAsEqual);
     CPPUNIT_TEST(shouldTreatVerseDisplayObjectsWithDifferentTranslationsAsNotEqual);
     CPPUNIT_TEST(shouldTreatVerseDisplayObjectsWithDifferentVerseIdsAsNotEqual);
@@ -79,6 +91,14 @@ class VerseDisplayBehavior : public CppUnit::TestFixture
     CPPUNIT_TEST_SUITE_END();
 
 public:
+	void shouldSetPropertiesCorrectly()
+	{
+		World world;
+
+        world.Given<VerseDisplayObject>();
+		world.Then<VerseDisplayHasCorrectProperties>();
+	}
+
     void shouldTreatTheSameVerseDisplayObjectsAsEqual()
     {
         World world;
