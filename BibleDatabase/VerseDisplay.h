@@ -2,6 +2,7 @@
 #define __VERSE_DISPLAY_H
 
 #include <string>
+#include <istream>
 #include <ostream>
 #include "BibleDatabaseExporter.h"
 
@@ -14,6 +15,9 @@ class VerseDisplay
 public:
     //! Create a new instance of the VerseDisplay class.
     BIBLE_DATABASE_EXPORT VerseDisplay(std::string translation, int verse_id, int num_verses_context);
+
+	//! Create a new instance of the VerseDisplay class from a stream.
+    BIBLE_DATABASE_EXPORT VerseDisplay(std::string stream);
 
     //! Get the long name of the Translation object for this instance.
     BIBLE_DATABASE_EXPORT std::string get_translation() const;

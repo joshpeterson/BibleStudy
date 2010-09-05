@@ -31,6 +31,26 @@ private:
 	boost::shared_ptr<VerseDisplay> m_verse_display;
 };
 
+class SerializedVerseDisplay : public IGiven
+{
+public:
+	SerializedVerseDisplay() {}
+
+	SerializedVerseDisplay(std::string serialized_verse_display) : m_serialized_verse_display(serialized_verse_display) {}
+
+	void setup (const World& world)
+	{
+	}
+
+	std::string get_serialized_verse_display() const
+	{
+		return m_serialized_verse_display;
+	}
+
+private:
+	std::string m_serialized_verse_display;
+};
+
 class ComparedTo : public IWhen
 {
 public:
@@ -68,6 +88,23 @@ public:
 
 private:
 	std::stringstream m_serialized_verse;
+};
+
+class VerseDisplayIsDeserialized : public IWhen
+{
+public:
+	void occurs(const World& world)
+	{
+		m_verse_display = boost::make_shared<VerseDisplay>(world.GetGiven<SerializedVerseDisplay>()->get_serialized_verse_display());
+	}
+
+	boost::shared_ptr<VerseDisplay> get_verse_display() const
+	{
+		return m_verse_display;
+	}
+
+private:
+	boost::shared_ptr<VerseDisplay> m_verse_display;
 };
 
 class VerseDisplayObjectsAreEqual : public IThen
@@ -108,6 +145,17 @@ public:
 	}
 };
 
+class VerseDeserializationIsCorrect : public IThen
+{
+public:
+	void ensure_that(const World& world)
+	{
+		CPPUNIT_ASSERT_EQUAL(std::string("Test Translation"), world.GetWhen<VerseDisplayIsDeserialized>()->get_verse_display()->get_translation());
+		CPPUNIT_ASSERT_EQUAL(101, world.GetWhen<VerseDisplayIsDeserialized>()->get_verse_display()->get_verse_id());
+		CPPUNIT_ASSERT_EQUAL(3, world.GetWhen<VerseDisplayIsDeserialized>()->get_verse_display()->get_num_verses_context());
+	}
+};
+
 class VerseDisplayBehavior : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(VerseDisplayBehavior);
@@ -117,6 +165,8 @@ class VerseDisplayBehavior : public CppUnit::TestFixture
     CPPUNIT_TEST(shouldTreatVerseDisplayObjectsWithDifferentVerseIdsAsNotEqual);
     CPPUNIT_TEST(shouldTreatVerseDisplayObjectsWithDifferentContextsAsEqual);
     CPPUNIT_TEST(shouldSerializeVerseDisplayObject);
+    CPPUNIT_TEST(shouldDeserializeVerseDisplayObject);
+	CPPUNIT_TEST_EXCEPTION(shouldThrowExceptionWhenSerializedVerseDisplayIsBad, std::invalid_argument);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -177,6 +227,23 @@ public:
         world.Given<VerseDisplayObject>();
 		world.When<VerseDisplayIsSerialized>();
         world.Then<VerseSerializationIsCorrect>();
+    }
+
+	void shouldDeserializeVerseDisplayObject()
+    {
+        World world;
+
+        world.Given<SerializedVerseDisplay>("Test Translation:101:3");
+		world.When<VerseDisplayIsDeserialized>();
+        world.Then<VerseDeserializationIsCorrect>();
+    }
+
+	void shouldThrowExceptionWhenSerializedVerseDisplayIsBad()
+    {
+        World world;
+
+		world.Given<SerializedVerseDisplay>("Test Translation:101:3:4");
+		world.When<VerseDisplayIsDeserialized>();
     }
 };
 
