@@ -2,7 +2,6 @@
 #define __VERSE_DISPLAY_BEHAVIOR_H
 
 #include <string>
-#include <sstream>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include "BehaviorDrivenDesign.h"
@@ -78,16 +77,16 @@ class VerseDisplayIsSerialized : public IWhen
 public:
 	void occurs(const World& world)
 	{
-		world.GetGiven<VerseDisplayObject>()->get_verse_display()->serialize(m_serialized_verse);
+		m_serialized_verse = world.GetGiven<VerseDisplayObject>()->get_verse_display()->serialize();
 	}
 
 	std::string get_serialized_verse_display() const
 	{
-		return m_serialized_verse.str();
+		return m_serialized_verse;
 	}
 
 private:
-	std::stringstream m_serialized_verse;
+	std::string m_serialized_verse;
 };
 
 class VerseDisplayIsDeserialized : public IWhen

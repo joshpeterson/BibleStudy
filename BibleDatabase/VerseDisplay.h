@@ -2,8 +2,6 @@
 #define __VERSE_DISPLAY_H
 
 #include <string>
-#include <istream>
-#include <ostream>
 #include "BibleDatabaseExporter.h"
 
 namespace BibleDatabase
@@ -32,7 +30,7 @@ public:
     BIBLE_DATABASE_EXPORT bool operator==(const VerseDisplay& other) const;
 
 	//! Serialize this VerseDisplay object to a stream.
-	BIBLE_DATABASE_EXPORT void serialize(std::ostream& stream) const;
+	BIBLE_DATABASE_EXPORT std::string serialize() const;
 
 private:
     std::string m_translation;

@@ -40,6 +40,7 @@ class UIStarredVersesWidget;
 class UITextViewWidget;
 class UIBrowseVersesWidget;
 class BackgroundWorker;
+class ProjectFileWriter;
 
 //! This class is the GUI respresentation of the top level widget for the application.
 /*!
@@ -96,6 +97,8 @@ private:
     boost::shared_ptr<SearchResultsModel> m_results_model;
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
     boost::shared_ptr<BrowseVersesModel> m_browse_verses_model;
+
+    boost::shared_ptr<ProjectFileWriter> m_project_file_writer;
 
     QWidget* m_dummy_central_widget;
     QTabWidget* m_tabs;

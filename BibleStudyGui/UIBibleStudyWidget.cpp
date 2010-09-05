@@ -29,6 +29,7 @@
 #include "UIBrowseVersesWidget.h"
 #include "QtConnectHelper.h"
 #include "BackgroundWorker.h"
+#include "ProjectFileWriter.h"
 
 using namespace BibleStudyGui;
 using namespace BibleDatabase;
@@ -41,6 +42,7 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> tra
     m_results_model(new SearchResultsModel(translation_manager)),
     m_starred_verses_model(new StarredVersesModel(translation_manager)),
     m_browse_verses_model(new BrowseVersesModel(translation_manager)),
+    m_project_file_writer(new ProjectFileWriter),
     m_dummy_central_widget(new QWidget(this)),
     m_tabs(new QTabWidget()),
     m_search(new UISearchWidget(translation_manager)),
@@ -57,6 +59,8 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> tra
     this->initialize_status_bar();
     this->initialize_actions();
     this->initialize_menus();
+
+    m_project_file_writer->start();
 
     m_translation_load_timer->start(m_translation_load_timeout_ms);
 }

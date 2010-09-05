@@ -1,5 +1,6 @@
 #include <vector>
 #include <stdexcept>
+#include <sstream>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/lexical_cast.hpp>
@@ -49,8 +50,11 @@ bool VerseDisplay::operator==(const VerseDisplay& other) const
     return m_verse_id == other.get_verse_id() && m_translation == other.get_translation();
 }
 
-void VerseDisplay::serialize(std::ostream& stream) const
+std::string VerseDisplay::serialize() const
 {
+	std::stringstream stream;
 	stream << m_translation << ":" << m_verse_id << ":" << m_num_verses_context;
+
+	return stream.str();
 }
 
