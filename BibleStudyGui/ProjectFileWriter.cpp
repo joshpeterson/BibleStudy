@@ -1,6 +1,5 @@
 #include <boost/make_shared.hpp>
 #include <QFile>
-#include <QTemporaryFile>
 #include <QTimer>
 #include <QIODevice>
 #include <QTextStream>
@@ -13,7 +12,6 @@ using namespace BibleStudyGui;
 
 ProjectFileWriter::ProjectFileWriter() :
 	m_abort(false),
-	m_project_file(new QTemporaryFile),
 	m_project_file_version(1),
 	m_project_file_save_timer(new QTimer),
     m_project_file_save_timeout_ms(1000)
@@ -44,14 +42,21 @@ void ProjectFileWriter::run()
 			return;
 		}
 
-		save_project_file();
+		if (m_project_file != NULL)
+		{
+			save_project_file();
+		}
 	}
 }
 
 void ProjectFileWriter::set_project_file_path(QString project_file_path)
 {
 	QMutexLocker lock(&m_save_project_file_mutex);
-	m_project_file->copy(project_file_path);
+
+	if (m_project_file != NULL)
+	{
+		m_project_file->copy(project_file_path);
+	}
 
 	m_project_file = boost::make_shared<QFile>(project_file_path);
 }
