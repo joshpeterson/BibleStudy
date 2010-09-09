@@ -19,7 +19,8 @@ private:
 	bool m_match_case;
 	bool m_whole_word;
 	std::vector<QString> m_selected_translations;
-}
+};
+
 }
 
 #endif __PROJECT_FILE_DATA_H
