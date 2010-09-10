@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <QString>
+#include "ISerializable.h"
 
 namespace BibleDatabase
 {
@@ -12,11 +13,16 @@ class VerseDisplay;
 namespace BibleStudyGui
 {
 
-class StarredVersesPersistenceState
+//! This class stores all of the data necessary to persist the state of the starred verses.
+class StarredVersesPersistenceState : public ISerializable
 {
 public:
+	//! Create a new instance of the StarredVersesPersistenceState class.
 	StarredVersesPersistenceState(std::vector<BibleDatabase::VerseDisplay> starred_verses);
+	
+	// ISerializable
 
+	//! This method is the implementation of ISerializable.  It serializes the object to a string.
 	QString serialize() const;
 
 private:

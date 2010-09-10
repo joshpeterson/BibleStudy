@@ -26,8 +26,6 @@ SearchPersistenceState::SearchPersistenceState(QString search_string, bool match
 		{
 			search_state_stream << *it << " ";
 		}
-
-		search_state_stream << "\n";
 	}
 
 	return serialized_search_state;

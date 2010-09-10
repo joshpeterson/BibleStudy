@@ -16,6 +16,7 @@ HEADERS += BibleStudyGui/ProjectFileWriter.h
 HEADERS += BibleStudyGui/QMutexLocker.h
 HEADERS += BibleStudyGui/SearchPersistenceState.h
 HEADERS += BibleStudyGui/StarredVersesPersistenceState.h
+HEADERS += BibleStudyGui/ISerializable.h
 
 SOURCES += BibleStudyGui/SearchResultsModel.cpp
 SOURCES += BibleStudyGui/UISearchWidget.cpp

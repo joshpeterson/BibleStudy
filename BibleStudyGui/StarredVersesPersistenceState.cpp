@@ -21,7 +21,6 @@ QString StarredVersesPersistenceState::serialize() const
 		{
 			starred_verses_state_stream << it->serialize().c_str() << " ";
 		}
-		starred_verses_state_stream << "\n";
 	}
 
 	return serialized_starred_verses_state;

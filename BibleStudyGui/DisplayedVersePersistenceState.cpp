@@ -16,7 +16,7 @@ QString DisplayedVersePersistenceState::serialize() const
 
 	{
 		QTextStream displayed_verse_state_stream(&serialized_displayed_verse_state);
-		displayed_verse_state_stream << "Displayed verse: " << m_displayed_verse.serialize().c_str() << "\n";
+		displayed_verse_state_stream << "Displayed verse: " << m_displayed_verse.serialize().c_str();
 	}
 
 	return serialized_displayed_verse_state;

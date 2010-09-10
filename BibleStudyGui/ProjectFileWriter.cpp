@@ -117,25 +117,10 @@ void ProjectFileWriter::save_project_file()
 
 			project_stream << "Version: " << m_project_file_version << "\n";
 
-			project_stream << "Search string: " << m_current_project_data.search_string << "\n";
-			project_stream << "Match case: " << m_current_project_data.match_case_search_option << "\n";
-			project_stream << "Whole word: " << m_current_project_data.whole_word_search_option << "\n";
-
-			project_stream << "Selected translations: ";
-			for (std::vector<QString>::const_iterator it = m_current_project_data.selected_translations.begin(); it != m_current_project_data.selected_translations.end(); ++it)
+			for (std::map<QString, boost::shared_ptr<const ISeriaizable> >::const_iterator it = m_current_project_data.begin(); it != m_current_project_data.end(); ++it)
 			{
-				project_stream << *it << " ";
+				project_stream << it->first << ": " << it->second->serialize() << "\n";
 			}
-			project_stream << "\n";
-
-			project_stream << "Starred verses: ";
-			for (std::vector<BibleDatabase::VerseDisplay>::const_iterator it = m_current_project_data.starred_verses.begin(); it != m_current_project_data.starred_verses.end(); ++it)
-			{
-				project_stream << it->serialize().c_str() << " ";
-			}
-			project_stream << "\n";
-
-			project_stream << "Displayed verse: " << m_current_project_data.displayed_verse->serialize().c_str() << "\n";
 		}
 
 		m_project_file->close();
