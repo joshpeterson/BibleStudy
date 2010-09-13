@@ -9,8 +9,9 @@ namespace BibleStudyGui
 //! This interface is used to serialize project data from objects to string.
 class ISerializable
 {
+public:
 	//! Write the project data of an object to a string.  The string should not end with a newline.
-	QString serialize() const = 0;
+	virtual QString serialize() const = 0;
 };
 
 }

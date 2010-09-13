@@ -65,7 +65,7 @@ private:
 	QTimer* m_project_file_save_timer;
 	const int m_project_file_save_timeout_ms;
 
-	std::map<QString, boost::shared_ptr<const ISeriaizable> > m_current_project_data;
+	std::map<QString, boost::shared_ptr<const ISerializable> > m_current_project_data;
 
 	void save_project_file();
 	void kick_project_file_save_timer();

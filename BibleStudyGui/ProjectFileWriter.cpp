@@ -6,6 +6,7 @@
 #include "ProjectFileWriter.h"
 #include "QtConnectHelper.h"
 #include "QMutexLocker.h"
+#include "ISerializable.h"
 
 using namespace BibleDatabase;
 using namespace BibleStudyGui;
@@ -61,43 +62,34 @@ void ProjectFileWriter::set_project_file_path(QString project_file_path)
 	m_project_file = boost::make_shared<QFile>(project_file_path);
 }
 
-void ProjectFileWriter::set_search_string(QString search_string)
+void ProjectFileWriter::set_last_searched_search_state(boost::shared_ptr<ISerializable> last_searched_search_state)
 {
 	QMutexLocker lock(&m_save_project_file_mutex);
-	m_current_project_data.search_string = search_string;
+	m_current_project_data["Last used search"] = last_searched_search_state;
+
+	kick_project_file_save_timer();
+}
+
+void ProjectFileWriter::set_current_search_state(boost::shared_ptr<ISerializable> current_search_state)
+{
+	QMutexLocker lock(&m_save_project_file_mutex);
+	m_current_project_data["Current search"] = current_search_state;
 	
 	kick_project_file_save_timer();
 }
 
-void ProjectFileWriter::set_search_options(bool match_case, bool whole_word)
+void ProjectFileWriter::set_starred_verses_state(boost::shared_ptr<ISerializable> starred_verses_state)
 {
 	QMutexLocker lock(&m_save_project_file_mutex);
-	m_current_project_data.match_case_search_option = match_case;
-	m_current_project_data.whole_word_search_option = whole_word;
+	m_current_project_data["Starred verses"] = starred_verses_state;
 
 	kick_project_file_save_timer();
 }
 
-void ProjectFileWriter::set_selected_translations(std::vector<QString> selected_translations)
+void ProjectFileWriter::set_displayed_verse_state(boost::shared_ptr<ISerializable> displayed_verse_state)
 {
 	QMutexLocker lock(&m_save_project_file_mutex);
-	m_current_project_data.selected_translations = selected_translations;
-
-	kick_project_file_save_timer();
-}
-
-void ProjectFileWriter::set_starred_verses(std::vector<VerseDisplay> starred_verses)
-{
-	QMutexLocker lock(&m_save_project_file_mutex);
-	m_current_project_data.starred_verses = starred_verses;
-
-	kick_project_file_save_timer();
-}
-
-void ProjectFileWriter::set_displayed_verse(boost::shared_ptr<VerseDisplay> displayed_verse)
-{
-	QMutexLocker lock(&m_save_project_file_mutex);
-	m_current_project_data.displayed_verse = displayed_verse;
+	m_current_project_data["Displayed verse"] = displayed_verse_state;
 
 	kick_project_file_save_timer();
 }
@@ -117,7 +109,7 @@ void ProjectFileWriter::save_project_file()
 
 			project_stream << "Version: " << m_project_file_version << "\n";
 
-			for (std::map<QString, boost::shared_ptr<const ISeriaizable> >::const_iterator it = m_current_project_data.begin(); it != m_current_project_data.end(); ++it)
+			for (std::map<QString, boost::shared_ptr<const ISerializable> >::const_iterator it = m_current_project_data.begin(); it != m_current_project_data.end(); ++it)
 			{
 				project_stream << it->first << ": " << it->second->serialize() << "\n";
 			}
