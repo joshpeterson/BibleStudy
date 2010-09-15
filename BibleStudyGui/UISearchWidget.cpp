@@ -14,6 +14,8 @@
 #include "../BibleDatabase/TranslationIterator.h"
 #include "QtConnectHelper.h"
 #include "BackgroundWorker.h"
+#include "ISerializable.h"
+#include "SearchPersistenceState.h"
 
 using namespace BibleStudyGui;
 using namespace BibleDatabase;
@@ -27,8 +29,8 @@ UISearchWidget::UISearchWidget(boost::shared_ptr<const TranslationManager> trans
     m_match_case_checkbox(new QCheckBox(tr("Match case"))),
     m_match_whole_word_checkbox(new QCheckBox(tr("Whole words")))
 {
-    QT_CONNECT(m_search_button, SIGNAL(clicked()), this, SLOT(perform_search()));
-    QT_CONNECT(m_search_input_field, SIGNAL(returnPressed()), this, SLOT(perform_search()));
+    QT_CONNECT(m_search_button, SIGNAL(clicked()), this, SLOT(on_perform_search()));
+    QT_CONNECT(m_search_input_field, SIGNAL(returnPressed()), this, SLOT(on_perform_search()));
 
     m_match_case_checkbox->setChecked(true);
     m_match_whole_word_checkbox->setChecked(false);
@@ -59,7 +61,7 @@ void UISearchWidget::display_translation_check_boxes()
     m_translation_selection_row->addStretch(1);
 }
 
-void UISearchWidget::perform_search()
+void UISearchWidget::on_perform_search()
 {
     if (!m_search_input_field->text().isEmpty())
     {
@@ -89,18 +91,22 @@ void UISearchWidget::perform_search()
         m_command_perform_search = boost::shared_ptr<ICommand>(new CommandPerformSearch(m_translation_manager, selected_translations, m_search_input_field->text().toStdString(), search_option));
         m_search_worker = boost::make_shared<BackgroundWorker>(m_command_perform_search);
 
-        QT_CONNECT(m_search_worker.get(), SIGNAL(finished()), this, SLOT(search_worker_finished()));
+        QT_CONNECT(m_search_worker.get(), SIGNAL(finished()), this, SLOT(on_search_worker_finished()));
         
         m_search_worker->start();
     }
 }
 
-void UISearchWidget::search_worker_finished()
+void UISearchWidget::on_search_worker_finished()
 {
-    QT_DISCONNECT(m_search_worker.get(), SIGNAL(finished()), this, SLOT(search_worker_finished()));
+    QT_DISCONNECT(m_search_worker.get(), SIGNAL(finished()), this, SLOT(on_search_worker_finished()));
 
     boost::shared_ptr<CommandPerformSearch> command_perform_search = boost::dynamic_pointer_cast<CommandPerformSearch>(m_command_perform_search);
     emit search_complete(command_perform_search->get_results());
+}
+
+void UISearchWidget::on_persisted_widget_state_changed()
+{
 }
 
 void UISearchWidget::add_translation_check_box(boost::shared_ptr<const Translation> translation)
@@ -111,3 +117,7 @@ void UISearchWidget::add_translation_check_box(boost::shared_ptr<const Translati
     m_translation_checkboxes.push_back(translation_check_box);
 }
 
+boost::shared_ptr<ISerializable> UISearchWidget::get_persisted_state() const
+{
+	SearchPersistenceState* persistence_state = new SearchPersistenceState(m_search_input_field->text(), m_match_case_checkbox->isChecked(), m_match_whole_word_checkbox->isChecked(), 
+}
