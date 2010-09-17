@@ -75,9 +75,9 @@ void UISearchWidget::on_perform_search()
     {
         emit search_started(m_search_input_field->text());
 
-		std::vector<std::string> selected_translations;
-		std::vector<QString> temporary_selected_translations = this->get_selected_translations();
-		std::transform(temporary_selected_translations.begin(), temporary_selected_translations.end(), std::back_inserter(selected_translations), boost::bind(&QString::toStdString, boost::lambda::_1));
+        std::vector<std::string> selected_translations;
+        std::vector<QString> temporary_selected_translations = this->get_selected_translations();
+        std::transform(temporary_selected_translations.begin(), temporary_selected_translations.end(), std::back_inserter(selected_translations), boost::bind(&QString::toStdString, boost::lambda::_1));
 
         int search_option = CaseSensitive;
         if (m_match_case_checkbox->checkState() == Qt::Unchecked)
@@ -109,8 +109,8 @@ void UISearchWidget::on_search_worker_finished()
 
 void UISearchWidget::on_persisted_widget_state_changed()
 {
-	boost::shared_ptr<ISerializable> current_search_state = this->get_persisted_state();
-	emit persistence_state_changed(current_search_state);
+    boost::shared_ptr<ISerializable> current_search_state = this->get_persisted_state();
+    emit persistence_state_changed(current_search_state);
 }
 
 void UISearchWidget::add_translation_check_box(boost::shared_ptr<const Translation> translation)
@@ -120,20 +120,20 @@ void UISearchWidget::add_translation_check_box(boost::shared_ptr<const Translati
     m_translation_selection_row->addWidget(translation_check_box);
     m_translation_checkboxes.push_back(translation_check_box);
 
-	QT_CONNECT(translation_check_box, SIGNAL(stateChanged(int)), this, SLOT(on_persisted_widget_state_changed()));
+    QT_CONNECT(translation_check_box, SIGNAL(stateChanged(int)), this, SLOT(on_persisted_widget_state_changed()));
 }
 
 boost::shared_ptr<ISerializable> UISearchWidget::get_persisted_state() const
 {
-	std::vector<QString> selected_translations = this->get_selected_translations();
-	boost::shared_ptr<ISerializable> persistence_state = boost::shared_ptr<ISerializable>(new SearchPersistenceState(m_search_input_field->text(), m_match_case_checkbox->isChecked(), m_match_whole_word_checkbox->isChecked(), selected_translations));
+    std::vector<QString> selected_translations = this->get_selected_translations();
+    boost::shared_ptr<ISerializable> persistence_state = boost::shared_ptr<ISerializable>(new SearchPersistenceState(m_search_input_field->text(), m_match_case_checkbox->isChecked(), m_match_whole_word_checkbox->isChecked(), selected_translations));
 
-	return persistence_state;
+    return persistence_state;
 }
 
 std::vector<QString> UISearchWidget::get_selected_translations() const
 {
-	std::vector<QString> selected_translations;
+    std::vector<QString> selected_translations;
 
     for (std::vector<QCheckBox*>::const_iterator it = m_translation_checkboxes.begin(); it != m_translation_checkboxes.end(); ++it)
     {
@@ -143,5 +143,5 @@ std::vector<QString> UISearchWidget::get_selected_translations() const
         }
     }
 
-	return selected_translations;
+    return selected_translations;
 }
