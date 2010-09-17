@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <QWidget>
+#include <QString>
 #include <boost/shared_ptr.hpp>
 
 class QAbstractItemModel;
@@ -74,6 +75,7 @@ private:
 
     void add_translation_check_box(boost::shared_ptr<const BibleDatabase::Translation> translation);
 	boost::shared_ptr<ISerializable> get_persisted_state() const;
+	std::vector<QString> get_selected_translations() const;
 };
 
 }
