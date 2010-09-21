@@ -48,7 +48,10 @@ signals:
 
     //! Inform other widgets that a search has finished.
     void search_complete(boost::shared_ptr<BibleDatabase::ISearchResults> query);
-    
+
+    //! Inform other widgets of the persisted state when a search completes
+    void persistence_state_when_search_completed(boost::shared_ptr<ISerializable> current_search_state);
+
     //! Inform other widgets when the persisted parts of the search widget have changed.
     void persistence_state_changed(boost::shared_ptr<ISerializable> current_search_state);
 

@@ -25,50 +25,51 @@ class ProjectFileWriter : public QThread
 
 public:
     //! Create a new instance of the ProjectFileWriter class.  This should be called from the GUI thread.
-	ProjectFileWriter();
-	
-	//! Cleanly stop the ProjectFileWriter background thread.  This should be called from the GUI thread.
-	~ProjectFileWriter();
+    ProjectFileWriter();
+    
+    //! Cleanly stop the ProjectFileWriter background thread.  This should be called from the GUI thread.
+    ~ProjectFileWriter();
 
     //! This is the method which executes on the background thread.  It should be called only by Qt.
     void run();
 
-	//! Set the project file path when the user does a save as operation.  This should be called from the GUI thread.
-	void set_project_file_path(QString project_file_path);
+    //! Set the project file path when the user does a save as operation.  This should be called from the GUI thread.
+    void set_project_file_path(QString project_file_path);
 
-	//! Set the state of the search GUI when the user actual performs a search.  This is used to restore the search results.  This should be called from the GUI thread.
-	void set_last_searched_search_state(boost::shared_ptr<ISerializable> last_searched_search_state);
+public slots:
+    //! Set the state of the search GUI when the user actual performs a search.  This is used to restore the search results.  This should be called from the GUI thread.
+    void set_last_searched_search_state(boost::shared_ptr<ISerializable> last_searched_search_state);
 
-	//! Set the current state of the search GUI when it changes.  This should be called from the GUI thread.
-	void set_current_search_state(boost::shared_ptr<ISerializable> current_search_state);
+    //! Set the current state of the search GUI when it changes.  This should be called from the GUI thread.
+    void set_current_search_state(boost::shared_ptr<ISerializable> current_search_state);
 
-	//! Set the starred verses state when it changes.  This should be called from the GUI thread.
-	void set_starred_verses_state(boost::shared_ptr<ISerializable> starred_verses_state);
+    //! Set the starred verses state when it changes.  This should be called from the GUI thread.
+    void set_starred_verses_state(boost::shared_ptr<ISerializable> starred_verses_state);
 
-	//! Set the displayed verse when it changes.  This should be called from the GUI thread.
-	void set_displayed_verse_state(boost::shared_ptr<ISerializable> displayed_verse_state);
+    //! Set the displayed verse when it changes.  This should be called from the GUI thread.
+    void set_displayed_verse_state(boost::shared_ptr<ISerializable> displayed_verse_state);
 
 private slots:
-	void start_save_project_file();
+    void start_save_project_file();
 
 signals:
-	void project_file_save_failed(QString reason);
+    void project_file_save_failed(QString reason);
 
 private:
-	bool m_abort;
-	QMutex m_save_project_file_mutex;
-	QWaitCondition m_save_project_file_condition;
+    bool m_abort;
+    QMutex m_save_project_file_mutex;
+    QWaitCondition m_save_project_file_condition;
 
-	boost::shared_ptr<QFile> m_project_file;
-	const int m_project_file_version;
+    boost::shared_ptr<QFile> m_project_file;
+    const int m_project_file_version;
 
-	QTimer* m_project_file_save_timer;
-	const int m_project_file_save_timeout_ms;
+    QTimer* m_project_file_save_timer;
+    const int m_project_file_save_timeout_ms;
 
-	std::map<QString, boost::shared_ptr<const ISerializable> > m_current_project_data;
+    std::map<QString, boost::shared_ptr<const ISerializable> > m_current_project_data;
 
-	void save_project_file();
-	void kick_project_file_save_timer();
+    void save_project_file();
+    void kick_project_file_save_timer();
 };
 
 }

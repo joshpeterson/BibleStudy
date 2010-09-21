@@ -105,6 +105,9 @@ void UISearchWidget::on_search_worker_finished()
 
     boost::shared_ptr<CommandPerformSearch> command_perform_search = boost::dynamic_pointer_cast<CommandPerformSearch>(m_command_perform_search);
     emit search_complete(command_perform_search->get_results());
+
+    boost::shared_ptr<ISerializable> current_search_state = this->get_persisted_state();
+    emit persistence_state_when_search_completed(current_search_state);
 }
 
 void UISearchWidget::on_persisted_widget_state_changed()

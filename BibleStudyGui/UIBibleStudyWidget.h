@@ -65,6 +65,9 @@ private slots:
     //! Show the About box for the application.
     void about();
 
+    //! Start automatically saving the project.
+    void start_auto_saving();
+
     //! Display a specific status bar message when a search starts.
     void display_search_status_bar_message(QString search_text);
 
@@ -108,6 +111,7 @@ private:
     UITextViewWidget* m_text;
     UIBrowseVersesWidget* m_browse;
 
+    QAction* m_start_auto_save_action;
     QAction* m_exit_action;
     QAction* m_about_action;
 

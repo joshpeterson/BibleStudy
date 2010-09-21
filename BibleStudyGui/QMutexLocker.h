@@ -9,19 +9,19 @@ namespace BibleStudyGui
 class QMutexLocker
 {
 public:
-	QMutexLocker(QMutex*	mutex) : 
-		m_mutex(mutex)
-	{
-		m_mutex->lock();
-	}
+    QMutexLocker(QMutex*	mutex) : 
+        m_mutex(mutex)
+    {
+        m_mutex->lock();
+    }
 
-	~QMutexLocker()
-	{
-		m_mutex->unlock();
-	}
+    ~QMutexLocker()
+    {
+        m_mutex->unlock();
+    }
 
 private:
-	QMutex* m_mutex;
+    QMutex* m_mutex;
 };
 
 }

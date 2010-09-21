@@ -13,6 +13,7 @@
 #include <QKeySequence>
 #include <QMessageBox>
 #include <QTimer>
+#include <QFileDialog>
 #include "../BibleDatabase/Translation.h"
 #include "../BibleDatabase/TranslationManager.h"
 #include "../BibleDatabase/TranslationLoader.h"
@@ -50,6 +51,7 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> tra
     m_starred_verses(new UIStarredVersesWidget(m_starred_verses_model)),
     m_text(new UITextViewWidget(translation_manager, m_starred_verses_model)),
     m_browse(new UIBrowseVersesWidget(m_browse_verses_model)),
+    m_start_auto_save_action(new QAction(tr("&Start Auto Saving"), this)),
     m_exit_action(new QAction(tr("E&xit"), this)),
     m_about_action(new QAction(tr("&About"), this))
 {
@@ -77,6 +79,8 @@ void UIBibleStudyWidget::connect_signals()
     QT_CONNECT(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), m_results, SLOT(display_search_results(boost::shared_ptr<BibleDatabase::ISearchResults>)));
     QT_CONNECT(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), this, SLOT(raise_results()));
     QT_CONNECT(m_search, SIGNAL(search_complete(boost::shared_ptr<BibleDatabase::ISearchResults>)), this, SLOT(pop_status_bar_message()));
+    QT_CONNECT(m_search, SIGNAL(persistence_state_when_search_completed(boost::shared_ptr<ISerializable>)), m_project_file_writer.get(), SLOT(set_last_searched_search_state(boost::shared_ptr<ISerializable>)));
+    QT_CONNECT(m_search, SIGNAL(persistence_state_changed(boost::shared_ptr<ISerializable>)), m_project_file_writer.get(), SLOT(set_current_search_state(boost::shared_ptr<ISerializable>)));
 
     // UITextViewWidget connections
     QT_CONNECT(m_text, SIGNAL(verse_starred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_starred_verses, SLOT(add_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
@@ -129,12 +133,16 @@ void UIBibleStudyWidget::initialize_status_bar()
 
 void UIBibleStudyWidget::initialize_actions()
 {
+    m_start_auto_save_action->setShortcuts(QKeySequence::Save);
+    m_start_auto_save_action->setStatusTip(tr("Start automatically saving the project"));
+    QT_CONNECT(m_start_auto_save_action, SIGNAL(triggered()), this, SLOT(start_auto_saving()));
+
     m_exit_action->setShortcuts(QKeySequence::Close);
     m_exit_action->setStatusTip(tr("Exit the BibleStudy"));
-    connect(m_exit_action, SIGNAL(triggered()), this, SLOT(close()));
+    QT_CONNECT(m_exit_action, SIGNAL(triggered()), this, SLOT(close()));
 
     m_about_action->setStatusTip(tr("Show the BibleStudy's About box"));
-    connect(m_about_action, SIGNAL(triggered()), this, SLOT(about()));
+    QT_CONNECT(m_about_action, SIGNAL(triggered()), this, SLOT(about()));
 }
 
 void UIBibleStudyWidget::initialize_menus()
@@ -161,6 +169,12 @@ void UIBibleStudyWidget::raise_starred_verses()
 void UIBibleStudyWidget::about()
 {
     QMessageBox::about(this, tr("About BibleStudy"), tr("This is the About box."));
+}
+
+void UIBibleStudyWidget::start_auto_saving()
+{
+    QString project_file_path = QFileDialog::getOpenFileName(this, tr("Set Project File Name"), QDir::homePath(), tr("Text files (*.txt)"));
+    m_project_file_writer->set_project_file_path(project_file_path);
 }
 
 void UIBibleStudyWidget::display_search_status_bar_message(QString search_text)
