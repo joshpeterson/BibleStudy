@@ -111,7 +111,7 @@ void ProjectFileWriter::save_project_file()
 
             for (std::map<QString, boost::shared_ptr<const ISerializable> >::const_iterator it = m_current_project_data.begin(); it != m_current_project_data.end(); ++it)
             {
-                project_stream << it->first << ": " << it->second->serialize() << "\n";
+                project_stream << it->first << ":\n" << it->second->serialize() << "\n";
             }
         }
 

@@ -148,6 +148,7 @@ void UIBibleStudyWidget::initialize_actions()
 void UIBibleStudyWidget::initialize_menus()
 {
     m_file_menu = this->menuBar()->addMenu(tr("&File"));
+    m_file_menu->addAction(m_start_auto_save_action);
     m_file_menu->addAction(m_exit_action);
 
     this->menuBar()->addSeparator();
@@ -173,8 +174,11 @@ void UIBibleStudyWidget::about()
 
 void UIBibleStudyWidget::start_auto_saving()
 {
-    QString project_file_path = QFileDialog::getOpenFileName(this, tr("Set Project File Name"), QDir::homePath(), tr("Text files (*.txt)"));
-    m_project_file_writer->set_project_file_path(project_file_path);
+    QString project_file_path = QFileDialog::getSaveFileName(this, tr("Set Project File Name"), QDir::homePath(), tr("Text files (*.txt)"));
+    if (!project_file_path.isEmpty())
+    {
+        m_project_file_writer->set_project_file_path(project_file_path);
+    }
 }
 
 void UIBibleStudyWidget::display_search_status_bar_message(QString search_text)
