@@ -18,6 +18,7 @@ namespace BibleStudyGui
 {
 
 class StarredVersesModel;
+class ISerializable;
 
 //! This class respresents a text box that displays a collection of verses and allows the user to star, unstar a verse and navigate a translation.
 class UITextViewWidget : public QWidget
@@ -35,6 +36,9 @@ signals:
 
     //! Let other widgets know that the user has removed the star from a starred verse.
     void verse_unstarred(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
+
+    //! Inform other widgets when the persisted parts of the text view have changed.
+    void persistence_state_changed(boost::shared_ptr<ISerializable> displayed_verse_state);
 
 public slots:
     //! Display a new verse.

@@ -57,6 +57,7 @@ signals:
 
 private:
     bool m_abort;
+    bool m_dirty;
     QMutex m_save_project_file_mutex;
     QWaitCondition m_save_project_file_condition;
 

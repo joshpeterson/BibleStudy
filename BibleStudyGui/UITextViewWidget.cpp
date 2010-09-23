@@ -9,6 +9,7 @@
 #include "../BibleDatabase/VerseDisplay.h"
 #include "StarredVersesModel.h"
 #include "QtConnectHelper.h"
+#include "DisplayedVersePersistenceState.h"
 
 using namespace BibleStudyGui;
 using namespace BibleDatabase;
@@ -95,6 +96,9 @@ void UITextViewWidget::display_text(boost::shared_ptr<VerseDisplay> verse)
     m_less_button->setEnabled(less_button_should_be_enabled());
     m_next_button->setEnabled(next_button_should_be_enabled());
     m_prev_button->setEnabled(prev_button_should_be_enabled());
+
+    boost::shared_ptr<ISerializable> displayed_verse_persistence_state = boost::shared_ptr<ISerializable>(new DisplayedVersePersistenceState(*m_displayed_verse));
+    emit persistence_state_changed(displayed_verse_persistence_state);
 }
 
 void UITextViewWidget::increase_displayed_context()

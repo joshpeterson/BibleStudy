@@ -17,16 +17,16 @@ namespace BibleStudyGui
 class StarredVersesPersistenceState : public ISerializable
 {
 public:
-	//! Create a new instance of the StarredVersesPersistenceState class.
-	StarredVersesPersistenceState(std::vector<BibleDatabase::VerseDisplay> starred_verses);
-	
-	// ISerializable
+    //! Create a new instance of the StarredVersesPersistenceState class.
+    StarredVersesPersistenceState(std::vector<BibleDatabase::VerseDisplay> starred_verses);
+    
+    // ISerializable
 
-	//! This method is the implementation of ISerializable.  It serializes the object to a string.
-	QString serialize() const;
+    //! This method is the implementation of ISerializable.  It serializes the object to a string.
+    QString serialize() const;
 
 private:
-	std::vector<BibleDatabase::VerseDisplay> m_starred_verses;
+    std::vector<BibleDatabase::VerseDisplay> m_starred_verses;
 };
 
 }

@@ -13,6 +13,7 @@ using namespace BibleStudyGui;
 
 ProjectFileWriter::ProjectFileWriter() :
     m_abort(false),
+    m_dirty(false),
     m_project_file_version(1),
     m_project_file_save_timer(new QTimer),
     m_project_file_save_timeout_ms(1000)
@@ -43,7 +44,7 @@ void ProjectFileWriter::run()
             return;
         }
 
-        if (m_project_file != NULL)
+        if (m_project_file != NULL && m_dirty)
         {
             save_project_file();
         }
@@ -96,6 +97,7 @@ void ProjectFileWriter::set_displayed_verse_state(boost::shared_ptr<ISerializabl
 
 void ProjectFileWriter::start_save_project_file()
 {
+    m_dirty = true;
     m_save_project_file_condition.wakeOne();
 }
 
@@ -116,6 +118,7 @@ void ProjectFileWriter::save_project_file()
         }
 
         m_project_file->close();
+        m_dirty = false;
     }
     else
     {

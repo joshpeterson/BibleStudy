@@ -86,6 +86,7 @@ void UIBibleStudyWidget::connect_signals()
     QT_CONNECT(m_text, SIGNAL(verse_starred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_starred_verses, SLOT(add_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
     QT_CONNECT(m_text, SIGNAL(verse_starred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), this, SLOT(raise_starred_verses()));
     QT_CONNECT(m_text, SIGNAL(verse_unstarred(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_starred_verses, SLOT(remove_starred_verse(boost::shared_ptr<BibleDatabase::VerseDisplay>)));
+    QT_CONNECT(m_text, SIGNAL(persistence_state_changed(boost::shared_ptr<ISerializable>)), m_project_file_writer.get(), SLOT(set_displayed_verse_state(boost::shared_ptr<ISerializable>)));
 
     // UISearchResultsWidget connections
     QT_CONNECT(m_results, SIGNAL(verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay>)), m_text, SLOT(display_text(boost::shared_ptr<BibleDatabase::VerseDisplay>)));

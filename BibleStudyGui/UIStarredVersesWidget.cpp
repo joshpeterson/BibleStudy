@@ -105,3 +105,7 @@ void UIStarredVersesWidget::display_starred_verses_context_menu(const QPoint& po
     menu->addAction(tr("Select All"), this, SLOT(select_all_verses()), QKeySequence::SelectAll);
     menu->exec(m_starred_verses_view->mapToGlobal(position + QPoint(10, 5)));
 }
+
+void UIStarredVersesWidget::set_persistence_state() const
+{
+}
