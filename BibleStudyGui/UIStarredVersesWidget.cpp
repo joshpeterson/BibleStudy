@@ -50,11 +50,13 @@ void UIStarredVersesWidget::keyPressEvent(QKeyEvent* key_event)
 void UIStarredVersesWidget::add_starred_verse(boost::shared_ptr<VerseDisplay> verse)
 {
     m_starred_verses_model->add_starred_verse(verse);
+    this->set_persistence_state();
 }
 
 void UIStarredVersesWidget::remove_starred_verse(boost::shared_ptr<VerseDisplay> verse)
 {
     m_starred_verses_model->remove_starred_verse(verse);
+    this->set_persistence_state();
 }
 
 void UIStarredVersesWidget::display_verse_text(const QModelIndex& index)
@@ -106,6 +108,7 @@ void UIStarredVersesWidget::display_starred_verses_context_menu(const QPoint& po
     menu->exec(m_starred_verses_view->mapToGlobal(position + QPoint(10, 5)));
 }
 
-void UIStarredVersesWidget::set_persistence_state() const
+void UIStarredVersesWidget::set_persistence_state()
 {
+    emit persistence_state_changed(m_starred_verses_model->get_serialized_state());
 }

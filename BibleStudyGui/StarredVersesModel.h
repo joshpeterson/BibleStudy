@@ -14,6 +14,8 @@ class VerseDisplay;
 namespace BibleStudyGui
 {
 
+class ISerializable;
+
 //! This class is an implementation of a model from the Qt Model/View framework for a list view which represents the verses the user has starred.
 class StarredVersesModel : public QAbstractListModel
 {
@@ -32,6 +34,9 @@ public:
 
     //! Get the VerseDisplay object for the verse at the given index.
     boost::shared_ptr<BibleDatabase::VerseDisplay> get_verse_display(const QModelIndex& index);
+
+    //! Get the serializable state of the starred verses model.
+    boost::shared_ptr<ISerializable> get_serialized_state() const;
     
     //! Get the number of rows for the given parent index.  This is the number of starred verses.
     int rowCount(const QModelIndex &parent = QModelIndex()) const;

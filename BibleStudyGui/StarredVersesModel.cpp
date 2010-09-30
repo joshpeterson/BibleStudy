@@ -1,6 +1,7 @@
 #include <limits.h>
 #include <boost/lambda/lambda.hpp>
 #include "StarredVersesModel.h"
+#include "StarredVersesPersistenceState.h"
 #include "../BibleDatabase/TranslationManager.h"
 #include "../BibleDatabase/Translation.h"
 #include "../BibleDatabase/VerseDisplay.h"
@@ -70,3 +71,7 @@ boost::shared_ptr<VerseDisplay> StarredVersesModel::get_verse_display(const QMod
                                                             m_starred_verses.at(index.row())->get_num_verses_context()));
 }
 
+boost::shared_ptr<ISerializable> StarredVersesModel::get_serialized_state() const
+{
+    return boost::shared_ptr<ISerializable>(new StarredVersesPersistenceState(m_starred_verses));
+}

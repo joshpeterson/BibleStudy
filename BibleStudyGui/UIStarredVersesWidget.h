@@ -15,6 +15,8 @@ class VerseDisplay;
 namespace BibleStudyGui
 {
 
+class ISerializable;
+
 class StarredVersesModel;
 
 //! This class is an implementation of a view from the Qt Model/View framework for a list view which represents the verses the user has starred.
@@ -48,18 +50,18 @@ public slots:
     //! Build and display context menu when the user right clicks on the search results.
     void display_starred_verses_context_menu(const QPoint& position);
 
-    //! Inform other widgets when the persisted parts of the starred verses widget have changed.
-    void persistence_state_changed(boost::shared_ptr<ISerializable> starred_verses_state);
-
 signals:
     //! Signal other widgets that a new verse should be displayed.
     void verse_display_changed(boost::shared_ptr<BibleDatabase::VerseDisplay> verse);
+
+    //! Inform other widgets when the persisted parts of the starred verses widget have changed.
+    void persistence_state_changed(boost::shared_ptr<ISerializable> starred_verses_state);
 
 private:
     QListView* m_starred_verses_view;
     boost::shared_ptr<StarredVersesModel> m_starred_verses_model;
 
-    void set_persistence_state() const;
+    void set_persistence_state();
 };
 
 }

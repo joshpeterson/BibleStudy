@@ -2,6 +2,7 @@
 #define __STARRED_VERSES_PERSISTENCE_STATE_H
 
 #include <vector>
+#include <boost/shared_ptr.hpp>
 #include <QString>
 #include "ISerializable.h"
 
@@ -18,7 +19,7 @@ class StarredVersesPersistenceState : public ISerializable
 {
 public:
     //! Create a new instance of the StarredVersesPersistenceState class.
-    StarredVersesPersistenceState(std::vector<BibleDatabase::VerseDisplay> starred_verses);
+    StarredVersesPersistenceState(std::vector<boost::shared_ptr<BibleDatabase::VerseDisplay> > starred_verses);
     
     // ISerializable
 
@@ -26,7 +27,7 @@ public:
     QString serialize() const;
 
 private:
-    std::vector<BibleDatabase::VerseDisplay> m_starred_verses;
+    std::vector<boost::shared_ptr<BibleDatabase::VerseDisplay> > m_starred_verses;
 };
 
 }
