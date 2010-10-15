@@ -7,6 +7,8 @@
     #else // _EXPORTING_BIBLE_DATABASE
         #define BIBLE_DATABASE_EXPORT __declspec(dllimport)
     #endif // _EXPORTING_BIBLE_DATABASE
+#else
+    #define BIBLE_DATABASE_EXPORT
 #endif // WIN32
 
 #endif // __BIBLE_DATABASE_EXPORTER_H
