@@ -245,3 +245,4 @@ void UIBibleStudyWidget::start_next_translation_load()
 
     m_load_translation_worker->start();
 }
+

@@ -3,15 +3,15 @@ CONFIG += console exceptions stl debug_and_release
 CONFIG -= qt
 QT -= core gui
 
-HEADERS += BibleDatabaseBehaviors/BehaviorDrivenDesign.h
-HEADERS += BibleDatabaseBehaviors/BehaviorDrivenDesignTest.h
-HEADERS += BibleDatabaseBehaviors/TranslationLoaderBehavior.h
-HEADERS += BibleDatabaseBehaviors/TranslationBehaviorGivens.h
-HEADERS += BibleDatabaseBehaviors/TranslationFirstAndLastVerseBehavior.h
-HEADERS += BibleDatabaseBehaviors/TranslationSearchBehavior.h
-HEADERS += BibleDatabaseBehaviors/SearchStringParserBehavior.h
+HEADERS += BehaviorDrivenDesign.h
+HEADERS += BehaviorDrivenDesignTest.h
+HEADERS += TranslationLoaderBehavior.h
+HEADERS += TranslationBehaviorGivens.h
+HEADERS += TranslationFirstAndLastVerseBehavior.h
+HEADERS += TranslationSearchBehavior.h
+HEADERS += SearchStringParserBehavior.h
 
-SOURCES += BibleDatabaseBehaviors/BibleDatabaseBehaviors.cpp
+SOURCES += BibleDatabaseBehaviors.cpp
 
 win32 {
     QMAKE_CXXFLAGS_DEBUG += /wd4100
@@ -42,6 +42,10 @@ win32 {
 }
 
 unix {
-    LIBS+=-l"cppunit"
+    DESTDIR = "../Output"
+    LIBS += -l"cppunit"
+    LIBS += -l"boost_filesystem"
+    LIBS += -l"BibleDatabase"
+    LIBS += -L"../Output"
 }
 

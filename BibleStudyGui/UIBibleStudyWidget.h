@@ -12,6 +12,8 @@
     #else // _EXPORTING_BIBLE_STUDY_GUI
         #define BIBLE_STUDY_GUI_EXPORT __declspec(dllimport)
     #endif //_EXPORTING_BIBLE_STUDY_GUI
+#else
+    #define BIBLE_STUDY_GUI_EXPORT
 #endif // WIN32
 
 class QWidget;

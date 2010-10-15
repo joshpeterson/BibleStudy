@@ -6,7 +6,7 @@
 #include <boost/filesystem.hpp>
 #include <cppunit/extensions/HelperMacros.h>
 #include "BehaviorDrivenDesign.h"
-#include "BibleDatabase/TranslationLoader.h"
+#include "../BibleDatabase/TranslationLoader.h"
 
 using namespace BehaviorDrivenDesign;
 using namespace BibleDatabase;

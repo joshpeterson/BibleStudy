@@ -22,3 +22,10 @@ win32 {
 	    LIBS += "BibleStudyGui.lib"
     }
 }
+
+unix {
+    DESTDIR = "Output"
+    LIBS += -L"Output"
+    LIBS += -l"BibleDatabase"
+    LIBS += -l"BibleStudyGui"
+}
