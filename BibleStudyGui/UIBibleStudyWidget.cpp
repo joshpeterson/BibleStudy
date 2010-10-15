@@ -8,8 +8,6 @@
 #include <QTabWidget>
 #include <QStatusBar>
 #include <QAction>
-#include <QMenu>
-#include <QMenuBar>
 #include <QKeySequence>
 #include <QMessageBox>
 #include <QTimer>
@@ -56,7 +54,6 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> tra
     this->initialize_widgets();
     this->initialize_status_bar();
     this->initialize_actions();
-    this->initialize_menus();
 
     m_translation_load_timer->start(m_translation_load_timeout_ms);
 }
@@ -131,17 +128,6 @@ void UIBibleStudyWidget::initialize_actions()
 
     m_about_action->setStatusTip(tr("Show the BibleStudy's About box"));
     connect(m_about_action, SIGNAL(triggered()), this, SLOT(about()));
-}
-
-void UIBibleStudyWidget::initialize_menus()
-{
-    m_file_menu = this->menuBar()->addMenu(tr("&File"));
-    m_file_menu->addAction(m_exit_action);
-
-    this->menuBar()->addSeparator();
-
-    m_help_menu = menuBar()->addMenu(tr("&Help"));
-    m_help_menu->addAction(m_about_action);
 }
 
 void UIBibleStudyWidget::raise_results()
