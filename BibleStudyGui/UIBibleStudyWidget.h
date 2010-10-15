@@ -19,7 +19,6 @@
 class QWidget;
 class QTabWidget;
 class QAction;
-class QMenu;
 class QTimer;
 
 namespace BibleDatabase
@@ -110,9 +109,6 @@ private:
     QAction* m_exit_action;
     QAction* m_about_action;
 
-    QMenu* m_file_menu;
-    QMenu* m_help_menu;
-
     std::stack<QString> m_status_bar_messages;
 
     struct TranslationLoadInformation
@@ -131,7 +127,6 @@ private:
     void initialize_widgets();
     void initialize_status_bar();
     void initialize_actions();
-    void initialize_menus();
     void start_next_translation_load();
 };
 
