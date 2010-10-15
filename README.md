@@ -31,7 +31,11 @@ To create a branch for a new feature:
 To merge that feature back into the development branch:
 
 `git checkout develop`
+
 `git merge --no-ff myfeature`
+
 `git branch -d myfeature`
+
 `git push origin :myfeature` (if the feature branch was pushed to github)
+
 `git push origin develop`
