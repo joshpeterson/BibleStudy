@@ -62,7 +62,8 @@ win32 {
 }
 
 unix {
-    LIBS+=-l"protoc"
-    LIBS+=-l"protobuf"
+    DESTDIR="../Output"
+    LIBS += -l"protobuf"
+    LIBS += -l"boost_system"
 }
 

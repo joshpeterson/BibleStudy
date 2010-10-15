@@ -43,3 +43,9 @@ win32 {
 	    LIBS += "BibleDatabase.lib"
     }
 }
+
+unix {
+    DESTDIR = "../Output"
+    LIBS += -l"BibleDatabase"
+    LIBS += -L"../Output"
+}

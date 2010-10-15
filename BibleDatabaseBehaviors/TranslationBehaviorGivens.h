@@ -2,7 +2,7 @@
 #define __TRANSLATION_BEHAVIOR_GIVENS
 
 #include <boost/filesystem.hpp>
-#include "BibleDatabase/Translation.h"
+#include "../BibleDatabase/Translation.h"
 
 using namespace BehaviorDrivenDesign;
 using namespace BibleDatabase;

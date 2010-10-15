@@ -5,7 +5,7 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include "BehaviorDrivenDesign.h"
-#include "BibleDatabase/SearchStringParser.h"
+#include "../BibleDatabase/SearchStringParser.h"
 
 using namespace BehaviorDrivenDesign;
 using namespace BibleDatabase;

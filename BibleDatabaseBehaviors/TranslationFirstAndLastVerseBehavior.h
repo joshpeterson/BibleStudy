@@ -4,8 +4,8 @@
 #include <boost/shared_ptr.hpp>
 #include "BehaviorDrivenDesign.h"
 #include "TranslationBehaviorGivens.h"
-#include "BibleDatabase/Translation.h"
-#include "BibleDatabase/Verse.h"
+#include "../BibleDatabase/Translation.h"
+#include "../BibleDatabase/Verse.h"
 
 using namespace BehaviorDrivenDesign;
 using namespace BibleDatabase;

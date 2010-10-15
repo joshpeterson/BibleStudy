@@ -42,6 +42,10 @@ win32 {
 }
 
 unix {
-    LIBS+=-l"cppunit"
+    DESTDIR = "../Output"
+    LIBS += -l"cppunit"
+    LIBS += -l"boost_filesystem"
+    LIBS += -l"BibleDatabase"
+    LIBS += -L"../Output"
 }
 
