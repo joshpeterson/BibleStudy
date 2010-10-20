@@ -16,7 +16,7 @@ Build Environment
 
 Branching Model
 ---------------
-The BibleStudy branching mode is based on [this one](http://nvie.com/posts/a-successful-git-branching-model/).
+The BibleStudy branching model is based on [this one](http://nvie.com/posts/a-successful-git-branching-model/).
 
 * Branch master is the release branch
 * Branch develop is the current development branch
