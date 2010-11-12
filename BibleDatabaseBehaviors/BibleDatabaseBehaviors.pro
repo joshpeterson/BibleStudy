@@ -12,6 +12,7 @@ HEADERS += TranslationSearchBehavior.h
 HEADERS += SearchStringParserBehavior.h
 
 SOURCES += BibleDatabaseBehaviors.cpp
+DESTDIR = "../Output"
 
 win32 {
     QMAKE_CXXFLAGS_DEBUG += /wd4100
@@ -24,28 +25,27 @@ win32 {
 
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
-	    LIBS += "$$(CPPUNIT_DIR)\lib\cppunitd.lib"
-	    LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"debug"
-	    LIBS += "BibleDatabase.lib"
+        LIBS += "$$(CPPUNIT_DIR)\lib\cppunitd.lib"
+        LIBS += -L"$$(BOOST_DIR)\lib"
+        LIBS += -L"../Output"
+        LIBS += "BibleDatabase.lib"
      }
 
 # Release mode specific settings
     build_pass:CONFIG(release, debug|release){
-	    LIBS += "$$(CPPUNIT_DIR)\lib\cppunit.lib"
-	    LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"release"
-	    LIBS += "BibleDatabase.lib"
+        LIBS += "$$(CPPUNIT_DIR)\lib\cppunit.lib"
+        LIBS += -L"$$(BOOST_DIR)\lib"
+        LIBS += -L"../Output"
+        LIBS += "BibleDatabase.lib"
     }
 
     QMAKE_POST_LINK = '"$(TargetPath)"'
 }
 
 unix {
-    DESTDIR = "../Output"
+    LIBS += -L"../Output"
     LIBS += -l"cppunit"
     LIBS += -l"boost_filesystem"
     LIBS += -l"BibleDatabase"
-    LIBS += -L"../Output"
 }
 

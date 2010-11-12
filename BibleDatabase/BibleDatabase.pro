@@ -33,6 +33,7 @@ SOURCES += SearchStringParser.cpp
 SOURCES += CommandLoadTranslation.cpp
 
 DEFINES += _EXPORTING_BIBLE_DATABASE
+DESTDIR = "../Output"
 
 win32 {  
     QMAKE_CXXFLAGS_DEBUG += /wd4996
@@ -62,7 +63,6 @@ win32 {
 }
 
 unix {
-    DESTDIR="../Output"
     LIBS += -l"protobuf"
     LIBS += -l"boost_system"
 }

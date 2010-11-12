@@ -25,6 +25,7 @@ SOURCES += UIBrowseVersesWidget.cpp
 SOURCES += BackgroundWorker.cpp
 
 DEFINES += _EXPORTING_BIBLE_STUDY_GUI
+DESTDIR = "../Output"
 
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
@@ -32,20 +33,21 @@ win32 {
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"debug"
-	    LIBS += "BibleDatabase.lib"
+        LIBS += -L"../Output"
+        LIBS += "BibleDatabase.lib"
+        QMAKE_POST_LINK = 'del /f ..\Output\Qt*4.dll;copy "$$(QT_DIR)\bin\QtGuid4.dll" ..\Output;copy "$$(QT_DIR)\bin\QtCored4.dll" ..\Output'
      }
 
 # Release mode specific settings
     build_pass:CONFIG(release, debug|release){
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"release"
-	    LIBS += "BibleDatabase.lib"
+        LIBS += -L"../Output"
+        LIBS += "BibleDatabase.lib"
+        QMAKE_POST_LINK = 'del /f ..\Output\Qt*4.dll;copy "$$(QT_DIR)\bin\QtGui4.dll" ..\Output;copy "$$(QT_DIR)\bin\QtCore4.dll" ..\Output'
     }
 }
 
 unix {
-    DESTDIR = "../Output"
-    LIBS += -l"BibleDatabase"
     LIBS += -L"../Output"
+    LIBS += -l"BibleDatabase"
 }

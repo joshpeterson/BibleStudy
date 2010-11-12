@@ -7,9 +7,18 @@ if "%GOOGLE_PROTOBUF_DIR%" == "" goto :protobuferror
 set PATH=%QT_DIR%\bin;%PATH%
 set QMAKESPEC=win32-msvc2008
 
+pushd BibleDatabase
 qmake -Wall -tp vc BibleDatabase.pro
+popd
+
+pushd BibleDatabaseBehaviors
 qmake -Wall -tp vc BibleDatabaseBehaviors.pro
+popd
+
+pushd BibleStudyGui
 qmake -Wall -tp vc BibleStudyGui.pro
+popd
+
 qmake -Wall -tp vc BibleStudy.pro
 
 goto :end
