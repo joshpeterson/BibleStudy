@@ -30,6 +30,10 @@ echo Building BibleStudy...
 call build\win\BuildBibleStudySolution.bat %CONFIGURATION%
 echo.
 
+echo Copying dependencies...
+call build\win\CopyDependencies.bat %CONFIGURATION%
+echo.
+
 echo Validating BibleDatabase behaviors.
 call build\win\RunBibleDatabaseBehaviors.bat
 echo.

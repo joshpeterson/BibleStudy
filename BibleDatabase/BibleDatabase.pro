@@ -33,7 +33,6 @@ SOURCES += SearchStringParser.cpp
 SOURCES += CommandLoadTranslation.cpp
 
 DEFINES += _EXPORTING_BIBLE_DATABASE
-DESTDIR = "../Output"
 
 win32 {  
     QMAKE_CXXFLAGS_DEBUG += /wd4996
@@ -49,6 +48,7 @@ win32 {
     
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
+        DESTDIR = "../Output/debug"
         LIBS += -L"$$(BOOST_DIR)\lib"
         LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotoc.lib"
         LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotobuf.lib"
@@ -56,6 +56,7 @@ win32 {
 
 # Release mode specific settings
     build_pass:CONFIG(release, debug|release){
+        DESTDIR = "../Output/release"
         LIBS += -L"$$(BOOST_DIR)\lib"
         LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotoc.lib"
         LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotobuf.lib"
@@ -63,6 +64,7 @@ win32 {
 }
 
 unix {
+    DESTDIR = "../Output"
     LIBS += -l"protobuf"
     LIBS += -l"boost_system"
 }
