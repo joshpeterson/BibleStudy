@@ -4,7 +4,6 @@
 #include <map>
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
-#include "BibleDatabaseExporter.h"
 
 namespace BibleDatabase
 {
@@ -18,22 +17,22 @@ class TranslationManager : private boost::noncopyable
 {
 public:
     //! Create a new instance of the TranslationManager class.
-    BIBLE_DATABASE_EXPORT TranslationManager();
+    TranslationManager();
 
     //! Add a translation to the TranslationManager.
-    BIBLE_DATABASE_EXPORT void add_translation(boost::shared_ptr<const Translation> translation);
+    void add_translation(boost::shared_ptr<const Translation> translation);
 
     //! Get the Translation with the given name.
-    BIBLE_DATABASE_EXPORT boost::shared_ptr<const Translation> at(const std::string& translation_long_name) const;
+    boost::shared_ptr<const Translation> at(const std::string& translation_long_name) const;
 
     //! Get the VerseTreeItem for the TranslationManager.  This object represents the root of the verse tree used for browsing.
-    BIBLE_DATABASE_EXPORT boost::shared_ptr<VerseTreeItem> get_verse_item_tree() const;
+    boost::shared_ptr<VerseTreeItem> get_verse_item_tree() const;
 
     //! Get the starting iterator in the collection of Translation objects.
-    BIBLE_DATABASE_EXPORT TranslationIterator begin() const;
+    TranslationIterator begin() const;
 
     //! Get the end iterator in the collection of Translation objects.
-    BIBLE_DATABASE_EXPORT TranslationIterator end() const;
+    TranslationIterator end() const;
 
 private:
     std::map<std::string, boost::shared_ptr<const Translation> > m_translations;
