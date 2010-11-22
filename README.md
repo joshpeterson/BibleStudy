@@ -22,7 +22,7 @@ To ease distribution, BibleStudy is statically linked to Qt and the C++ runtime.
 In the Qt Windows build, the following changes were made to the mkspecs\win32-msvc2008 file:
 
 * QMAKE_CFLAGS_RELEASE = -O2 -GL -arch:SSE -MT -MD
-* QMAKE_LFLAGS_RELEASE = INCREMENTAL:NO /NODEFAULTLIB:"MSVCRT" /LTCG
+* QMAKE_LFLAGS_RELEASE = /INCREMENTAL:NO /NODEFAULTLIB:"MSVCRT" /LTCG
 
 The following configure command was used:
 
