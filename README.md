@@ -14,20 +14,6 @@ Build Environment
 * Windows: Visual Studio 2008
 * Linux: g++ 4.4.3
 
-Qt Build Options
-----------------
-
-To ease distribution, BibleStudy is statically linked to Qt and the C++ runtime.
-
-In the Qt Windows build, the following changes were made to the mkspecs\win32-msvc2008 file:
-
-* QMAKE_CFLAGS_RELEASE = -O2 -GL -arch:SSE -MT -MD
-* QMAKE_LFLAGS_RELEASE = /INCREMENTAL:NO /NODEFAULTLIB:"MSVCRT" /LTCG
-
-The following configure command was used:
-
-* configure -release -no-libjpeg -qt-zlib -qt-libpng -no-exceptions -no-stl -no-rtti -no-qt3support -no-openssl -no-opengl -no-webkit -no-phonon -no-style-motif -no-style-cde -no-style-cleanlooks -no-style-plastique -no-sql-sqlite -mmx -static -platform win32-msvc2008
-
 Branching Model
 ---------------
 The BibleStudy branching model is based on [this one](http://nvie.com/posts/a-successful-git-branching-model/).
