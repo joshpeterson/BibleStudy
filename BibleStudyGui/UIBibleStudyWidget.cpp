@@ -185,8 +185,8 @@ void UIBibleStudyWidget::load_translations()
 {
     m_translation_load_timer->stop();
 
-    TranslationLoadInformation dr_load_information = {"Douay-Rheims", "../Translations/DR.buf" };
-    TranslationLoadInformation kjv_load_information = {"King James Version", "../Translations/KJV.buf" };
+    TranslationLoadInformation dr_load_information = {"Douay-Rheims", "Translations/DR.buf" };
+    TranslationLoadInformation kjv_load_information = {"King James Version", "Translations/KJV.buf" };
     
     m_translations_to_load.push_back(dr_load_information);
     m_translations_to_load.push_back(kjv_load_information);

@@ -7,7 +7,7 @@ if not exist %DEST_DIR%\Translations mkdir %DEST_DIR%\Translations
 echo Copying translation files
 copy Translations\*.buf %DEST_DIR%\Translations
 
-if "%1"=="debug" (
+if "%1"=="Debug" (
     echo Copying Qt debug files
     copy %QT_DIR%\lib\QtCored4.dll %DEST_DIR%
     copy %QT_DIR%\lib\QtGuid4.dll %DEST_DIR%
@@ -20,6 +20,6 @@ if "%1"=="debug" (
 goto :end
 
 :error
-echo Please pass debug or release as the first argument.
+echo Please pass Debug or Release as the first argument.
 
 :end
