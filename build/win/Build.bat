@@ -35,7 +35,7 @@ call build\win\CopyDependencies.bat %CONFIGURATION%
 echo.
 
 echo Validating BibleDatabase behaviors.
-call build\win\RunBibleDatabaseBehaviors.bat
+call build\win\RunBibleDatabaseBehaviors.bat %CONFIGURATION%
 echo.
 
 :end

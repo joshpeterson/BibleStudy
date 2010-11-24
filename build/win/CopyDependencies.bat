@@ -9,12 +9,12 @@ copy Translations\*.buf %DEST_DIR%\Translations
 
 if "%1"=="debug" (
     echo Copying Qt debug files
-    copy %QT_DIR%\bin\QtCored4.dll %DEST_DIR%
-    copy %QT_DIR%\bin\QtGuid4.dll %DEST_DIR%
+    copy %QT_DIR%\lib\QtCored4.dll %DEST_DIR%
+    copy %QT_DIR%\lib\QtGuid4.dll %DEST_DIR%
 ) else (
     echo Copying Qt release files
-    copy %QT_DIR%\bin\QtCore4.dll %DEST_DIR%
-    copy %QT_DIR%\bin\QtGui4.dll %DEST_DIR%
+    copy %QT_DIR%\lib\QtCore4.dll %DEST_DIR%
+    copy %QT_DIR%\lib\QtGui4.dll %DEST_DIR%
 )
 
 goto :end

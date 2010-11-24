@@ -39,8 +39,6 @@ win32 {
         LIBS += -L"../Output/release"
         LIBS += "BibleDatabase.lib"
     }
-
-    QMAKE_POST_LINK = '"$(TargetPath)"'
 }
 
 unix {
