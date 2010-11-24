@@ -6,16 +6,6 @@
 #include <QMainWindow>
 #include <boost/shared_ptr.hpp>
 
-#ifdef WIN32
-    #ifdef _EXPORTING_BIBLE_STUDY_GUI
-        #define BIBLE_STUDY_GUI_EXPORT __declspec(dllexport)
-    #else // _EXPORTING_BIBLE_STUDY_GUI
-        #define BIBLE_STUDY_GUI_EXPORT __declspec(dllimport)
-    #endif //_EXPORTING_BIBLE_STUDY_GUI
-#else
-    #define BIBLE_STUDY_GUI_EXPORT
-#endif // WIN32
-
 class QWidget;
 class QTabWidget;
 class QAction;
@@ -47,7 +37,7 @@ class BackgroundWorker;
     This widget owns all of the other widgets in the application.  It also defines the layout
     of the application.
 */
-class BIBLE_STUDY_GUI_EXPORT UIBibleStudyWidget : public QMainWindow
+class UIBibleStudyWidget : public QMainWindow
 {
     Q_OBJECT
 

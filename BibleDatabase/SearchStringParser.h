@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <string>
-#include "BibleDatabaseExporter.h"
 
 namespace BibleDatabase
 {
@@ -11,9 +10,9 @@ namespace BibleDatabase
 class SearchStringParser
 {
 public:
-    BIBLE_DATABASE_EXPORT SearchStringParser() {};
+    SearchStringParser() {};
 
-    BIBLE_DATABASE_EXPORT std::vector<std::string> parse(std::string search_string) const;
+    std::vector<std::string> parse(std::string search_string) const;
 };
 
 }

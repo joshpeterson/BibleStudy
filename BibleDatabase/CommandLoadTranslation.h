@@ -4,7 +4,6 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include "ICommand.h"
-#include "BibleDatabaseExporter.h"
 
 namespace BibleDatabase
 {
@@ -17,15 +16,15 @@ class CommandLoadTranslation : public ICommand
 {
 public:
     //! Create a new instance of the CommandLoadTranslation command.
-    BIBLE_DATABASE_EXPORT CommandLoadTranslation(boost::shared_ptr<const TranslationLoader> translation_loader, std::string translation_file);
+    CommandLoadTranslation(boost::shared_ptr<const TranslationLoader> translation_loader, std::string translation_file);
 
     //! Get the translation that was loaded.
-    BIBLE_DATABASE_EXPORT boost::shared_ptr<const Translation> get_translation() const;
+    boost::shared_ptr<const Translation> get_translation() const;
     
     // ICommand
     
     //! Execute the translaton load.
-    BIBLE_DATABASE_EXPORT void Execute();
+    void Execute();
 
 private:
     boost::shared_ptr<const TranslationLoader> m_translation_loader;

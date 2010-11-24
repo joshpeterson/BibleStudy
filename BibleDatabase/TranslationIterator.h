@@ -4,7 +4,6 @@
 #include <map>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/shared_ptr.hpp>
-#include "BibleDatabaseExporter.h"
 
 namespace BibleDatabase
 {
@@ -15,7 +14,7 @@ class TranslationIterator : public boost::iterator_facade<TranslationIterator, b
 {
 public:
     //! Create a new instance of the TranslationIterator class.
-    BIBLE_DATABASE_EXPORT TranslationIterator(std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator translation_iterator) : m_translation_iterator(translation_iterator)
+    TranslationIterator(std::map<std::string, boost::shared_ptr<const Translation> >::const_iterator translation_iterator) : m_translation_iterator(translation_iterator)
     {
     }
 

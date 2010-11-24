@@ -13,6 +13,8 @@ HEADERS += SearchStringParserBehavior.h
 
 SOURCES += BibleDatabaseBehaviors.cpp
 
+DESTDIR = ../
+
 win32 {
     QMAKE_CXXFLAGS_DEBUG += /wd4100
     
@@ -24,26 +26,27 @@ win32 {
 
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
-        DESTDIR = "../Output/debug"
         LIBS += "$$(CPPUNIT_DIR)\lib\cppunitd.lib"
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"../Output/debug"
+        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotoc.lib"
+        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotobuf.lib"
+        LIBS += -L"..\BibleDatabase\debug"
         LIBS += "BibleDatabase.lib"
      }
 
 # Release mode specific settings
     build_pass:CONFIG(release, debug|release){
-        DESTDIR = "../Output/release"
         LIBS += "$$(CPPUNIT_DIR)\lib\cppunit.lib"
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"../Output/release"
+        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotoc.lib"
+        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotobuf.lib"
+        LIBS += -L"..\BibleDatabase\release"
         LIBS += "BibleDatabase.lib"
     }
 }
 
 unix {
-    DESTDIR = "../Output"
-    LIBS += -L"../Output"
+    LIBS += -L"../BibleDatabase"
     LIBS += -l"cppunit"
     LIBS += -l"boost_filesystem"
     LIBS += -l"BibleDatabase"
