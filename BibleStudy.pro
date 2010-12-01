@@ -11,18 +11,16 @@ win32 {
     build_pass:CONFIG(debug, debug|release) {
         DESTDIR = "Output/debug"
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"Output/debug"
-        LIBS += "BibleDatabase.lib"
-        LIBS += "BibleStudyGui.lib"
+        LIBS += "BibleDatabase/debug/BibleDatabase.lib"
+        LIBS += "BibleStudyGui/debug/BibleStudyGui.lib"
      }
 
 # Release mode specific settings
     build_pass:CONFIG(release, debug|release){
         DESTDIR = "Output/release"
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"Output/release"
-        LIBS += "BibleDatabase.lib"
-        LIBS += "BibleStudyGui.lib"
+        LIBS += "BibleDatabase/release/BibleDatabase.lib"
+        LIBS += "BibleStudyGui/release/BibleStudyGui.lib"
     }
 }
 

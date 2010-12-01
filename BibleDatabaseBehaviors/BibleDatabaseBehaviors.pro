@@ -27,8 +27,7 @@ win32 {
         DESTDIR = "../Output/debug"
         LIBS += "$$(CPPUNIT_DIR)\lib\cppunitd.lib"
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"../Output/debug"
-        LIBS += "BibleDatabase.lib"
+        LIBS += "../BibleDatabase/debug/BibleDatabase.lib"
      }
 
 # Release mode specific settings
@@ -36,8 +35,7 @@ win32 {
         DESTDIR = "../Output/release"
         LIBS += "$$(CPPUNIT_DIR)\lib\cppunit.lib"
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"../Output/release"
-        LIBS += "BibleDatabase.lib"
+        LIBS += "../BibleDatabase/release/BibleDatabase.lib"
     }
 }
 
