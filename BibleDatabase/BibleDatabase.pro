@@ -1,5 +1,5 @@
 TEMPLATE = lib
-CONFIG += staticlib stl debug_and_release console
+CONFIG += dll stl debug_and_release console
 CONFIG -= qt
 QT -= core gui
 
@@ -15,6 +15,7 @@ HEADERS += VerseDisplay.h
 HEADERS += VerseTreeItem.h
 HEADERS += TranslationManager.h
 HEADERS += TranslationIterator.h
+HEADERS += BibleDatabaseExporter.h
 HEADERS += TranslationLoader.h
 HEADERS += SearchStringParser.h
 HEADERS += CommandLoadTranslation.h
@@ -31,6 +32,8 @@ SOURCES += TranslationLoader.cpp
 SOURCES += SearchStringParser.cpp
 SOURCES += CommandLoadTranslation.cpp
 
+DEFINES += _EXPORTING_BIBLE_DATABASE
+
 win32 {  
     QMAKE_CXXFLAGS_DEBUG += /wd4996
     QMAKE_CXXFLAGS_DEBUG += /wd4251
@@ -42,9 +45,26 @@ win32 {
     
     INCLUDEPATH += "$$(BOOST_DIR)"
     INCLUDEPATH += "$$(GOOGLE_PROTOBUF_DIR)\include"
+    
+# Debug mode specific settings
+    build_pass:CONFIG(debug, debug|release) {
+        DESTDIR = "../Output/debug"
+        LIBS += -L"$$(BOOST_DIR)\lib"
+        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotoc.lib"
+        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotobuf.lib"
+     }
+
+# Release mode specific settings
+    build_pass:CONFIG(release, debug|release){
+        DESTDIR = "../Output/release"
+        LIBS += -L"$$(BOOST_DIR)\lib"
+        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotoc.lib"
+        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotobuf.lib"
+    }
 }
 
 unix {
+    DESTDIR = "../Output"
     LIBS += -l"protobuf"
     LIBS += -l"boost_system"
 }

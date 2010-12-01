@@ -1,5 +1,5 @@
 TEMPLATE = lib
-CONFIG += staticlib stl debug_and_release qt
+CONFIG += dll stl debug_and_release qt
 
 HEADERS += SearchResultsModel.h
 HEADERS += UISearchWidget.h
@@ -24,11 +24,30 @@ SOURCES += BrowseVersesModel.cpp
 SOURCES += UIBrowseVersesWidget.cpp
 SOURCES += BackgroundWorker.cpp
 
+DEFINES += _EXPORTING_BIBLE_STUDY_GUI
+
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
+
+# Debug mode specific settings
+    build_pass:CONFIG(debug, debug|release) {
+        DESTDIR = "../Output/debug"
+        LIBS += -L"$$(BOOST_DIR)\lib"
+        LIBS += -L"../Output/debug"
+        LIBS += "BibleDatabase.lib"
+     }
+
+# Release mode specific settings
+    build_pass:CONFIG(release, debug|release){
+        DESTDIR = "../Output/release"
+        LIBS += -L"$$(BOOST_DIR)\lib"
+        LIBS += -L"../Output/release"
+        LIBS += "BibleDatabase.lib"
+    }
 }
 
 unix {
-    LIBS += -L"../BibleDatabase"
+    DESTDIR = "../Output"
+    LIBS += -L"../Output"
     LIBS += -l"BibleDatabase"
 }
