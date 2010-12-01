@@ -29,20 +29,20 @@ DEFINES += _EXPORTING_BIBLE_STUDY_GUI
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
 
+    QMAKE_LFLAGS += /IMPLIB:$(IntDir)$(TargetName).lib
+
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
         DESTDIR = "../Output/debug"
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"../Output/debug"
-        LIBS += "BibleDatabase.lib"
+        LIBS += "../BibleDatabase/debug/BibleDatabase.lib"
      }
 
 # Release mode specific settings
     build_pass:CONFIG(release, debug|release){
         DESTDIR = "../Output/release"
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += -L"../Output/release"
-        LIBS += "BibleDatabase.lib"
+        LIBS += "../BibleDatabase/release/BibleDatabase.lib"
     }
 }
 
