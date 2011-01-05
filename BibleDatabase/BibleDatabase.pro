@@ -31,6 +31,7 @@ SOURCES += TranslationManager.cpp
 SOURCES += TranslationLoader.cpp
 SOURCES += SearchStringParser.cpp
 SOURCES += CommandLoadTranslation.cpp
+SOURCES += PythonVerseWrapper.cpp
 
 DEFINES += _EXPORTING_BIBLE_DATABASE
 
@@ -47,6 +48,9 @@ win32 {
     
     INCLUDEPATH += "$$(BOOST_DIR)"
     INCLUDEPATH += "$$(GOOGLE_PROTOBUF_DIR)\include"
+    INCLUDEPATH += "$$(PYTHON_DIR)\include"
+    
+    QMAKE_POST_LINK = copy /y "$(TargetPath)" "$(TargetDir)\$(TargetName).pyd"
     
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
@@ -54,6 +58,7 @@ win32 {
         LIBS += -L"$$(BOOST_DIR)\lib"
         LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotoc.lib"
         LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotobuf.lib"
+        LIBS += "$$(PYTHON_DIR)\libs\python26.lib"
      }
 
 # Release mode specific settings
@@ -62,6 +67,7 @@ win32 {
         LIBS += -L"$$(BOOST_DIR)\lib"
         LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotoc.lib"
         LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotobuf.lib"
+        LIBS += "$$(PYTHON_DIR)\libs\python26.lib"
     }
 }
 
