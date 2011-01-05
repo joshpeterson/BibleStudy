@@ -27,6 +27,7 @@
 #include "UIBrowseVersesWidget.h"
 #include "QtConnectHelper.h"
 #include "BackgroundWorker.h"
+#include "Version.h"
 
 using namespace BibleStudyGui;
 using namespace BibleDatabase;
@@ -117,7 +118,7 @@ void UIBibleStudyWidget::initialize_widgets()
 
 void UIBibleStudyWidget::initialize_status_bar()
 {
-    this->push_status_bar_message(tr("Ready"));
+    this->push_status_bar_message(tr("Ready (Version ") + QString(VERSION ")"));
 }
 
 void UIBibleStudyWidget::initialize_actions()

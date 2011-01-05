@@ -12,6 +12,7 @@ HEADERS += BrowseVersesModel.h
 HEADERS += UIBrowseVersesWidget.h
 HEADERS += QtConnectHelper.h
 HEADERS += BackgroundWorker.h
+HEADERS += Version.h
 
 SOURCES += SearchResultsModel.cpp
 SOURCES += UISearchWidget.cpp
