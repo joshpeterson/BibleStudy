@@ -231,7 +231,7 @@ test
 
 }
 FileGroup ::057DD326-672D-47AB-A6AC-7EBC6F2E123D -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-5-x86 FreeBSD-6-x86 FreeBSD-7-x86 HPUX-hppa Linux-x86 Linux-x86_64 Solaris-sparc Solaris-x86 Windows TarArchive ZipArchive} -name {Program Files} -parent FileGroups
-File ::50DCA91C-CE13-4004-B78C-994FAC3D24CA -type dir -directory <%InstallDir%> -name {../Output/release} -parent 057DD326-672D-47AB-A6AC-7EBC6F2E123D
+File ::50DCA91C-CE13-4004-B78C-994FAC3D24CA -type dir -directory <%InstallDir%> -name ../Output/release -parent 057DD326-672D-47AB-A6AC-7EBC6F2E123D
 File ::7D56F978-62EB-4CDB-9EB9-CFB457520A73 -name BibleDatabase.dll -parent 50DCA91C-CE13-4004-B78C-994FAC3D24CA
 File ::14087A03-FB3C-48BB-A1E2-46DF13CD0690 -name BibleDatabaseBehaviors.exe -active 0 -parent 50DCA91C-CE13-4004-B78C-994FAC3D24CA
 File ::1DB57835-1177-4A32-A7EB-9EB44D6FD1E6 -name BibleStudy.exe -parent 50DCA91C-CE13-4004-B78C-994FAC3D24CA
@@ -249,6 +249,7 @@ File ::A7AB0C82-0A9A-4BD6-BF5D-D0FCFC6B2383 -type dir -name Translations -parent
 File ::951C9326-6AAE-44E0-9EBA-94DE0C5F4E25 -name DR.buf -parent A7AB0C82-0A9A-4BD6-BF5D-D0FCFC6B2383
 File ::B56F9DED-98BE-40FE-92CA-2265D3669321 -name KJV.buf -parent A7AB0C82-0A9A-4BD6-BF5D-D0FCFC6B2383
 File ::802F2B21-5B35-4D66-A34E-F57446C1B24C -name TT.buf -active 0 -parent A7AB0C82-0A9A-4BD6-BF5D-D0FCFC6B2383
+File ::31BC06E8-0CB6-4E30-8C33-59433D50780B -name msvcr90.dll -parent 50DCA91C-CE13-4004-B78C-994FAC3D24CA
 Component ::E823DE7F-4BC0-4F58-AA9B-70668450896B -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-5-x86 FreeBSD-6-x86 FreeBSD-7-x86 HPUX-hppa Linux-x86 Linux-x86_64 Solaris-sparc Solaris-x86 Windows} -name {Default Component} -parent Components
 SetupType ::B99F4DA2-B2A4-47D1-9E9E-7FD085EEF0E7 -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-5-x86 FreeBSD-6-x86 FreeBSD-7-x86 HPUX-hppa Linux-x86 Linux-x86_64 Solaris-sparc Solaris-x86 Windows} -name Typical -parent SetupTypes
 SetupType ::838E76E1-2D9A-4D83-A5DA-15F5089A575C -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-5-x86 FreeBSD-6-x86 FreeBSD-7-x86 HPUX-hppa Linux-x86 Linux-x86_64 Solaris-sparc Solaris-x86 Windows} -name Custom -parent SetupTypes

@@ -21,6 +21,9 @@ if "%1"=="Debug" (
     copy %QT_DIR%\lib\QtGui4.dll %DEST_DIR%
 )
 
+echo Copying Microsoft C++ runtime file
+copy MicrosoftCRT\msvcr90.dll %DEST_DIR%
+
 goto :end
 
 :error
