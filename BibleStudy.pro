@@ -5,6 +5,7 @@ SOURCES += BibleStudy.cpp
 
 
 win32 {
+    RC_FILE=BibleStudy.rc
     INCLUDEPATH += "$$(BOOST_DIR)"
 
 # Debug mode specific settings
