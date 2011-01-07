@@ -9,7 +9,7 @@ ApplicationID
 {D887929D-0DBA-448B-88D3-F78DCF5517E9}
 
 ApplicationURL
-{}
+{http://joshpeterson.github.com/BibleStudy}
 
 AutoRefreshFiles
 {Yes}
@@ -1692,16 +1692,16 @@ Windows,ProgramFolderName
 {<%AppName%>}
 
 Windows,ProgramLicense
-{<%InstallDir%>/LICENSE.txt}
+{}
 
 Windows,ProgramName
 {}
 
 Windows,ProgramReadme
-{<%InstallDir%>/README.txt}
+{}
 
 Windows,RequireAdministrator
-{Yes}
+{No}
 
 Windows,UseUncompressedBinaries
 {No}
