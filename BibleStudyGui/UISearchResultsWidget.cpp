@@ -13,6 +13,7 @@
 #include <QPoint>
 #include <QMenu>
 #include <QKeySequence>
+#include <QScrollBar>
 #include "UISearchResultsWidget.h"
 #include "SearchResultsModel.h"
 #include "../BibleDatabase/VerseDisplay.h"
@@ -86,6 +87,8 @@ void UISearchResultsWidget::display_search_results(boost::shared_ptr<ISearchResu
     {
         m_filter_text->setText(QString());
     }
+    m_results_view->verticalScrollBar()->setValue(m_results_view->verticalScrollBar()->minimum());
+    m_results_view->horizontalScrollBar()->setValue(m_results_view->horizontalScrollBar()->minimum());
     m_results_model->SetResults(query);
     m_results_view->resizeRowsToContents();
     update_results_status();
