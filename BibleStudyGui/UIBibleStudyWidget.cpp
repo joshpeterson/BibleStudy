@@ -11,6 +11,7 @@
 #include <QKeySequence>
 #include <QMessageBox>
 #include <QTimer>
+#include <QIcon>
 #include "../BibleDatabase/Translation.h"
 #include "../BibleDatabase/TranslationManager.h"
 #include "../BibleDatabase/TranslationLoader.h"
@@ -50,6 +51,9 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> tra
     m_exit_action(new QAction(tr("E&xit"), this)),
     m_about_action(new QAction(tr("&About"), this))
 {
+
+    this->setWindowIcon(QIcon("icons/BibleStudy.ico"));
+
     this->connect_signals();
     this->set_font();
     this->initialize_widgets();

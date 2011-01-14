@@ -37,5 +37,7 @@ echo "***"
 echo "*** Copying metadata into Output directory"
 echo "***"
 cd Output
+mkdir Translations
+mkdir icons
 cp ../Translations/* Translations/
 cp ../icons/* icons/
