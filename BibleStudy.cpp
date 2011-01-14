@@ -1,43 +1,38 @@
 #include <iostream>
-#include "Translation.h"
-#include "TranslationManager.h"
-#include "UISearchWidget.h"
-#include "SearchResultsModel.h"
-#include "UISearchResultsWidget.h"
-#include "UIBibleStudyWidget.h"
+#include <stdexcept>
 #include <QApplication>
 #include <QPushButton>
 #include <QAbstractItemModel>
 #include <QTableView>
 #include <QHeaderView>
 #include <QVBoxLayout>
+#include "BibleDatabase/Translation.h"
+#include "BibleDatabase/TranslationManager.h"
+#include "BibleDatabase/TranslationLoader.h"
+#include "BibleStudyGui/UIBibleStudyWidget.h"
 
-using namespace BibleStudy;
+using namespace BibleStudyGui;
+using namespace BibleDatabase;
 
 int main(int argc, char* argv[])
 {
-    QApplication app(argc, argv);
+    try
+    {
+        QApplication app(argc, argv);
 
-    boost::shared_ptr<Translation> test(new Translation);
+        boost::shared_ptr<const TranslationLoader> translation_loader = boost::shared_ptr<const TranslationLoader>(new TranslationLoader(QCoreApplication::applicationDirPath().toStdString()));
+        boost::shared_ptr<TranslationManager> manager(new TranslationManager);
+        
+        UIBibleStudyWidget study(manager, translation_loader);
 
-    //test->Import("King James Version", "KJV", "c:\\Documents and Settings\\Josh\\Desktop\\KJV.txt");
+        study.show();
 
-    //test->Save("c:\\Documents and Settings\\Josh\\Desktop\\KJV.buf");
-
-    test->Resume("Translations/DR.buf");
-
-    boost::shared_ptr<Translation> test2(new Translation);
-    test2->Resume("Translations/KJV.buf");
-
-    boost::shared_ptr<TranslationManager> manager(new TranslationManager);
-    manager->add_translation(test);
-    manager->add_translation(test2);
-    
-    UIBibleStudyWidget study(manager);
-
-    study.show();
-
-    return app.exec();
-
+        return app.exec();
+    }
+    catch (std::exception& e)
+    {
+        std::cout << "Uh-oh, something very bad happened." << std::endl;
+        std::cout << "These details might help (or they might not):\n\n" << e.what() << std::endl;
+    }
 }
 

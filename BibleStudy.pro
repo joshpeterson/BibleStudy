@@ -1,66 +1,32 @@
-CONFIG += qt thread exceptions stl debug_and_release
-
-HEADERS += ISearchResults.h
-HEADERS += ICommand.h
-HEADERS += SearchResultsModel.h
-HEADERS += SearchResultsSerial.h
-HEADERS += Translation.h
-HEADERS += TranslationBuffer.pb.h
-HEADERS += TranslationBufferNoWarnings.pb.h
-HEADERS += UISearchWidget.h
-HEADERS += Verse.h
-HEADERS += UISearchResultsWidget.h
-HEADERS += UIBibleStudyWidget.h
-HEADERS += CommandPerformSearch.h
-HEADERS += UITextViewWidget.h
-HEADERS += UIStarredVersesWidget.h
-HEADERS += StarredVersesModel.h
-HEADERS += VerseDisplay.h
-HEADERS += BrowseVersesModel.h
-HEADERS += UIBrowseVersesWidget.h
-HEADERS += VerseTreeItem.h
-HEADERS += TranslationManager.h
-HEADERS += TranslationIterator.h
+TEMPLATE = app
+CONFIG += windows qt thread exceptions stl debug_and_release
 
 SOURCES += BibleStudy.cpp
-SOURCES += SearchResultsModel.cpp
-SOURCES += SearchResultsSerial.cpp
-SOURCES += Translation.cpp
-SOURCES += UISearchWidget.cpp
-SOURCES += Verse.cpp
-SOURCES += TranslationBuffer.pb.cc
-SOURCES += UISearchResultsWidget.cpp
-SOURCES += UIBibleStudyWidget.cpp
-SOURCES += CommandPerformSearch.cpp
-SOURCES += UITextViewWidget.cpp
-SOURCES += UIStarredVersesWidget.cpp
-SOURCES += StarredVersesModel.cpp
-SOURCES += VerseDisplay.cpp
-SOURCES += BrowseVersesModel.cpp
-SOURCES += UIBrowseVersesWidget.cpp
-SOURCES += VerseTreeItem.cpp
-SOURCES += TranslationManager.cpp
+
 
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
-    INCLUDEPATH += "$$(GOOGLE_PROTOBUF_DIR)\include"
 
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
+        DESTDIR = "Output/debug"
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotoc.lib"
-        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\debug\libprotobuf.lib"
+        LIBS += "BibleDatabase/debug/BibleDatabase.lib"
+        LIBS += "BibleStudyGui/debug/BibleStudyGui.lib"
      }
 
 # Release mode specific settings
     build_pass:CONFIG(release, debug|release){
+        DESTDIR = "Output/release"
         LIBS += -L"$$(BOOST_DIR)\lib"
-        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotoc.lib"
-        LIBS += "$$(GOOGLE_PROTOBUF_DIR)\release\libprotobuf.lib"
+        LIBS += "BibleDatabase/release/BibleDatabase.lib"
+        LIBS += "BibleStudyGui/release/BibleStudyGui.lib"
     }
 }
 
 unix {
-    LIBS+=-l"protoc"
-    LIBS+=-l"protobuf"
+    DESTDIR = "Output"
+    LIBS += -L"Output"
+    LIBS += -l"BibleDatabase"
+    LIBS += -l"BibleStudyGui"
 }

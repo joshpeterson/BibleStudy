@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>BibleStudy: C:/Documents and Settings/Josh/My Documents/BibleStudy/Translation.h Source File</title>
+<title>BibleStudy: C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/Translation.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -23,7 +23,7 @@
       <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-<h1>C:/Documents and Settings/Josh/My Documents/BibleStudy/Translation.h</h1><a href="_translation_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef __TRANSLATION_H</span>
+<h1>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/Translation.h</h1><a href="_translation_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef __TRANSLATION_H</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define __TRANSLATION_H</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;string&gt;</span>
@@ -32,61 +32,94 @@
 <a name="l00007"></a>00007 <span class="preprocessor">#include &lt;boost/shared_ptr.hpp&gt;</span>
 <a name="l00008"></a>00008 <span class="preprocessor">#include &lt;boost/noncopyable.hpp&gt;</span>
 <a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="_i_search_results_8h.html">ISearchResults.h</a>&quot;</span>
-<a name="l00010"></a>00010 
-<a name="l00011"></a>00011 <span class="keyword">namespace </span>BibleStudy
-<a name="l00012"></a>00012 {
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 <span class="keyword">class </span>Verse;
-<a name="l00015"></a>00015 <span class="keyword">class </span>VerseTreeItem;
-<a name="l00016"></a>00016 
-<a name="l00018"></a>00018 
-<a name="l00022"></a><a class="code" href="class_bible_study_1_1_translation.html">00022</a> <span class="keyword">class </span><a class="code" href="class_bible_study_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> : <span class="keyword">private</span> boost::noncopyable
-<a name="l00023"></a>00023 {
-<a name="l00024"></a>00024 <span class="keyword">public</span>:
-<a name="l00026"></a><a class="code" href="class_bible_study_1_1_translation.html#a873c2c066a53a0cbe04f6e1fe05b5182">00026</a>     std::string <a class="code" href="class_bible_study_1_1_translation.html#a873c2c066a53a0cbe04f6e1fe05b5182" title="Get the full name of the translation.">get_long_name</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_long_name; }
+<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;<a class="code" href="_bible_database_exporter_8h.html">BibleDatabaseExporter.h</a>&quot;</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="keyword">namespace </span>BibleDatabase
+<a name="l00013"></a>00013 {
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="keyword">class </span>Verse;
+<a name="l00016"></a>00016 <span class="keyword">class </span>VerseTreeItem;
+<a name="l00017"></a>00017 
+<a name="l00019"></a><a class="code" href="namespace_bible_database.html#a44c9e9a204d56ccb5c8c632c333ddeb9">00019</a> <span class="keyword">enum</span> <a class="code" href="namespace_bible_database.html#a44c9e9a204d56ccb5c8c632c333ddeb9" title="This enum represents the options available for a search of the Translation. It is...">SearchOption</a>
+<a name="l00020"></a>00020 {
+<a name="l00021"></a><a class="code" href="namespace_bible_database.html#a44c9e9a204d56ccb5c8c632c333ddeb9a01e68e89070f99be9fc04bbb7261c4f0">00021</a>     <a class="code" href="namespace_bible_database.html#a44c9e9a204d56ccb5c8c632c333ddeb9a01e68e89070f99be9fc04bbb7261c4f0">CaseSensitive</a> = 0,
+<a name="l00022"></a><a class="code" href="namespace_bible_database.html#a44c9e9a204d56ccb5c8c632c333ddeb9a335948d35e2ded12b3277922166b356c">00022</a>     <a class="code" href="namespace_bible_database.html#a44c9e9a204d56ccb5c8c632c333ddeb9a335948d35e2ded12b3277922166b356c">CaseInsensitive</a> = 1,
+<a name="l00023"></a><a class="code" href="namespace_bible_database.html#a44c9e9a204d56ccb5c8c632c333ddeb9a26ad8087950018ca1b83ecb6894aaceb">00023</a>     <a class="code" href="namespace_bible_database.html#a44c9e9a204d56ccb5c8c632c333ddeb9a26ad8087950018ca1b83ecb6894aaceb">MatchWholeWord</a> = 2
+<a name="l00024"></a>00024 };
+<a name="l00025"></a>00025 
 <a name="l00027"></a>00027 
-<a name="l00029"></a><a class="code" href="class_bible_study_1_1_translation.html#a4e4447116d09d51ebd4cb412e4f389e4">00029</a>     std::string <a class="code" href="class_bible_study_1_1_translation.html#a4e4447116d09d51ebd4cb412e4f389e4" title="Get the abbreviated name of the translation.">get_short_name</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_short_name; }
-<a name="l00030"></a>00030 
-<a name="l00032"></a>00032     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_1_1_translation.html#a44f1be9cf9356dac178c5174a01bb192" title="Iterate the verses in this translation and add the ones which match the query to...">search</a>(std::vector&lt;boost::shared_ptr&lt;ISearchResults&gt; &gt;&amp; results) <span class="keyword">const</span>;
-<a name="l00033"></a>00033 
-<a name="l00035"></a><a class="code" href="class_bible_study_1_1_translation.html#aa65ef0d29f7b354a5917d2106445f277">00035</a>     <span class="keyword">const</span> <a class="code" href="class_bible_study_1_1_verse.html" title="This class represents a single verse in a Translation object.">Verse</a>* <a class="code" href="class_bible_study_1_1_translation.html#aa65ef0d29f7b354a5917d2106445f277" title="Get a specific verse from the translation based on its verse ID.">get_entry</a>(<span class="keywordtype">int</span> unique_id)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_verses[unique_id].get(); }
-<a name="l00036"></a>00036     
-<a name="l00038"></a>00038     std::vector&lt;boost::shared_ptr&lt;const Verse&gt; &gt; <a class="code" href="class_bible_study_1_1_translation.html#aa65ef0d29f7b354a5917d2106445f277" title="Get a specific verse from the translation based on its verse ID.">get_entry</a>(<span class="keywordtype">int</span> unique_id, <span class="keywordtype">int</span> num_entries_context) <span class="keyword">const</span>;
+<a name="l00031"></a><a class="code" href="class_bible_database_1_1_translation.html">00031</a> <span class="keyword">class </span><a class="code" href="class_bible_database_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> : <span class="keyword">private</span> boost::noncopyable
+<a name="l00032"></a>00032 {
+<a name="l00033"></a>00033 <span class="keyword">public</span>:
+<a name="l00035"></a><a class="code" href="class_bible_database_1_1_translation.html#a313098837e300937a532da82cb21a07a">00035</a>     <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> std::string <a class="code" href="class_bible_database_1_1_translation.html#a313098837e300937a532da82cb21a07a" title="Get the full name of the translation.">get_long_name</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_long_name; }
+<a name="l00036"></a>00036 
+<a name="l00038"></a><a class="code" href="class_bible_database_1_1_translation.html#a66d028c88ea1315f277249a9d06f5a92">00038</a>     <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> std::string <a class="code" href="class_bible_database_1_1_translation.html#a66d028c88ea1315f277249a9d06f5a92" title="Get the abbreviated name of the translation.">get_short_name</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_short_name; }
 <a name="l00039"></a>00039 
-<a name="l00041"></a><a class="code" href="class_bible_study_1_1_translation.html#af5d6f637d32490d514f59e8abe6bfb48">00041</a>     <span class="keywordtype">int</span> <a class="code" href="class_bible_study_1_1_translation.html#af5d6f637d32490d514f59e8abe6bfb48" title="Get the number of verses in the translation.">num_entries</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_verses.size()); }
+<a name="l00041"></a>00041     <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> <span class="keywordtype">void</span> <a class="code" href="class_bible_database_1_1_translation.html#abe4fa73f6ce9be0c2cdedacc7fcf14d0" title="Iterate the verses in this translation and add the ones which match the query to...">search</a>(boost::shared_ptr&lt;ISearchResults&gt; query, <span class="keywordtype">int</span> search_option) <span class="keyword">const</span>;
 <a name="l00042"></a>00042 
-<a name="l00044"></a>00044     boost::shared_ptr&lt;VerseTreeItem&gt; <a class="code" href="class_bible_study_1_1_translation.html#ac1778966847c1bf13e37688933815cf1" title="Get the root item of the tree representation of this translation.">get_verse_item_tree</a>() <span class="keyword">const</span>;
-<a name="l00045"></a>00045 
-<a name="l00047"></a>00047     <span class="keywordtype">bool</span> <a class="code" href="class_bible_study_1_1_translation.html#a8d2e476f08ba52d1de12ca9c31142f5b" title="Save the translation to a platform independent binary file.">Save</a>(<span class="keyword">const</span> std::string&amp; filename);
+<a name="l00044"></a><a class="code" href="class_bible_database_1_1_translation.html#a46c7cb82f53ce92997698b6bbc31d39c">00044</a>     <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> <span class="keyword">const</span> <a class="code" href="class_bible_database_1_1_verse.html" title="This class represents a single verse in a Translation object.">Verse</a>* <a class="code" href="class_bible_database_1_1_translation.html#a46c7cb82f53ce92997698b6bbc31d39c" title="Get a specific verse from the translation based on its verse ID.">get_verse</a>(<span class="keywordtype">int</span> unique_id)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_verses[unique_id].get(); }
+<a name="l00045"></a>00045     
+<a name="l00047"></a>00047     <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> std::vector&lt;boost::shared_ptr&lt;const Verse&gt; &gt; <a class="code" href="class_bible_database_1_1_translation.html#a46c7cb82f53ce92997698b6bbc31d39c" title="Get a specific verse from the translation based on its verse ID.">get_verse</a>(<span class="keywordtype">int</span> unique_id, <span class="keywordtype">int</span> num_entries_context) <span class="keyword">const</span>;
 <a name="l00048"></a>00048 
-<a name="l00050"></a>00050     <span class="keywordtype">bool</span> <a class="code" href="class_bible_study_1_1_translation.html#aa1b619691d8e9df32ec287a6bfd47dfc" title="Resume the translation from a platform independent binary file.">Resume</a>(<span class="keyword">const</span> std::string&amp; filename);
-<a name="l00051"></a>00051     
-<a name="l00053"></a>00053 
-<a name="l00069"></a>00069     <span class="keywordtype">bool</span> <a class="code" href="class_bible_study_1_1_translation.html#ad95bad7757f91bda06e77e8c137a51f6" title="Import a translation of a given name from a text file.">Import</a>(<span class="keyword">const</span> std::string&amp; long_name, <span class="keyword">const</span> std::string&amp; short_name, <span class="keyword">const</span> std::string&amp; filename);
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071 <span class="keyword">private</span>:
-<a name="l00072"></a>00072     std::string m_long_name;
-<a name="l00073"></a>00073     std::string m_short_name;
-<a name="l00074"></a>00074     std::vector&lt; boost::shared_ptr&lt;Verse&gt; &gt; m_verses;
-<a name="l00075"></a>00075     boost::shared_ptr&lt;VerseTreeItem&gt; m_verse_tree;
-<a name="l00076"></a>00076 
-<a name="l00078"></a>00078     <span class="keywordtype">void</span> partial_search(std::vector&lt; boost::shared_ptr&lt;Verse&gt; &gt;::const_iterator begin, 
-<a name="l00079"></a>00079                         std::vector&lt; boost::shared_ptr&lt;Verse&gt; &gt;::const_iterator end,
-<a name="l00080"></a>00080                         boost::shared_ptr&lt;ISearchResults&gt; query) <span class="keyword">const</span>;
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082 };
-<a name="l00083"></a>00083 
-<a name="l00085"></a>00085 std::string <a class="code" href="namespace_bible_study.html#a0c7c29d0fdd56613a774aeadffbf2906" title="Get the text representation and title of a collection of verses.">verse_collection_to_title_and_string_wrapped</a>(<span class="keyword">const</span> std::vector&lt;boost::shared_ptr&lt;const Verse&gt; &gt;&amp; verse_collection, boost::shared_ptr&lt;const Translation&gt; translation);
-<a name="l00086"></a>00086 
-<a name="l00088"></a>00088 std::string <a class="code" href="namespace_bible_study.html#a37bd25b2ca2bf39145352a502f77297c" title="Get the text representation of a collection of verses.">verse_collection_to_string</a>(<span class="keyword">const</span> std::vector&lt;boost::shared_ptr&lt;const Verse&gt; &gt;&amp; verse_collection);
-<a name="l00089"></a>00089 
-<a name="l00091"></a>00091 std::string <a class="code" href="namespace_bible_study.html#a79208e06ff6ec9a933df6334e0646a28" title="Get the title of a collection of verses.">verse_collection_title</a>(<span class="keyword">const</span> std::vector&lt;boost::shared_ptr&lt;const Verse&gt; &gt;&amp; verse_collection, boost::shared_ptr&lt;const Translation&gt; translation);
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093 }
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095 <span class="preprocessor">#endif //__TRANSLATION_H</span>
+<a name="l00050"></a><a class="code" href="class_bible_database_1_1_translation.html#a02e7d090d5ca69b99496cf1c3d019cc1">00050</a>     <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> <span class="keywordtype">int</span> <a class="code" href="class_bible_database_1_1_translation.html#a02e7d090d5ca69b99496cf1c3d019cc1" title="Get the number of verses in the translation.">num_entries</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_verses.size()); }
+<a name="l00051"></a>00051 
+<a name="l00053"></a>00053     <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> boost::shared_ptr&lt;VerseTreeItem&gt; <a class="code" href="class_bible_database_1_1_translation.html#ac1778966847c1bf13e37688933815cf1" title="Get the root item of the tree representation of this translation.">get_verse_item_tree</a>() <span class="keyword">const</span>;
+<a name="l00054"></a>00054 
+<a name="l00056"></a>00056     <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> <span class="keywordtype">bool</span> <a class="code" href="class_bible_database_1_1_translation.html#a6927de69f8d869e05f87ce85e5f60b5b" title="Save the translation to a platform independent binary file.">save</a>(<span class="keyword">const</span> std::string&amp; filename);
+<a name="l00057"></a>00057 
+<a name="l00059"></a>00059     <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> <span class="keywordtype">bool</span> <a class="code" href="class_bible_database_1_1_translation.html#a9c8984088dfa6ed806a028025b1e4171" title="Resume the translation from a platform independent binary file.">resume</a>(<span class="keyword">const</span> std::string&amp; filename);
+<a name="l00060"></a>00060     
+<a name="l00062"></a>00062 
+<a name="l00078"></a>00078     <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> <span class="keywordtype">bool</span> <span class="keyword">import</span>(<span class="keyword">const</span> std::string&amp; long_name, <span class="keyword">const</span> std::string&amp; short_name, <span class="keyword">const</span> std::string&amp; filename);
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080 <span class="keyword">private</span>:
+<a name="l00081"></a>00081     std::string m_long_name;
+<a name="l00082"></a>00082     std::string m_short_name;
+<a name="l00083"></a>00083     std::vector&lt; boost::shared_ptr&lt;const Verse&gt; &gt; m_verses;
+<a name="l00084"></a>00084     boost::shared_ptr&lt;VerseTreeItem&gt; m_verse_tree;
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086     <span class="keyword">class </span>VerseMatcher
+<a name="l00087"></a>00087     {
+<a name="l00088"></a>00088     <span class="keyword">public</span>:
+<a name="l00089"></a>00089         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> is_match(boost::shared_ptr&lt;const Verse&gt; <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>, std::string search_string) <span class="keyword">const</span> = 0;
+<a name="l00090"></a>00090     };
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092     <span class="keyword">class </span>CaseSensitiveVerseMatcher : <span class="keyword">public</span> VerseMatcher
+<a name="l00093"></a>00093     {
+<a name="l00094"></a>00094     <span class="keyword">public</span>:
+<a name="l00095"></a>00095         <span class="keywordtype">bool</span> is_match(boost::shared_ptr&lt;const Verse&gt; <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>, std::string search_string) <span class="keyword">const</span>;
+<a name="l00096"></a>00096     };
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098     <span class="keyword">class </span>CaseSensitiveWholeWordVerseMatcher : <span class="keyword">public</span> VerseMatcher
+<a name="l00099"></a>00099     {
+<a name="l00100"></a>00100     <span class="keyword">public</span>:
+<a name="l00101"></a>00101         <span class="keywordtype">bool</span> is_match(boost::shared_ptr&lt;const Verse&gt; <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>, std::string search_string) <span class="keyword">const</span>;
+<a name="l00102"></a>00102     };
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104     <span class="keyword">class </span>CaseInsensitiveVerseMatcher : <span class="keyword">public</span> VerseMatcher
+<a name="l00105"></a>00105     {
+<a name="l00106"></a>00106     <span class="keyword">public</span>:
+<a name="l00107"></a>00107         <span class="keywordtype">bool</span> is_match(boost::shared_ptr&lt;const Verse&gt; <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>, std::string search_string) <span class="keyword">const</span>;
+<a name="l00108"></a>00108     };
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110     <span class="keyword">class </span>CaseInsensitiveWholeWordVerseMatcher : <span class="keyword">public</span> VerseMatcher
+<a name="l00111"></a>00111     {
+<a name="l00112"></a>00112     <span class="keyword">public</span>:
+<a name="l00113"></a>00113         <span class="keywordtype">bool</span> is_match(boost::shared_ptr&lt;const Verse&gt; <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>, std::string search_string) <span class="keyword">const</span>;
+<a name="l00114"></a>00114     };
+<a name="l00115"></a>00115 };
+<a name="l00116"></a>00116 
+<a name="l00118"></a>00118 <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> std::string <a class="code" href="namespace_bible_database.html#a18a3b7c465119693c6a9fdaf544779c0" title="Get the text representation and title of a collection of verses.">verse_collection_to_title_and_string_wrapped</a>(<span class="keyword">const</span> std::vector&lt;boost::shared_ptr&lt;const Verse&gt; &gt;&amp; verse_collection, boost::shared_ptr&lt;const Translation&gt; translation);
+<a name="l00119"></a>00119 
+<a name="l00121"></a>00121 <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> std::string <a class="code" href="namespace_bible_database.html#a5bd43b0d83542b6e6e6fec851eddaddb" title="Get the text representation of a collection of verses.">verse_collection_to_string</a>(<span class="keyword">const</span> std::vector&lt;boost::shared_ptr&lt;const Verse&gt; &gt;&amp; verse_collection);
+<a name="l00122"></a>00122 
+<a name="l00124"></a>00124 <a class="code" href="_bible_database_exporter_8h.html#a0fde79adcc32d77f004c3f02483a8a4a">BIBLE_DATABASE_EXPORT</a> std::string <a class="code" href="namespace_bible_database.html#aee0bc9fff9457c5ec5b8f1833519cff5" title="Get the title of a collection of verses.">verse_collection_title</a>(<span class="keyword">const</span> std::vector&lt;boost::shared_ptr&lt;const Verse&gt; &gt;&amp; verse_collection, boost::shared_ptr&lt;const Translation&gt; translation);
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126 }
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128 <span class="preprocessor">#endif //__TRANSLATION_H</span>
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Sep 21 08:17:05 2009 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Thu Dec 2 07:12:51 2010 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
