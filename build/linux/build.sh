@@ -17,8 +17,7 @@ echo "***"
 echo "***  Running BibleDatabaseBehaviors verification tests"
 echo "***"
 cd ../Output
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
-bin/BibleDatabaseBehaviors
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib bin/BibleDatabaseBehaviors
 
 echo "***"
 echo "*** Building BibleStudyGui"
