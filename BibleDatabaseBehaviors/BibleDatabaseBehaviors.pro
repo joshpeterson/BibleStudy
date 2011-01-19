@@ -40,6 +40,7 @@ win32 {
 }
 
 unix {
+    DEFINES = LINUX
     DESTDIR = "../Output/bin"
     LIBS += -L"../Output/lib"
     LIBS += -l"cppunit"

@@ -52,7 +52,7 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> tra
     m_about_action(new QAction(tr("&About"), this))
 {
 
-    this->setWindowIcon(QIcon("icons/BibleStudy.ico"));
+    this->setWindowIcon(QIcon("../share/BibleStudy/icons/BibleStudy.ico"));
 
     this->connect_signals();
     this->set_font();
@@ -190,8 +190,13 @@ void UIBibleStudyWidget::load_translations()
 {
     m_translation_load_timer->stop();
 
+#ifdef LINUX
+    TranslationLoadInformation dr_load_information = {"Douay-Rheims", "../share/BibleStudy/Translations/DR.buf" };
+    TranslationLoadInformation kjv_load_information = {"King James Version", "../share/BibleStudy/Translations/KJV.buf" };
+#else
     TranslationLoadInformation dr_load_information = {"Douay-Rheims", "Translations/DR.buf" };
     TranslationLoadInformation kjv_load_information = {"King James Version", "Translations/KJV.buf" };
+#endif
     
     m_translations_to_load.push_back(dr_load_information);
     m_translations_to_load.push_back(kjv_load_information);

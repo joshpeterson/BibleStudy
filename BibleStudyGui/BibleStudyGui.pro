@@ -48,6 +48,7 @@ win32 {
 }
 
 unix {
+    DEFINES = LINUX
     DESTDIR = "../Output/lib"
     LIBS += -L"../Output/lib"
     LIBS += -l"BibleDatabase"
