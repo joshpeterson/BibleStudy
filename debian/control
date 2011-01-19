@@ -1,0 +1,12 @@
+Source: bible-study
+Section: utils
+Priority: extra
+Maintainer: Josh Peterson <petersonjm1@gmail.com>
+Build-Depends: debhelper (>= 7), libqt4-dev, qt4-qmake, libboost1.40-dev, libboost-system1.40-dev, libboost-filesystem1.40-dev
+Standards-Version: 3.8.3
+Homepage: http://joshpeterson.github.com/BibleStudy
+
+Package: bible-study
+Architecture: i386
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A simple and fast bible searching and browsing application.

@@ -66,7 +66,7 @@ win32 {
 }
 
 unix {
-    DESTDIR = "../Output"
+    DESTDIR = "../Output/lib"
     LIBS += -l"protobuf"
     LIBS += -l"boost_system"
 }
