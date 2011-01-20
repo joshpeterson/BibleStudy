@@ -40,7 +40,7 @@ unix {
     INSTALLS += libraries
 
     translations.path = /usr/share/BibleStudy/Translations
-    translations.files = $$DESTDIR/share/BibleStudy/Translations/*.buf
+    translations.files = $$DESTDIR/share/BibleStudy/Translations/DR.buf $$DESTDIR/share/BibleStudy/Translations/KJV.buf
     INSTALLS += translations
 
     icons.path = /usr/share/BibleStudy/icons
