@@ -14,12 +14,6 @@ qmake
 make
 
 echo "***"
-echo "***  Running BibleDatabaseBehaviors verification tests"
-echo "***"
-cd ../Output
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib bin/BibleDatabaseBehaviors
-
-echo "***"
 echo "*** Building BibleStudyGui"
 echo "***"
 cd ../BibleStudyGui
@@ -30,12 +24,26 @@ echo "***"
 echo "*** Copying metadata into Output directory"
 echo "***"
 cd ../Output
-mkdir share
+if [ ! -d "share" ]; then
+    mkdir share
+fi
+
 cd share
-mkdir BibleStudy
+
+if [ ! -d "BibleStudy" ]; then
+    mkdir BibleStudy
+fi
+
 cd BibleStudy
-mkdir Translations
-mkdir icons
+
+if [ ! -d "BibleStudy" ]; then
+    mkdir Translations
+fi
+
+if [ ! -d "icons" ]; then
+    mkdir icons
+fi
+
 cd ../..
 cp ../Translations/*.buf share/BibleStudy/Translations/
 cp ../icons/* share/BibleStudy/icons/
@@ -46,3 +54,10 @@ echo "***"
 cd ..
 qmake
 make
+
+echo "***"
+echo "***  Running BibleDatabaseBehaviors verification tests"
+echo "***"
+cd Output
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib bin/BibleDatabaseBehaviors
+
