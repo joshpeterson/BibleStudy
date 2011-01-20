@@ -52,7 +52,11 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> tra
     m_about_action(new QAction(tr("&About"), this))
 {
 
-    this->setWindowIcon(QIcon(QCoreApplication::applicationDirPath() + QString("../share/BibleStudy/icons/BibleStudy.ico")));
+#ifdef LINUX
+    this->setWindowIcon(QIcon(QCoreApplication::applicationDirPath() + QString("/../share/BibleStudy/icons/BibleStudy.ico")));
+#else
+    this->setWindowIcon(QIcon(QCoreApplication::applicationDirPath() + QString("/icons/BibleStudy.ico")));
+#endif
 
     this->connect_signals();
     this->set_font();
