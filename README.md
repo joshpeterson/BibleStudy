@@ -14,6 +14,10 @@ Build Environment
 * Windows: Visual Studio 2008
 * Linux: g++ 4.4.3
 
+Building
+-------
+*Linux: From the root BibleStudy directory, run the build/linux/build.sh script
+
 Branching Model
 ---------------
 The BibleStudy branching model is based on [this one](http://nvie.com/posts/a-successful-git-branching-model/).
