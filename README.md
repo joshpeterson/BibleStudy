@@ -44,3 +44,27 @@ To merge that feature back into the development branch:
 `git push origin :myfeature` (if the feature branch was pushed to github)
 
 `git push origin develop`
+
+To create a release:
+
+`git checkout -b release-1.2 develop`
+
+`update version`
+
+`git commit -a -m "Bumped version number to 1.2"`
+
+`Build product and installer`
+
+`git checkout master`
+
+`git merge --no-ff release-1.2`
+
+`git tag -a 1.2`
+
+`git checkout develop`
+
+`git merge --no-ff release-1.2`
+
+`git branch -d release-1.2`
+
+`git push origin :release-1.2` (if the release branch was pushed to github)
