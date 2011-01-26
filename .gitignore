@@ -1,0 +1,10 @@
+*.pdb
+*.idb
+*.user
+*.ncb
+*.suo
+*.vcproj
+*.orig
+*.tmp
+*.bat~
+*.log

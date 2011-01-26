@@ -12,6 +12,7 @@ HEADERS += BrowseVersesModel.h
 HEADERS += UIBrowseVersesWidget.h
 HEADERS += QtConnectHelper.h
 HEADERS += BackgroundWorker.h
+HEADERS += Version.h
 
 SOURCES += SearchResultsModel.cpp
 SOURCES += UISearchWidget.cpp
@@ -47,7 +48,8 @@ win32 {
 }
 
 unix {
-    DESTDIR = "../Output"
-    LIBS += -L"../Output"
+    DEFINES = LINUX
+    DESTDIR = "../Output/lib"
+    LIBS += -L"../Output/lib"
     LIBS += -l"BibleDatabase"
 }
