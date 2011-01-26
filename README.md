@@ -16,7 +16,8 @@ Build Environment
 
 Building
 -------
-*Linux: From the root BibleStudy directory, run the build/linux/build.sh script
+* Linux: From the root BibleStudy directory, run the build/linux/build.sh script
+* Windows: From the root BibleStudy directory, run the build\win\Build.bat script
 
 Branching Model
 ---------------
