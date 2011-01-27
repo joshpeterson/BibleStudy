@@ -121,93 +121,105 @@
 <a name="l00096"></a>00096 <span class="keyword">public</span>:
 <a name="l00097"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_can_be_created_from_disk.html#abc6ab2ffaa2fe08384ce1f2ddfac278c">00097</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_can_be_created_from_disk.html#abc6ab2ffaa2fe08384ce1f2ddfac278c">ensure_that</a>(<span class="keyword">const</span> <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a>&amp; world)
 <a name="l00098"></a>00098     {
-<a name="l00099"></a>00099         std::string translation_file(<span class="stringliteral">&quot;Translations/TT.buf&quot;</span>);
-<a name="l00100"></a>00100         boost::shared_ptr&lt;const Translation&gt; translation = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html">TranslationLoaderIsCreated</a>&gt;()-&gt;get_loader()-&gt;create_translation(translation_file);
-<a name="l00101"></a>00101         CPPUNIT_ASSERT(translation != NULL);
-<a name="l00102"></a>00102     }
-<a name="l00103"></a>00103 };
-<a name="l00104"></a>00104 
-<a name="l00105"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html">00105</a> <span class="keyword">class </span><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html">TranslationCannotBeCreated</a> : <span class="keyword">public</span> <a class="code" href="class_behavior_driven_design_1_1_i_then.html">IThen</a>
-<a name="l00106"></a>00106 {
-<a name="l00107"></a>00107 <span class="keyword">public</span>:
-<a name="l00108"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html#ad1c6ee26c3151321df813d89d2f298a3">00108</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html#ad1c6ee26c3151321df813d89d2f298a3">ensure_that</a>(<span class="keyword">const</span> <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a>&amp; world)
-<a name="l00109"></a>00109     {
-<a name="l00110"></a>00110         std::string translation_file(<span class="stringliteral">&quot;Translations/TT.buf&quot;</span>);
-<a name="l00111"></a>00111         boost::shared_ptr&lt;const Translation&gt; translation = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created_with_non_existent_executable_directory.html">TranslationLoaderIsCreatedWithNonExistentExecutableDirectory</a>&gt;()-&gt;get_loader()-&gt;create_translation(translation_file);
-<a name="l00112"></a>00112         CPPUNIT_ASSERT(translation == NULL);
-<a name="l00113"></a>00113     }
-<a name="l00114"></a>00114 };
-<a name="l00115"></a>00115 
-<a name="l00116"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created_with_non_existent_translation_file.html">00116</a> <span class="keyword">class </span><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created_with_non_existent_translation_file.html">TranslationCannotBeCreatedWithNonExistentTranslationFile</a> : <span class="keyword">public</span> <a class="code" href="class_behavior_driven_design_1_1_i_then.html">IThen</a>
-<a name="l00117"></a>00117 {
-<a name="l00118"></a>00118 <span class="keyword">public</span>:
-<a name="l00119"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created_with_non_existent_translation_file.html#a3685ded02b98e1bd33bdb2c12a795c6d">00119</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created_with_non_existent_translation_file.html#a3685ded02b98e1bd33bdb2c12a795c6d">ensure_that</a>(<span class="keyword">const</span> <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a>&amp; world)
-<a name="l00120"></a>00120     {
-<a name="l00121"></a>00121         std::string translation_file(<span class="stringliteral">&quot;Translations/foo.buf&quot;</span>);
-<a name="l00122"></a>00122         boost::shared_ptr&lt;const Translation&gt; translation = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html">TranslationLoaderIsCreated</a>&gt;()-&gt;get_loader()-&gt;create_translation(translation_file);
-<a name="l00123"></a>00123         CPPUNIT_ASSERT(translation == NULL);
-<a name="l00124"></a>00124     }
-<a name="l00125"></a>00125 };
-<a name="l00126"></a>00126 
-<a name="l00127"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html">00127</a> <span class="keyword">class </span><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html">TranslationLoaderBehavior</a> : <span class="keyword">public</span> CppUnit::TestFixture
-<a name="l00128"></a>00128 {
-<a name="l00129"></a>00129     CPPUNIT_TEST_SUITE(<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html">TranslationLoaderBehavior</a>);
-<a name="l00130"></a>00130     CPPUNIT_TEST(<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#af86285de2910b494b357667d1f4d0fdb">shouldStoreExecutableDirectoryOnCreation</a>);
-<a name="l00131"></a>00131     CPPUNIT_TEST(<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a3b176a1d6665d762d638616e2b81def3">shouldCreateTranslationFromDiskWhenRequested</a>);
-<a name="l00132"></a>00132     CPPUNIT_TEST(<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a7319c1986bcf14783e36796261f7dbc2">shouldNotCreateTranslationIfExecutableDirectoryDoesNotExist</a>);
-<a name="l00133"></a>00133     CPPUNIT_TEST(<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#ab27ef3bdbef12fccf1a786819a7f8bec">shouldNotCreateTranslationIfTranslationFileDoesNotExist</a>);
-<a name="l00134"></a>00134     CPPUNIT_TEST_SUITE_END();
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136 <span class="keyword">public</span>:
-<a name="l00137"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#ab8b7541ccc5801fca74858a9e9a8d83b">00137</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#ab8b7541ccc5801fca74858a9e9a8d83b">setUp</a>()
-<a name="l00138"></a>00138     {
-<a name="l00139"></a>00139     }
-<a name="l00140"></a>00140 
-<a name="l00141"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#aaacb5ec3b0a33d74076b8b83ed350f12">00141</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#aaacb5ec3b0a33d74076b8b83ed350f12">tearDown</a>()
-<a name="l00142"></a>00142     {
-<a name="l00143"></a>00143     }
-<a name="l00144"></a>00144 
-<a name="l00145"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#af86285de2910b494b357667d1f4d0fdb">00145</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#af86285de2910b494b357667d1f4d0fdb">shouldStoreExecutableDirectoryOnCreation</a>()
-<a name="l00146"></a>00146     {
-<a name="l00147"></a>00147         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
-<a name="l00148"></a>00148 
-<a name="l00149"></a>00149         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_executable_directory.html">ExecutableDirectory</a>&gt;();
-<a name="l00150"></a>00150         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html">TranslationLoaderIsCreated</a>&gt;();
-<a name="l00151"></a>00151         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_executable_directory_is_set.html">ExecutableDirectoryIsSet</a>&gt;();
-<a name="l00152"></a>00152     }
-<a name="l00153"></a>00153 
-<a name="l00154"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a3b176a1d6665d762d638616e2b81def3">00154</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a3b176a1d6665d762d638616e2b81def3">shouldCreateTranslationFromDiskWhenRequested</a>()
-<a name="l00155"></a>00155     {
-<a name="l00156"></a>00156         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
-<a name="l00157"></a>00157 
-<a name="l00158"></a>00158         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_executable_directory.html">ExecutableDirectory</a>&gt;();
-<a name="l00159"></a>00159         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html">TranslationLoaderIsCreated</a>&gt;();
-<a name="l00160"></a>00160         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_can_be_created_from_disk.html">TranslationCanBeCreatedFromDisk</a>&gt;();
-<a name="l00161"></a>00161     }
-<a name="l00162"></a>00162 
-<a name="l00163"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a7319c1986bcf14783e36796261f7dbc2">00163</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a7319c1986bcf14783e36796261f7dbc2">shouldNotCreateTranslationIfExecutableDirectoryDoesNotExist</a>()
-<a name="l00164"></a>00164     {
-<a name="l00165"></a>00165         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
-<a name="l00166"></a>00166 
-<a name="l00167"></a>00167         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_non_existent_executable_directory.html">NonExistentExecutableDirectory</a>&gt;();
-<a name="l00168"></a>00168         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created_with_non_existent_executable_directory.html">TranslationLoaderIsCreatedWithNonExistentExecutableDirectory</a>&gt;();
-<a name="l00169"></a>00169         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html">TranslationCannotBeCreated</a>&gt;();
-<a name="l00170"></a>00170     }
-<a name="l00171"></a>00171 
-<a name="l00172"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#ab27ef3bdbef12fccf1a786819a7f8bec">00172</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#ab27ef3bdbef12fccf1a786819a7f8bec">shouldNotCreateTranslationIfTranslationFileDoesNotExist</a>()
-<a name="l00173"></a>00173     {
-<a name="l00174"></a>00174         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
-<a name="l00175"></a>00175 
-<a name="l00176"></a>00176         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_executable_directory.html">ExecutableDirectory</a>&gt;();
-<a name="l00177"></a>00177         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html">TranslationLoaderIsCreated</a>&gt;();
-<a name="l00178"></a>00178         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created_with_non_existent_translation_file.html">TranslationCannotBeCreatedWithNonExistentTranslationFile</a>&gt;();
-<a name="l00179"></a>00179     }
-<a name="l00180"></a>00180 };
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182 }
-<a name="l00183"></a>00183 <span class="preprocessor">#endif // __TRANSLATION_LOADER_BEHAVIOR_H</span>
+<a name="l00099"></a>00099 <span class="preprocessor">#ifdef LINUX</span>
+<a name="l00100"></a>00100 <span class="preprocessor"></span>        std::string translation_file(<span class="stringliteral">&quot;share/BibleStudy/Translations/TT.buf&quot;</span>);
+<a name="l00101"></a>00101 <span class="preprocessor">#else</span>
+<a name="l00102"></a>00102 <span class="preprocessor"></span>        std::string translation_file(<span class="stringliteral">&quot;Translations/TT.buf&quot;</span>);
+<a name="l00103"></a>00103 <span class="preprocessor">#endif</span>
+<a name="l00104"></a>00104 <span class="preprocessor"></span>        boost::shared_ptr&lt;const Translation&gt; translation = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html">TranslationLoaderIsCreated</a>&gt;()-&gt;get_loader()-&gt;create_translation(translation_file);
+<a name="l00105"></a>00105         CPPUNIT_ASSERT(translation != NULL);
+<a name="l00106"></a>00106     }
+<a name="l00107"></a>00107 };
+<a name="l00108"></a>00108 
+<a name="l00109"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html">00109</a> <span class="keyword">class </span><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html">TranslationCannotBeCreated</a> : <span class="keyword">public</span> <a class="code" href="class_behavior_driven_design_1_1_i_then.html">IThen</a>
+<a name="l00110"></a>00110 {
+<a name="l00111"></a>00111 <span class="keyword">public</span>:
+<a name="l00112"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html#ad1c6ee26c3151321df813d89d2f298a3">00112</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html#ad1c6ee26c3151321df813d89d2f298a3">ensure_that</a>(<span class="keyword">const</span> <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a>&amp; world)
+<a name="l00113"></a>00113     {
+<a name="l00114"></a>00114 <span class="preprocessor">#ifdef LINUX</span>
+<a name="l00115"></a>00115 <span class="preprocessor"></span>        std::string translation_file(<span class="stringliteral">&quot;share/BibleStudy/Translations/TT.buf&quot;</span>);
+<a name="l00116"></a>00116 <span class="preprocessor">#else</span>
+<a name="l00117"></a>00117 <span class="preprocessor"></span>        std::string translation_file(<span class="stringliteral">&quot;Translations/TT.buf&quot;</span>);
+<a name="l00118"></a>00118 <span class="preprocessor">#endif</span>
+<a name="l00119"></a>00119 <span class="preprocessor"></span>        boost::shared_ptr&lt;const Translation&gt; translation = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created_with_non_existent_executable_directory.html">TranslationLoaderIsCreatedWithNonExistentExecutableDirectory</a>&gt;()-&gt;get_loader()-&gt;create_translation(translation_file);
+<a name="l00120"></a>00120         CPPUNIT_ASSERT(translation == NULL);
+<a name="l00121"></a>00121     }
+<a name="l00122"></a>00122 };
+<a name="l00123"></a>00123 
+<a name="l00124"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created_with_non_existent_translation_file.html">00124</a> <span class="keyword">class </span><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created_with_non_existent_translation_file.html">TranslationCannotBeCreatedWithNonExistentTranslationFile</a> : <span class="keyword">public</span> <a class="code" href="class_behavior_driven_design_1_1_i_then.html">IThen</a>
+<a name="l00125"></a>00125 {
+<a name="l00126"></a>00126 <span class="keyword">public</span>:
+<a name="l00127"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created_with_non_existent_translation_file.html#a3685ded02b98e1bd33bdb2c12a795c6d">00127</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created_with_non_existent_translation_file.html#a3685ded02b98e1bd33bdb2c12a795c6d">ensure_that</a>(<span class="keyword">const</span> <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a>&amp; world)
+<a name="l00128"></a>00128     {
+<a name="l00129"></a>00129 <span class="preprocessor">#ifdef LINUX</span>
+<a name="l00130"></a>00130 <span class="preprocessor"></span>        std::string translation_file(<span class="stringliteral">&quot;share/BibleStudy/Translations/foo.buf&quot;</span>);
+<a name="l00131"></a>00131 <span class="preprocessor">#else</span>
+<a name="l00132"></a>00132 <span class="preprocessor"></span>        std::string translation_file(<span class="stringliteral">&quot;share/BibleStudy/Translations/foo.buf&quot;</span>);
+<a name="l00133"></a>00133 <span class="preprocessor">#endif</span>
+<a name="l00134"></a>00134 <span class="preprocessor"></span>        boost::shared_ptr&lt;const Translation&gt; translation = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html">TranslationLoaderIsCreated</a>&gt;()-&gt;get_loader()-&gt;create_translation(translation_file);
+<a name="l00135"></a>00135         CPPUNIT_ASSERT(translation == NULL);
+<a name="l00136"></a>00136     }
+<a name="l00137"></a>00137 };
+<a name="l00138"></a>00138 
+<a name="l00139"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html">00139</a> <span class="keyword">class </span><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html">TranslationLoaderBehavior</a> : <span class="keyword">public</span> CppUnit::TestFixture
+<a name="l00140"></a>00140 {
+<a name="l00141"></a>00141     CPPUNIT_TEST_SUITE(<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html">TranslationLoaderBehavior</a>);
+<a name="l00142"></a>00142     CPPUNIT_TEST(<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#af86285de2910b494b357667d1f4d0fdb">shouldStoreExecutableDirectoryOnCreation</a>);
+<a name="l00143"></a>00143     CPPUNIT_TEST(<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a3b176a1d6665d762d638616e2b81def3">shouldCreateTranslationFromDiskWhenRequested</a>);
+<a name="l00144"></a>00144     CPPUNIT_TEST(<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a7319c1986bcf14783e36796261f7dbc2">shouldNotCreateTranslationIfExecutableDirectoryDoesNotExist</a>);
+<a name="l00145"></a>00145     CPPUNIT_TEST(<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#ab27ef3bdbef12fccf1a786819a7f8bec">shouldNotCreateTranslationIfTranslationFileDoesNotExist</a>);
+<a name="l00146"></a>00146     CPPUNIT_TEST_SUITE_END();
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148 <span class="keyword">public</span>:
+<a name="l00149"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#ab8b7541ccc5801fca74858a9e9a8d83b">00149</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#ab8b7541ccc5801fca74858a9e9a8d83b">setUp</a>()
+<a name="l00150"></a>00150     {
+<a name="l00151"></a>00151     }
+<a name="l00152"></a>00152 
+<a name="l00153"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#aaacb5ec3b0a33d74076b8b83ed350f12">00153</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#aaacb5ec3b0a33d74076b8b83ed350f12">tearDown</a>()
+<a name="l00154"></a>00154     {
+<a name="l00155"></a>00155     }
+<a name="l00156"></a>00156 
+<a name="l00157"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#af86285de2910b494b357667d1f4d0fdb">00157</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#af86285de2910b494b357667d1f4d0fdb">shouldStoreExecutableDirectoryOnCreation</a>()
+<a name="l00158"></a>00158     {
+<a name="l00159"></a>00159         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_executable_directory.html">ExecutableDirectory</a>&gt;();
+<a name="l00162"></a>00162         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html">TranslationLoaderIsCreated</a>&gt;();
+<a name="l00163"></a>00163         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_executable_directory_is_set.html">ExecutableDirectoryIsSet</a>&gt;();
+<a name="l00164"></a>00164     }
+<a name="l00165"></a>00165 
+<a name="l00166"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a3b176a1d6665d762d638616e2b81def3">00166</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a3b176a1d6665d762d638616e2b81def3">shouldCreateTranslationFromDiskWhenRequested</a>()
+<a name="l00167"></a>00167     {
+<a name="l00168"></a>00168         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_executable_directory.html">ExecutableDirectory</a>&gt;();
+<a name="l00171"></a>00171         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html">TranslationLoaderIsCreated</a>&gt;();
+<a name="l00172"></a>00172         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_can_be_created_from_disk.html">TranslationCanBeCreatedFromDisk</a>&gt;();
+<a name="l00173"></a>00173     }
+<a name="l00174"></a>00174 
+<a name="l00175"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a7319c1986bcf14783e36796261f7dbc2">00175</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#a7319c1986bcf14783e36796261f7dbc2">shouldNotCreateTranslationIfExecutableDirectoryDoesNotExist</a>()
+<a name="l00176"></a>00176     {
+<a name="l00177"></a>00177         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00178"></a>00178 
+<a name="l00179"></a>00179         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_non_existent_executable_directory.html">NonExistentExecutableDirectory</a>&gt;();
+<a name="l00180"></a>00180         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created_with_non_existent_executable_directory.html">TranslationLoaderIsCreatedWithNonExistentExecutableDirectory</a>&gt;();
+<a name="l00181"></a>00181         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html">TranslationCannotBeCreated</a>&gt;();
+<a name="l00182"></a>00182     }
+<a name="l00183"></a>00183 
+<a name="l00184"></a><a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#ab27ef3bdbef12fccf1a786819a7f8bec">00184</a>     <span class="keywordtype">void</span> <a class="code" href="class_bible_database_behaviors_1_1_translation_loader_behavior.html#ab27ef3bdbef12fccf1a786819a7f8bec">shouldNotCreateTranslationIfTranslationFileDoesNotExist</a>()
+<a name="l00185"></a>00185     {
+<a name="l00186"></a>00186         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_executable_directory.html">ExecutableDirectory</a>&gt;();
+<a name="l00189"></a>00189         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html">TranslationLoaderIsCreated</a>&gt;();
+<a name="l00190"></a>00190         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;<a class="code" href="class_bible_database_behaviors_1_1_translation_cannot_be_created_with_non_existent_translation_file.html">TranslationCannotBeCreatedWithNonExistentTranslationFile</a>&gt;();
+<a name="l00191"></a>00191     }
+<a name="l00192"></a>00192 };
+<a name="l00193"></a>00193 
+<a name="l00194"></a>00194 }
+<a name="l00195"></a>00195 <span class="preprocessor">#endif // __TRANSLATION_LOADER_BEHAVIOR_H</span>
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Thu Dec 2 07:12:51 2010 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Thu Jan 27 07:28:42 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
