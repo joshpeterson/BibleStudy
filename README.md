@@ -53,6 +53,8 @@ To create a release:
 
 `git commit -a -m "Bumped version number to 1.2"`
 
+`Generate the code documentation`
+
 `Build product and installer`
 
 `git checkout master`
