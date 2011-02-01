@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>BibleStudy: C:/Documents and Settings/Josh/My Documents/BibleStudy/BrowseVersesModel.h Source File</title>
+<title>BibleStudy: C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/BrowseVersesModel.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -23,49 +23,52 @@
       <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-<h1>C:/Documents and Settings/Josh/My Documents/BibleStudy/BrowseVersesModel.h</h1><a href="_browse_verses_model_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef __BROWSE_VERSES_MODEL_H</span>
+<h1>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/BrowseVersesModel.h</h1><a href="_browse_verses_model_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef __BROWSE_VERSES_MODEL_H</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define __BROWSE_VERSES_MODEL_H</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;boost/shared_ptr.hpp&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;QAbstractItemModel&gt;</span>
 <a name="l00006"></a>00006 
-<a name="l00007"></a><a class="code" href="namespace_bible_study.html">00007</a> <span class="keyword">namespace </span>BibleStudy
+<a name="l00007"></a>00007 <span class="keyword">namespace </span>BibleDatabase
 <a name="l00008"></a>00008 {
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="keyword">class </span><a class="code" href="class_bible_study_1_1_translation_manager.html" title="This class represents a collection of read-only translations.">TranslationManager</a>;
-<a name="l00011"></a>00011 <span class="keyword">class </span><a class="code" href="class_bible_study_1_1_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a>;
+<a name="l00009"></a>00009 <span class="keyword">class </span>TranslationManager;
+<a name="l00010"></a>00010 <span class="keyword">class </span>VerseDisplay;
+<a name="l00011"></a>00011 }
 <a name="l00012"></a>00012 
-<a name="l00014"></a><a class="code" href="class_bible_study_1_1_browse_verses_model.html">00014</a> <span class="keyword">class </span><a class="code" href="class_bible_study_1_1_browse_verses_model.html" title="This class is an implementation of a model from the Qt Model/View framework for a...">BrowseVersesModel</a> : <span class="keyword">public</span> QAbstractItemModel
-<a name="l00015"></a>00015 {
-<a name="l00016"></a>00016     Q_OBJECT
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018 <span class="keyword">public</span>:
-<a name="l00020"></a>00020     <a class="code" href="class_bible_study_1_1_browse_verses_model.html#a24fe926a896b86da7d1bfac8415b2297" title="Create a new instance of the BrowseVerseModel, using a given TranslationManager.">BrowseVersesModel</a>(boost::shared_ptr&lt;const TranslationManager&gt; translation_manager, QObject *<a class="code" href="class_bible_study_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a> = 0);
-<a name="l00021"></a>00021 
-<a name="l00023"></a>00023     QVariant <a class="code" href="class_bible_study_1_1_browse_verses_model.html#a451b8dbb17e6442ef437e662a82462d0" title="Get the data that should be displayed in the view for the given index.">data</a>(<span class="keyword">const</span> QModelIndex &amp;<a class="code" href="class_bible_study_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>, <span class="keywordtype">int</span> role) <span class="keyword">const</span>;
+<a name="l00013"></a>00013 <span class="keyword">namespace </span>BibleStudyGui
+<a name="l00014"></a>00014 {
+<a name="l00015"></a>00015 
+<a name="l00017"></a><a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html">00017</a> <span class="keyword">class </span><a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html" title="This class is an implementation of a model from the Qt Model/View framework for a...">BrowseVersesModel</a> : <span class="keyword">public</span> QAbstractItemModel
+<a name="l00018"></a>00018 {
+<a name="l00019"></a>00019     Q_OBJECT
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="keyword">public</span>:
+<a name="l00023"></a>00023     <a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a1b9f6c7a6f5e823e8d1f3d86fd362b82" title="Create a new instance of the BrowseVerseModel, using a given TranslationManager.">BrowseVersesModel</a>(boost::shared_ptr&lt;const BibleDatabase::TranslationManager&gt; translation_manager, QObject *<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a> = 0);
 <a name="l00024"></a>00024 
-<a name="l00026"></a>00026     Qt::ItemFlags <a class="code" href="class_bible_study_1_1_browse_verses_model.html#a9c7c69069d90b506534f7fc30871f195" title="This method is required by the Qt Model/View framework, although I&amp;#39;m not certain...">flags</a>(<span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;
+<a name="l00026"></a>00026     QVariant <a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a451b8dbb17e6442ef437e662a82462d0" title="Get the data that should be displayed in the view for the given index.">data</a>(<span class="keyword">const</span> QModelIndex &amp;<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>, <span class="keywordtype">int</span> role) <span class="keyword">const</span>;
 <a name="l00027"></a>00027 
-<a name="l00029"></a>00029     QVariant <a class="code" href="class_bible_study_1_1_browse_verses_model.html#afe675c9073c167dbbb563f933ce57750" title="Get the data for the view header that should be displayed in the view for the given...">headerData</a>(<span class="keywordtype">int</span> section, Qt::Orientation orientation, <span class="keywordtype">int</span> role = Qt::DisplayRole) <span class="keyword">const</span>;
+<a name="l00029"></a>00029     Qt::ItemFlags <a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a9c7c69069d90b506534f7fc30871f195" title="This method is required by the Qt Model/View framework, although I&amp;#39;m not certain...">flags</a>(<span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;
 <a name="l00030"></a>00030 
-<a name="l00032"></a>00032     QModelIndex <a class="code" href="class_bible_study_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>(<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> column, <span class="keyword">const</span> QModelIndex &amp;<a class="code" href="class_bible_study_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a> = QModelIndex()) <span class="keyword">const</span>;
+<a name="l00032"></a>00032     QVariant <a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#afe675c9073c167dbbb563f933ce57750" title="Get the data for the view header that should be displayed in the view for the given...">headerData</a>(<span class="keywordtype">int</span> section, Qt::Orientation orientation, <span class="keywordtype">int</span> role = Qt::DisplayRole) <span class="keyword">const</span>;
 <a name="l00033"></a>00033 
-<a name="l00035"></a>00035     QModelIndex <a class="code" href="class_bible_study_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a>(<span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;
+<a name="l00035"></a>00035     QModelIndex <a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>(<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> column, <span class="keyword">const</span> QModelIndex &amp;<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a> = QModelIndex()) <span class="keyword">const</span>;
 <a name="l00036"></a>00036 
-<a name="l00038"></a>00038     <span class="keywordtype">int</span> <a class="code" href="class_bible_study_1_1_browse_verses_model.html#ab26c9d84724c354d9d05acd3e91ba11c" title="Get the number of rows directly under the current parent index.">rowCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const</span>;
+<a name="l00038"></a>00038     QModelIndex <a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a>(<span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;
 <a name="l00039"></a>00039 
-<a name="l00041"></a>00041     <span class="keywordtype">int</span> <a class="code" href="class_bible_study_1_1_browse_verses_model.html#a787cee0ec86041dd37dc1e8859c8fe16" title="Get the number of columns for the given parent index. Note that this is always 1...">columnCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const</span>;
+<a name="l00041"></a>00041     <span class="keywordtype">int</span> <a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#ab26c9d84724c354d9d05acd3e91ba11c" title="Get the number of rows directly under the current parent index.">rowCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const</span>;
 <a name="l00042"></a>00042 
-<a name="l00044"></a>00044     boost::shared_ptr&lt;VerseDisplay&gt; <a class="code" href="class_bible_study_1_1_browse_verses_model.html#af06e586f5bae5a15ffc56de542c368e3" title="Get the VerseDisplay object corresponding to the given index in the model.">get_verse_display</a>(<span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;
+<a name="l00044"></a>00044     <span class="keywordtype">int</span> <a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a787cee0ec86041dd37dc1e8859c8fe16" title="Get the number of columns for the given parent index. Note that this is always 1...">columnCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const</span>;
 <a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">private</span>:
-<a name="l00047"></a>00047     boost::shared_ptr&lt;const TranslationManager&gt; m_translation_manager;
-<a name="l00048"></a>00048 };
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050 }
-<a name="l00051"></a>00051 <span class="preprocessor">#endif //__BROWSE_VERSES_MODEL_H</span>
+<a name="l00047"></a>00047     boost::shared_ptr&lt;BibleDatabase::VerseDisplay&gt; <a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af06e586f5bae5a15ffc56de542c368e3" title="Get the VerseDisplay object corresponding to the given index in the model.">get_verse_display</a>(<span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049 <span class="keyword">private</span>:
+<a name="l00050"></a>00050     boost::shared_ptr&lt;const BibleDatabase::TranslationManager&gt; m_translation_manager;
+<a name="l00051"></a>00051 };
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 }
+<a name="l00054"></a>00054 <span class="preprocessor">#endif //__BROWSE_VERSES_MODEL_H</span>
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Sep 21 08:17:05 2009 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Thu Jan 27 07:28:42 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>BibleStudy: C:/Documents and Settings/Josh/My Documents/BibleStudy/StarredVersesModel.h Source File</title>
+<title>BibleStudy: C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/StarredVersesModel.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -23,46 +23,49 @@
       <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-<h1>C:/Documents and Settings/Josh/My Documents/BibleStudy/StarredVersesModel.h</h1><a href="_starred_verses_model_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef __STARRED_VERSES_MODEL_H</span>
+<h1>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/StarredVersesModel.h</h1><a href="_starred_verses_model_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef __STARRED_VERSES_MODEL_H</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define __STARRED_VERSES_MODEL_H</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;QAbstractListModel&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;boost/shared_ptr.hpp&gt;</span>
 <a name="l00006"></a>00006 <span class="preprocessor">#include &lt;vector&gt;</span>
 <a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="keyword">namespace </span>BibleStudy
+<a name="l00008"></a>00008 <span class="keyword">namespace </span>BibleDatabase
 <a name="l00009"></a>00009 {
-<a name="l00010"></a>00010 
-<a name="l00011"></a>00011 <span class="keyword">class </span>TranslationManager;
-<a name="l00012"></a>00012 <span class="keyword">class </span>VerseDisplay;
+<a name="l00010"></a>00010 <span class="keyword">class </span>TranslationManager;
+<a name="l00011"></a>00011 <span class="keyword">class </span>VerseDisplay;
+<a name="l00012"></a>00012 }
 <a name="l00013"></a>00013 
-<a name="l00015"></a><a class="code" href="class_bible_study_1_1_starred_verses_model.html">00015</a> <span class="keyword">class </span><a class="code" href="class_bible_study_1_1_starred_verses_model.html" title="This class is an implementation of a model from the Qt Model/View framework for a...">StarredVersesModel</a> : <span class="keyword">public</span> QAbstractListModel
-<a name="l00016"></a>00016 {
-<a name="l00017"></a>00017 <span class="keyword">public</span>:
-<a name="l00019"></a>00019     <a class="code" href="class_bible_study_1_1_starred_verses_model.html#abc8f19ccf497b7f8ae330ea3a3604928" title="Create a new instance of the StarredVersesModel class.">StarredVersesModel</a>(boost::shared_ptr&lt;const TranslationManager&gt; translation_manager);
-<a name="l00020"></a>00020 
-<a name="l00022"></a>00022     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_1_1_starred_verses_model.html#a3fd540dfc7ccc1bbca9e09551d5f6b50" title="Add a verse to the collection of starred verses.">add_starred_verse</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
+<a name="l00014"></a>00014 <span class="keyword">namespace </span>BibleStudyGui
+<a name="l00015"></a>00015 {
+<a name="l00016"></a>00016 
+<a name="l00018"></a><a class="code" href="class_bible_study_gui_1_1_starred_verses_model.html">00018</a> <span class="keyword">class </span><a class="code" href="class_bible_study_gui_1_1_starred_verses_model.html" title="This class is an implementation of a model from the Qt Model/View framework for a...">StarredVersesModel</a> : <span class="keyword">public</span> QAbstractListModel
+<a name="l00019"></a>00019 {
+<a name="l00020"></a>00020 <span class="keyword">public</span>:
+<a name="l00022"></a>00022     <a class="code" href="class_bible_study_gui_1_1_starred_verses_model.html#a83b7f12d0be3491eca2a6891710acb5b" title="Create a new instance of the StarredVersesModel class.">StarredVersesModel</a>(boost::shared_ptr&lt;const BibleDatabase::TranslationManager&gt; translation_manager);
 <a name="l00023"></a>00023 
-<a name="l00025"></a>00025     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_1_1_starred_verses_model.html#ad82f319ae07ea37d8330979697767b45" title="Remove a verse from the collection of starred verses.">remove_starred_verse</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
+<a name="l00025"></a>00025     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_gui_1_1_starred_verses_model.html#a7d0b7f783f4f0b93be7fe89b4f54e2ab" title="Add a verse to the collection of starred verses.">add_starred_verse</a>(boost::shared_ptr&lt;BibleDatabase::VerseDisplay&gt; <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>);
 <a name="l00026"></a>00026 
-<a name="l00028"></a>00028     <span class="keywordtype">bool</span> <a class="code" href="class_bible_study_1_1_starred_verses_model.html#abf54bce57ed0470afd050a036a18f961" title="Determine whether or not the given verse has been starred.">verse_starred</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
+<a name="l00028"></a>00028     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_gui_1_1_starred_verses_model.html#a6537234c148b0bedfb67d701943b5e96" title="Remove a verse from the collection of starred verses.">remove_starred_verse</a>(boost::shared_ptr&lt;BibleDatabase::VerseDisplay&gt; verse);
 <a name="l00029"></a>00029 
-<a name="l00031"></a>00031     boost::shared_ptr&lt;VerseDisplay&gt; <a class="code" href="class_bible_study_1_1_starred_verses_model.html#a03e2322efc58373f4cc2a90470a329b9" title="Get the VerseDisplay object for the verse at the given index.">get_verse_display</a>(<span class="keyword">const</span> QModelIndex&amp; index);
-<a name="l00032"></a>00032     
-<a name="l00034"></a>00034     <span class="keywordtype">int</span> <a class="code" href="class_bible_study_1_1_starred_verses_model.html#a3f7844b9a210cd39c062d2422577a2d6" title="Get the number of rows for the given parent index. This is the number of starred...">rowCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const</span>;
-<a name="l00035"></a>00035 
-<a name="l00037"></a>00037     QVariant <a class="code" href="class_bible_study_1_1_starred_verses_model.html#a7fafb7716b73bff283b3a7af353c7f38" title="Get the data for a given index.">data</a>(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keywordtype">int</span> role) <span class="keyword">const</span>;
+<a name="l00031"></a>00031     <span class="keywordtype">bool</span> <a class="code" href="class_bible_study_gui_1_1_starred_verses_model.html#ae4ff5a859e422303ef012f73bffd8446" title="Determine whether or not the given verse has been starred.">verse_starred</a>(boost::shared_ptr&lt;BibleDatabase::VerseDisplay&gt; verse);
+<a name="l00032"></a>00032 
+<a name="l00034"></a>00034     boost::shared_ptr&lt;BibleDatabase::VerseDisplay&gt; <a class="code" href="class_bible_study_gui_1_1_starred_verses_model.html#a03e2322efc58373f4cc2a90470a329b9" title="Get the VerseDisplay object for the verse at the given index.">get_verse_display</a>(<span class="keyword">const</span> QModelIndex&amp; <a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>);
+<a name="l00035"></a>00035     
+<a name="l00037"></a>00037     <span class="keywordtype">int</span> <a class="code" href="class_bible_study_gui_1_1_starred_verses_model.html#a3f7844b9a210cd39c062d2422577a2d6" title="Get the number of rows for the given parent index. This is the number of starred...">rowCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const</span>;
 <a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <span class="keyword">private</span>:
-<a name="l00040"></a>00040     boost::shared_ptr&lt;const TranslationManager&gt; m_translation_manager;
-<a name="l00041"></a>00041     std::vector&lt;boost::shared_ptr&lt;VerseDisplay&gt; &gt; m_starred_verses;
-<a name="l00042"></a>00042 };
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044 }
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="preprocessor">#endif // __STARRED_VERSES_MODEL_H</span>
+<a name="l00040"></a>00040     QVariant <a class="code" href="class_bible_study_gui_1_1_starred_verses_model.html#a7fafb7716b73bff283b3a7af353c7f38" title="Get the data for a given index.">data</a>(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keywordtype">int</span> role) <span class="keyword">const</span>;
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 <span class="keyword">private</span>:
+<a name="l00043"></a>00043     boost::shared_ptr&lt;const BibleDatabase::TranslationManager&gt; m_translation_manager;
+<a name="l00044"></a>00044     std::vector&lt;boost::shared_ptr&lt;BibleDatabase::VerseDisplay&gt; &gt; m_starred_verses;
+<a name="l00045"></a>00045 };
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 }
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049 <span class="preprocessor">#endif // __STARRED_VERSES_MODEL_H</span>
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Sep 21 08:17:05 2009 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Thu Jan 27 07:28:42 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

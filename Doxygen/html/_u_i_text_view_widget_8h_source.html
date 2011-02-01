@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>BibleStudy: C:/Documents and Settings/Josh/My Documents/BibleStudy/UITextViewWidget.h Source File</title>
+<title>BibleStudy: C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/UITextViewWidget.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -23,7 +23,7 @@
       <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-<h1>C:/Documents and Settings/Josh/My Documents/BibleStudy/UITextViewWidget.h</h1><a href="_u_i_text_view_widget_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef __UI_TEXT_VIEW_WIDGET_H</span>
+<h1>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/UITextViewWidget.h</h1><a href="_u_i_text_view_widget_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef __UI_TEXT_VIEW_WIDGET_H</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define __UI_TEXT_VIEW_WIDGET_H</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;QWidget&gt;</span>
@@ -33,63 +33,67 @@
 <a name="l00008"></a>00008 <span class="keyword">class </span>QTextEdit;
 <a name="l00009"></a>00009 <span class="keyword">class </span>QToolButton;
 <a name="l00010"></a>00010 
-<a name="l00011"></a>00011 <span class="keyword">namespace </span>BibleStudy
+<a name="l00011"></a>00011 <span class="keyword">namespace </span>BibleDatabase
 <a name="l00012"></a>00012 {
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 <span class="keyword">class </span>TranslationManager;
-<a name="l00015"></a>00015 <span class="keyword">class </span>VerseDisplay;
-<a name="l00016"></a>00016 <span class="keyword">class </span>StarredVersesModel;
-<a name="l00017"></a>00017 
-<a name="l00019"></a><a class="code" href="class_bible_study_1_1_u_i_text_view_widget.html">00019</a> <span class="keyword">class </span><a class="code" href="class_bible_study_1_1_u_i_text_view_widget.html" title="This class respresents a text box that displays a collection of verses and allows...">UITextViewWidget</a> : <span class="keyword">public</span> QWidget
-<a name="l00020"></a>00020 {
-<a name="l00021"></a>00021     Q_OBJECT
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="keyword">public</span>:
-<a name="l00025"></a>00025     <a class="code" href="class_bible_study_1_1_u_i_text_view_widget.html#a4d73a2c51951bf04a39ef104a0b01d86" title="Create a new instance of the UITextViewWidget class.">UITextViewWidget</a>(boost::shared_ptr&lt;const TranslationManager&gt; translation_manager,
-<a name="l00026"></a>00026                      boost::shared_ptr&lt;StarredVersesModel&gt; starred_verses_model, QWidget* parent = 0);
-<a name="l00027"></a>00027 
-<a name="l00028"></a>00028 signals:
-<a name="l00030"></a>00030     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_1_1_u_i_text_view_widget.html#ab64abbb95e790358b92e6f4c8e35b8e0" title="Let other widgets know that the user has starred a verse.">verse_starred</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
+<a name="l00013"></a>00013 <span class="keyword">class </span>TranslationManager;
+<a name="l00014"></a>00014 <span class="keyword">class </span>VerseDisplay;
+<a name="l00015"></a>00015 }
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 <span class="keyword">namespace </span>BibleStudyGui
+<a name="l00018"></a>00018 {
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020 <span class="keyword">class </span>StarredVersesModel;
+<a name="l00021"></a>00021 
+<a name="l00023"></a><a class="code" href="class_bible_study_gui_1_1_u_i_text_view_widget.html">00023</a> <span class="keyword">class </span><a class="code" href="class_bible_study_gui_1_1_u_i_text_view_widget.html" title="This class respresents a text box that displays a collection of verses and allows...">UITextViewWidget</a> : <span class="keyword">public</span> QWidget
+<a name="l00024"></a>00024 {
+<a name="l00025"></a>00025     Q_OBJECT
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027 <span class="keyword">public</span>:
+<a name="l00029"></a>00029     <a class="code" href="class_bible_study_gui_1_1_u_i_text_view_widget.html#a359e371afc8ca5a69e41d46a4b1805c8" title="Create a new instance of the UITextViewWidget class.">UITextViewWidget</a>(boost::shared_ptr&lt;const BibleDatabase::TranslationManager&gt; translation_manager,
+<a name="l00030"></a>00030                      boost::shared_ptr&lt;StarredVersesModel&gt; starred_verses_model, QWidget* parent = 0);
 <a name="l00031"></a>00031 
-<a name="l00033"></a>00033     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_1_1_u_i_text_view_widget.html#a8be7c5e66d9f07de14dcfcdd56649761" title="Let other widgets know that the user has removed the star from a starred verse.">verse_unstarred</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035 <span class="keyword">public</span> slots:
-<a name="l00037"></a>00037     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_1_1_u_i_text_view_widget.html#af7b565a22b48a935fb17200467c7c7c7" title="Display a new verse.">display_text</a>(boost::shared_ptr&lt;VerseDisplay&gt; verse);
+<a name="l00032"></a>00032 signals:
+<a name="l00034"></a>00034     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_gui_1_1_u_i_text_view_widget.html#ad89e6b0747e939c9318f035491230243" title="Let other widgets know that the user has starred a verse.">verse_starred</a>(boost::shared_ptr&lt;BibleDatabase::VerseDisplay&gt; <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>);
+<a name="l00035"></a>00035 
+<a name="l00037"></a>00037     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_gui_1_1_u_i_text_view_widget.html#a8f706dec197faf9680ad909b1cca29dd" title="Let other widgets know that the user has removed the star from a starred verse.">verse_unstarred</a>(boost::shared_ptr&lt;BibleDatabase::VerseDisplay&gt; verse);
 <a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <span class="keyword">private</span> slots:
-<a name="l00040"></a>00040     <span class="keywordtype">void</span> increase_displayed_context();
-<a name="l00041"></a>00041     <span class="keywordtype">void</span> decrease_displayed_context();
-<a name="l00042"></a>00042     <span class="keywordtype">void</span> display_next_verse();
-<a name="l00043"></a>00043     <span class="keywordtype">void</span> display_prev_verse();
-<a name="l00044"></a>00044     <span class="keywordtype">void</span> change_star_button_icon();
-<a name="l00045"></a>00045     <span class="keywordtype">void</span> change_starred_verse_state();
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047 <span class="keyword">private</span>:
-<a name="l00048"></a>00048     boost::shared_ptr&lt;const TranslationManager&gt; m_translation_manager;
-<a name="l00049"></a>00049     boost::shared_ptr&lt;StarredVersesModel&gt; m_starred_verses_model;
-<a name="l00050"></a>00050     
-<a name="l00051"></a>00051     boost::shared_ptr&lt;VerseDisplay&gt; m_displayed_verse;
-<a name="l00052"></a>00052     QLabel* m_title;
-<a name="l00053"></a>00053     QTextEdit* m_text;
-<a name="l00054"></a>00054     QToolButton* m_more_button;
-<a name="l00055"></a>00055     QToolButton* m_less_button;
-<a name="l00056"></a>00056     QToolButton* m_star_button;
-<a name="l00057"></a>00057     QToolButton* m_prev_button;
-<a name="l00058"></a>00058     QToolButton* m_next_button;
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060     <span class="keywordtype">bool</span> next_button_should_be_enabled();
-<a name="l00061"></a>00061     <span class="keywordtype">bool</span> prev_button_should_be_enabled();
-<a name="l00062"></a>00062     <span class="keywordtype">bool</span> more_button_should_be_enabled();
-<a name="l00063"></a>00063     <span class="keywordtype">bool</span> less_button_should_be_enabled();
-<a name="l00064"></a>00064     <span class="keywordtype">bool</span> star_button_should_be_enabled();
-<a name="l00065"></a>00065 };
-<a name="l00066"></a>00066 
-<a name="l00067"></a>00067 }
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 <span class="preprocessor">#endif // __UI_TEXT_VIEW_WIDGET_H</span>
-<a name="l00070"></a>00070 <span class="preprocessor"></span>
+<a name="l00039"></a>00039 <span class="keyword">public</span> slots:
+<a name="l00041"></a>00041     <span class="keywordtype">void</span> <a class="code" href="class_bible_study_gui_1_1_u_i_text_view_widget.html#a6e90872fdfabd100906c241ded94e66d" title="Display a new verse.">display_text</a>(boost::shared_ptr&lt;BibleDatabase::VerseDisplay&gt; verse);
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043 <span class="keyword">private</span> slots:
+<a name="l00044"></a>00044     <span class="keywordtype">void</span> increase_displayed_context();
+<a name="l00045"></a>00045     <span class="keywordtype">void</span> decrease_displayed_context();
+<a name="l00046"></a>00046     <span class="keywordtype">void</span> display_next_verse();
+<a name="l00047"></a>00047     <span class="keywordtype">void</span> display_prev_verse();
+<a name="l00048"></a>00048     <span class="keywordtype">void</span> change_star_button_icon();
+<a name="l00049"></a>00049     <span class="keywordtype">void</span> change_starred_verse_state();
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 <span class="keyword">private</span>:
+<a name="l00052"></a>00052     boost::shared_ptr&lt;const BibleDatabase::TranslationManager&gt; m_translation_manager;
+<a name="l00053"></a>00053     boost::shared_ptr&lt;StarredVersesModel&gt; m_starred_verses_model;
+<a name="l00054"></a>00054     
+<a name="l00055"></a>00055     boost::shared_ptr&lt;BibleDatabase::VerseDisplay&gt; m_displayed_verse;
+<a name="l00056"></a>00056     QLabel* m_title;
+<a name="l00057"></a>00057     QTextEdit* m_text;
+<a name="l00058"></a>00058     QToolButton* m_more_button;
+<a name="l00059"></a>00059     QToolButton* m_less_button;
+<a name="l00060"></a>00060     QToolButton* m_star_button;
+<a name="l00061"></a>00061     QToolButton* m_prev_button;
+<a name="l00062"></a>00062     QToolButton* m_next_button;
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064     <span class="keywordtype">bool</span> next_button_should_be_enabled();
+<a name="l00065"></a>00065     <span class="keywordtype">bool</span> prev_button_should_be_enabled();
+<a name="l00066"></a>00066     <span class="keywordtype">bool</span> more_button_should_be_enabled();
+<a name="l00067"></a>00067     <span class="keywordtype">bool</span> less_button_should_be_enabled();
+<a name="l00068"></a>00068     <span class="keywordtype">bool</span> star_button_should_be_enabled();
+<a name="l00069"></a>00069 };
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071 }
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073 <span class="preprocessor">#endif // __UI_TEXT_VIEW_WIDGET_H</span>
+<a name="l00074"></a>00074 <span class="preprocessor"></span>
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Sep 21 08:17:05 2009 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Thu Jan 27 07:28:43 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
