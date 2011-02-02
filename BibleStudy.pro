@@ -5,6 +5,7 @@ SOURCES += BibleStudy.cpp
 
 
 win32 {
+    RC_FILE=BibleStudy.rc
     INCLUDEPATH += "$$(BOOST_DIR)"
 
 # Debug mode specific settings
@@ -26,7 +27,23 @@ win32 {
 
 unix {
     DESTDIR = "Output"
-    LIBS += -L"Output"
+    LIBS += -L"Output/lib"
     LIBS += -l"BibleDatabase"
     LIBS += -l"BibleStudyGui"
+
+    TARGET = "bin/BibleStudy"
+    target.path = /usr/bin
+    INSTALLS += target
+
+    libraries.path = /usr/lib
+    libraries.files = $$DESTDIR/lib/lib*.so*
+    INSTALLS += libraries
+
+    translations.path = /usr/share/BibleStudy/Translations
+    translations.files = $$DESTDIR/share/BibleStudy/Translations/DR.buf $$DESTDIR/share/BibleStudy/Translations/KJV.buf
+    INSTALLS += translations
+
+    icons.path = /usr/share/BibleStudy/icons
+    icons.files = $$DESTDIR/share/BibleStudy/icons/*
+    INSTALLS += icons
 }

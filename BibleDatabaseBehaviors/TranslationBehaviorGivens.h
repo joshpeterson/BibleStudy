@@ -21,7 +21,11 @@ public:
         m_translation = boost::shared_ptr<Translation>(new Translation());
 
         boost::filesystem::path translation_file = boost::filesystem::initial_path();
+#ifdef LINUX
+        translation_file /= "share/BibleStudy/Translations/TT.buf";
+#else
         translation_file /= "Translations/TT.buf";
+#endif
 
         if (!boost::filesystem::exists(translation_file))
         {
