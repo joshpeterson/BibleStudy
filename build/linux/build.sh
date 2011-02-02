@@ -36,7 +36,7 @@ fi
 
 cd BibleStudy
 
-if [ ! -d "BibleStudy" ]; then
+if [ ! -d "Translations" ]; then
     mkdir Translations
 fi
 
