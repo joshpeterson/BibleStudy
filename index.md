@@ -1,11 +1,11 @@
 ---
-title: BibleStudy: fast bible searching
+title: BibleStudy fast bible searching
 ---
 BibleStudy
-=========
+==========
 BibleStudy is a simple and fast bible searching and browsing application.  It is open source software, licensed under the GPLv3.
 
-![BibleStudy screen shot] (images/BibleStudy.png)
+![BibleStudy screen shot] (images/BibleStudy-small.png)
 
 Download
 --------
