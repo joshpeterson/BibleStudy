@@ -36,24 +36,44 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<const TranslationManager> t
     QT_CONNECT(m_star_button, SIGNAL(clicked()), this, SLOT(change_starred_verse_state()));
 
     m_star_button->setEnabled(false);
+#ifdef LINUX
+    m_star_button->setIcon(QIcon("../share/BibleStudy/icons/star_off.png"));
+#else
     m_star_button->setIcon(QIcon("icons/star_off.png"));
+#endif
     m_star_button->setToolTip(tr("Save this verse"));
     m_star_button->setCheckable(true);
 
     m_more_button->setEnabled(false);
+#ifdef LINUX
+    m_more_button->setIcon(QIcon("../share/BibleStudy/icons/plus.png"));
+#else
     m_more_button->setIcon(QIcon("icons/plus.png"));
+#endif
     m_more_button->setToolTip(tr("Show more context"));
     
     m_less_button->setEnabled(false);
+#ifdef LINUX
+    m_less_button->setIcon(QIcon("../share/BibleStudy/icons/minus.png"));
+#else
     m_less_button->setIcon(QIcon("icons/minus.png"));
+#endif
     m_less_button->setToolTip(tr("Show less context"));
 
     m_next_button->setEnabled(false);
+#ifdef LINUX
+    m_next_button->setIcon(QIcon("../share/BibleStudy/icons/next.png"));
+#else
     m_next_button->setIcon(QIcon("icons/next.png"));
+#endif
     m_next_button->setToolTip(tr("Next verse"));
 
     m_prev_button->setEnabled(false);
+#ifdef LINUX
+    m_prev_button->setIcon(QIcon("../share/BibleStudy/icons/prev.png"));
+#else
     m_prev_button->setIcon(QIcon("icons/prev.png"));
+#endif
     m_prev_button->setToolTip(tr("Previous verse"));
 
     QHBoxLayout* header_row = new QHBoxLayout;
