@@ -6,7 +6,7 @@ layout: default
 --------
 BibleStudy is a simple and fast bible searching and browsing application.
 
-<a href="images/BibleStudy.png"><img src="images/BibleStudy-small.png" alt="BibleStudy screen shot  (click to view a larger image)"/></a>
+<a href="images/BibleStudy.png"><img src="images/BibleStudy-small.png" alt="BibleStudy screen shot  (click to view a larger image)"></a>
 
 Download
 --------
