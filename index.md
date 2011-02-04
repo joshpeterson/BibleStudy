@@ -1,20 +1,23 @@
 ---
-title: BibleStudy fast bible searching
+title: BibleStudy - fast bible searching
+layout: default
 ---
-BibleStudy
-==========
-BibleStudy is a simple and fast bible searching and browsing application.  It is open source software, licensed under the GPLv3.
+![BibleStudy] (images/BibleStudy-logo.png)
+--------
+BibleStudy is a simple and fast bible searching and browsing application.
 
-![BibleStudy screen shot] (images/BibleStudy-small.png)
+<a href="images/BibleStudy.png"><img src="images/BibleStudy-small.png" alt="BibleStudy screen shot  (click to view a larger image)"/></a>
 
 Download
 --------
-Release 1.0
-* [Windows] (https://github.com/joshpeterson/BibleStudy/blob/master/Installer/output/BibleStudy-1.0-Setup.exe)
-* [Linux (Ubuntu 10.04)] (https://github.com/joshpeterson/BibleStudy/blob/master/Installer/output/bible-study_1.0_i386.deb)
+<hr/>
+Version 1.0
+* [Windows] (https://github.com/joshpeterson/BibleStudy/raw/master/Installer/output/BibleStudy-1.0-Setup.exe)
+* [Linux (Ubuntu 10.04)] (https://github.com/joshpeterson/BibleStudy/raw/master/Installer/output/bible-study_1.0_i386.deb)
 
 Features
 --------
+<hr/>
 * Douay-Rheims and King James translations
 * Search for specific words
 * Filter search results with regular expressions
@@ -24,7 +27,14 @@ Features
 * Star verses to easily access them later
 
 Development
------------
-If you would like to contribute to the development of BibleStudy, please fork the repository on github:
+--------
+<hr/>
+BibleStudy is open source software, licensed under the GPLv3.
+
+If you would like to contribute to the development of BibleStudy, please fork the repository on Github:
 
 [https://github.com/joshpeterson/BibleStudy] (https://github.com/joshpeterson/BibleStudy)
+
+To report problems with BibleStudy, please create an issue on Github:
+
+[https://github.com/joshpeterson/BibleStudy/issues] (https://github.com/joshpeterson/BibleStudy/issues)
