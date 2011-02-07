@@ -1,0 +1,7 @@
+?package(bible-study):\
+    needs="x11"\
+    section="Applications/Accessories"\
+    title="BibleStudy"\
+    longtitle="Simple, fast bible searching"\
+    icon="/usr/share/pixmaps/bible-study.xpm"\
+    command="/usr/bin/BibleStudy"

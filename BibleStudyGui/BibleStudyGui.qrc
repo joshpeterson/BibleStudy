@@ -1,0 +1,11 @@
+<!DOCTYPE RCC><RCC version="1.0">
+ <qresource>
+     <file>icons/BibleStudy.ico</file>
+     <file>icons/next.png</file>
+     <file>icons/prev.png</file>
+     <file>icons/plus.png</file>
+     <file>icons/minus.png</file>
+     <file>icons/star_on.png</file>
+     <file>icons/star_off.png</file>
+ </qresource>
+ </RCC>

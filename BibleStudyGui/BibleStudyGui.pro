@@ -27,6 +27,8 @@ SOURCES += BackgroundWorker.cpp
 
 DEFINES += _EXPORTING_BIBLE_STUDY_GUI
 
+RESOURCES = BibleStudyGui.qrc
+
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
 
