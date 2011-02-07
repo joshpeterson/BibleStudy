@@ -7,10 +7,6 @@ if not exist %DEST_DIR%\Translations mkdir %DEST_DIR%\Translations
 echo Copying translation files
 copy Translations\*.buf %DEST_DIR%\Translations
 
-if not exist %DEST_DIR%\icons mkdir %DEST_DIR%\icons
-echo Copying icon files
-copy icons\*.png %DEST_DIR%\icons
-
 if "%1"=="Debug" (
     echo Copying Qt debug files
     copy %QT_DIR%\lib\QtCored4.dll %DEST_DIR%

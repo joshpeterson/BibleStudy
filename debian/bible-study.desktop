@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=BibleStudy
+Icon=/usr/share/pixmaps/bible-study.xpm
+Type=Application
+Terminal=false
+Name=BibleStudy
+GenericName=Simple, fast bible searching

@@ -30,23 +30,28 @@ fi
 
 cd share
 
+if [ ! -d "pixmaps" ]; then
+    mkdir pixmaps
+fi
+
+if [ ! -d "applications" ]; then
+    mkdir applications
+fi
+
 if [ ! -d "BibleStudy" ]; then
     mkdir BibleStudy
 fi
 
 cd BibleStudy
 
-if [ ! -d "BibleStudy" ]; then
+if [ ! -d "Translations" ]; then
     mkdir Translations
-fi
-
-if [ ! -d "icons" ]; then
-    mkdir icons
 fi
 
 cd ../..
 cp ../Translations/*.buf share/BibleStudy/Translations/
-cp ../icons/* share/BibleStudy/icons/
+cp ../BibleStudyGui/icons/bible-study.xpm share/pixmaps/
+cp ../debian/bible-study.desktop share/applications/
 
 echo "***"
 echo "*** Building BibleStudy"

@@ -36,24 +36,24 @@ UITextViewWidget::UITextViewWidget(boost::shared_ptr<const TranslationManager> t
     QT_CONNECT(m_star_button, SIGNAL(clicked()), this, SLOT(change_starred_verse_state()));
 
     m_star_button->setEnabled(false);
-    m_star_button->setIcon(QIcon("icons/star_off.png"));
+    m_star_button->setIcon(QIcon(QString(":/icons/star_off.png")));
     m_star_button->setToolTip(tr("Save this verse"));
     m_star_button->setCheckable(true);
 
     m_more_button->setEnabled(false);
-    m_more_button->setIcon(QIcon("icons/plus.png"));
+    m_more_button->setIcon(QIcon(QString(":/icons/plus.png")));
     m_more_button->setToolTip(tr("Show more context"));
     
     m_less_button->setEnabled(false);
-    m_less_button->setIcon(QIcon("icons/minus.png"));
+    m_less_button->setIcon(QIcon(QString(":/icons/minus.png")));
     m_less_button->setToolTip(tr("Show less context"));
 
     m_next_button->setEnabled(false);
-    m_next_button->setIcon(QIcon("icons/next.png"));
+    m_next_button->setIcon(QIcon(QString(":/icons/next.png")));
     m_next_button->setToolTip(tr("Next verse"));
 
     m_prev_button->setEnabled(false);
-    m_prev_button->setIcon(QIcon("icons/prev.png"));
+    m_prev_button->setIcon(QIcon(QString(":/icons/prev.png")));
     m_prev_button->setToolTip(tr("Previous verse"));
 
     QHBoxLayout* header_row = new QHBoxLayout;
@@ -157,9 +157,9 @@ void UITextViewWidget::display_prev_verse()
 void UITextViewWidget::change_star_button_icon()
 {
     if (m_star_button->isChecked())
-        m_star_button->setIcon(QIcon("icons/star_on.png"));
+        m_star_button->setIcon(QIcon(QString(":/icons/star_on.png")));
     else
-        m_star_button->setIcon(QIcon("icons/star_off.png"));
+        m_star_button->setIcon(QIcon(QString(":/icons/star_off.png")));
 }
 
 void UITextViewWidget::change_starred_verse_state()
