@@ -3,5 +3,5 @@
     section="Applications/Accessories"\
     title="BibleStudy"\
     longtitle="Simple, fast bible searching"\
-    icon="/usr/share/BibleStudy/icons/BibleStudy.ico"\
+    icon="/usr/share/pixmaps/bible-study.xpm"\
     command="/usr/bin/BibleStudy"

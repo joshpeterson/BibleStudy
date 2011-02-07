@@ -42,7 +42,11 @@ unix {
     translations.files = $$DESTDIR/share/BibleStudy/Translations/DR.buf $$DESTDIR/share/BibleStudy/Translations/KJV.buf
     INSTALLS += translations
 
-    icons.path = /usr/share/BibleStudy/icons
-    icons.files = $$DESTDIR/share/BibleStudy/icons/*
+    icons.path = /usr/share/pixmaps
+    icons.files = $$DESTDIR/share/pixmaps/bible-study.xpm
     INSTALLS += icons
+
+    desktop.path = /usr/share/applications
+    desktop.files = $$DESTDIR/share/applications/bible-study.desktop
+    INSTALLS += desktop
 }
