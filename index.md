@@ -38,3 +38,7 @@ If you would like to contribute to the development of BibleStudy, please fork th
 To report problems with BibleStudy, please create an issue on Github:
 
 [https://github.com/joshpeterson/BibleStudy/issues] (https://github.com/joshpeterson/BibleStudy/issues)
+
+Documentation for the code at the current release is available here:
+
+[http://joshpeterson.github.com/BibleStudy/Doxygen/html/] (http://joshpeterson.github.com/BibleStudy/Doxygen/html/)
