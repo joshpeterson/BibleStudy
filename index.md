@@ -12,6 +12,8 @@ Download
 --------
 <hr/>
 Version 1.0
+* [Windows] (https://github.com/joshpeterson/BibleStudy/raw/master/Installer/output/BibleStudy-1.0-Setup.exe)
+* [Linux] (https://github.com/joshpeterson/BibleStudy/raw/master/Installer/output/bible-study_1.0_i386.deb)
 
 Features
 --------
