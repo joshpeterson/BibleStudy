@@ -50,6 +50,8 @@
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class represents a collection of widgets which provide a text input field to input a search string and a button to start the search. </p>
+
+<p>Definition at line <a class="el" href="_u_i_search_widget_8h_source.html#l00028">28</a> of file <a class="el" href="_u_i_search_widget_8h_source.html">UISearchWidget.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ab89b08773648fa95878af5fd58cd3f83"></a><!-- doxytag: member="BibleStudyGui::UISearchWidget::UISearchWidget" ref="ab89b08773648fa95878af5fd58cd3f83" args="(boost::shared_ptr&lt; const BibleDatabase::TranslationManager &gt; translation_manager, QWidget *parent=0)" -->
 <div class="memitem">
@@ -78,6 +80,40 @@
 
 <p>Create a new instance of the <a class="el" href="class_bible_study_gui_1_1_u_i_search_widget.html" title="This class represents a collection of widgets which provide a text input field to...">UISearchWidget</a> class. </p>
 
+<p>Definition at line <a class="el" href="_u_i_search_widget_8cpp_source.html#l00021">21</a> of file <a class="el" href="_u_i_search_widget_8cpp_source.html">UISearchWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00021"></a>00021                                                                                                              : 
+<a name="l00022"></a>00022     QWidget(parent),
+<a name="l00023"></a>00023     m_translation_manager(translation_manager),
+<a name="l00024"></a>00024     m_search_button(<span class="keyword">new</span> QPushButton(tr(<span class="stringliteral">&quot;Search&quot;</span>))),
+<a name="l00025"></a>00025     m_search_input_field(<span class="keyword">new</span> QLineEdit()),
+<a name="l00026"></a>00026     m_translation_selection_row(<span class="keyword">new</span> QHBoxLayout),
+<a name="l00027"></a>00027     m_match_case_checkbox(<span class="keyword">new</span> QCheckBox(tr(<span class="stringliteral">&quot;Match case&quot;</span>))),
+<a name="l00028"></a>00028     m_match_whole_word_checkbox(<span class="keyword">new</span> QCheckBox(tr(<span class="stringliteral">&quot;Whole words&quot;</span>)))
+<a name="l00029"></a>00029 {
+<a name="l00030"></a>00030     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_search_button, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(perform_search()));
+<a name="l00031"></a>00031     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_search_input_field, SIGNAL(returnPressed()), <span class="keyword">this</span>, SLOT(perform_search()));
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033     m_match_case_checkbox-&gt;setChecked(<span class="keyword">true</span>);
+<a name="l00034"></a>00034     m_match_whole_word_checkbox-&gt;setChecked(<span class="keyword">false</span>);
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036     QVBoxLayout* search_options = <span class="keyword">new</span> QVBoxLayout;
+<a name="l00037"></a>00037     search_options-&gt;addWidget(m_match_case_checkbox);
+<a name="l00038"></a>00038     search_options-&gt;addWidget(m_match_whole_word_checkbox);
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040     QHBoxLayout* search_field_row = <span class="keyword">new</span> QHBoxLayout;
+<a name="l00041"></a>00041     search_field_row-&gt;addWidget(m_search_input_field);
+<a name="l00042"></a>00042     search_field_row-&gt;addWidget(m_search_button);
+<a name="l00043"></a>00043     search_field_row-&gt;addLayout(search_options);
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045     QVBoxLayout* layout = <span class="keyword">new</span> QVBoxLayout;
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047     layout-&gt;addLayout(search_field_row);
+<a name="l00048"></a>00048     layout-&gt;addLayout(m_translation_selection_row);
+<a name="l00049"></a>00049     setLayout(layout);
+<a name="l00050"></a>00050 }
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -97,6 +133,18 @@
 <div class="memdoc">
 
 <p>Display the translation check boxes in the UI. </p>
+
+<p>Definition at line <a class="el" href="_u_i_search_widget_8cpp_source.html#l00052">52</a> of file <a class="el" href="_u_i_search_widget_8cpp_source.html">UISearchWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00053"></a>00053 {
+<a name="l00054"></a>00054     <span class="keywordflow">for</span> (<a class="code" href="class_bible_database_1_1_translation_iterator.html" title="This class represents an iterator which is used to iterate the translations in the...">TranslationIterator</a> it = m_translation_manager-&gt;begin(); it != m_translation_manager-&gt;end(); ++it)
+<a name="l00055"></a>00055     {
+<a name="l00056"></a>00056         this-&gt;add_translation_check_box(*it);
+<a name="l00057"></a>00057     }
+<a name="l00058"></a>00058  
+<a name="l00059"></a>00059     m_translation_selection_row-&gt;addStretch(1);
+<a name="l00060"></a>00060 }
+</pre></div></p>
 
 </div>
 </div>
@@ -141,13 +189,11 @@
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_u_i_search_widget_8h_source.html">UISearchWidget.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/debug/<a class="el" href="debug_2moc___u_i_search_widget_8cpp.html">moc_UISearchWidget.cpp</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/release/<a class="el" href="release_2moc___u_i_search_widget_8cpp.html">moc_UISearchWidget.cpp</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_u_i_search_widget_8cpp.html">UISearchWidget.cpp</a></li>
+<li>BibleStudyGui/<a class="el" href="_u_i_search_widget_8h_source.html">UISearchWidget.h</a></li>
+<li>BibleStudyGui/<a class="el" href="_u_i_search_widget_8cpp_source.html">UISearchWidget.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

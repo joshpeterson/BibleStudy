@@ -50,6 +50,9 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsObtainedWithNoContext:</d
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; boost::shared_ptr<br class="typebreak"/>
 &lt; const <a class="el" href="class_bible_database_1_1_verse.html">Verse</a> &gt; &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_verse_is_obtained_with_no_context.html#a0a24c13813ec464ac6002aff72695d7e">get_verses</a> () const </td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00016">16</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a3aa7f9767ec5da05e9ab30c756cb8e58"></a><!-- doxytag: member="BibleDatabaseBehaviors::VerseIsObtainedWithNoContext::VerseIsObtainedWithNoContext" ref="a3aa7f9767ec5da05e9ab30c756cb8e58" args="()" -->
 <div class="memitem">
@@ -65,6 +68,11 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsObtainedWithNoContext:</d
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00019">19</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00019"></a>00019 {}
+</pre></div></p>
 
 </div>
 </div>
@@ -84,6 +92,11 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsObtainedWithNoContext:</d
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00021">21</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00021"></a>00021 : m_verse_id(verse_id) {}
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -101,6 +114,13 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsObtainedWithNoContext:</d
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00029">29</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00030"></a>00030     {
+<a name="l00031"></a>00031         <span class="keywordflow">return</span> m_verses;
+<a name="l00032"></a>00032     }
+</pre></div></p>
 
 </div>
 </div>
@@ -122,13 +142,21 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsObtainedWithNoContext:</d
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_when.html#a4a5d147bf5a379724615b5e2b238db13">BehaviorDrivenDesign::IWhen</a>.</p>
 
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00023">23</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00024"></a>00024     {
+<a name="l00025"></a>00025         boost::shared_ptr&lt;const Translation&gt; translation = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a8e21725c6623f42fb405f71e37065d4b">GetGiven</a>&lt;TestTranslation&gt;()-&gt;get_translation();        
+<a name="l00026"></a>00026         m_verses = translation-&gt;get_verse(m_verse_id, 0);
+<a name="l00027"></a>00027     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

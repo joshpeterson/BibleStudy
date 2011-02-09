@@ -48,6 +48,9 @@ Inheritance diagram for BibleDatabaseBehaviors::CorrectResultsAreReturned:</div>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_correct_results_are_returned.html#ae404b3ed4c038ed52e95133885cfbef3">CorrectResultsAreReturned</a> (std::vector&lt; int &gt; expected_results)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_correct_results_are_returned.html#afecd515caaead8d534668e4e1f28f3a0">ensure_that</a> (const <a class="el" href="class_behavior_driven_design_1_1_world.html">World</a> &amp;world)</td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00043">43</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ad3386caf6aa6b9de81648a0168da16b6"></a><!-- doxytag: member="BibleDatabaseBehaviors::CorrectResultsAreReturned::CorrectResultsAreReturned" ref="ad3386caf6aa6b9de81648a0168da16b6" args="()" -->
 <div class="memitem">
@@ -63,6 +66,11 @@ Inheritance diagram for BibleDatabaseBehaviors::CorrectResultsAreReturned:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00046">46</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00046"></a>00046 {}
+</pre></div></p>
 
 </div>
 </div>
@@ -81,6 +89,11 @@ Inheritance diagram for BibleDatabaseBehaviors::CorrectResultsAreReturned:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00048">48</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00048"></a>00048 : m_expected_results(expected_results) {}
+</pre></div></p>
 
 </div>
 </div>
@@ -103,13 +116,29 @@ Inheritance diagram for BibleDatabaseBehaviors::CorrectResultsAreReturned:</div>
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_then.html#a3bffcea3036a246faacffbc385bbade4">BehaviorDrivenDesign::IThen</a>.</p>
 
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00050">50</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00051"></a>00051     {
+<a name="l00052"></a>00052         boost::shared_ptr&lt;ISearchResults&gt; actual_results = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;SearchIs&gt;()-&gt;get_search_results();
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054         <span class="keywordtype">int</span> number_of_expected_results = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_expected_results.size());
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056         CPPUNIT_ASSERT_EQUAL(number_of_expected_results, actual_results-&gt;num_results());
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 0; idx &lt; number_of_expected_results; ++idx)
+<a name="l00059"></a>00059         {
+<a name="l00060"></a>00060             CPPUNIT_ASSERT_EQUAL(m_expected_results[idx], actual_results-&gt;at(idx));
+<a name="l00061"></a>00061         }
+<a name="l00062"></a>00062     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

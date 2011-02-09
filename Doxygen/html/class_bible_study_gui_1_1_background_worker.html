@@ -44,6 +44,8 @@
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class executes a given command on a background thread. Call QThread::start() to start the worker. </p>
+
+<p>Definition at line <a class="el" href="_background_worker_8h_source.html#l00016">16</a> of file <a class="el" href="_background_worker_8h_source.html">BackgroundWorker.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a680e77d50201897630c2705df3f84084"></a><!-- doxytag: member="BibleStudyGui::BackgroundWorker::BackgroundWorker" ref="a680e77d50201897630c2705df3f84084" args="(boost::shared_ptr&lt; BibleDatabase::ICommand &gt; command)" -->
 <div class="memitem">
@@ -62,6 +64,13 @@
 <div class="memdoc">
 
 <p>Create a new instance of the <a class="el" href="class_bible_study_gui_1_1_background_worker.html" title="This class executes a given command on a background thread. Call QThread::start()...">BackgroundWorker</a> class. </p>
+
+<p>Definition at line <a class="el" href="_background_worker_8cpp_source.html#l00007">7</a> of file <a class="el" href="_background_worker_8cpp_source.html">BackgroundWorker.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00007"></a>00007                                                                     : m_command(command)
+<a name="l00008"></a>00008 {
+<a name="l00009"></a>00009 }
+</pre></div></p>
 
 </div>
 </div>
@@ -83,14 +92,20 @@
 
 <p>Execute the given command. This method should be called by Qt. </p>
 
+<p>Definition at line <a class="el" href="_background_worker_8cpp_source.html#l00011">11</a> of file <a class="el" href="_background_worker_8cpp_source.html">BackgroundWorker.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00012"></a>00012 {
+<a name="l00013"></a>00013     m_command-&gt;Execute();
+<a name="l00014"></a>00014 }</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_background_worker_8h_source.html">BackgroundWorker.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_background_worker_8cpp.html">BackgroundWorker.cpp</a></li>
+<li>BibleStudyGui/<a class="el" href="_background_worker_8h_source.html">BackgroundWorker.h</a></li>
+<li>BibleStudyGui/<a class="el" href="_background_worker_8cpp_source.html">BackgroundWorker.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

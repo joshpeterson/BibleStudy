@@ -50,6 +50,8 @@
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class respresents a text box that displays a collection of verses and allows the user to star, unstar a verse and navigate a translation. </p>
+
+<p>Definition at line <a class="el" href="_u_i_text_view_widget_8h_source.html#l00023">23</a> of file <a class="el" href="_u_i_text_view_widget_8h_source.html">UITextViewWidget.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a359e371afc8ca5a69e41d46a4b1805c8"></a><!-- doxytag: member="BibleStudyGui::UITextViewWidget::UITextViewWidget" ref="a359e371afc8ca5a69e41d46a4b1805c8" args="(boost::shared_ptr&lt; const BibleDatabase::TranslationManager &gt; translation_manager, boost::shared_ptr&lt; StarredVersesModel &gt; starred_verses_model, QWidget *parent=0)" -->
 <div class="memitem">
@@ -84,6 +86,70 @@
 
 <p>Create a new instance of the <a class="el" href="class_bible_study_gui_1_1_u_i_text_view_widget.html" title="This class respresents a text box that displays a collection of verses and allows...">UITextViewWidget</a> class. </p>
 
+<p>Definition at line <a class="el" href="_u_i_text_view_widget_8cpp_source.html#l00016">16</a> of file <a class="el" href="_u_i_text_view_widget_8cpp_source.html">UITextViewWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00018"></a>00018                                                     :
+<a name="l00019"></a>00019     QWidget(parent),
+<a name="l00020"></a>00020     m_translation_manager(translation_manager),
+<a name="l00021"></a>00021     m_starred_verses_model(starred_verses_model),
+<a name="l00022"></a>00022     m_displayed_verse(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a>(<span class="stringliteral">&quot;&quot;</span>, -1, -1)),
+<a name="l00023"></a>00023     m_title(<span class="keyword">new</span> QLabel()),
+<a name="l00024"></a>00024     m_text(<span class="keyword">new</span> QTextEdit()),
+<a name="l00025"></a>00025     m_more_button(<span class="keyword">new</span> QToolButton()),
+<a name="l00026"></a>00026     m_less_button(<span class="keyword">new</span> QToolButton()),
+<a name="l00027"></a>00027     m_star_button(<span class="keyword">new</span> QToolButton()),
+<a name="l00028"></a>00028     m_prev_button(<span class="keyword">new</span> QToolButton()),
+<a name="l00029"></a>00029     m_next_button(<span class="keyword">new</span> QToolButton())
+<a name="l00030"></a>00030 {
+<a name="l00031"></a>00031     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_more_button, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(increase_displayed_context()));
+<a name="l00032"></a>00032     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_less_button, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(decrease_displayed_context()));
+<a name="l00033"></a>00033     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_next_button, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(display_next_verse()));
+<a name="l00034"></a>00034     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_prev_button, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(display_prev_verse()));
+<a name="l00035"></a>00035     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_star_button, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(change_star_button_icon()));
+<a name="l00036"></a>00036     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_star_button, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(change_starred_verse_state()));
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038     m_star_button-&gt;setEnabled(<span class="keyword">false</span>);
+<a name="l00039"></a>00039     m_star_button-&gt;setIcon(QIcon(QString(<span class="stringliteral">&quot;:/icons/star_off.png&quot;</span>)));
+<a name="l00040"></a>00040     m_star_button-&gt;setToolTip(tr(<span class="stringliteral">&quot;Save this verse&quot;</span>));
+<a name="l00041"></a>00041     m_star_button-&gt;setCheckable(<span class="keyword">true</span>);
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043     m_more_button-&gt;setEnabled(<span class="keyword">false</span>);
+<a name="l00044"></a>00044     m_more_button-&gt;setIcon(QIcon(QString(<span class="stringliteral">&quot;:/icons/plus.png&quot;</span>)));
+<a name="l00045"></a>00045     m_more_button-&gt;setToolTip(tr(<span class="stringliteral">&quot;Show more context&quot;</span>));
+<a name="l00046"></a>00046     
+<a name="l00047"></a>00047     m_less_button-&gt;setEnabled(<span class="keyword">false</span>);
+<a name="l00048"></a>00048     m_less_button-&gt;setIcon(QIcon(QString(<span class="stringliteral">&quot;:/icons/minus.png&quot;</span>)));
+<a name="l00049"></a>00049     m_less_button-&gt;setToolTip(tr(<span class="stringliteral">&quot;Show less context&quot;</span>));
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051     m_next_button-&gt;setEnabled(<span class="keyword">false</span>);
+<a name="l00052"></a>00052     m_next_button-&gt;setIcon(QIcon(QString(<span class="stringliteral">&quot;:/icons/next.png&quot;</span>)));
+<a name="l00053"></a>00053     m_next_button-&gt;setToolTip(tr(<span class="stringliteral">&quot;Next verse&quot;</span>));
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055     m_prev_button-&gt;setEnabled(<span class="keyword">false</span>);
+<a name="l00056"></a>00056     m_prev_button-&gt;setIcon(QIcon(QString(<span class="stringliteral">&quot;:/icons/prev.png&quot;</span>)));
+<a name="l00057"></a>00057     m_prev_button-&gt;setToolTip(tr(<span class="stringliteral">&quot;Previous verse&quot;</span>));
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059     QHBoxLayout* header_row = <span class="keyword">new</span> QHBoxLayout;
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061     header_row-&gt;addWidget(m_title);
+<a name="l00062"></a>00062     header_row-&gt;addWidget(m_star_button);
+<a name="l00063"></a>00063     header_row-&gt;addWidget(m_less_button);
+<a name="l00064"></a>00064     header_row-&gt;addWidget(m_more_button);
+<a name="l00065"></a>00065     header_row-&gt;addWidget(m_prev_button);
+<a name="l00066"></a>00066     header_row-&gt;addWidget(m_next_button);
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068     m_text-&gt;setReadOnly(<span class="keyword">true</span>);
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070     QVBoxLayout* layout = <span class="keyword">new</span> QVBoxLayout;
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072     layout-&gt;addLayout(header_row);
+<a name="l00073"></a>00073     layout-&gt;addWidget(m_text);
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075     setLayout(layout);
+<a name="l00076"></a>00076 }
+
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -104,6 +170,30 @@
 <div class="memdoc">
 
 <p>Display a new verse. </p>
+
+<p>Definition at line <a class="el" href="_u_i_text_view_widget_8cpp_source.html#l00078">78</a> of file <a class="el" href="_u_i_text_view_widget_8cpp_source.html">UITextViewWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00079"></a>00079 {
+<a name="l00080"></a>00080     m_displayed_verse = <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>;
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082     boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(<a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>-&gt;get_translation());
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084     std::vector&lt;boost::shared_ptr&lt;const Verse&gt; &gt; verses = translation-&gt;get_verse(m_displayed_verse-&gt;get_verse_id(),
+<a name="l00085"></a>00085                                                                                  m_displayed_verse-&gt;get_num_verses_context());
+<a name="l00086"></a>00086     m_title-&gt;setText(<a class="code" href="namespace_bible_database.html#aee0bc9fff9457c5ec5b8f1833519cff5" title="Get the title of a collection of verses.">verse_collection_title</a>(verses, translation).c_str());
+<a name="l00087"></a>00087     m_text-&gt;setText(<a class="code" href="namespace_bible_database.html#a5bd43b0d83542b6e6e6fec851eddaddb" title="Get the text representation of a collection of verses.">verse_collection_to_string</a>(verses).c_str());
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089     m_star_button-&gt;setChecked(m_starred_verses_model-&gt;verse_starred(m_displayed_verse));
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091     change_star_button_icon();
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093     m_star_button-&gt;setEnabled(star_button_should_be_enabled());
+<a name="l00094"></a>00094     m_more_button-&gt;setEnabled(more_button_should_be_enabled());
+<a name="l00095"></a>00095     m_less_button-&gt;setEnabled(less_button_should_be_enabled());
+<a name="l00096"></a>00096     m_next_button-&gt;setEnabled(next_button_should_be_enabled());
+<a name="l00097"></a>00097     m_prev_button-&gt;setEnabled(prev_button_should_be_enabled());
+<a name="l00098"></a>00098 }
+</pre></div></p>
 
 </div>
 </div>
@@ -148,13 +238,11 @@
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_u_i_text_view_widget_8h_source.html">UITextViewWidget.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/debug/<a class="el" href="debug_2moc___u_i_text_view_widget_8cpp.html">moc_UITextViewWidget.cpp</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/release/<a class="el" href="release_2moc___u_i_text_view_widget_8cpp.html">moc_UITextViewWidget.cpp</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_u_i_text_view_widget_8cpp.html">UITextViewWidget.cpp</a></li>
+<li>BibleStudyGui/<a class="el" href="_u_i_text_view_widget_8h_source.html">UITextViewWidget.h</a></li>
+<li>BibleStudyGui/<a class="el" href="_u_i_text_view_widget_8cpp_source.html">UITextViewWidget.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:27 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

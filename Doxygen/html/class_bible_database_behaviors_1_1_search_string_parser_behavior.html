@@ -40,6 +40,9 @@
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_search_string_parser_behavior.html#a9ed13328bacbc2bd2353294a3b084f20">shouldParseStringWithConsecutiveQuotedStrings</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_search_string_parser_behavior.html#a0d1f50fefd562ae2d246d7828aea663e">shouldRemoveLeadingAndTrailingWhitespace</a> ()</td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00081">81</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a9ed13328bacbc2bd2353294a3b084f20"></a><!-- doxytag: member="BibleDatabaseBehaviors::SearchStringParserBehavior::shouldParseStringWithConsecutiveQuotedStrings" ref="a9ed13328bacbc2bd2353294a3b084f20" args="()" -->
 <div class="memitem">
@@ -55,6 +58,21 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00133">133</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00134"></a>00134     {
+<a name="l00135"></a>00135         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137         std::vector&lt;std::string&gt; expected_search_terms;
+<a name="l00138"></a>00138         expected_search_terms.push_back(<span class="stringliteral">&quot;Foo bar&quot;</span>);
+<a name="l00139"></a>00139         expected_search_terms.push_back(<span class="stringliteral">&quot;yes no&quot;</span>);
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;DefaultSearchStringParser&gt;();
+<a name="l00142"></a>00142         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;SearchStringIs&gt;(<span class="stringliteral">&quot;\&quot;Foo bar\&quot;\&quot;yes no\&quot;&quot;</span>);
+<a name="l00143"></a>00143         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;ValidSearchTermsAreReturned&gt;(expected_search_terms);
+<a name="l00144"></a>00144     }
+</pre></div></p>
 
 </div>
 </div>
@@ -73,6 +91,22 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00119">119</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00120"></a>00120     {
+<a name="l00121"></a>00121         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123         std::vector&lt;std::string&gt; expected_search_terms;
+<a name="l00124"></a>00124         expected_search_terms.push_back(<span class="stringliteral">&quot;test&quot;</span>);
+<a name="l00125"></a>00125         expected_search_terms.push_back(<span class="stringliteral">&quot;Foo bar&quot;</span>);
+<a name="l00126"></a>00126         expected_search_terms.push_back(<span class="stringliteral">&quot;yes&quot;</span>);
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;DefaultSearchStringParser&gt;();
+<a name="l00129"></a>00129         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;SearchStringIs&gt;(<span class="stringliteral">&quot;test \&quot;Foo bar\&quot; yes&quot;</span>);
+<a name="l00130"></a>00130         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;ValidSearchTermsAreReturned&gt;(expected_search_terms);
+<a name="l00131"></a>00131     }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a0d1f50fefd562ae2d246d7828aea663e"></a><!-- doxytag: member="BibleDatabaseBehaviors::SearchStringParserBehavior::shouldRemoveLeadingAndTrailingWhitespace" ref="a0d1f50fefd562ae2d246d7828aea663e" args="()" -->
@@ -89,6 +123,20 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00146">146</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00147"></a>00147     {
+<a name="l00148"></a>00148         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150         std::vector&lt;std::string&gt; expected_search_terms;
+<a name="l00151"></a>00151         expected_search_terms.push_back(<span class="stringliteral">&quot;Foo bar&quot;</span>);
+<a name="l00152"></a>00152 
+<a name="l00153"></a>00153         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;DefaultSearchStringParser&gt;();
+<a name="l00154"></a>00154         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;SearchStringIs&gt;(<span class="stringliteral">&quot;   \&quot;Foo bar\&quot;     &quot;</span>);
+<a name="l00155"></a>00155         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;ValidSearchTermsAreReturned&gt;(expected_search_terms);
+<a name="l00156"></a>00156     }
+</pre></div></p>
 
 </div>
 </div>
@@ -107,6 +155,20 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00107">107</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00108"></a>00108     {
+<a name="l00109"></a>00109         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111         std::vector&lt;std::string&gt; expected_search_terms;
+<a name="l00112"></a>00112         expected_search_terms.push_back(<span class="stringliteral">&quot;Foo bar&quot;</span>);
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;DefaultSearchStringParser&gt;();
+<a name="l00115"></a>00115         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;SearchStringIs&gt;(<span class="stringliteral">&quot;\&quot;Foo bar\&quot;&quot;</span>);
+<a name="l00116"></a>00116         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;ValidSearchTermsAreReturned&gt;(expected_search_terms);
+<a name="l00117"></a>00117     }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="aed51b151d102d57a528025d1a989ef06"></a><!-- doxytag: member="BibleDatabaseBehaviors::SearchStringParserBehavior::shouldTreatSpacesInSearchStringAsAndOperators" ref="aed51b151d102d57a528025d1a989ef06" args="()" -->
@@ -124,13 +186,30 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00092">92</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00093"></a>00093     {
+<a name="l00094"></a>00094         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096         std::vector&lt;std::string&gt; expected_search_terms;
+<a name="l00097"></a>00097         expected_search_terms.push_back(<span class="stringliteral">&quot;Foo&quot;</span>);
+<a name="l00098"></a>00098         expected_search_terms.push_back(<span class="stringliteral">&quot;bar&quot;</span>);
+<a name="l00099"></a>00099         expected_search_terms.push_back(<span class="stringliteral">&quot;yes&quot;</span>);
+<a name="l00100"></a>00100         expected_search_terms.push_back(<span class="stringliteral">&quot;no&quot;</span>);
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;DefaultSearchStringParser&gt;();
+<a name="l00103"></a>00103         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;SearchStringIs&gt;(<span class="stringliteral">&quot;Foo bar yes no&quot;</span>);
+<a name="l00104"></a>00104         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;ValidSearchTermsAreReturned&gt;(expected_search_terms);
+<a name="l00105"></a>00105     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

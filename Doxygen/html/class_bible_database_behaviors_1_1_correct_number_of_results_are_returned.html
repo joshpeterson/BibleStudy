@@ -48,6 +48,9 @@ Inheritance diagram for BibleDatabaseBehaviors::CorrectNumberOfResultsAreReturne
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_correct_number_of_results_are_returned.html#a1b78af60fc3999c8b356b6341851d9f4">CorrectNumberOfResultsAreReturned</a> (int expected_number_of_results)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_correct_number_of_results_are_returned.html#aaa38ca04691f89526f9c2e7aeead9299">ensure_that</a> (const <a class="el" href="class_behavior_driven_design_1_1_world.html">World</a> &amp;world)</td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00068">68</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a17b125f09b87736b5cb0ddf01301eb82"></a><!-- doxytag: member="BibleDatabaseBehaviors::CorrectNumberOfResultsAreReturned::CorrectNumberOfResultsAreReturned" ref="a17b125f09b87736b5cb0ddf01301eb82" args="()" -->
 <div class="memitem">
@@ -63,6 +66,11 @@ Inheritance diagram for BibleDatabaseBehaviors::CorrectNumberOfResultsAreReturne
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00071">71</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00071"></a>00071 {}
+</pre></div></p>
 
 </div>
 </div>
@@ -81,6 +89,11 @@ Inheritance diagram for BibleDatabaseBehaviors::CorrectNumberOfResultsAreReturne
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00073">73</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00073"></a>00073 : m_expected_number_of_results(expected_number_of_results) {}
+</pre></div></p>
 
 </div>
 </div>
@@ -103,13 +116,22 @@ Inheritance diagram for BibleDatabaseBehaviors::CorrectNumberOfResultsAreReturne
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_then.html#a3bffcea3036a246faacffbc385bbade4">BehaviorDrivenDesign::IThen</a>.</p>
 
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00075">75</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00076"></a>00076     {
+<a name="l00077"></a>00077         boost::shared_ptr&lt;ISearchResults&gt; actual_results = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;SearchIs&gt;()-&gt;get_search_results();
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079         CPPUNIT_ASSERT_EQUAL(m_expected_number_of_results, actual_results-&gt;num_results());
+<a name="l00080"></a>00080     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

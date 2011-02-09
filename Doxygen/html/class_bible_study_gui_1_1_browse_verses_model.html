@@ -59,6 +59,8 @@
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class is an implementation of a model from the Qt Model/View framework for a tree view that is used to browse the verses of multiple translations. </p>
+
+<p>Definition at line <a class="el" href="_browse_verses_model_8h_source.html#l00017">17</a> of file <a class="el" href="_browse_verses_model_8h_source.html">BrowseVersesModel.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a1b9f6c7a6f5e823e8d1f3d86fd362b82"></a><!-- doxytag: member="BibleStudyGui::BrowseVersesModel::BrowseVersesModel" ref="a1b9f6c7a6f5e823e8d1f3d86fd362b82" args="(boost::shared_ptr&lt; const BibleDatabase::TranslationManager &gt; translation_manager, QObject *parent=0)" -->
 <div class="memitem">
@@ -87,6 +89,16 @@
 
 <p>Create a new instance of the BrowseVerseModel, using a given TranslationManager. </p>
 
+<p>Definition at line <a class="el" href="_browse_verses_model_8cpp_source.html#l00011">11</a> of file <a class="el" href="_browse_verses_model_8cpp_source.html">BrowseVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00011"></a>00011                                                                                                                    :
+<a name="l00012"></a>00012     QAbstractItemModel(<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a>),
+<a name="l00013"></a>00013     m_translation_manager(translation_manager)
+<a name="l00014"></a>00014 {
+<a name="l00015"></a>00015 }
+
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -107,6 +119,13 @@
 <div class="memdoc">
 
 <p>Get the number of columns for the given parent index. Note that this is always 1. </p>
+
+<p>Definition at line <a class="el" href="_browse_verses_model_8cpp_source.html#l00144">144</a> of file <a class="el" href="_browse_verses_model_8cpp_source.html">BrowseVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00145"></a>00145 {
+<a name="l00146"></a>00146     <span class="keywordflow">return</span> 1;
+<a name="l00147"></a>00147 }
+</pre></div></p>
 
 </div>
 </div>
@@ -137,6 +156,58 @@
 
 <p>Get the data that should be displayed in the view for the given index. </p>
 
+<p>Definition at line <a class="el" href="_browse_verses_model_8cpp_source.html#l00017">17</a> of file <a class="el" href="_browse_verses_model_8cpp_source.html">BrowseVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00018"></a>00018 {
+<a name="l00019"></a>00019     <span class="keywordflow">if</span> (!<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>.isValid())
+<a name="l00020"></a>00020         <span class="keywordflow">return</span> QVariant();
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022     <a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>* item = <span class="keyword">static_cast&lt;</span><a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>.internalPointer());
+<a name="l00023"></a>00023     <span class="keywordflow">if</span> (!item)
+<a name="l00024"></a>00024         <span class="keywordflow">return</span> QVariant();
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026     boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#ab49de380e4db6c9d30d7f5ad1c221fe3" title="Get the long name of the Translation object for this node.">get_translation_name</a>());
+<a name="l00027"></a>00027     <span class="keywordflow">if</span> (<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>.row() &gt;= translation-&gt;num_entries())
+<a name="l00028"></a>00028         <span class="keywordflow">return</span> QVariant();
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030     <span class="keywordflow">if</span> (role == Qt::DisplayRole)
+<a name="l00031"></a>00031     {
+<a name="l00032"></a>00032         <span class="keywordflow">if</span> (<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>.column() == 0)
+<a name="l00033"></a>00033         {
+<a name="l00034"></a>00034             <span class="keywordflow">switch</span> (item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a8845584e04601409b0e3c6198dab4668" title="Get the type of item for this node.">get_item_type</a>())
+<a name="l00035"></a>00035             {
+<a name="l00036"></a>00036                 <span class="keywordflow">case</span> VerseTreeItem::translation:
+<a name="l00037"></a>00037                     <span class="keywordflow">return</span> translation-&gt;get_long_name().c_str();
+<a name="l00038"></a>00038                 
+<a name="l00039"></a>00039                 <span class="keywordflow">case</span> <a class="code" href="namespace_k_j_v_parser.html#aec91fb480ba2175cbb0c215f2948b58f">VerseTreeItem::book</a>:
+<a name="l00040"></a>00040                     <span class="keywordflow">return</span> translation-&gt;get_verse(item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a7a6eff1fa482bbb866c802ca96efac1c" title="Get the verse ID for this node.">get_verse_id</a>())-&gt;get_book().c_str();
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042                 <span class="keywordflow">case</span> <a class="code" href="namespace_k_j_v_parser.html#a6615e6a8330e0cc191d7820260e90c64">VerseTreeItem::chapter</a>:
+<a name="l00043"></a>00043                     <span class="keywordflow">return</span> QString(tr(<span class="stringliteral">&quot;Chapter &quot;</span>)) + QVariant(translation-&gt;get_verse(item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a7a6eff1fa482bbb866c802ca96efac1c" title="Get the verse ID for this node.">get_verse_id</a>())-&gt;get_chapter()).toString();
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045                 <span class="keywordflow">case</span> <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">VerseTreeItem::verse</a>:
+<a name="l00046"></a>00046                     <span class="keywordflow">return</span> QVariant(translation-&gt;get_verse(item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a7a6eff1fa482bbb866c802ca96efac1c" title="Get the verse ID for this node.">get_verse_id</a>())-&gt;get_verse()).toString() + QString(<span class="stringliteral">&quot;: &quot;</span>) + translation-&gt;get_verse(item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a7a6eff1fa482bbb866c802ca96efac1c" title="Get the verse ID for this node.">get_verse_id</a>())-&gt;get_text().c_str();
+<a name="l00047"></a>00047                 
+<a name="l00048"></a>00048                 <span class="keywordflow">default</span>:
+<a name="l00049"></a>00049                     <span class="keywordflow">return</span> QVariant();
+<a name="l00050"></a>00050             }
+<a name="l00051"></a>00051         }
+<a name="l00052"></a>00052         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>.column() == 1 &amp;&amp; item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a8845584e04601409b0e3c6198dab4668" title="Get the type of item for this node.">get_item_type</a>() == <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">VerseTreeItem::verse</a>)
+<a name="l00053"></a>00053         {
+<a name="l00054"></a>00054             <span class="keywordflow">return</span> translation-&gt;get_verse(item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a7a6eff1fa482bbb866c802ca96efac1c" title="Get the verse ID for this node.">get_verse_id</a>())-&gt;get_text().c_str();
+<a name="l00055"></a>00055         }
+<a name="l00056"></a>00056     }
+<a name="l00057"></a>00057     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (role == Qt::ToolTipRole)
+<a name="l00058"></a>00058     {
+<a name="l00059"></a>00059         <span class="keywordflow">if</span> (item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a8845584e04601409b0e3c6198dab4668" title="Get the type of item for this node.">get_item_type</a>() == <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">VerseTreeItem::verse</a>)
+<a name="l00060"></a>00060         {
+<a name="l00061"></a>00061             <span class="keywordflow">return</span> <a class="code" href="namespace_bible_database.html#a18a3b7c465119693c6a9fdaf544779c0" title="Get the text representation and title of a collection of verses.">verse_collection_to_title_and_string_wrapped</a>(translation-&gt;get_verse(item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a7a6eff1fa482bbb866c802ca96efac1c" title="Get the verse ID for this node.">get_verse_id</a>(), 0), translation).c_str();
+<a name="l00062"></a>00062         }
+<a name="l00063"></a>00063     }
+<a name="l00064"></a>00064     <span class="keywordflow">return</span> QVariant();
+<a name="l00065"></a>00065 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a9c7c69069d90b506534f7fc30871f195"></a><!-- doxytag: member="BibleStudyGui::BrowseVersesModel::flags" ref="a9c7c69069d90b506534f7fc30871f195" args="(const QModelIndex &amp;index) const " -->
@@ -157,6 +228,16 @@
 
 <p>This method is required by the Qt Model/View framework, although I'm not certain what it does. </p>
 
+<p>Definition at line <a class="el" href="_browse_verses_model_8cpp_source.html#l00068">68</a> of file <a class="el" href="_browse_verses_model_8cpp_source.html">BrowseVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00069"></a>00069 {
+<a name="l00070"></a>00070     <span class="keywordflow">if</span> (!<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>.isValid())
+<a name="l00071"></a>00071          <span class="keywordflow">return</span> 0;
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073      <span class="keywordflow">return</span> Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+<a name="l00074"></a>00074 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="af06e586f5bae5a15ffc56de542c368e3"></a><!-- doxytag: member="BibleStudyGui::BrowseVersesModel::get_verse_display" ref="af06e586f5bae5a15ffc56de542c368e3" args="(const QModelIndex &amp;index) const " -->
@@ -176,6 +257,17 @@
 <div class="memdoc">
 
 <p>Get the VerseDisplay object corresponding to the given index in the model. </p>
+
+<p>Definition at line <a class="el" href="_browse_verses_model_8cpp_source.html#l00149">149</a> of file <a class="el" href="_browse_verses_model_8cpp_source.html">BrowseVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00150"></a>00150 {
+<a name="l00151"></a>00151     <a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>* item = <span class="keyword">static_cast&lt;</span><a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>.internalPointer());
+<a name="l00152"></a>00152     <span class="keywordflow">if</span> (item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a8845584e04601409b0e3c6198dab4668" title="Get the type of item for this node.">get_item_type</a>() == <a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">VerseTreeItem::verse</a>)
+<a name="l00153"></a>00153         <span class="keywordflow">return</span> boost::shared_ptr&lt;VerseDisplay&gt;(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a>(item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#ab49de380e4db6c9d30d7f5ad1c221fe3" title="Get the long name of the Translation object for this node.">get_translation_name</a>(), item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a7a6eff1fa482bbb866c802ca96efac1c" title="Get the verse ID for this node.">get_verse_id</a>(), 2));
+<a name="l00154"></a>00154     <span class="keywordflow">else</span>
+<a name="l00155"></a>00155         <span class="keywordflow">return</span> boost::shared_ptr&lt;VerseDisplay&gt;(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a>(item-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#ab49de380e4db6c9d30d7f5ad1c221fe3" title="Get the long name of the Translation object for this node.">get_translation_name</a>(), -1, -1));
+<a name="l00156"></a>00156 }
+</pre></div></p>
 
 </div>
 </div>
@@ -212,6 +304,29 @@
 
 <p>Get the data for the view header that should be displayed in the view for the given index. </p>
 
+<p>Definition at line <a class="el" href="_browse_verses_model_8cpp_source.html#l00076">76</a> of file <a class="el" href="_browse_verses_model_8cpp_source.html">BrowseVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00077"></a>00077 {
+<a name="l00078"></a>00078     <span class="keywordflow">if</span> (role != Qt::DisplayRole)
+<a name="l00079"></a>00079         <span class="keywordflow">return</span> QVariant();
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081     <span class="keywordflow">if</span> (orientation == Qt::Horizontal)
+<a name="l00082"></a>00082         <span class="keywordflow">switch</span> (section)
+<a name="l00083"></a>00083         {
+<a name="l00084"></a>00084             <span class="keywordflow">case</span> 0:
+<a name="l00085"></a>00085                 <span class="keywordflow">return</span> tr(<span class="stringliteral">&quot;Location&quot;</span>);
+<a name="l00086"></a>00086             
+<a name="l00087"></a>00087             <span class="keywordflow">case</span> 1:
+<a name="l00088"></a>00088                 <span class="keywordflow">return</span> tr(<span class="stringliteral">&quot;Verse Text&quot;</span>);
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090             <span class="keywordflow">default</span>:
+<a name="l00091"></a>00091                 <span class="keywordflow">return</span> QVariant();
+<a name="l00092"></a>00092         }
+<a name="l00093"></a>00093     <span class="keywordflow">else</span>
+<a name="l00094"></a>00094         <span class="keywordflow">return</span> QString(<span class="stringliteral">&quot;%1&quot;</span>).arg(section);
+<a name="l00095"></a>00095 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a71e8eda19113eba6af981a8938432a81"></a><!-- doxytag: member="BibleStudyGui::BrowseVersesModel::index" ref="a71e8eda19113eba6af981a8938432a81" args="(int row, int column, const QModelIndex &amp;parent=QModelIndex()) const " -->
@@ -247,6 +362,27 @@
 
 <p>Get the index of for the given row and column. </p>
 
+<p>Definition at line <a class="el" href="_browse_verses_model_8cpp_source.html#l00097">97</a> of file <a class="el" href="_browse_verses_model_8cpp_source.html">BrowseVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00098"></a>00098 {
+<a name="l00099"></a>00099     <span class="keywordflow">if</span> (!hasIndex(row, column, <a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a>))
+<a name="l00100"></a>00100          <span class="keywordflow">return</span> QModelIndex();
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102     <a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>* parentItem;
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104      <span class="keywordflow">if</span> (!<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a>.isValid())
+<a name="l00105"></a>00105          parentItem = m_translation_manager-&gt;get_verse_item_tree().get();
+<a name="l00106"></a>00106      <span class="keywordflow">else</span>
+<a name="l00107"></a>00107          parentItem = <span class="keyword">static_cast&lt;</span><a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a>.internalPointer());
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109      boost::shared_ptr&lt;VerseTreeItem&gt; childItem = parentItem-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a39fa5658c6723f8e4c683e2a24ef1e51" title="Get the child node at the given index.">get_child</a>(row);
+<a name="l00110"></a>00110      <span class="keywordflow">if</span> (childItem)
+<a name="l00111"></a>00111          <span class="keywordflow">return</span> createIndex(row, column, childItem.get());
+<a name="l00112"></a>00112      <span class="keywordflow">else</span>
+<a name="l00113"></a>00113          <span class="keywordflow">return</span> QModelIndex();
+<a name="l00114"></a>00114 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="af6b2f89157bf66144d19c06a60543cc0"></a><!-- doxytag: member="BibleStudyGui::BrowseVersesModel::parent" ref="af6b2f89157bf66144d19c06a60543cc0" args="(const QModelIndex &amp;index) const " -->
@@ -266,6 +402,22 @@
 <div class="memdoc">
 
 <p>Get the parent of the given index. </p>
+
+<p>Definition at line <a class="el" href="_browse_verses_model_8cpp_source.html#l00116">116</a> of file <a class="el" href="_browse_verses_model_8cpp_source.html">BrowseVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00117"></a>00117 {
+<a name="l00118"></a>00118     <span class="keywordflow">if</span> (!<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>.isValid())
+<a name="l00119"></a>00119          <span class="keywordflow">return</span> QModelIndex();
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121      <a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>* childItem = <span class="keyword">static_cast&lt;</span><a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#a71e8eda19113eba6af981a8938432a81" title="Get the index of for the given row and column.">index</a>.internalPointer());
+<a name="l00122"></a>00122      <a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>* parentItem = childItem-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#ac6fc2134074dc468c51b1eeed6f715be" title="Get the parent of this node.">get_parent</a>();
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124      <span class="keywordflow">if</span> (parentItem-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a7a6eff1fa482bbb866c802ca96efac1c" title="Get the verse ID for this node.">get_verse_id</a>() == -1)
+<a name="l00125"></a>00125          <span class="keywordflow">return</span> QModelIndex();
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127      <span class="keywordflow">return</span> createIndex(parentItem-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a77fe58b722a36a7cc09043f43cf6d91c" title="Get the row of this element in its parent node.">row</a>(), 0, parentItem);
+<a name="l00128"></a>00128 }
+</pre></div></p>
 
 </div>
 </div>
@@ -287,14 +439,30 @@
 
 <p>Get the number of rows directly under the current parent index. </p>
 
+<p>Definition at line <a class="el" href="_browse_verses_model_8cpp_source.html#l00130">130</a> of file <a class="el" href="_browse_verses_model_8cpp_source.html">BrowseVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00131"></a>00131 {
+<a name="l00132"></a>00132     <span class="keywordflow">if</span> (<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a>.column() &gt; 0)
+<a name="l00133"></a>00133         <span class="keywordflow">return</span> 0;
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135     <a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>* parentItem;
+<a name="l00136"></a>00136     <span class="keywordflow">if</span> (!<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a>.isValid())
+<a name="l00137"></a>00137         parentItem = m_translation_manager-&gt;get_verse_item_tree().get();
+<a name="l00138"></a>00138     <span class="keywordflow">else</span>
+<a name="l00139"></a>00139         parentItem = <span class="keyword">static_cast&lt;</span><a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_bible_study_gui_1_1_browse_verses_model.html#af6b2f89157bf66144d19c06a60543cc0" title="Get the parent of the given index.">parent</a>.internalPointer());
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141     <span class="keywordflow">return</span> parentItem-&gt;<a class="code" href="class_bible_database_1_1_verse_tree_item.html#a98d4b9c01e25c557f8d43865a377a509" title="Get the number of children for this node.">num_children</a>();
+<a name="l00142"></a>00142 }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_browse_verses_model_8h_source.html">BrowseVersesModel.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_browse_verses_model_8cpp.html">BrowseVersesModel.cpp</a></li>
+<li>BibleStudyGui/<a class="el" href="_browse_verses_model_8h_source.html">BrowseVersesModel.h</a></li>
+<li>BibleStudyGui/<a class="el" href="_browse_verses_model_8cpp_source.html">BrowseVersesModel.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

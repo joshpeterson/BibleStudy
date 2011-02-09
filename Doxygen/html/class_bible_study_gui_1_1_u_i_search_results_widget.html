@@ -66,6 +66,8 @@
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class is an implementation of a view from the Qt Model/View framework for a table view which displays the results of a text search. </p>
+
+<p>Definition at line <a class="el" href="_u_i_search_results_widget_8h_source.html#l00030">30</a> of file <a class="el" href="_u_i_search_results_widget_8h_source.html">UISearchResultsWidget.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a18250175eaf1040e34a1eb5a6f01a7e5"></a><!-- doxytag: member="BibleStudyGui::UISearchResultsWidget::UISearchResultsWidget" ref="a18250175eaf1040e34a1eb5a6f01a7e5" args="(boost::shared_ptr&lt; SearchResultsModel &gt; results_model, QWidget *parent=0)" -->
 <div class="memitem">
@@ -94,6 +96,56 @@
 
 <p>Create a new instance of the <a class="el" href="class_bible_study_gui_1_1_u_i_search_results_widget.html" title="This class is an implementation of a view from the Qt Model/View framework for a...">UISearchResultsWidget</a> class. </p>
 
+<p>Definition at line <a class="el" href="_u_i_search_results_widget_8cpp_source.html#l00025">25</a> of file <a class="el" href="_u_i_search_results_widget_8cpp_source.html">UISearchResultsWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00026"></a>00026                                                               :
+<a name="l00027"></a>00027     QWidget(parent),
+<a name="l00028"></a>00028     m_results_view(<span class="keyword">new</span> QTableView),
+<a name="l00029"></a>00029     m_results_status(<span class="keyword">new</span> QLabel),
+<a name="l00030"></a>00030     m_filter_text(<span class="keyword">new</span> QLineEdit),
+<a name="l00031"></a>00031     m_filter_delay_timer(<span class="keyword">new</span> QTimer),
+<a name="l00032"></a>00032     m_filter_delay_typing_timeout_ms(500),
+<a name="l00033"></a>00033     m_proxy_model(<span class="keyword">new</span> QSortFilterProxyModel(<span class="keyword">this</span>)),
+<a name="l00034"></a>00034     m_results_model(results_model)
+<a name="l00035"></a>00035 {
+<a name="l00036"></a>00036     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_results_view, SIGNAL(doubleClicked(<span class="keyword">const</span> QModelIndex&amp;)), <span class="keyword">this</span>, SLOT(<a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#a3fc8efbb82a112c1f3826eb656afe44f" title="Get the verse at the given index and emit the verse_display_changed signal for that...">display_verse_text</a>(<span class="keyword">const</span> QModelIndex&amp;)));
+<a name="l00037"></a>00037     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_results_view, SIGNAL(customContextMenuRequested(<span class="keyword">const</span> QPoint&amp;)), <span class="keyword">this</span>, SLOT(<a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#a3f3a398f62f24ca4269bcc85771517f3" title="Build and display context menu when the user right clicks on the search results.">display_results_context_menu</a>(<span class="keyword">const</span> QPoint&amp;)));
+<a name="l00038"></a>00038     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_filter_text, SIGNAL(textChanged(QString)), <span class="keyword">this</span>, SLOT(<a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#ac59807f22e7018b4390f200ac05d2d4c" title="When the user types text in the search results filter, restart the timer which waits...">update_search_results_filter_delay_timer</a>()));
+<a name="l00039"></a>00039     <a class="code" href="_qt_connect_helper_8h.html#acfbbf25bc33bd8acf47623ba220ba79f">QT_CONNECT</a>(m_filter_delay_timer, SIGNAL(timeout()), <span class="keyword">this</span>, SLOT(<a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#a1f6b737a46191c8b83268a09e7293c1e" title="Get the new filter text and apply it to the search results.">change_search_results_filter</a>()));
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041     QHeaderView* <a class="code" href="namespace_k_j_v_parser.html#a6be2721fd4116f71e6f5289adf2fee37">header</a> = m_results_view-&gt;horizontalHeader();
+<a name="l00042"></a>00042     header-&gt;setResizeMode(QHeaderView::ResizeToContents);
+<a name="l00043"></a>00043     header-&gt;setStretchLastSection(<span class="keyword">true</span>);
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045     m_results_view-&gt;setShowGrid(<span class="keyword">false</span>);
+<a name="l00046"></a>00046     m_results_view-&gt;setTextElideMode(Qt::ElideNone);
+<a name="l00047"></a>00047     m_results_view-&gt;setSortingEnabled(<span class="keyword">false</span>);
+<a name="l00048"></a>00048     m_results_view-&gt;setContextMenuPolicy(Qt::CustomContextMenu);
+<a name="l00049"></a>00049     
+<a name="l00050"></a>00050     m_proxy_model-&gt;setDynamicSortFilter(<span class="keyword">true</span>);
+<a name="l00051"></a>00051     m_proxy_model-&gt;setFilterKeyColumn(<a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9fa32fd6432321383790d4f08ff192f69fc">SearchResultsModel::text_column</a>);
+<a name="l00052"></a>00052     m_proxy_model-&gt;setSourceModel(m_results_model.get());
+<a name="l00053"></a>00053     m_results_view-&gt;setModel(m_proxy_model);
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055     m_results_status-&gt;setText(tr(<span class="stringliteral">&quot;No matches&quot;</span>));
+<a name="l00056"></a>00056     
+<a name="l00057"></a>00057     QLabel* filter_title = <span class="keyword">new</span> QLabel(tr(<span class="stringliteral">&quot;Filter results:&quot;</span>));
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059     QGridLayout* top_line = <span class="keyword">new</span> QGridLayout;
+<a name="l00060"></a>00060     top_line-&gt;setColumnMinimumWidth(1, 250);
+<a name="l00061"></a>00061     top_line-&gt;addWidget(m_results_status, 0, 0);
+<a name="l00062"></a>00062     top_line-&gt;addWidget(filter_title, 0, 2);
+<a name="l00063"></a>00063     top_line-&gt;addWidget(m_filter_text, 0, 3);
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065     QVBoxLayout* layout = <span class="keyword">new</span> QVBoxLayout;
+<a name="l00066"></a>00066     layout-&gt;addLayout(top_line);
+<a name="l00067"></a>00067     layout-&gt;addWidget(m_results_view);
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069     setLayout(layout);
+<a name="l00070"></a>00070 }
+
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -114,6 +166,20 @@
 
 <p>Get the new filter text and apply it to the search results. </p>
 
+<p>Definition at line <a class="el" href="_u_i_search_results_widget_8cpp_source.html#l00110">110</a> of file <a class="el" href="_u_i_search_results_widget_8cpp_source.html">UISearchResultsWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00111"></a>00111 {
+<a name="l00112"></a>00112     emit <a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#a51f70050beb2a0802b34792ad677d7cd" title="Inform other widgets that the search results filtering process has started.">results_filter_started</a>(m_filter_text-&gt;text());
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114     m_filter_delay_timer-&gt;stop();
+<a name="l00115"></a>00115     m_proxy_model-&gt;setFilterRegExp(QRegExp(m_filter_text-&gt;text()));
+<a name="l00116"></a>00116     m_results_view-&gt;resizeRowsToContents();
+<a name="l00117"></a>00117     update_results_status();
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119     emit <a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#a8459960d8a46a9d9c4245ae0967abe62" title="Inform other widgets that the search results filtering process has completed.">results_filter_completed</a>();
+<a name="l00120"></a>00120 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="aa335fef79ee341f584fff5c7d592c02b"></a><!-- doxytag: member="BibleStudyGui::UISearchResultsWidget::copy_selected_search_results" ref="aa335fef79ee341f584fff5c7d592c02b" args="()" -->
@@ -132,6 +198,44 @@
 <div class="memdoc">
 
 <p>Copies the selected cells in the search results to the clipboard in format which can be pasted into Excel. </p>
+
+<p>Definition at line <a class="el" href="_u_i_search_results_widget_8cpp_source.html#l00122">122</a> of file <a class="el" href="_u_i_search_results_widget_8cpp_source.html">UISearchResultsWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00123"></a>00123 {
+<a name="l00124"></a>00124     QItemSelectionModel* selection_model = m_results_view-&gt;selectionModel();
+<a name="l00125"></a>00125     <span class="keywordflow">if</span> (selection_model)
+<a name="l00126"></a>00126     {
+<a name="l00127"></a>00127         QItemSelection item_selection = m_proxy_model-&gt;mapSelectionToSource(selection_model-&gt;selection());
+<a name="l00128"></a>00128         QModelIndexList selected_indexes = item_selection.indexes();
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130         std::sort(selected_indexes.begin(), selected_indexes.end());
+<a name="l00131"></a>00131         
+<a name="l00132"></a>00132         QModelIndex previous_index;
+<a name="l00133"></a>00133         QString text_to_paste;
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135         <span class="keywordflow">foreach</span> (<span class="keyword">const</span> QModelIndex&amp; current_index, selected_indexes)
+<a name="l00136"></a>00136         {
+<a name="l00137"></a>00137             <span class="keywordflow">if</span> (previous_index.row() != -1)
+<a name="l00138"></a>00138             {
+<a name="l00139"></a>00139                 <span class="keywordflow">if</span> (current_index.row() == previous_index.row())
+<a name="l00140"></a>00140                 {
+<a name="l00141"></a>00141                     text_to_paste.append(<span class="stringliteral">&quot;\t&quot;</span>);
+<a name="l00142"></a>00142                 }
+<a name="l00143"></a>00143                 <span class="keywordflow">else</span>
+<a name="l00144"></a>00144                 {
+<a name="l00145"></a>00145                     text_to_paste.append(<span class="stringliteral">&quot;\n&quot;</span>);
+<a name="l00146"></a>00146                 }
+<a name="l00147"></a>00147             }
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149             QVariant data = m_results_model-&gt;data(current_index, Qt::DisplayRole);
+<a name="l00150"></a>00150             text_to_paste.append(data.toString());
+<a name="l00151"></a>00151             
+<a name="l00152"></a>00152             previous_index = current_index;
+<a name="l00153"></a>00153         }
+<a name="l00154"></a>00154         QApplication::clipboard()-&gt;setText(text_to_paste);
+<a name="l00155"></a>00155     }
+<a name="l00156"></a>00156 }
+</pre></div></p>
 
 </div>
 </div>
@@ -153,6 +257,17 @@
 
 <p>Build and display context menu when the user right clicks on the search results. </p>
 
+<p>Definition at line <a class="el" href="_u_i_search_results_widget_8cpp_source.html#l00163">163</a> of file <a class="el" href="_u_i_search_results_widget_8cpp_source.html">UISearchResultsWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00164"></a>00164 {
+<a name="l00165"></a>00165     QMenu *menu = <span class="keyword">new</span> QMenu;
+<a name="l00166"></a>00166     menu-&gt;addAction(tr(<span class="stringliteral">&quot;Copy&quot;</span>), <span class="keyword">this</span>, SLOT(<a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#aa335fef79ee341f584fff5c7d592c02b" title="Copies the selected cells in the search results to the clipboard in format which...">copy_selected_search_results</a>()), QKeySequence::Copy);
+<a name="l00167"></a>00167     menu-&gt;addSeparator();
+<a name="l00168"></a>00168     menu-&gt;addAction(tr(<span class="stringliteral">&quot;Select All&quot;</span>), <span class="keyword">this</span>, SLOT(<a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#a438814317fa7b1e7d69b5cff907f83b4" title="Select all cells in the current search results view.">select_all_search_results</a>()), QKeySequence::SelectAll);
+<a name="l00169"></a>00169     menu-&gt;exec(m_results_view-&gt;mapToGlobal(position + QPoint(42,30)));
+<a name="l00170"></a>00170 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a28bdbdfec3869486672ef357dfc356fa"></a><!-- doxytag: member="BibleStudyGui::UISearchResultsWidget::display_search_results" ref="a28bdbdfec3869486672ef357dfc356fa" args="(boost::shared_ptr&lt; BibleDatabase::ISearchResults &gt; query)" -->
@@ -172,6 +287,21 @@
 <div class="memdoc">
 
 <p>Set the results object which the widget should display. </p>
+
+<p>Definition at line <a class="el" href="_u_i_search_results_widget_8cpp_source.html#l00084">84</a> of file <a class="el" href="_u_i_search_results_widget_8cpp_source.html">UISearchResultsWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00085"></a>00085 {
+<a name="l00086"></a>00086     <span class="keywordflow">if</span> (!m_filter_text-&gt;text().isEmpty())
+<a name="l00087"></a>00087     {
+<a name="l00088"></a>00088         m_filter_text-&gt;setText(QString());
+<a name="l00089"></a>00089     }
+<a name="l00090"></a>00090     m_results_view-&gt;verticalScrollBar()-&gt;setValue(m_results_view-&gt;verticalScrollBar()-&gt;minimum());
+<a name="l00091"></a>00091     m_results_view-&gt;horizontalScrollBar()-&gt;setValue(m_results_view-&gt;horizontalScrollBar()-&gt;minimum());
+<a name="l00092"></a>00092     m_results_model-&gt;SetResults(query);
+<a name="l00093"></a>00093     m_results_view-&gt;resizeRowsToContents();
+<a name="l00094"></a>00094     update_results_status();
+<a name="l00095"></a>00095 }
+</pre></div></p>
 
 </div>
 </div>
@@ -193,6 +323,16 @@
 
 <p>Get the verse at the given index and emit the verse_display_changed signal for that verse. </p>
 
+<p>Definition at line <a class="el" href="_u_i_search_results_widget_8cpp_source.html#l00097">97</a> of file <a class="el" href="_u_i_search_results_widget_8cpp_source.html">UISearchResultsWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00098"></a>00098 {
+<a name="l00099"></a>00099     QModelIndex actualIndex = m_proxy_model-&gt;mapToSource(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>);
+<a name="l00100"></a>00100     boost::shared_ptr&lt;VerseDisplay&gt; verse_to_display = m_results_model-&gt;get_verse_display(actualIndex);
+<a name="l00101"></a>00101     <span class="keywordflow">if</span> (verse_to_display-&gt;get_verse_id() != -1)
+<a name="l00102"></a>00102         emit <a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#a493e8699e518688c8c505a4dbed0febb" title="Signal other widgets that a new verse should be displayed.">verse_display_changed</a>(verse_to_display);
+<a name="l00103"></a>00103 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a7743458d99ea9347e008d21a8c32f1d0"></a><!-- doxytag: member="BibleStudyGui::UISearchResultsWidget::keyPressEvent" ref="a7743458d99ea9347e008d21a8c32f1d0" args="(QKeyEvent *key_event)" -->
@@ -212,6 +352,20 @@
 <div class="memdoc">
 
 <p>Listen to and process key presses. </p>
+
+<p>Definition at line <a class="el" href="_u_i_search_results_widget_8cpp_source.html#l00072">72</a> of file <a class="el" href="_u_i_search_results_widget_8cpp_source.html">UISearchResultsWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00073"></a>00073 {
+<a name="l00074"></a>00074     <span class="keywordflow">if</span> ((key_event-&gt;key() == Qt::Key_C) &amp;&amp; (key_event-&gt;modifiers() &amp; Qt::ControlModifier))
+<a name="l00075"></a>00075     {
+<a name="l00076"></a>00076         <a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#aa335fef79ee341f584fff5c7d592c02b" title="Copies the selected cells in the search results to the clipboard in format which...">copy_selected_search_results</a>();
+<a name="l00077"></a>00077     }
+<a name="l00078"></a>00078     <span class="keywordflow">else</span>
+<a name="l00079"></a>00079     {
+<a name="l00080"></a>00080         <a class="code" href="class_bible_study_gui_1_1_u_i_search_results_widget.html#a7743458d99ea9347e008d21a8c32f1d0" title="Listen to and process key presses.">QWidget::keyPressEvent</a>(key_event);
+<a name="l00081"></a>00081     }
+<a name="l00082"></a>00082 }
+</pre></div></p>
 
 </div>
 </div>
@@ -271,6 +425,13 @@
 
 <p>Select all cells in the current search results view. </p>
 
+<p>Definition at line <a class="el" href="_u_i_search_results_widget_8cpp_source.html#l00158">158</a> of file <a class="el" href="_u_i_search_results_widget_8cpp_source.html">UISearchResultsWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00159"></a>00159 {
+<a name="l00160"></a>00160     m_results_view-&gt;selectAll();
+<a name="l00161"></a>00161 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="ac59807f22e7018b4390f200ac05d2d4c"></a><!-- doxytag: member="BibleStudyGui::UISearchResultsWidget::update_search_results_filter_delay_timer" ref="ac59807f22e7018b4390f200ac05d2d4c" args="()" -->
@@ -289,6 +450,13 @@
 <div class="memdoc">
 
 <p>When the user types text in the search results filter, restart the timer which waits for the typing to be complete. </p>
+
+<p>Definition at line <a class="el" href="_u_i_search_results_widget_8cpp_source.html#l00105">105</a> of file <a class="el" href="_u_i_search_results_widget_8cpp_source.html">UISearchResultsWidget.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00106"></a>00106 {
+<a name="l00107"></a>00107     m_filter_delay_timer-&gt;start(m_filter_delay_typing_timeout_ms);
+<a name="l00108"></a>00108 }
+</pre></div></p>
 
 </div>
 </div>
@@ -313,13 +481,11 @@
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_u_i_search_results_widget_8h_source.html">UISearchResultsWidget.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/debug/<a class="el" href="debug_2moc___u_i_search_results_widget_8cpp.html">moc_UISearchResultsWidget.cpp</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/release/<a class="el" href="release_2moc___u_i_search_results_widget_8cpp.html">moc_UISearchResultsWidget.cpp</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_u_i_search_results_widget_8cpp.html">UISearchResultsWidget.cpp</a></li>
+<li>BibleStudyGui/<a class="el" href="_u_i_search_results_widget_8h_source.html">UISearchResultsWidget.h</a></li>
+<li>BibleStudyGui/<a class="el" href="_u_i_search_results_widget_8cpp_source.html">UISearchResultsWidget.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

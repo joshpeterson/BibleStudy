@@ -65,6 +65,8 @@
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class is an implementation of a model from the Qt Model/View framework for a table view which displays the results of a search. </p>
+
+<p>Definition at line <a class="el" href="_search_results_model_8h_source.html#l00018">18</a> of file <a class="el" href="_search_results_model_8h_source.html">SearchResultsModel.h</a>.</p>
 <hr/><h2>Member Enumeration Documentation</h2>
 <a class="anchor" id="aa4a86a79e6e5b667bff5463d37908e9f"></a><!-- doxytag: member="BibleStudyGui::SearchResultsModel::ColumnType" ref="aa4a86a79e6e5b667bff5463d37908e9f" args="" -->
 <div class="memitem">
@@ -90,6 +92,17 @@
 </table>
 </dd>
 </dl>
+
+<p>Definition at line <a class="el" href="_search_results_model_8h_source.html#l00043">43</a> of file <a class="el" href="_search_results_model_8h_source.html">SearchResultsModel.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00044"></a>00044     {
+<a name="l00045"></a>00045         <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faa711d02bc33a2bfc3bac723af3581809">translation_column</a> = 0,
+<a name="l00046"></a>00046         <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9fa499ad4592b5c7418da3b589b48124c0b">book_column</a> = 1,
+<a name="l00047"></a>00047         <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faee830b1ab7e616ab9507834b0f1336b7">chapter_column</a> = 2,
+<a name="l00048"></a>00048         <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faaf6e7e8b9547b22ee77c372c86234a6a">verse_column</a> = 3,
+<a name="l00049"></a>00049         <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9fa32fd6432321383790d4f08ff192f69fc">text_column</a> = 4
+<a name="l00050"></a>00050     };
+</pre></div></p>
 
 </div>
 </div>
@@ -121,6 +134,16 @@
 
 <p>Create a new instance of the <a class="el" href="class_bible_study_gui_1_1_search_results_model.html" title="This class is an implementation of a model from the Qt Model/View framework for a...">SearchResultsModel</a> class. </p>
 
+<p>Definition at line <a class="el" href="_search_results_model_8cpp_source.html#l00011">11</a> of file <a class="el" href="_search_results_model_8cpp_source.html">SearchResultsModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00012"></a>00012                                                         :
+<a name="l00013"></a>00013     QAbstractTableModel(parent),
+<a name="l00014"></a>00014     m_translation_manager(translation_manager)
+<a name="l00015"></a>00015 {
+<a name="l00016"></a>00016 }
+
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -141,6 +164,13 @@
 <div class="memdoc">
 
 <p>Get the number of columns for the given parent index. This is always 5. </p>
+
+<p>Definition at line <a class="el" href="_search_results_model_8cpp_source.html#l00032">32</a> of file <a class="el" href="_search_results_model_8cpp_source.html">SearchResultsModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00033"></a>00033  {
+<a name="l00034"></a>00034     <span class="keywordflow">return</span> 5;
+<a name="l00035"></a>00035  }
+</pre></div></p>
 
 </div>
 </div>
@@ -171,6 +201,77 @@
 
 <p>Get the data that should be displayed for the given index in the given role DisplayRole, ToolTipRole). </p>
 
+<p>Definition at line <a class="el" href="_search_results_model_8cpp_source.html#l00037">37</a> of file <a class="el" href="_search_results_model_8cpp_source.html">SearchResultsModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00038"></a>00038  {
+<a name="l00039"></a>00039     <span class="keywordflow">if</span> (!m_results)
+<a name="l00040"></a>00040         <span class="keywordflow">return</span> QVariant();
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042     <span class="keywordflow">if</span> (!<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.isValid())
+<a name="l00043"></a>00043         <span class="keywordflow">return</span> QVariant();
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045     <span class="keywordflow">if</span> (<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row() &gt;= m_results-&gt;num_results())
+<a name="l00046"></a>00046         <span class="keywordflow">return</span> QVariant();
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048     <span class="keywordflow">if</span> (role == Qt::DisplayRole)
+<a name="l00049"></a>00049     {
+<a name="l00050"></a>00050         <span class="keywordtype">int</span> column = <a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.column();
+<a name="l00051"></a>00051         <span class="keywordflow">if</span> (column == <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faa711d02bc33a2bfc3bac723af3581809">translation_column</a>)
+<a name="l00052"></a>00052         {
+<a name="l00053"></a>00053             boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(m_results-&gt;translation_at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()));
+<a name="l00054"></a>00054             <span class="keywordflow">return</span> translation-&gt;get_short_name().c_str();
+<a name="l00055"></a>00055         }
+<a name="l00056"></a>00056         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (column == <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9fa499ad4592b5c7418da3b589b48124c0b">book_column</a>)
+<a name="l00057"></a>00057         {
+<a name="l00058"></a>00058             boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(m_results-&gt;translation_at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()));
+<a name="l00059"></a>00059             <span class="keywordflow">return</span> translation-&gt;get_verse(m_results-&gt;at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()))-&gt;get_book().c_str();;
+<a name="l00060"></a>00060         }
+<a name="l00061"></a>00061         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (column == <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faee830b1ab7e616ab9507834b0f1336b7">chapter_column</a>)
+<a name="l00062"></a>00062         {
+<a name="l00063"></a>00063             boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(m_results-&gt;translation_at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()));
+<a name="l00064"></a>00064             <span class="keywordflow">return</span> translation-&gt;get_verse(m_results-&gt;at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()))-&gt;get_chapter();
+<a name="l00065"></a>00065         }
+<a name="l00066"></a>00066         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (column == <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faaf6e7e8b9547b22ee77c372c86234a6a">verse_column</a>)
+<a name="l00067"></a>00067         {
+<a name="l00068"></a>00068             boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(m_results-&gt;translation_at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()));
+<a name="l00069"></a>00069             <span class="keywordflow">return</span> translation-&gt;get_verse(m_results-&gt;at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()))-&gt;get_verse();
+<a name="l00070"></a>00070         }
+<a name="l00071"></a>00071         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (column == <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9fa32fd6432321383790d4f08ff192f69fc">text_column</a>)
+<a name="l00072"></a>00072         {
+<a name="l00073"></a>00073             boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(m_results-&gt;translation_at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()));
+<a name="l00074"></a>00074             <span class="keywordflow">return</span> translation-&gt;get_verse(m_results-&gt;at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()))-&gt;get_text().c_str();
+<a name="l00075"></a>00075         }
+<a name="l00076"></a>00076         <span class="keywordflow">else</span>
+<a name="l00077"></a>00077         {
+<a name="l00078"></a>00078             <span class="keywordflow">return</span> QVariant();
+<a name="l00079"></a>00079         }
+<a name="l00080"></a>00080     }
+<a name="l00081"></a>00081     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (role == Qt::ToolTipRole)
+<a name="l00082"></a>00082     {
+<a name="l00083"></a>00083         <span class="keywordtype">int</span> column = <a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.column();
+<a name="l00084"></a>00084         <span class="keywordflow">if</span> (column == <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faa711d02bc33a2bfc3bac723af3581809">translation_column</a>)
+<a name="l00085"></a>00085         {
+<a name="l00086"></a>00086             boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(m_results-&gt;translation_at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()));
+<a name="l00087"></a>00087             <span class="keywordflow">return</span> translation-&gt;get_long_name().c_str();
+<a name="l00088"></a>00088         }
+<a name="l00089"></a>00089         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (column == <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9fa32fd6432321383790d4f08ff192f69fc">text_column</a>)
+<a name="l00090"></a>00090         {
+<a name="l00091"></a>00091             boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(m_results-&gt;translation_at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()));
+<a name="l00092"></a>00092             translation = m_translation_manager-&gt;at(m_results-&gt;translation_at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()));
+<a name="l00093"></a>00093             <span class="keywordflow">return</span> <a class="code" href="namespace_bible_database.html#a18a3b7c465119693c6a9fdaf544779c0" title="Get the text representation and title of a collection of verses.">verse_collection_to_title_and_string_wrapped</a>(translation-&gt;get_verse(m_results-&gt;at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()), 0), translation).c_str();
+<a name="l00094"></a>00094         }
+<a name="l00095"></a>00095         <span class="keywordflow">else</span>
+<a name="l00096"></a>00096         {
+<a name="l00097"></a>00097             <span class="keywordflow">return</span> QVariant();
+<a name="l00098"></a>00098         }
+<a name="l00099"></a>00099     }
+<a name="l00100"></a>00100     <span class="keywordflow">else</span>
+<a name="l00101"></a>00101     {
+<a name="l00102"></a>00102         <span class="keywordflow">return</span> QVariant();
+<a name="l00103"></a>00103     }
+<a name="l00104"></a>00104  }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a87e350a0e4dfd3da945387d77d348ac5"></a><!-- doxytag: member="BibleStudyGui::SearchResultsModel::get_verse_display" ref="a87e350a0e4dfd3da945387d77d348ac5" args="(const QModelIndex &amp;index)" -->
@@ -190,6 +291,16 @@
 <div class="memdoc">
 
 <p>Get a VerseDisplay object corresponding to the verse at the given index. </p>
+
+<p>Definition at line <a class="el" href="_search_results_model_8cpp_source.html#l00157">157</a> of file <a class="el" href="_search_results_model_8cpp_source.html">SearchResultsModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00158"></a>00158  {
+<a name="l00159"></a>00159      <span class="keywordflow">if</span> (<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.column() == <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9fa32fd6432321383790d4f08ff192f69fc">text_column</a>)
+<a name="l00160"></a>00160          <span class="keywordflow">return</span> boost::shared_ptr&lt;VerseDisplay&gt;(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a>(m_results-&gt;translation_at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()), m_results-&gt;at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()), 2));
+<a name="l00161"></a>00161      <span class="keywordflow">else</span>
+<a name="l00162"></a>00162          <span class="keywordflow">return</span> boost::shared_ptr&lt;VerseDisplay&gt;(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a>(m_results-&gt;translation_at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()), -1, -1));
+<a name="l00163"></a>00163  }
+</pre></div></p>
 
 </div>
 </div>
@@ -226,6 +337,58 @@
 
 <p>Get the header data that should be displayed for the given index. </p>
 
+<p>Definition at line <a class="el" href="_search_results_model_8cpp_source.html#l00106">106</a> of file <a class="el" href="_search_results_model_8cpp_source.html">SearchResultsModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00108"></a>00108  {
+<a name="l00109"></a>00109     <span class="keywordflow">if</span> (role == Qt::DisplayRole)
+<a name="l00110"></a>00110     {
+<a name="l00111"></a>00111         <span class="keywordflow">if</span> (orientation == Qt::Horizontal)
+<a name="l00112"></a>00112             <span class="keywordflow">switch</span> (section)
+<a name="l00113"></a>00113             {
+<a name="l00114"></a>00114                 <span class="keywordflow">case</span> <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faa711d02bc33a2bfc3bac723af3581809">translation_column</a>:
+<a name="l00115"></a>00115                     <span class="keywordflow">return</span> tr(<span class="stringliteral">&quot;T&quot;</span>);
+<a name="l00116"></a>00116                 
+<a name="l00117"></a>00117                 <span class="keywordflow">case</span> <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9fa499ad4592b5c7418da3b589b48124c0b">book_column</a>:
+<a name="l00118"></a>00118                     <span class="keywordflow">return</span> tr(<span class="stringliteral">&quot;Book&quot;</span>);
+<a name="l00119"></a>00119                 
+<a name="l00120"></a>00120                 <span class="keywordflow">case</span> <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faee830b1ab7e616ab9507834b0f1336b7">chapter_column</a>:
+<a name="l00121"></a>00121                     <span class="keywordflow">return</span> tr(<span class="stringliteral">&quot;Ch&quot;</span>);
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123                 <span class="keywordflow">case</span> <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faaf6e7e8b9547b22ee77c372c86234a6a">verse_column</a>:
+<a name="l00124"></a>00124                     <span class="keywordflow">return</span> tr(<span class="stringliteral">&quot;V&quot;</span>);
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126                 <span class="keywordflow">case</span> <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9fa32fd6432321383790d4f08ff192f69fc">text_column</a>:
+<a name="l00127"></a>00127                     <span class="keywordflow">return</span> tr(<span class="stringliteral">&quot;Verse Text&quot;</span>);
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129                 <span class="keywordflow">default</span>:
+<a name="l00130"></a>00130                     <span class="keywordflow">return</span> QVariant();
+<a name="l00131"></a>00131             }
+<a name="l00132"></a>00132         <span class="keywordflow">else</span>
+<a name="l00133"></a>00133             <span class="keywordflow">return</span> QString(<span class="stringliteral">&quot;%1&quot;</span>).arg(section);
+<a name="l00134"></a>00134     }
+<a name="l00135"></a>00135     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (role == Qt::ToolTipRole)
+<a name="l00136"></a>00136     {
+<a name="l00137"></a>00137         <span class="keywordflow">if</span> (orientation == Qt::Horizontal)
+<a name="l00138"></a>00138             <span class="keywordflow">switch</span> (section)
+<a name="l00139"></a>00139             {
+<a name="l00140"></a>00140                 <span class="keywordflow">case</span> <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faa711d02bc33a2bfc3bac723af3581809">translation_column</a>:
+<a name="l00141"></a>00141                     <span class="keywordflow">return</span> tr(<span class="stringliteral">&quot;Translation&quot;</span>);
+<a name="l00142"></a>00142                 
+<a name="l00143"></a>00143                 <span class="keywordflow">case</span> <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faee830b1ab7e616ab9507834b0f1336b7">chapter_column</a>:
+<a name="l00144"></a>00144                     <span class="keywordflow">return</span> tr(<span class="stringliteral">&quot;Chapter&quot;</span>);
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146                 <span class="keywordflow">case</span> <a class="code" href="class_bible_study_gui_1_1_search_results_model.html#aa4a86a79e6e5b667bff5463d37908e9faaf6e7e8b9547b22ee77c372c86234a6a">verse_column</a>:
+<a name="l00147"></a>00147                     <span class="keywordflow">return</span> tr(<span class="stringliteral">&quot;Verse&quot;</span>);
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149                 <span class="keywordflow">default</span>:
+<a name="l00150"></a>00150                     <span class="keywordflow">return</span> QVariant();
+<a name="l00151"></a>00151             }
+<a name="l00152"></a>00152     }
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154     <span class="keywordflow">return</span> QVariant();
+<a name="l00155"></a>00155  }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a06a1b74ddcfcf13cfaac81bff2bfb985"></a><!-- doxytag: member="BibleStudyGui::SearchResultsModel::rowCount" ref="a06a1b74ddcfcf13cfaac81bff2bfb985" args="(const QModelIndex &amp;parent=QModelIndex()) const " -->
@@ -245,6 +408,16 @@
 <div class="memdoc">
 
 <p>Get the number of rows for the given parent index. This should be the number of verses in the results. </p>
+
+<p>Definition at line <a class="el" href="_search_results_model_8cpp_source.html#l00024">24</a> of file <a class="el" href="_search_results_model_8cpp_source.html">SearchResultsModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00025"></a>00025  {
+<a name="l00026"></a>00026     <span class="keywordflow">if</span> (m_results)
+<a name="l00027"></a>00027         <span class="keywordflow">return</span> m_results-&gt;num_results();
+<a name="l00028"></a>00028     <span class="keywordflow">else</span>
+<a name="l00029"></a>00029        <span class="keywordflow">return</span> 0;
+<a name="l00030"></a>00030  }
+</pre></div></p>
 
 </div>
 </div>
@@ -266,14 +439,22 @@
 
 <p>Set the ISearchResults object that this model should use to obtain data. </p>
 
+<p>Definition at line <a class="el" href="_search_results_model_8cpp_source.html#l00018">18</a> of file <a class="el" href="_search_results_model_8cpp_source.html">SearchResultsModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00019"></a>00019 {
+<a name="l00020"></a>00020     m_results = results;
+<a name="l00021"></a>00021     this-&gt;reset();
+<a name="l00022"></a>00022 }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_search_results_model_8h_source.html">SearchResultsModel.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_search_results_model_8cpp.html">SearchResultsModel.cpp</a></li>
+<li>BibleStudyGui/<a class="el" href="_search_results_model_8h_source.html">SearchResultsModel.h</a></li>
+<li>BibleStudyGui/<a class="el" href="_search_results_model_8cpp_source.html">SearchResultsModel.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

@@ -46,6 +46,9 @@ Inheritance diagram for BibleDatabaseBehaviors::ExecutableDirectoryIsSet:</div>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_executable_directory_is_set.html#a5d808c70e9f206ad71378a812a2b8f19">ensure_that</a> (const <a class="el" href="class_behavior_driven_design_1_1_world.html">World</a> &amp;world)</td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_translation_loader_behavior_8h_source.html#l00085">85</a> of file <a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a5d808c70e9f206ad71378a812a2b8f19"></a><!-- doxytag: member="BibleDatabaseBehaviors::ExecutableDirectoryIsSet::ensure_that" ref="a5d808c70e9f206ad71378a812a2b8f19" args="(const World &amp;world)" -->
 <div class="memitem">
@@ -65,13 +68,20 @@ Inheritance diagram for BibleDatabaseBehaviors::ExecutableDirectoryIsSet:</div>
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_then.html#a3bffcea3036a246faacffbc385bbade4">BehaviorDrivenDesign::IThen</a>.</p>
 
+<p>Definition at line <a class="el" href="_translation_loader_behavior_8h_source.html#l00088">88</a> of file <a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00089"></a>00089     {
+<a name="l00090"></a>00090         CPPUNIT_ASSERT_EQUAL(world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a8e21725c6623f42fb405f71e37065d4b">GetGiven</a>&lt;ExecutableDirectory&gt;()-&gt;get_directory_name(), world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;TranslationLoaderIsCreated&gt;()-&gt;get_loader()-&gt;get_executable_directory());
+<a name="l00091"></a>00091     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

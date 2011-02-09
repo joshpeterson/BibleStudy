@@ -48,6 +48,9 @@ Inheritance diagram for BibleDatabaseBehaviors::TranslationLoaderIsCreated:</div
 <tr><td class="memItemLeft" align="right" valign="top">boost::shared_ptr&lt; const <br class="typebreak"/>
 <a class="el" href="class_bible_database_1_1_translation_loader.html">TranslationLoader</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_translation_loader_is_created.html#ad4c5accca684e7a24fd124aee1401291">get_loader</a> () const </td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_translation_loader_behavior_8h_source.html#l00051">51</a> of file <a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ad4c5accca684e7a24fd124aee1401291"></a><!-- doxytag: member="BibleDatabaseBehaviors::TranslationLoaderIsCreated::get_loader" ref="ad4c5accca684e7a24fd124aee1401291" args="() const " -->
 <div class="memitem">
@@ -63,6 +66,13 @@ Inheritance diagram for BibleDatabaseBehaviors::TranslationLoaderIsCreated:</div
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_loader_behavior_8h_source.html#l00059">59</a> of file <a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00060"></a>00060     {
+<a name="l00061"></a>00061         <span class="keywordflow">return</span> m_loader;
+<a name="l00062"></a>00062     }
+</pre></div></p>
 
 </div>
 </div>
@@ -84,13 +94,20 @@ Inheritance diagram for BibleDatabaseBehaviors::TranslationLoaderIsCreated:</div
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_when.html#a4a5d147bf5a379724615b5e2b238db13">BehaviorDrivenDesign::IWhen</a>.</p>
 
+<p>Definition at line <a class="el" href="_translation_loader_behavior_8h_source.html#l00054">54</a> of file <a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00055"></a>00055     {
+<a name="l00056"></a>00056         m_loader = boost::shared_ptr&lt;TranslationLoader&gt;(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_translation_loader.html" title="This class represents the factory used to create Translation objects.">TranslationLoader</a>(world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a8e21725c6623f42fb405f71e37065d4b">GetGiven</a>&lt;ExecutableDirectory&gt;()-&gt;get_directory_name()));
+<a name="l00057"></a>00057     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

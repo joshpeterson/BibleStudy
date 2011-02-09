@@ -55,6 +55,8 @@
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class is an implementation of a model from the Qt Model/View framework for a list view which represents the verses the user has starred. </p>
+
+<p>Definition at line <a class="el" href="_starred_verses_model_8h_source.html#l00018">18</a> of file <a class="el" href="_starred_verses_model_8h_source.html">StarredVersesModel.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a83b7f12d0be3491eca2a6891710acb5b"></a><!-- doxytag: member="BibleStudyGui::StarredVersesModel::StarredVersesModel" ref="a83b7f12d0be3491eca2a6891710acb5b" args="(boost::shared_ptr&lt; const BibleDatabase::TranslationManager &gt; translation_manager)" -->
 <div class="memitem">
@@ -73,6 +75,15 @@
 <div class="memdoc">
 
 <p>Create a new instance of the <a class="el" href="class_bible_study_gui_1_1_starred_verses_model.html" title="This class is an implementation of a model from the Qt Model/View framework for a...">StarredVersesModel</a> class. </p>
+
+<p>Definition at line <a class="el" href="_starred_verses_model_8cpp_source.html#l00012">12</a> of file <a class="el" href="_starred_verses_model_8cpp_source.html">StarredVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00012"></a>00012                                                                                                     :
+<a name="l00013"></a>00013     m_translation_manager(translation_manager)
+<a name="l00014"></a>00014 {
+<a name="l00015"></a>00015 }
+
+</pre></div></p>
 
 </div>
 </div>
@@ -94,6 +105,17 @@
 <div class="memdoc">
 
 <p>Add a verse to the collection of starred verses. </p>
+
+<p>Definition at line <a class="el" href="_starred_verses_model_8cpp_source.html#l00040">40</a> of file <a class="el" href="_starred_verses_model_8cpp_source.html">StarredVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00041"></a>00041 {
+<a name="l00042"></a>00042     <span class="keywordflow">if</span> (std::find_if(m_starred_verses.begin(), m_starred_verses.end(), *_1 == *<a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>) == m_starred_verses.end())
+<a name="l00043"></a>00043     {
+<a name="l00044"></a>00044         m_starred_verses.push_back(<a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>);
+<a name="l00045"></a>00045         reset();
+<a name="l00046"></a>00046     }
+<a name="l00047"></a>00047 }
+</pre></div></p>
 
 </div>
 </div>
@@ -124,6 +146,26 @@
 
 <p>Get the data for a given index. </p>
 
+<p>Definition at line <a class="el" href="_starred_verses_model_8cpp_source.html#l00022">22</a> of file <a class="el" href="_starred_verses_model_8cpp_source.html">StarredVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00023"></a>00023 {
+<a name="l00024"></a>00024     <span class="keywordflow">if</span> (!<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.isValid())
+<a name="l00025"></a>00025         <span class="keywordflow">return</span> QVariant();
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027     <span class="keywordflow">if</span> (<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row() &gt;= <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_starred_verses.size()))
+<a name="l00028"></a>00028         <span class="keywordflow">return</span> QVariant();
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030     <span class="keywordflow">if</span> (role == Qt::DisplayRole)
+<a name="l00031"></a>00031     {
+<a name="l00032"></a>00032         boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(m_starred_verses[<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()]-&gt;get_translation());
+<a name="l00033"></a>00033         <span class="keywordflow">return</span> <a class="code" href="namespace_bible_database.html#aee0bc9fff9457c5ec5b8f1833519cff5" title="Get the title of a collection of verses.">verse_collection_title</a>(translation-&gt;get_verse(m_starred_verses[<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()]-&gt;get_verse_id(), 
+<a name="l00034"></a>00034                                                              m_starred_verses[<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()]-&gt;get_num_verses_context()), translation).c_str();
+<a name="l00035"></a>00035     }
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037     <span class="keywordflow">return</span> QVariant();
+<a name="l00038"></a>00038 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a03e2322efc58373f4cc2a90470a329b9"></a><!-- doxytag: member="BibleStudyGui::StarredVersesModel::get_verse_display" ref="a03e2322efc58373f4cc2a90470a329b9" args="(const QModelIndex &amp;index)" -->
@@ -143,6 +185,15 @@
 <div class="memdoc">
 
 <p>Get the VerseDisplay object for the verse at the given index. </p>
+
+<p>Definition at line <a class="el" href="_starred_verses_model_8cpp_source.html#l00066">66</a> of file <a class="el" href="_starred_verses_model_8cpp_source.html">StarredVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00067"></a>00067 {
+<a name="l00068"></a>00068     boost::shared_ptr&lt;const Translation&gt; translation = m_translation_manager-&gt;at(m_starred_verses[<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row()]-&gt;get_translation());
+<a name="l00069"></a>00069     <span class="keywordflow">return</span> boost::shared_ptr&lt;VerseDisplay&gt;(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a>(translation-&gt;get_long_name(), m_starred_verses.at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row())-&gt;get_verse_id(), 
+<a name="l00070"></a>00070                                                             m_starred_verses.at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>.row())-&gt;get_num_verses_context()));
+<a name="l00071"></a>00071 }
+</pre></div></p>
 
 </div>
 </div>
@@ -164,6 +215,20 @@
 
 <p>Remove a verse from the collection of starred verses. </p>
 
+<p>Definition at line <a class="el" href="_starred_verses_model_8cpp_source.html#l00049">49</a> of file <a class="el" href="_starred_verses_model_8cpp_source.html">StarredVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00050"></a>00050 {
+<a name="l00051"></a>00051     std::vector&lt;boost::shared_ptr&lt;VerseDisplay&gt; &gt;::iterator verse_it = std::find_if(m_starred_verses.begin(), 
+<a name="l00052"></a>00052                                                                                     m_starred_verses.end(), 
+<a name="l00053"></a>00053                                                                                     *_1 == *<a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>);
+<a name="l00054"></a>00054     <span class="keywordflow">if</span> (verse_it != m_starred_verses.end())
+<a name="l00055"></a>00055     {
+<a name="l00056"></a>00056         m_starred_verses.erase(verse_it);
+<a name="l00057"></a>00057         reset();
+<a name="l00058"></a>00058     }
+<a name="l00059"></a>00059 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a3f7844b9a210cd39c062d2422577a2d6"></a><!-- doxytag: member="BibleStudyGui::StarredVersesModel::rowCount" ref="a3f7844b9a210cd39c062d2422577a2d6" args="(const QModelIndex &amp;parent=QModelIndex()) const " -->
@@ -183,6 +248,13 @@
 <div class="memdoc">
 
 <p>Get the number of rows for the given parent index. This is the number of starred verses. </p>
+
+<p>Definition at line <a class="el" href="_starred_verses_model_8cpp_source.html#l00017">17</a> of file <a class="el" href="_starred_verses_model_8cpp_source.html">StarredVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00018"></a>00018 {
+<a name="l00019"></a>00019     <span class="keywordflow">return</span> m_starred_verses.size();
+<a name="l00020"></a>00020 }
+</pre></div></p>
 
 </div>
 </div>
@@ -204,14 +276,21 @@
 
 <p>Determine whether or not the given verse has been starred. </p>
 
+<p>Definition at line <a class="el" href="_starred_verses_model_8cpp_source.html#l00061">61</a> of file <a class="el" href="_starred_verses_model_8cpp_source.html">StarredVersesModel.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00062"></a>00062 {
+<a name="l00063"></a>00063     <span class="keywordflow">return</span> std::find_if(m_starred_verses.begin(), m_starred_verses.end(), *_1 == *<a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>) != m_starred_verses.end();
+<a name="l00064"></a>00064 }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_starred_verses_model_8h_source.html">StarredVersesModel.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudyGui/<a class="el" href="_starred_verses_model_8cpp.html">StarredVersesModel.cpp</a></li>
+<li>BibleStudyGui/<a class="el" href="_starred_verses_model_8h_source.html">StarredVersesModel.h</a></li>
+<li>BibleStudyGui/<a class="el" href="_starred_verses_model_8cpp_source.html">StarredVersesModel.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

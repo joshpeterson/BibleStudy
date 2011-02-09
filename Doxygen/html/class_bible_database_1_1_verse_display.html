@@ -50,6 +50,8 @@
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class respresents the information necessary to display a given verse. This include the verse ID, the number of context verses, and <a class="el" href="class_bible_database_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> object. </p>
+
+<p>Definition at line <a class="el" href="_verse_display_8h_source.html#l00011">11</a> of file <a class="el" href="_verse_display_8h_source.html">VerseDisplay.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ad76c62098590ac9e73b899c1b70b97d8"></a><!-- doxytag: member="BibleDatabase::VerseDisplay::VerseDisplay" ref="ad76c62098590ac9e73b899c1b70b97d8" args="(std::string translation, int verse_id, int num_verses_context)" -->
 <div class="memitem">
@@ -84,6 +86,17 @@
 
 <p>Create a new instance of the <a class="el" href="class_bible_database_1_1_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a> class. </p>
 
+<p>Definition at line <a class="el" href="_verse_display_8cpp_source.html#l00005">5</a> of file <a class="el" href="_verse_display_8cpp_source.html">VerseDisplay.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00005"></a>00005                                                                                       :
+<a name="l00006"></a>00006     m_translation(translation),
+<a name="l00007"></a>00007     m_verse_id(verse_id),
+<a name="l00008"></a>00008     m_num_verses_context(num_verses_context)
+<a name="l00009"></a>00009 {
+<a name="l00010"></a>00010 }
+std::string <a class="code" href="class_bible_database_1_1_verse_display.html#ac8d50053240a1b7a3543f8016e200bf1" title="Get the long name of the Translation object for this instance.">VerseDisplay::get_translation</a>() const
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -104,6 +117,13 @@
 
 <p>Get the number of verses of context that should be displayed with this verse. </p>
 
+<p>Definition at line <a class="el" href="_verse_display_8cpp_source.html#l00021">21</a> of file <a class="el" href="_verse_display_8cpp_source.html">VerseDisplay.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00022"></a>00022 {
+<a name="l00023"></a>00023     <span class="keywordflow">return</span> m_num_verses_context;
+<a name="l00024"></a>00024 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="ac8d50053240a1b7a3543f8016e200bf1"></a><!-- doxytag: member="BibleDatabase::VerseDisplay::get_translation" ref="ac8d50053240a1b7a3543f8016e200bf1" args="() const " -->
@@ -123,6 +143,13 @@
 
 <p>Get the long name of the <a class="el" href="class_bible_database_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> object for this instance. </p>
 
+<p>Definition at line <a class="el" href="_verse_display_8cpp_source.html#l00011">11</a> of file <a class="el" href="_verse_display_8cpp_source.html">VerseDisplay.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00012"></a>00012 {
+<a name="l00013"></a>00013     <span class="keywordflow">return</span> m_translation;
+<a name="l00014"></a>00014 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a5bc9a4c66215217e96c74c8cffa964f6"></a><!-- doxytag: member="BibleDatabase::VerseDisplay::get_verse_id" ref="a5bc9a4c66215217e96c74c8cffa964f6" args="() const " -->
@@ -141,6 +168,13 @@
 <div class="memdoc">
 
 <p>Get the unique ID of the verse for this instance. </p>
+
+<p>Definition at line <a class="el" href="_verse_display_8cpp_source.html#l00016">16</a> of file <a class="el" href="_verse_display_8cpp_source.html">VerseDisplay.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00017"></a>00017 {
+<a name="l00018"></a>00018     <span class="keywordflow">return</span> m_verse_id;
+<a name="l00019"></a>00019 }
+</pre></div></p>
 
 </div>
 </div>
@@ -162,14 +196,21 @@
 
 <p>Determine if this <a class="el" href="class_bible_database_1_1_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a> instance has the same data as another instance. Note that this does not test the number of context verses. </p>
 
+<p>Definition at line <a class="el" href="_verse_display_8cpp_source.html#l00026">26</a> of file <a class="el" href="_verse_display_8cpp_source.html">VerseDisplay.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00027"></a>00027 {
+<a name="l00028"></a>00028     <span class="keywordflow">return</span> m_verse_id == other.<a class="code" href="class_bible_database_1_1_verse_display.html#a5bc9a4c66215217e96c74c8cffa964f6" title="Get the unique ID of the verse for this instance.">get_verse_id</a>() &amp;&amp; m_translation == other.<a class="code" href="class_bible_database_1_1_verse_display.html#ac8d50053240a1b7a3543f8016e200bf1" title="Get the long name of the Translation object for this instance.">get_translation</a>();
+<a name="l00029"></a>00029 }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/<a class="el" href="_verse_display_8h_source.html">VerseDisplay.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/<a class="el" href="_verse_display_8cpp.html">VerseDisplay.cpp</a></li>
+<li>BibleDatabase/<a class="el" href="_verse_display_8h_source.html">VerseDisplay.h</a></li>
+<li>BibleDatabase/<a class="el" href="_verse_display_8cpp_source.html">VerseDisplay.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:25 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

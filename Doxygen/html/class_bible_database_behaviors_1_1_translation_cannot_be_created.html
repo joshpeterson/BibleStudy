@@ -46,6 +46,9 @@ Inheritance diagram for BibleDatabaseBehaviors::TranslationCannotBeCreated:</div
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_translation_cannot_be_created.html#ad1c6ee26c3151321df813d89d2f298a3">ensure_that</a> (const <a class="el" href="class_behavior_driven_design_1_1_world.html">World</a> &amp;world)</td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_translation_loader_behavior_8h_source.html#l00109">109</a> of file <a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ad1c6ee26c3151321df813d89d2f298a3"></a><!-- doxytag: member="BibleDatabaseBehaviors::TranslationCannotBeCreated::ensure_that" ref="ad1c6ee26c3151321df813d89d2f298a3" args="(const World &amp;world)" -->
 <div class="memitem">
@@ -65,13 +68,26 @@ Inheritance diagram for BibleDatabaseBehaviors::TranslationCannotBeCreated:</div
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_then.html#a3bffcea3036a246faacffbc385bbade4">BehaviorDrivenDesign::IThen</a>.</p>
 
+<p>Definition at line <a class="el" href="_translation_loader_behavior_8h_source.html#l00112">112</a> of file <a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00113"></a>00113     {
+<a name="l00114"></a>00114 <span class="preprocessor">#ifdef LINUX</span>
+<a name="l00115"></a>00115 <span class="preprocessor"></span>        std::string translation_file(<span class="stringliteral">&quot;share/BibleStudy/Translations/TT.buf&quot;</span>);
+<a name="l00116"></a>00116 <span class="preprocessor">#else</span>
+<a name="l00117"></a>00117 <span class="preprocessor"></span>        std::string translation_file(<span class="stringliteral">&quot;Translations/TT.buf&quot;</span>);
+<a name="l00118"></a>00118 <span class="preprocessor">#endif</span>
+<a name="l00119"></a>00119 <span class="preprocessor"></span>        boost::shared_ptr&lt;const Translation&gt; translation = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;TranslationLoaderIsCreatedWithNonExistentExecutableDirectory&gt;()-&gt;get_loader()-&gt;create_translation(translation_file);
+<a name="l00120"></a>00120         CPPUNIT_ASSERT(translation == NULL);
+<a name="l00121"></a>00121     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
