@@ -51,6 +51,9 @@
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_behavior_driven_design_test.html#a6ca01abf68c0947cb641da5f83f237e9">testWhenWithTwoArgumentConstructor</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_behavior_driven_design_test.html#a8f741bc64c065664bc457e8f97df5b7e">testThenWithTwoArgumentConstructor</a> ()</td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00240">240</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a8304b100737a98e6a3b612eeb0444d7f"></a><!-- doxytag: member="BibleDatabaseBehaviors::BehaviorDrivenDesignTest::setUp" ref="a8304b100737a98e6a3b612eeb0444d7f" args="()" -->
 <div class="memitem">
@@ -66,6 +69,12 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00260">260</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00261"></a>00261     {
+<a name="l00262"></a>00262     }
+</pre></div></p>
 
 </div>
 </div>
@@ -84,6 +93,12 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00264">264</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00265"></a>00265     {
+<a name="l00266"></a>00266     }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="afb39d4eb8e070c1d3c367493462f0260"></a><!-- doxytag: member="BibleDatabaseBehaviors::BehaviorDrivenDesignTest::testGivenSetupCalled" ref="afb39d4eb8e070c1d3c367493462f0260" args="()" -->
@@ -100,6 +115,18 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00268">268</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00269"></a>00269     {
+<a name="l00270"></a>00270         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00271"></a>00271 
+<a name="l00272"></a>00272         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;TestGiven&gt;();
+<a name="l00273"></a>00273 
+<a name="l00274"></a>00274         <span class="keyword">const</span> TestGiven* testGiven = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a8e21725c6623f42fb405f71e37065d4b">GetGiven</a>&lt;TestGiven&gt;();
+<a name="l00275"></a>00275         CPPUNIT_ASSERT_EQUAL(<span class="keyword">true</span>, testGiven-&gt;get_setup_called());
+<a name="l00276"></a>00276     }
+</pre></div></p>
 
 </div>
 </div>
@@ -118,6 +145,16 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00304">304</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00305"></a>00305     {
+<a name="l00306"></a>00306         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00307"></a>00307 
+<a name="l00308"></a>00308         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;TestGiven&gt;();
+<a name="l00309"></a>00309         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a8e21725c6623f42fb405f71e37065d4b">GetGiven</a>&lt;EmptyTestGiven&gt;();
+<a name="l00310"></a>00310     }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a40b04daecc96131770177e2f3ec74f59"></a><!-- doxytag: member="BibleDatabaseBehaviors::BehaviorDrivenDesignTest::testGivenThrowsLogicErrorWhenTwoGivensOfTheSameTypeAreDefined" ref="a40b04daecc96131770177e2f3ec74f59" args="()" -->
@@ -134,6 +171,15 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00297">297</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00298"></a>00298     {
+<a name="l00299"></a>00299         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00300"></a>00300 
+<a name="l00301"></a>00301         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;TestGiven&gt;().Given&lt;TestGiven&gt;();
+<a name="l00302"></a>00302     }
+</pre></div></p>
 
 </div>
 </div>
@@ -152,6 +198,16 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00339">339</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00340"></a>00340     {
+<a name="l00341"></a>00341         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00342"></a>00342 
+<a name="l00343"></a>00343         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;TestGivenWithOneArgumentConstructor, <span class="keywordtype">int</span>&gt;(42);
+<a name="l00344"></a>00344         CPPUNIT_ASSERT_EQUAL(42, world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a8e21725c6623f42fb405f71e37065d4b">GetGiven</a>&lt;TestGivenWithOneArgumentConstructor&gt;()-&gt;get_argument());
+<a name="l00345"></a>00345     }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="acf9728cecf4f485c226bd3f4c11ae6a4"></a><!-- doxytag: member="BibleDatabaseBehaviors::BehaviorDrivenDesignTest::testGivenWithTwoArgumentConstructor" ref="acf9728cecf4f485c226bd3f4c11ae6a4" args="()" -->
@@ -168,6 +224,17 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00362">362</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00363"></a>00363     {
+<a name="l00364"></a>00364         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00365"></a>00365 
+<a name="l00366"></a>00366         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;TestGivenWithTwoArgumentConstructor, <span class="keywordtype">int</span>&gt;(42, 43);
+<a name="l00367"></a>00367         CPPUNIT_ASSERT_EQUAL(42, world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a8e21725c6623f42fb405f71e37065d4b">GetGiven</a>&lt;TestGivenWithTwoArgumentConstructor&gt;()-&gt;get_argument1());
+<a name="l00368"></a>00368         CPPUNIT_ASSERT_EQUAL(43, world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a8e21725c6623f42fb405f71e37065d4b">GetGiven</a>&lt;TestGivenWithTwoArgumentConstructor&gt;()-&gt;get_argument2());
+<a name="l00369"></a>00369     }
+</pre></div></p>
 
 </div>
 </div>
@@ -186,6 +253,17 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00288">288</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00289"></a>00289     {
+<a name="l00290"></a>00290         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00291"></a>00291 
+<a name="l00292"></a>00292         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;TestThen&gt;();
+<a name="l00293"></a>00293 
+<a name="l00294"></a>00294         <span class="comment">// If we don&apos;t get any exceptions, we&apos;ll assume this test passed.</span>
+<a name="l00295"></a>00295     }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="aa0205eed3968ecbe6fcbbdf5450625e6"></a><!-- doxytag: member="BibleDatabaseBehaviors::BehaviorDrivenDesignTest::testThenWithOneArgumentConstructor" ref="aa0205eed3968ecbe6fcbbdf5450625e6" args="()" -->
@@ -202,6 +280,15 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00355">355</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00356"></a>00356     {
+<a name="l00357"></a>00357         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00358"></a>00358 
+<a name="l00359"></a>00359         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;TestThenWithOneArgumentConstructor, <span class="keywordtype">int</span>&gt;(42);
+<a name="l00360"></a>00360     }
+</pre></div></p>
 
 </div>
 </div>
@@ -220,6 +307,15 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00380">380</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00381"></a>00381     {
+<a name="l00382"></a>00382         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00383"></a>00383 
+<a name="l00384"></a>00384         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#abea734cc54d1b558a517c4fa4dc3b3d8">Then</a>&lt;TestThenWithTwoArgumentConstructor, <span class="keywordtype">int</span>&gt;(42, 43);
+<a name="l00385"></a>00385     }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a74227f6f49a0fa8e40b13357f80f4df4"></a><!-- doxytag: member="BibleDatabaseBehaviors::BehaviorDrivenDesignTest::testWhenOccursCalled" ref="a74227f6f49a0fa8e40b13357f80f4df4" args="()" -->
@@ -236,6 +332,18 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00278">278</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00279"></a>00279     {
+<a name="l00280"></a>00280         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00281"></a>00281 
+<a name="l00282"></a>00282         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;TestWhen&gt;();
+<a name="l00283"></a>00283 
+<a name="l00284"></a>00284         <span class="keyword">const</span> TestWhen* testWhen = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;TestWhen&gt;();
+<a name="l00285"></a>00285         CPPUNIT_ASSERT_EQUAL(<span class="keyword">true</span>, testWhen-&gt;get_occurs_called());
+<a name="l00286"></a>00286     }
+</pre></div></p>
 
 </div>
 </div>
@@ -254,6 +362,16 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00319">319</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00320"></a>00320     {
+<a name="l00321"></a>00321         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00322"></a>00322 
+<a name="l00323"></a>00323         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;TestWhen&gt;();
+<a name="l00324"></a>00324         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;EmptyTestWhen&gt;();
+<a name="l00325"></a>00325     }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="acbedfe9d087cac701b4e8afc076ae514"></a><!-- doxytag: member="BibleDatabaseBehaviors::BehaviorDrivenDesignTest::testWhenThrowsLogicErrorWhenTwoGivensOfTheSameTypeAreDefined" ref="acbedfe9d087cac701b4e8afc076ae514" args="()" -->
@@ -270,6 +388,15 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00312">312</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00313"></a>00313     {
+<a name="l00314"></a>00314         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00315"></a>00315 
+<a name="l00316"></a>00316         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;TestWhen&gt;().When&lt;TestWhen&gt;();
+<a name="l00317"></a>00317     }
+</pre></div></p>
 
 </div>
 </div>
@@ -288,6 +415,16 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00347">347</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00348"></a>00348     {
+<a name="l00349"></a>00349         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00350"></a>00350 
+<a name="l00351"></a>00351         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;TestWhenWithOneArgumentConstructor, <span class="keywordtype">int</span>&gt;(42);
+<a name="l00352"></a>00352         CPPUNIT_ASSERT_EQUAL(42, world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;TestWhenWithOneArgumentConstructor&gt;()-&gt;get_argument());
+<a name="l00353"></a>00353     }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a6ca01abf68c0947cb641da5f83f237e9"></a><!-- doxytag: member="BibleDatabaseBehaviors::BehaviorDrivenDesignTest::testWhenWithTwoArgumentConstructor" ref="a6ca01abf68c0947cb641da5f83f237e9" args="()" -->
@@ -304,6 +441,17 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00371">371</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00372"></a>00372     {
+<a name="l00373"></a>00373         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00374"></a>00374 
+<a name="l00375"></a>00375         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;TestWhenWithTwoArgumentConstructor, <span class="keywordtype">int</span>&gt;(42, 43);
+<a name="l00376"></a>00376         CPPUNIT_ASSERT_EQUAL(42, world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;TestWhenWithTwoArgumentConstructor&gt;()-&gt;get_argument1());
+<a name="l00377"></a>00377         CPPUNIT_ASSERT_EQUAL(43, world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;TestWhenWithTwoArgumentConstructor&gt;()-&gt;get_argument2());
+<a name="l00378"></a>00378     }
+</pre></div></p>
 
 </div>
 </div>
@@ -322,13 +470,27 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_behavior_driven_design_test_8h_source.html#l00327">327</a> of file <a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00328"></a>00328     {
+<a name="l00329"></a>00329         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> world;
+<a name="l00330"></a>00330 
+<a name="l00331"></a>00331         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a20769ec17b56619873ddb34a9305cae3">Given</a>&lt;TestGiven&gt;();
+<a name="l00332"></a>00332         world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a0225389259cf4cf59693d84d55159a1f">When</a>&lt;TestWhen&gt;();
+<a name="l00333"></a>00333 
+<a name="l00334"></a>00334         <a class="code" href="class_behavior_driven_design_1_1_world.html">World</a> worldCopy(world);
+<a name="l00335"></a>00335         CPPUNIT_ASSERT(worldCopy.GetGiven&lt;TestGiven&gt;() != NULL);
+<a name="l00336"></a>00336         CPPUNIT_ASSERT(worldCopy.GetWhen&lt;TestWhen&gt;() != NULL);
+<a name="l00337"></a>00337     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

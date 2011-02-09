@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>BibleStudy: C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudy.cpp File Reference</title>
+<title>BibleStudy: BibleStudy.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -25,7 +25,7 @@
   </div>
 </div>
 <div class="contents">
-<h1>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleStudy.cpp File Reference</h1><code>#include &lt;iostream&gt;</code><br/>
+<h1>BibleStudy.cpp File Reference</h1><code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;stdexcept&gt;</code><br/>
 <code>#include &lt;QApplication&gt;</code><br/>
 <code>#include &lt;QPushButton&gt;</code><br/>
@@ -37,6 +37,8 @@
 <code>#include &quot;<a class="el" href="_translation_manager_8h_source.html">BibleDatabase/TranslationManager.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_translation_loader_8h_source.html">BibleDatabase/TranslationLoader.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_u_i_bible_study_widget_8h_source.html">BibleStudyGui/UIBibleStudyWidget.h</a>&quot;</code><br/>
+
+<p><a href="_bible_study_8cpp_source.html">Go to the source code of this file.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_bible_study_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
@@ -67,10 +69,34 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_bible_study_8cpp_source.html#l00017">17</a> of file <a class="el" href="_bible_study_8cpp_source.html">BibleStudy.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00018"></a>00018 {
+<a name="l00019"></a>00019     <span class="keywordflow">try</span>
+<a name="l00020"></a>00020     {
+<a name="l00021"></a>00021         QApplication app(argc, argv);
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023         boost::shared_ptr&lt;const TranslationLoader&gt; translation_loader = boost::shared_ptr&lt;const TranslationLoader&gt;(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_translation_loader.html" title="This class represents the factory used to create Translation objects.">TranslationLoader</a>(QCoreApplication::applicationDirPath().toStdString()));
+<a name="l00024"></a>00024         boost::shared_ptr&lt;TranslationManager&gt; manager(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_translation_manager.html" title="This class represents a collection of read-only translations.">TranslationManager</a>);
+<a name="l00025"></a>00025         
+<a name="l00026"></a>00026         <a class="code" href="class_bible_study_gui_1_1_u_i_bible_study_widget.html" title="This class is the GUI respresentation of the top level widget for the application...">UIBibleStudyWidget</a> study(manager, translation_loader);
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028         study.show();
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030         <span class="keywordflow">return</span> app.exec();
+<a name="l00031"></a>00031     }
+<a name="l00032"></a>00032     <span class="keywordflow">catch</span> (std::exception&amp; e)
+<a name="l00033"></a>00033     {
+<a name="l00034"></a>00034         std::cout &lt;&lt; <span class="stringliteral">&quot;Uh-oh, something very bad happened.&quot;</span> &lt;&lt; std::endl;
+<a name="l00035"></a>00035         std::cout &lt;&lt; <span class="stringliteral">&quot;These details might help (or they might not):\n\n&quot;</span> &lt;&lt; e.what() &lt;&lt; std::endl;
+<a name="l00036"></a>00036     }
+<a name="l00037"></a>00037 }
+</pre></div></p>
+
 </div>
 </div>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:27 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:24 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

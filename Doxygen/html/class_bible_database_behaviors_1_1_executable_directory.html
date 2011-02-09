@@ -47,6 +47,9 @@ Inheritance diagram for BibleDatabaseBehaviors::ExecutableDirectory:</div>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_executable_directory.html#a3c45493a8dbeec100a471a765310b44a">setup</a> (const <a class="el" href="class_behavior_driven_design_1_1_world.html">World</a> &amp;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_executable_directory.html#aa4b6a566b22a97cb6b341ad69f750b10">get_directory_name</a> () const </td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_translation_loader_behavior_8h_source.html#l00017">17</a> of file <a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="aa4b6a566b22a97cb6b341ad69f750b10"></a><!-- doxytag: member="BibleDatabaseBehaviors::ExecutableDirectory::get_directory_name" ref="aa4b6a566b22a97cb6b341ad69f750b10" args="() const " -->
 <div class="memitem">
@@ -62,6 +65,13 @@ Inheritance diagram for BibleDatabaseBehaviors::ExecutableDirectory:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_loader_behavior_8h_source.html#l00025">25</a> of file <a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00026"></a>00026     {
+<a name="l00027"></a>00027         <span class="keywordflow">return</span> m_directory_name;
+<a name="l00028"></a>00028     }
+</pre></div></p>
 
 </div>
 </div>
@@ -83,13 +93,20 @@ Inheritance diagram for BibleDatabaseBehaviors::ExecutableDirectory:</div>
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_given.html#a18155430571fb1f049d22c5394bb106a">BehaviorDrivenDesign::IGiven</a>.</p>
 
+<p>Definition at line <a class="el" href="_translation_loader_behavior_8h_source.html#l00020">20</a> of file <a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00021"></a>00021     {
+<a name="l00022"></a>00022         m_directory_name = boost::filesystem::initial_path().directory_string();
+<a name="l00023"></a>00023     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

@@ -48,6 +48,9 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsCorrectWithNoContextWithC
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_verse_is_correct_with_no_context_with_context.html#a1706c4da49ffaafc09bae8a930bae906">VerseIsCorrectWithNoContextWithContext</a> (int verse_id)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_verse_is_correct_with_no_context_with_context.html#aa02d7b6e4de980b1e4b5e15055090812">ensure_that</a> (const <a class="el" href="class_behavior_driven_design_1_1_world.html">World</a> &amp;world)</td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00077">77</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a863ca683b9f3cfb9e93c5f36a8242d45"></a><!-- doxytag: member="BibleDatabaseBehaviors::VerseIsCorrectWithNoContextWithContext::VerseIsCorrectWithNoContextWithContext" ref="a863ca683b9f3cfb9e93c5f36a8242d45" args="()" -->
 <div class="memitem">
@@ -63,6 +66,11 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsCorrectWithNoContextWithC
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00080">80</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00080"></a>00080 {}
+</pre></div></p>
 
 </div>
 </div>
@@ -81,6 +89,11 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsCorrectWithNoContextWithC
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00081">81</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00081"></a>00081 : m_verse_id(verse_id) {}
+</pre></div></p>
 
 </div>
 </div>
@@ -103,13 +116,45 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsCorrectWithNoContextWithC
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_then.html#a3bffcea3036a246faacffbc385bbade4">BehaviorDrivenDesign::IThen</a>.</p>
 
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00083">83</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00084"></a>00084     {
+<a name="l00085"></a>00085         <span class="keywordtype">int</span> expected_number_verses = 0;
+<a name="l00086"></a>00086         <span class="keywordtype">int</span> expected_first_verse_id = 0;
+<a name="l00087"></a>00087         <span class="keywordtype">int</span> expected_last_verse_id = 0;
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089         <span class="keywordflow">if</span> (m_verse_id == 0)
+<a name="l00090"></a>00090         {
+<a name="l00091"></a>00091             expected_number_verses = 2;
+<a name="l00092"></a>00092             expected_first_verse_id = 0;
+<a name="l00093"></a>00093             expected_last_verse_id = 1;
+<a name="l00094"></a>00094         }
+<a name="l00095"></a>00095         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_verse_id == 2740)
+<a name="l00096"></a>00096         {
+<a name="l00097"></a>00097             expected_number_verses = 2;
+<a name="l00098"></a>00098             expected_first_verse_id = 2739;
+<a name="l00099"></a>00099             expected_last_verse_id = 2740;
+<a name="l00100"></a>00100         }
+<a name="l00101"></a>00101         <span class="keywordflow">else</span>
+<a name="l00102"></a>00102         {
+<a name="l00103"></a>00103             expected_number_verses = 3;
+<a name="l00104"></a>00104             expected_first_verse_id = m_verse_id - 1;
+<a name="l00105"></a>00105             expected_last_verse_id = m_verse_id + 1;
+<a name="l00106"></a>00106         }
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108         CPPUNIT_ASSERT_EQUAL(expected_number_verses, static_cast&lt;int&gt;(world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;VerseIsObtainedWithContext&gt;()-&gt;get_verses().size()));
+<a name="l00109"></a>00109         CPPUNIT_ASSERT_EQUAL(expected_first_verse_id, world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;VerseIsObtainedWithContext&gt;()-&gt;get_verses()[0]-&gt;get_unique_id());
+<a name="l00110"></a>00110         CPPUNIT_ASSERT_EQUAL(expected_last_verse_id, world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;VerseIsObtainedWithContext&gt;()-&gt;get_verses()[expected_number_verses-1]-&gt;get_unique_id());
+<a name="l00111"></a>00111     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

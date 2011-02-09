@@ -64,6 +64,8 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class represents a single verse in a <a class="el" href="class_bible_database_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> object. </p>
+
+<p>Definition at line <a class="el" href="_verse_8h_source.html#l00016">16</a> of file <a class="el" href="_verse_8h_source.html">Verse.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="adbdf6cf1c13f44cf02a020ef209d4e95"></a><!-- doxytag: member="BibleDatabase::Verse::Verse" ref="adbdf6cf1c13f44cf02a020ef209d4e95" args="(const std::string &amp;book, int chapter, int verse, const std::string &amp;text, int unique_verse_id)" -->
 <div class="memitem">
@@ -110,6 +112,19 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 <p>Create a new instance of the <a class="el" href="class_bible_database_1_1_verse.html" title="This class represents a single verse in a Translation object.">Verse</a> class. </p>
 
+<p>Definition at line <a class="el" href="_verse_8cpp_source.html#l00018">18</a> of file <a class="el" href="_verse_8cpp_source.html">Verse.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00019"></a>00019                                   :
+<a name="l00020"></a>00020     m_book(<a class="code" href="namespace_k_j_v_parser.html#aec91fb480ba2175cbb0c215f2948b58f">book</a>),
+<a name="l00021"></a>00021     m_chapter(<a class="code" href="namespace_k_j_v_parser.html#a6615e6a8330e0cc191d7820260e90c64">chapter</a>),
+<a name="l00022"></a>00022     m_verse(<a class="code" href="namespace_k_j_v_parser.html#a5e85492cc40b86b8acbf8615d6395307">verse</a>),
+<a name="l00023"></a>00023     m_text(text),
+<a name="l00024"></a>00024     m_unique_id(unqiue_verse_id)
+<a name="l00025"></a>00025 {
+<a name="l00026"></a>00026 }
+
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -131,6 +146,13 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 <p>Determine whether or not this verse matches the given string, not including the casing of the string. </p>
 
+<p>Definition at line <a class="el" href="_verse_8cpp_source.html#l00050">50</a> of file <a class="el" href="_verse_8cpp_source.html">Verse.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00051"></a>00051 {
+<a name="l00052"></a>00052     <span class="keywordflow">return</span> std::search(m_text.begin(), m_text.end(), search_string.begin(), search_string.end(), <a class="code" href="namespace_bible_database.html#a1ea8a511c42efed6272b8537ace412fa">case_insensitive_character_comparison</a>) != m_text.end();
+<a name="l00053"></a>00053 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a9ec096ef3021712fab2d96b2beaf5ba0"></a><!-- doxytag: member="BibleDatabase::Verse::case_insensitive_whole_word_match" ref="a9ec096ef3021712fab2d96b2beaf5ba0" args="(std::string search_string) const " -->
@@ -150,6 +172,25 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <div class="memdoc">
 
 <p>Determine whether or not this verse matches the given string, using whole words only and not including the casing of the string. </p>
+
+<p>Definition at line <a class="el" href="_verse_8cpp_source.html#l00055">55</a> of file <a class="el" href="_verse_8cpp_source.html">Verse.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00056"></a>00056 {
+<a name="l00057"></a>00057     std::string::const_iterator position = std::search(m_text.begin(), m_text.end(), search_string.begin(), search_string.end(), <a class="code" href="namespace_bible_database.html#a1ea8a511c42efed6272b8537ace412fa">case_insensitive_character_comparison</a>);
+<a name="l00058"></a>00058     <span class="keywordflow">while</span> (position != m_text.end())
+<a name="l00059"></a>00059     {
+<a name="l00060"></a>00060         <span class="keywordflow">if</span> ((position == m_text.begin() || is_word_delimiter(*(position-1))) &amp;&amp; 
+<a name="l00061"></a>00061             (position + search_string.size() == m_text.end() || is_word_delimiter(*(position + search_string.size()))))
+<a name="l00062"></a>00062         {
+<a name="l00063"></a>00063             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00064"></a>00064         }
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066         position = std::search(position + 1, m_text.end(), search_string.begin(), search_string.end(), <a class="code" href="namespace_bible_database.html#a1ea8a511c42efed6272b8537ace412fa">case_insensitive_character_comparison</a>);
+<a name="l00067"></a>00067     }
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00070"></a>00070 }
+</pre></div></p>
 
 </div>
 </div>
@@ -171,6 +212,13 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 <p>Determine whether or not this verse matches the given string, including the casing of the string. </p>
 
+<p>Definition at line <a class="el" href="_verse_8cpp_source.html#l00028">28</a> of file <a class="el" href="_verse_8cpp_source.html">Verse.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00029"></a>00029 {
+<a name="l00030"></a>00030     <span class="keywordflow">return</span> m_text.find(search_string) != std::string::npos;
+<a name="l00031"></a>00031 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="aa533fcb813f80e36e4803203e28b1ec2"></a><!-- doxytag: member="BibleDatabase::Verse::case_sensitive_whole_word_match" ref="aa533fcb813f80e36e4803203e28b1ec2" args="(std::string search_string) const " -->
@@ -190,6 +238,25 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <div class="memdoc">
 
 <p>Determine whether or not this verse matches the given string, using whole words only and including the casing of the string. </p>
+
+<p>Definition at line <a class="el" href="_verse_8cpp_source.html#l00033">33</a> of file <a class="el" href="_verse_8cpp_source.html">Verse.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00034"></a>00034 {
+<a name="l00035"></a>00035     <span class="keywordtype">size_t</span> position = m_text.find(search_string);
+<a name="l00036"></a>00036     <span class="keywordflow">while</span> (position != std::string::npos)
+<a name="l00037"></a>00037     {
+<a name="l00038"></a>00038         <span class="keywordflow">if</span> ((position == 0 || is_word_delimiter(m_text[position-1])) &amp;&amp; 
+<a name="l00039"></a>00039             (position + search_string.size() == m_text.size() || is_word_delimiter(m_text[position + search_string.size()])))
+<a name="l00040"></a>00040         {
+<a name="l00041"></a>00041             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00042"></a>00042         }
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044         position = m_text.find(search_string, position + 1);
+<a name="l00045"></a>00045     }
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00048"></a>00048 }
+</pre></div></p>
 
 </div>
 </div>
@@ -211,6 +278,13 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 <p>Stream the verse to an output stream. </p>
 
+<p>Definition at line <a class="el" href="_verse_8cpp_source.html#l00072">72</a> of file <a class="el" href="_verse_8cpp_source.html">Verse.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00073"></a>00073 {
+<a name="l00074"></a>00074     out &lt;&lt; m_book &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; m_chapter &lt;&lt; <span class="stringliteral">&quot;:&quot;</span> &lt;&lt; m_verse &lt;&lt; std::endl &lt;&lt; m_text &lt;&lt; std::endl;
+<a name="l00075"></a>00075 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a96f4e7922c08e2f72201aac7c91fb2a9"></a><!-- doxytag: member="BibleDatabase::Verse::get_book" ref="a96f4e7922c08e2f72201aac7c91fb2a9" args="() const " -->
@@ -229,6 +303,11 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <div class="memdoc">
 
 <p>Get the book of this verse. </p>
+
+<p>Definition at line <a class="el" href="_verse_8h_source.html#l00044">44</a> of file <a class="el" href="_verse_8h_source.html">Verse.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00044"></a>00044 { <span class="keywordflow">return</span> m_book; }
+</pre></div></p>
 
 </div>
 </div>
@@ -249,6 +328,11 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 <p>Get the chapter of this verse. </p>
 
+<p>Definition at line <a class="el" href="_verse_8h_source.html#l00047">47</a> of file <a class="el" href="_verse_8h_source.html">Verse.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00047"></a>00047 { <span class="keywordflow">return</span> m_chapter; }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a99d5a3897087ca02f49552ee278d3cf9"></a><!-- doxytag: member="BibleDatabase::Verse::get_text" ref="a99d5a3897087ca02f49552ee278d3cf9" args="() const " -->
@@ -267,6 +351,11 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <div class="memdoc">
 
 <p>Get the text of the verse. </p>
+
+<p>Definition at line <a class="el" href="_verse_8h_source.html#l00038">38</a> of file <a class="el" href="_verse_8h_source.html">Verse.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00038"></a>00038 { <span class="keywordflow">return</span> m_text; }
+</pre></div></p>
 
 </div>
 </div>
@@ -287,6 +376,11 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 <p>Get the ID for this verse, which is unique to the <a class="el" href="class_bible_database_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> where the verse lives. </p>
 
+<p>Definition at line <a class="el" href="_verse_8h_source.html#l00035">35</a> of file <a class="el" href="_verse_8h_source.html">Verse.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00035"></a>00035 {<span class="keywordflow">return</span> m_unique_id; }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="abc272d33c0e17d97823e9d8e098e07f0"></a><!-- doxytag: member="BibleDatabase::Verse::get_verse" ref="abc272d33c0e17d97823e9d8e098e07f0" args="() const " -->
@@ -306,14 +400,19 @@ std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 <p>Get the verse number of this verse. </p>
 
+<p>Definition at line <a class="el" href="_verse_8h_source.html#l00050">50</a> of file <a class="el" href="_verse_8h_source.html">Verse.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00050"></a>00050 { <span class="keywordflow">return</span> m_verse; }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/<a class="el" href="_verse_8h_source.html">Verse.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/<a class="el" href="_verse_8cpp.html">Verse.cpp</a></li>
+<li>BibleDatabase/<a class="el" href="_verse_8h_source.html">Verse.h</a></li>
+<li>BibleDatabase/<a class="el" href="_verse_8cpp_source.html">Verse.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:25 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

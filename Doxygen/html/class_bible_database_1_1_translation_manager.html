@@ -58,6 +58,8 @@ boost::shared_ptr<br class="typebreak"/>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class represents a collection of read-only translations. </p>
+
+<p>Definition at line <a class="el" href="_translation_manager_8h_source.html#l00017">17</a> of file <a class="el" href="_translation_manager_8h_source.html">TranslationManager.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="af618fe62f08908bb1415cd2ea93186f4"></a><!-- doxytag: member="BibleDatabase::TranslationManager::TranslationManager" ref="af618fe62f08908bb1415cd2ea93186f4" args="()" -->
 <div class="memitem">
@@ -75,6 +77,13 @@ boost::shared_ptr<br class="typebreak"/>
 <div class="memdoc">
 
 <p>Create a new instance of the <a class="el" href="class_bible_database_1_1_translation_manager.html" title="This class represents a collection of read-only translations.">TranslationManager</a> class. </p>
+
+<p>Definition at line <a class="el" href="_translation_manager_8cpp_source.html#l00008">8</a> of file <a class="el" href="_translation_manager_8cpp_source.html">TranslationManager.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00009"></a>00009 {
+<a name="l00010"></a>00010     m_verse_tree = boost::shared_ptr&lt;VerseTreeItem&gt;(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a>(<span class="stringliteral">&quot;&quot;</span>, -1));
+<a name="l00011"></a>00011 }
+</pre></div></p>
 
 </div>
 </div>
@@ -97,6 +106,17 @@ boost::shared_ptr<br class="typebreak"/>
 
 <p>Add a translation to the <a class="el" href="class_bible_database_1_1_translation_manager.html" title="This class represents a collection of read-only translations.">TranslationManager</a>. </p>
 
+<p>Definition at line <a class="el" href="_translation_manager_8cpp_source.html#l00013">13</a> of file <a class="el" href="_translation_manager_8cpp_source.html">TranslationManager.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00014"></a>00014 {
+<a name="l00015"></a>00015     <span class="keywordflow">if</span> (!this-&gt;contains_translation(translation-&gt;get_long_name()))
+<a name="l00016"></a>00016     {
+<a name="l00017"></a>00017         m_translations[translation-&gt;get_long_name()] = translation;
+<a name="l00018"></a>00018         m_verse_tree-&gt;add_child(translation-&gt;get_verse_item_tree(), <a class="code" href="class_bible_database_1_1_verse_tree_item.html#ae3cc90e9eb3c4175b8598046f130462ca0f7e716b6a31072d4138daea3f363934">VerseTreeItem::translation</a>);
+<a name="l00019"></a>00019     }
+<a name="l00020"></a>00020 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="aa14a318878eaab815f881632dc6c325e"></a><!-- doxytag: member="BibleDatabase::TranslationManager::at" ref="aa14a318878eaab815f881632dc6c325e" args="(const std::string &amp;translation_long_name) const " -->
@@ -117,6 +137,20 @@ boost::shared_ptr<br class="typebreak"/>
 
 <p>Get the <a class="el" href="class_bible_database_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> with the given name. </p>
 
+<p>Definition at line <a class="el" href="_translation_manager_8cpp_source.html#l00022">22</a> of file <a class="el" href="_translation_manager_8cpp_source.html">TranslationManager.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00023"></a>00023 {
+<a name="l00024"></a>00024     <span class="keywordflow">if</span> (this-&gt;contains_translation(translation_long_name))
+<a name="l00025"></a>00025     {
+<a name="l00026"></a>00026         <span class="keywordflow">return</span> m_translations.find(translation_long_name)-&gt;second;
+<a name="l00027"></a>00027     }
+<a name="l00028"></a>00028     <span class="keywordflow">else</span>
+<a name="l00029"></a>00029     {
+<a name="l00030"></a>00030         <span class="keywordflow">throw</span> <a class="code" href="class_bible_database_1_1_translation_not_found.html" title="This class represents an exception that is thrown when a Translation object of the...">TranslationNotFound</a>();
+<a name="l00031"></a>00031     }
+<a name="l00032"></a>00032 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="abadb7edade8a198a64b6d26c13822603"></a><!-- doxytag: member="BibleDatabase::TranslationManager::begin" ref="abadb7edade8a198a64b6d26c13822603" args="() const " -->
@@ -135,6 +169,13 @@ boost::shared_ptr<br class="typebreak"/>
 <div class="memdoc">
 
 <p>Get the starting iterator in the collection of <a class="el" href="class_bible_database_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> objects. </p>
+
+<p>Definition at line <a class="el" href="_translation_manager_8cpp_source.html#l00044">44</a> of file <a class="el" href="_translation_manager_8cpp_source.html">TranslationManager.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00045"></a>00045 {
+<a name="l00046"></a>00046     <span class="keywordflow">return</span> <a class="code" href="class_bible_database_1_1_translation_iterator.html" title="This class represents an iterator which is used to iterate the translations in the...">TranslationIterator</a>(m_translations.begin());
+<a name="l00047"></a>00047 }
+</pre></div></p>
 
 </div>
 </div>
@@ -155,6 +196,13 @@ boost::shared_ptr<br class="typebreak"/>
 
 <p>Get the end iterator in the collection of <a class="el" href="class_bible_database_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> objects. </p>
 
+<p>Definition at line <a class="el" href="_translation_manager_8cpp_source.html#l00049">49</a> of file <a class="el" href="_translation_manager_8cpp_source.html">TranslationManager.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00050"></a>00050 {
+<a name="l00051"></a>00051     <span class="keywordflow">return</span> <a class="code" href="class_bible_database_1_1_translation_iterator.html" title="This class represents an iterator which is used to iterate the translations in the...">TranslationIterator</a>(m_translations.end());
+<a name="l00052"></a>00052 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="ac79678e2ac5628a54a2d298e58dee5da"></a><!-- doxytag: member="BibleDatabase::TranslationManager::get_verse_item_tree" ref="ac79678e2ac5628a54a2d298e58dee5da" args="() const " -->
@@ -174,14 +222,21 @@ boost::shared_ptr<br class="typebreak"/>
 
 <p>Get the <a class="el" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a> for the <a class="el" href="class_bible_database_1_1_translation_manager.html" title="This class represents a collection of read-only translations.">TranslationManager</a>. This object represents the root of the verse tree used for browsing. </p>
 
+<p>Definition at line <a class="el" href="_translation_manager_8cpp_source.html#l00034">34</a> of file <a class="el" href="_translation_manager_8cpp_source.html">TranslationManager.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00035"></a>00035 {
+<a name="l00036"></a>00036     <span class="keywordflow">return</span> m_verse_tree;
+<a name="l00037"></a>00037 }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/<a class="el" href="_translation_manager_8h_source.html">TranslationManager.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/<a class="el" href="_translation_manager_8cpp.html">TranslationManager.cpp</a></li>
+<li>BibleDatabase/<a class="el" href="_translation_manager_8h_source.html">TranslationManager.h</a></li>
+<li>BibleDatabase/<a class="el" href="_translation_manager_8cpp_source.html">TranslationManager.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:25 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

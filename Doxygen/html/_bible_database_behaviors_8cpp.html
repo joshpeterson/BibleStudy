@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>BibleStudy: C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/BibleDatabaseBehaviors.cpp File Reference</title>
+<title>BibleStudy: BibleDatabaseBehaviors/BibleDatabaseBehaviors.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -25,13 +25,15 @@
   </div>
 </div>
 <div class="contents">
-<h1>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/BibleDatabaseBehaviors.cpp File Reference</h1><code>#include &lt;cppunit/extensions/TestFactoryRegistry.h&gt;</code><br/>
+<h1>BibleDatabaseBehaviors/BibleDatabaseBehaviors.cpp File Reference</h1><code>#include &lt;cppunit/extensions/TestFactoryRegistry.h&gt;</code><br/>
 <code>#include &lt;cppunit/ui/text/TestRunner.h&gt;</code><br/>
 <code>#include &quot;<a class="el" href="_behavior_driven_design_test_8h_source.html">BehaviorDrivenDesignTest.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_translation_loader_behavior_8h_source.html">TranslationLoaderBehavior.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>&quot;</code><br/>
+
+<p><a href="_bible_database_behaviors_8cpp_source.html">Go to the source code of this file.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_bible_database_behaviors_8cpp.html#afffd56007433bdbabc396e0d30f3254d">CPPUNIT_TEST_SUITE_REGISTRATION</a> (<a class="el" href="class_bible_database_behaviors_1_1_behavior_driven_design_test.html">BehaviorDrivenDesignTest</a>)</td></tr>
@@ -147,10 +149,23 @@
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_bible_database_behaviors_8cpp_source.html#l00019">19</a> of file <a class="el" href="_bible_database_behaviors_8cpp_source.html">BibleDatabaseBehaviors.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00020"></a>00020 {
+<a name="l00021"></a>00021     CppUnit::TextUi::TestRunner runner;
+<a name="l00022"></a>00022     CppUnit::TestFactoryRegistry &amp;registry = CppUnit::TestFactoryRegistry::getRegistry();
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024     runner.addTest(registry.makeTest());
+<a name="l00025"></a>00025     <span class="keywordtype">bool</span> testStatus = runner.run(<span class="stringliteral">&quot;&quot;</span>, <span class="keyword">false</span>);
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027     <span class="keywordflow">return</span> testStatus ? 0 : 1;
+<a name="l00028"></a>00028 }
+</pre></div></p>
+
 </div>
 </div>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:27 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:24 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

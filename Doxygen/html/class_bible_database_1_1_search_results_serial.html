@@ -73,6 +73,8 @@ std::vector&lt; <a class="el" href="class_bible_database_1_1_verse_display.html"
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class implements the <a class="el" href="class_bible_database_1_1_i_search_results.html" title="This class represents an interface for accumulating translation search results.">ISearchResults</a> interface using a serial linear search. </p>
 <p>See the document for <a class="el" href="class_bible_database_1_1_i_search_results.html" title="This class represents an interface for accumulating translation search results.">ISearchResults</a> for details about the individual members of this class. </p>
+
+<p>Definition at line <a class="el" href="_search_results_serial_8h_source.html#l00018">18</a> of file <a class="el" href="_search_results_serial_8h_source.html">SearchResultsSerial.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa3cbb6b265a551ece35c726e31116fd1"></a><!-- doxytag: member="BibleDatabase::SearchResultsSerial::SearchResultsSerial" ref="aa3cbb6b265a551ece35c726e31116fd1" args="(std::string search_string)" -->
 <div class="memitem">
@@ -91,6 +93,15 @@ std::vector&lt; <a class="el" href="class_bible_database_1_1_verse_display.html"
 <div class="memdoc">
 
 <p>Create a new instance of the <a class="el" href="class_bible_database_1_1_search_results_serial.html" title="This class implements the ISearchResults interface using a serial linear search.">SearchResultsSerial</a> class. </p>
+
+<p>Definition at line <a class="el" href="_search_results_serial_8cpp_source.html#l00005">5</a> of file <a class="el" href="_search_results_serial_8cpp_source.html">SearchResultsSerial.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00005"></a>00005                                                                 :
+<a name="l00006"></a>00006     m_search_string(search_string)
+<a name="l00007"></a>00007 {
+<a name="l00008"></a>00008 }
+
+</pre></div></p>
 
 </div>
 </div>
@@ -124,6 +135,13 @@ std::vector&lt; <a class="el" href="class_bible_database_1_1_verse_display.html"
 
 <p>Implements <a class="el" href="class_bible_database_1_1_i_search_results.html#a941576598b06ea39551286f15c3a569c">BibleDatabase::ISearchResults</a>.</p>
 
+<p>Definition at line <a class="el" href="_search_results_serial_8cpp_source.html#l00010">10</a> of file <a class="el" href="_search_results_serial_8cpp_source.html">SearchResultsSerial.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00011"></a>00011 {
+<a name="l00012"></a>00012     m_matching_verses.push_back(<a class="code" href="class_bible_database_1_1_verse_display.html" title="This class respresents the information necessary to display a given verse. This include...">VerseDisplay</a>(translation_long_name, unique_verse_id, 0));
+<a name="l00013"></a>00013 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a79b27038bdfe6346d365855f22c359a6"></a><!-- doxytag: member="BibleDatabase::SearchResultsSerial::at" ref="a79b27038bdfe6346d365855f22c359a6" args="(int index) const " -->
@@ -146,6 +164,11 @@ std::vector&lt; <a class="el" href="class_bible_database_1_1_verse_display.html"
 
 <p>Implements <a class="el" href="class_bible_database_1_1_i_search_results.html#a48e79f3ba95d88bec2cf6941684d6949">BibleDatabase::ISearchResults</a>.</p>
 
+<p>Definition at line <a class="el" href="_search_results_serial_8h_source.html#l00028">28</a> of file <a class="el" href="_search_results_serial_8h_source.html">SearchResultsSerial.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00028"></a>00028 { <span class="keywordflow">return</span> m_matching_verses.at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>).get_verse_id(); }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a0f677168a0fe10d47f5c5df5930982e5"></a><!-- doxytag: member="BibleDatabase::SearchResultsSerial::begin" ref="a0f677168a0fe10d47f5c5df5930982e5" args="()" -->
@@ -166,6 +189,11 @@ std::vector&lt; <a class="el" href="class_bible_database_1_1_verse_display.html"
 <p>Get the starting iterator of the collection of matching verses. </p>
 
 <p>Implements <a class="el" href="class_bible_database_1_1_i_search_results.html#a4f577624e9852ea3e1ff40b93e3cab5d">BibleDatabase::ISearchResults</a>.</p>
+
+<p>Definition at line <a class="el" href="_search_results_serial_8h_source.html#l00030">30</a> of file <a class="el" href="_search_results_serial_8h_source.html">SearchResultsSerial.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00030"></a>00030 { <span class="keywordflow">return</span> m_matching_verses.begin(); }
+</pre></div></p>
 
 </div>
 </div>
@@ -188,6 +216,11 @@ std::vector&lt; <a class="el" href="class_bible_database_1_1_verse_display.html"
 
 <p>Implements <a class="el" href="class_bible_database_1_1_i_search_results.html#a0081b32e8215a43abb277d0aa697df7e">BibleDatabase::ISearchResults</a>.</p>
 
+<p>Definition at line <a class="el" href="_search_results_serial_8h_source.html#l00031">31</a> of file <a class="el" href="_search_results_serial_8h_source.html">SearchResultsSerial.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00031"></a>00031 { <span class="keywordflow">return</span> m_matching_verses.end(); }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a0ba287d1145b69537969e88a3514560a"></a><!-- doxytag: member="BibleDatabase::SearchResultsSerial::get_search_string" ref="a0ba287d1145b69537969e88a3514560a" args="() const " -->
@@ -209,6 +242,11 @@ std::vector&lt; <a class="el" href="class_bible_database_1_1_verse_display.html"
 
 <p>Implements <a class="el" href="class_bible_database_1_1_i_search_results.html#aa40228ed9b7101c307e8212162acb975">BibleDatabase::ISearchResults</a>.</p>
 
+<p>Definition at line <a class="el" href="_search_results_serial_8h_source.html#l00026">26</a> of file <a class="el" href="_search_results_serial_8h_source.html">SearchResultsSerial.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00026"></a>00026 { <span class="keywordflow">return</span> m_search_string; }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="af57969ac7857b7ca9e1913a9c0ac3858"></a><!-- doxytag: member="BibleDatabase::SearchResultsSerial::num_results" ref="af57969ac7857b7ca9e1913a9c0ac3858" args="() const " -->
@@ -229,6 +267,11 @@ std::vector&lt; <a class="el" href="class_bible_database_1_1_verse_display.html"
 <p>Get the number of matching verses for this search string. </p>
 
 <p>Implements <a class="el" href="class_bible_database_1_1_i_search_results.html#a3deecd4dda211f39558ddfe44229df37">BibleDatabase::ISearchResults</a>.</p>
+
+<p>Definition at line <a class="el" href="_search_results_serial_8h_source.html#l00027">27</a> of file <a class="el" href="_search_results_serial_8h_source.html">SearchResultsSerial.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00027"></a>00027 { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_matching_verses.size()); }
+</pre></div></p>
 
 </div>
 </div>
@@ -252,14 +295,19 @@ std::vector&lt; <a class="el" href="class_bible_database_1_1_verse_display.html"
 
 <p>Implements <a class="el" href="class_bible_database_1_1_i_search_results.html#a481d62cca67d23335463b366c02a5e92">BibleDatabase::ISearchResults</a>.</p>
 
+<p>Definition at line <a class="el" href="_search_results_serial_8h_source.html#l00029">29</a> of file <a class="el" href="_search_results_serial_8h_source.html">SearchResultsSerial.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00029"></a>00029 { <span class="keywordflow">return</span> m_matching_verses.at(<a class="code" href="namespace_k_j_v_parser.html#a809d2baacbbd8bcdfb90a741ae5792ed">index</a>).get_translation(); }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/<a class="el" href="_search_results_serial_8h_source.html">SearchResultsSerial.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/<a class="el" href="_search_results_serial_8cpp.html">SearchResultsSerial.cpp</a></li>
+<li>BibleDatabase/<a class="el" href="_search_results_serial_8h_source.html">SearchResultsSerial.h</a></li>
+<li>BibleDatabase/<a class="el" href="_search_results_serial_8cpp_source.html">SearchResultsSerial.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:25 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

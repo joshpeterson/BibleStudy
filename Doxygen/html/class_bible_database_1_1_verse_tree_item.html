@@ -69,6 +69,8 @@ boost::shared_ptr<br class="typebreak"/>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class is used to represent a verse and its relationship to other verses in a <a class="el" href="class_bible_database_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> object that allow it to be displayed in a tree view. </p>
+
+<p>Definition at line <a class="el" href="_verse_tree_item_8h_source.html#l00013">13</a> of file <a class="el" href="_verse_tree_item_8h_source.html">VerseTreeItem.h</a>.</p>
 <hr/><h2>Member Enumeration Documentation</h2>
 <a class="anchor" id="ae3cc90e9eb3c4175b8598046f130462c"></a><!-- doxytag: member="BibleDatabase::VerseTreeItem::ItemType" ref="ae3cc90e9eb3c4175b8598046f130462c" args="" -->
 <div class="memitem">
@@ -94,6 +96,16 @@ boost::shared_ptr<br class="typebreak"/>
 </table>
 </dd>
 </dl>
+
+<p>Definition at line <a class="el" href="_verse_tree_item_8h_source.html#l00017">17</a> of file <a class="el" href="_verse_tree_item_8h_source.html">VerseTreeItem.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00018"></a>00018     {
+<a name="l00019"></a>00019         <a class="code" href="class_bible_database_1_1_verse_tree_item.html#ae3cc90e9eb3c4175b8598046f130462ca0f7e716b6a31072d4138daea3f363934">translation</a> = 0,
+<a name="l00020"></a>00020         <a class="code" href="class_bible_database_1_1_verse_tree_item.html#ae3cc90e9eb3c4175b8598046f130462caac7773934a829c41d5f23932d69aea62">book</a> = 1,
+<a name="l00021"></a>00021         <a class="code" href="class_bible_database_1_1_verse_tree_item.html#ae3cc90e9eb3c4175b8598046f130462ca3dea92f0707dbb05d58c7665202f60b8">chapter</a> = 2,
+<a name="l00022"></a>00022         <a class="code" href="class_bible_database_1_1_verse_tree_item.html#ae3cc90e9eb3c4175b8598046f130462ca8b534808e67dab245327aa7dc5d86a37">verse</a> = 3
+<a name="l00023"></a>00023     };
+</pre></div></p>
 
 </div>
 </div>
@@ -125,6 +137,17 @@ boost::shared_ptr<br class="typebreak"/>
 
 <p>Create a new instance of the <a class="el" href="class_bible_database_1_1_verse_tree_item.html" title="This class is used to represent a verse and its relationship to other verses in a...">VerseTreeItem</a> class. The translation_long_name should be an empty string and the verse_id -1 for a root node in the tree. </p>
 
+<p>Definition at line <a class="el" href="_verse_tree_item_8cpp_source.html#l00007">7</a> of file <a class="el" href="_verse_tree_item_8cpp_source.html">VerseTreeItem.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00007"></a>00007                                                                           :
+<a name="l00008"></a>00008     m_translation_long_name(translation_long_name),
+<a name="l00009"></a>00009     m_verse_id(verse_id),
+<a name="l00010"></a>00010     m_parent(NULL)
+<a name="l00011"></a>00011 {
+<a name="l00012"></a>00012 }
+
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -155,6 +178,18 @@ boost::shared_ptr<br class="typebreak"/>
 
 <p>Add a child item to this node. </p>
 
+<p>Definition at line <a class="el" href="_verse_tree_item_8cpp_source.html#l00014">14</a> of file <a class="el" href="_verse_tree_item_8cpp_source.html">VerseTreeItem.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00015"></a>00015 {
+<a name="l00016"></a>00016     <span class="keywordflow">if</span> (child != NULL)
+<a name="l00017"></a>00017     {
+<a name="l00018"></a>00018         child-&gt;set_parent(<span class="keyword">this</span>);
+<a name="l00019"></a>00019         child-&gt;m_item_type = item_type;
+<a name="l00020"></a>00020         m_children.push_back(child);
+<a name="l00021"></a>00021     }
+<a name="l00022"></a>00022 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a39fa5658c6723f8e4c683e2a24ef1e51"></a><!-- doxytag: member="BibleDatabase::VerseTreeItem::get_child" ref="a39fa5658c6723f8e4c683e2a24ef1e51" args="(int child_index) const " -->
@@ -175,6 +210,16 @@ boost::shared_ptr<br class="typebreak"/>
 
 <p>Get the child node at the given index. </p>
 
+<p>Definition at line <a class="el" href="_verse_tree_item_8cpp_source.html#l00049">49</a> of file <a class="el" href="_verse_tree_item_8cpp_source.html">VerseTreeItem.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00050"></a>00050 {
+<a name="l00051"></a>00051     <span class="keywordflow">if</span> (child_index &lt; static_cast&lt;int&gt;(m_children.size()))
+<a name="l00052"></a>00052         <span class="keywordflow">return</span> m_children[child_index];
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054     <span class="keywordflow">return</span> boost::shared_ptr&lt;VerseTreeItem&gt;();
+<a name="l00055"></a>00055 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a8845584e04601409b0e3c6198dab4668"></a><!-- doxytag: member="BibleDatabase::VerseTreeItem::get_item_type" ref="a8845584e04601409b0e3c6198dab4668" args="() const " -->
@@ -193,6 +238,13 @@ boost::shared_ptr<br class="typebreak"/>
 <div class="memdoc">
 
 <p>Get the type of item for this node. </p>
+
+<p>Definition at line <a class="el" href="_verse_tree_item_8cpp_source.html#l00034">34</a> of file <a class="el" href="_verse_tree_item_8cpp_source.html">VerseTreeItem.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00035"></a>00035 {
+<a name="l00036"></a>00036     <span class="keywordflow">return</span> m_item_type;
+<a name="l00037"></a>00037 }
+</pre></div></p>
 
 </div>
 </div>
@@ -213,6 +265,13 @@ boost::shared_ptr<br class="typebreak"/>
 
 <p>Get the parent of this node. </p>
 
+<p>Definition at line <a class="el" href="_verse_tree_item_8cpp_source.html#l00039">39</a> of file <a class="el" href="_verse_tree_item_8cpp_source.html">VerseTreeItem.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00040"></a>00040 {
+<a name="l00041"></a>00041     <span class="keywordflow">return</span> m_parent;
+<a name="l00042"></a>00042 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="ab49de380e4db6c9d30d7f5ad1c221fe3"></a><!-- doxytag: member="BibleDatabase::VerseTreeItem::get_translation_name" ref="ab49de380e4db6c9d30d7f5ad1c221fe3" args="() const " -->
@@ -231,6 +290,13 @@ boost::shared_ptr<br class="typebreak"/>
 <div class="memdoc">
 
 <p>Get the long name of the <a class="el" href="class_bible_database_1_1_translation.html" title="This class represents a specific translation of the Bible.">Translation</a> object for this node. </p>
+
+<p>Definition at line <a class="el" href="_verse_tree_item_8cpp_source.html#l00024">24</a> of file <a class="el" href="_verse_tree_item_8cpp_source.html">VerseTreeItem.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00025"></a>00025 {
+<a name="l00026"></a>00026     <span class="keywordflow">return</span> m_translation_long_name;
+<a name="l00027"></a>00027 }
+</pre></div></p>
 
 </div>
 </div>
@@ -251,6 +317,13 @@ boost::shared_ptr<br class="typebreak"/>
 
 <p>Get the verse ID for this node. </p>
 
+<p>Definition at line <a class="el" href="_verse_tree_item_8cpp_source.html#l00029">29</a> of file <a class="el" href="_verse_tree_item_8cpp_source.html">VerseTreeItem.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00030"></a>00030 {
+<a name="l00031"></a>00031     <span class="keywordflow">return</span> m_verse_id;
+<a name="l00032"></a>00032 }
+</pre></div></p>
+
 </div>
 </div>
 <a class="anchor" id="a98d4b9c01e25c557f8d43865a377a509"></a><!-- doxytag: member="BibleDatabase::VerseTreeItem::num_children" ref="a98d4b9c01e25c557f8d43865a377a509" args="() const " -->
@@ -269,6 +342,13 @@ boost::shared_ptr<br class="typebreak"/>
 <div class="memdoc">
 
 <p>Get the number of children for this node. </p>
+
+<p>Definition at line <a class="el" href="_verse_tree_item_8cpp_source.html#l00044">44</a> of file <a class="el" href="_verse_tree_item_8cpp_source.html">VerseTreeItem.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00045"></a>00045 {
+<a name="l00046"></a>00046     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_children.size());
+<a name="l00047"></a>00047 }
+</pre></div></p>
 
 </div>
 </div>
@@ -289,14 +369,26 @@ boost::shared_ptr<br class="typebreak"/>
 
 <p>Get the row of this element in its parent node. </p>
 
+<p>Definition at line <a class="el" href="_verse_tree_item_8cpp_source.html#l00062">62</a> of file <a class="el" href="_verse_tree_item_8cpp_source.html">VerseTreeItem.cpp</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00063"></a>00063 {
+<a name="l00064"></a>00064     <span class="keywordflow">if</span> (m_parent)
+<a name="l00065"></a>00065     {
+<a name="l00066"></a>00066         <span class="keywordflow">return</span> std::distance(m_parent-&gt;m_children.begin(), std::find_if(m_parent-&gt;m_children.begin(), m_parent-&gt;m_children.end(), &amp;(*_1) == <span class="keyword">this</span>));
+<a name="l00067"></a>00067     }
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069     <span class="keywordflow">return</span> 0;
+<a name="l00070"></a>00070 }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/<a class="el" href="_verse_tree_item_8h_source.html">VerseTreeItem.h</a></li>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabase/<a class="el" href="_verse_tree_item_8cpp.html">VerseTreeItem.cpp</a></li>
+<li>BibleDatabase/<a class="el" href="_verse_tree_item_8h_source.html">VerseTreeItem.h</a></li>
+<li>BibleDatabase/<a class="el" href="_verse_tree_item_8cpp_source.html">VerseTreeItem.cpp</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:25 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

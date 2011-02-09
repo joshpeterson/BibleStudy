@@ -47,6 +47,9 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsCorrectWithNoContext:</di
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_verse_is_correct_with_no_context.html#ac4398f4c4433c13eb68cf9b4636fb708">VerseIsCorrectWithNoContext</a> (int verse_id)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_verse_is_correct_with_no_context.html#a3a598b8e21fa1994c621297a18d91a1a">ensure_that</a> (const <a class="el" href="class_behavior_driven_design_1_1_world.html">World</a> &amp;world)</td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00062">62</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac4398f4c4433c13eb68cf9b4636fb708"></a><!-- doxytag: member="BibleDatabaseBehaviors::VerseIsCorrectWithNoContext::VerseIsCorrectWithNoContext" ref="ac4398f4c4433c13eb68cf9b4636fb708" args="(int verse_id)" -->
 <div class="memitem">
@@ -63,6 +66,11 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsCorrectWithNoContext:</di
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00065">65</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00065"></a>00065 : m_verse_id(verse_id) {}
+</pre></div></p>
 
 </div>
 </div>
@@ -85,13 +93,21 @@ Inheritance diagram for BibleDatabaseBehaviors::VerseIsCorrectWithNoContext:</di
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_then.html#a3bffcea3036a246faacffbc385bbade4">BehaviorDrivenDesign::IThen</a>.</p>
 
+<p>Definition at line <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html#l00067">67</a> of file <a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00068"></a>00068     {
+<a name="l00069"></a>00069         CPPUNIT_ASSERT_EQUAL(1, static_cast&lt;int&gt;(world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;VerseIsObtainedWithNoContext&gt;()-&gt;get_verses().size()));
+<a name="l00070"></a>00070         CPPUNIT_ASSERT_EQUAL(m_verse_id, world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a891889ce39bd9d3539f0fc8c73665542">GetWhen</a>&lt;VerseIsObtainedWithNoContext&gt;()-&gt;get_verses()[0]-&gt;get_unique_id());
+<a name="l00071"></a>00071     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_translation_first_and_last_verse_behavior_8h_source.html">TranslationFirstAndLastVerseBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

@@ -49,6 +49,9 @@ Inheritance diagram for BibleDatabaseBehaviors::SearchStringIs:</div>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_search_string_is.html#a048c698ce7f81a1f85b082daa880f0a2">occurs</a> (const <a class="el" href="class_behavior_driven_design_1_1_world.html">World</a> &amp;world)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt; &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_search_string_is.html#ac105ca66f71cf1273dd088d825e8e55b">get_search_terms</a> () const </td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00033">33</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ab1fd87c4e538fd0c14fa234cc9318c5e"></a><!-- doxytag: member="BibleDatabaseBehaviors::SearchStringIs::SearchStringIs" ref="ab1fd87c4e538fd0c14fa234cc9318c5e" args="()" -->
 <div class="memitem">
@@ -64,6 +67,11 @@ Inheritance diagram for BibleDatabaseBehaviors::SearchStringIs:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00036">36</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00036"></a>00036 {}
+</pre></div></p>
 
 </div>
 </div>
@@ -83,6 +91,11 @@ Inheritance diagram for BibleDatabaseBehaviors::SearchStringIs:</div>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00038">38</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00038"></a>00038 : m_search_string(search_string) {}
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -100,6 +113,13 @@ Inheritance diagram for BibleDatabaseBehaviors::SearchStringIs:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00045">45</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00046"></a>00046     {
+<a name="l00047"></a>00047         <span class="keywordflow">return</span> m_search_terms;
+<a name="l00048"></a>00048     }
+</pre></div></p>
 
 </div>
 </div>
@@ -121,13 +141,20 @@ Inheritance diagram for BibleDatabaseBehaviors::SearchStringIs:</div>
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_when.html#a4a5d147bf5a379724615b5e2b238db13">BehaviorDrivenDesign::IWhen</a>.</p>
 
+<p>Definition at line <a class="el" href="_search_string_parser_behavior_8h_source.html#l00040">40</a> of file <a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00041"></a>00041     {
+<a name="l00042"></a>00042         m_search_terms = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a8e21725c6623f42fb405f71e37065d4b">GetGiven</a>&lt;DefaultSearchStringParser&gt;()-&gt;get_search_string_parser()-&gt;parse(m_search_string);
+<a name="l00043"></a>00043     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_search_string_parser_behavior_8h_source.html">SearchStringParserBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:28 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

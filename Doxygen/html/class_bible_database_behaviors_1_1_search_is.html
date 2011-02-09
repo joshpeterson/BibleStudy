@@ -49,6 +49,9 @@ Inheritance diagram for BibleDatabaseBehaviors::SearchIs:</div>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_search_is.html#abfced88e4f8bab655a7e2302f0a798b8">occurs</a> (const <a class="el" href="class_behavior_driven_design_1_1_world.html">World</a> &amp;world)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">boost::shared_ptr&lt; <a class="el" href="class_bible_database_1_1_i_search_results.html">ISearchResults</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bible_database_behaviors_1_1_search_is.html#a6eca2453b2a3385d873af7f85f588571">get_search_results</a> () const </td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00017">17</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a9c196b53c0e725fa56c4e1084f9e93bb"></a><!-- doxytag: member="BibleDatabaseBehaviors::SearchIs::SearchIs" ref="a9c196b53c0e725fa56c4e1084f9e93bb" args="()" -->
 <div class="memitem">
@@ -64,6 +67,11 @@ Inheritance diagram for BibleDatabaseBehaviors::SearchIs:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00020">20</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00020"></a>00020 {}
+</pre></div></p>
 
 </div>
 </div>
@@ -92,6 +100,11 @@ Inheritance diagram for BibleDatabaseBehaviors::SearchIs:</div>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00022">22</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00022"></a>00022 : m_search_string(search_string), m_search_option(search_option) {}
+</pre></div></p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -109,6 +122,13 @@ Inheritance diagram for BibleDatabaseBehaviors::SearchIs:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00031">31</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00032"></a>00032     {
+<a name="l00033"></a>00033         <span class="keywordflow">return</span> m_query;
+<a name="l00034"></a>00034     }
+</pre></div></p>
 
 </div>
 </div>
@@ -130,13 +150,22 @@ Inheritance diagram for BibleDatabaseBehaviors::SearchIs:</div>
 
 <p>Implements <a class="el" href="class_behavior_driven_design_1_1_i_when.html#a4a5d147bf5a379724615b5e2b238db13">BehaviorDrivenDesign::IWhen</a>.</p>
 
+<p>Definition at line <a class="el" href="_translation_search_behavior_8h_source.html#l00024">24</a> of file <a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00025"></a>00025     {
+<a name="l00026"></a>00026         m_query = boost::shared_ptr&lt;ISearchResults&gt;(<span class="keyword">new</span> <a class="code" href="class_bible_database_1_1_search_results_serial.html" title="This class implements the ISearchResults interface using a serial linear search.">SearchResultsSerial</a>(m_search_string));
+<a name="l00027"></a>00027         boost::shared_ptr&lt;const Translation&gt; translation = world.<a class="code" href="class_behavior_driven_design_1_1_world.html#a8e21725c6623f42fb405f71e37065d4b">GetGiven</a>&lt;TestTranslation&gt;()-&gt;get_translation();        
+<a name="l00028"></a>00028         translation-&gt;search(m_query, m_search_option);
+<a name="l00029"></a>00029     }
+</pre></div></p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Documents and Settings/Josh/My Documents/BibleStudy/BibleDatabaseBehaviors/<a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a></li>
+<li>BibleDatabaseBehaviors/<a class="el" href="_translation_search_behavior_8h_source.html">TranslationSearchBehavior.h</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Feb 7 07:45:29 2011 for BibleStudy by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Tue Feb 8 20:49:26 2011 for BibleStudy by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
