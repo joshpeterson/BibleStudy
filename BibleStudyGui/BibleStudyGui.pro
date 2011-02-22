@@ -12,6 +12,7 @@ HEADERS += BrowseVersesModel.h
 HEADERS += UIBrowseVersesWidget.h
 HEADERS += QtConnectHelper.h
 HEADERS += BackgroundWorker.h
+HEADERS += Version.h
 
 SOURCES += SearchResultsModel.cpp
 SOURCES += UISearchWidget.cpp
@@ -25,6 +26,8 @@ SOURCES += UIBrowseVersesWidget.cpp
 SOURCES += BackgroundWorker.cpp
 
 DEFINES += _EXPORTING_BIBLE_STUDY_GUI
+
+RESOURCES = BibleStudyGui.qrc
 
 win32 {
     INCLUDEPATH += "$$(BOOST_DIR)"
@@ -47,7 +50,8 @@ win32 {
 }
 
 unix {
-    DESTDIR = "../Output"
-    LIBS += -L"../Output"
+    DEFINES = LINUX
+    DESTDIR = "../Output/lib"
+    LIBS += -L"../Output/lib"
     LIBS += -l"BibleDatabase"
 }

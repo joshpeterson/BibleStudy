@@ -11,6 +11,7 @@
 #include <QKeySequence>
 #include <QMessageBox>
 #include <QTimer>
+#include <QIcon>
 #include "../BibleDatabase/Translation.h"
 #include "../BibleDatabase/TranslationManager.h"
 #include "../BibleDatabase/TranslationLoader.h"
@@ -27,6 +28,7 @@
 #include "UIBrowseVersesWidget.h"
 #include "QtConnectHelper.h"
 #include "BackgroundWorker.h"
+#include "Version.h"
 
 using namespace BibleStudyGui;
 using namespace BibleDatabase;
@@ -49,6 +51,8 @@ UIBibleStudyWidget::UIBibleStudyWidget(boost::shared_ptr<TranslationManager> tra
     m_exit_action(new QAction(tr("E&xit"), this)),
     m_about_action(new QAction(tr("&About"), this))
 {
+    this->setWindowIcon(QIcon(QString(":/icons/BibleStudy.ico")));
+
     this->connect_signals();
     this->set_font();
     this->initialize_widgets();
@@ -117,7 +121,7 @@ void UIBibleStudyWidget::initialize_widgets()
 
 void UIBibleStudyWidget::initialize_status_bar()
 {
-    this->push_status_bar_message(tr("Ready"));
+    this->push_status_bar_message(tr("Ready (Version ") + QString(VERSION ")"));
 }
 
 void UIBibleStudyWidget::initialize_actions()
@@ -185,8 +189,13 @@ void UIBibleStudyWidget::load_translations()
 {
     m_translation_load_timer->stop();
 
+#ifdef LINUX
+    TranslationLoadInformation dr_load_information = {"Douay-Rheims", "../share/BibleStudy/Translations/DR.buf" };
+    TranslationLoadInformation kjv_load_information = {"King James Version", "../share/BibleStudy/Translations/KJV.buf" };
+#else
     TranslationLoadInformation dr_load_information = {"Douay-Rheims", "Translations/DR.buf" };
     TranslationLoadInformation kjv_load_information = {"King James Version", "Translations/KJV.buf" };
+#endif
     
     m_translations_to_load.push_back(dr_load_information);
     m_translations_to_load.push_back(kjv_load_information);

@@ -96,7 +96,11 @@ class TranslationCanBeCreatedFromDisk : public IThen
 public:
     void ensure_that(const World& world)
     {
+#ifdef LINUX
+        std::string translation_file("share/BibleStudy/Translations/TT.buf");
+#else
         std::string translation_file("Translations/TT.buf");
+#endif
         boost::shared_ptr<const Translation> translation = world.GetWhen<TranslationLoaderIsCreated>()->get_loader()->create_translation(translation_file);
         CPPUNIT_ASSERT(translation != NULL);
     }
@@ -107,7 +111,11 @@ class TranslationCannotBeCreated : public IThen
 public:
     void ensure_that(const World& world)
     {
+#ifdef LINUX
+        std::string translation_file("share/BibleStudy/Translations/TT.buf");
+#else
         std::string translation_file("Translations/TT.buf");
+#endif
         boost::shared_ptr<const Translation> translation = world.GetWhen<TranslationLoaderIsCreatedWithNonExistentExecutableDirectory>()->get_loader()->create_translation(translation_file);
         CPPUNIT_ASSERT(translation == NULL);
     }
@@ -118,7 +126,11 @@ class TranslationCannotBeCreatedWithNonExistentTranslationFile : public IThen
 public:
     void ensure_that(const World& world)
     {
-        std::string translation_file("Translations/foo.buf");
+#ifdef LINUX
+        std::string translation_file("share/BibleStudy/Translations/foo.buf");
+#else
+        std::string translation_file("share/BibleStudy/Translations/foo.buf");
+#endif
         boost::shared_ptr<const Translation> translation = world.GetWhen<TranslationLoaderIsCreated>()->get_loader()->create_translation(translation_file);
         CPPUNIT_ASSERT(translation == NULL);
     }
