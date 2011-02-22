@@ -50,7 +50,7 @@ win32 {
     INCLUDEPATH += "$$(GOOGLE_PROTOBUF_DIR)\include"
     INCLUDEPATH += "$$(PYTHON_DIR)\include"
     
-    QMAKE_POST_LINK = copy /y "$(TargetPath)" "$(TargetDir)\$(TargetName).pyd"
+    QMAKE_POST_LINK = copy /y \"$(TargetPath)\" \"$(TargetDir)\$(TargetName).pyd\"
     
 # Debug mode specific settings
     build_pass:CONFIG(debug, debug|release) {
