@@ -21,5 +21,5 @@ BOOST_PYTHON_MODULE(BibleDatabase)
         .def("resume", &Translation::resume)
         .def("short_name", &Translation::get_short_name)
         .def("long_name", &Translation::get_long_name)
-        .def("get_verse", get_verse_1, return_value_policy<manage_new_object>());
+        .def("get_verse", get_verse_1, return_value_policy<reference_existing_object>());
 }
