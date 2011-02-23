@@ -6,5 +6,9 @@ using namespace boost::python;
 BOOST_PYTHON_MODULE(BibleDatabase)
 {
     class_<BibleDatabase::Verse, boost::noncopyable>("Verse", init<const std::string&, int, int, const std::string&, int>())
-        .def("case_sensitive_match", &BibleDatabase::Verse::case_sensitive_match);
+        .def("book", &BibleDatabase::Verse::get_book)
+        .def("chapter", &BibleDatabase::Verse::get_chapter)
+        .def("verse", &BibleDatabase::Verse::get_verse)
+        .def("text", &BibleDatabase::Verse::get_text)
+        .def("id", &BibleDatabase::Verse::get_unique_id);
 }
