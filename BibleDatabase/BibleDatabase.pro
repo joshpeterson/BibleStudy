@@ -31,7 +31,7 @@ SOURCES += TranslationManager.cpp
 SOURCES += TranslationLoader.cpp
 SOURCES += SearchStringParser.cpp
 SOURCES += CommandLoadTranslation.cpp
-SOURCES += PythonVerseWrapper.cpp
+SOURCES += PythonWrapper.cpp
 
 DEFINES += _EXPORTING_BIBLE_DATABASE
 
