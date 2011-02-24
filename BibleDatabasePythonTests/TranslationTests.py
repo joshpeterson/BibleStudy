@@ -1,5 +1,6 @@
 import unittest
 from BibleDatabase import Translation
+from BibleDatabase import SearchResultsSerial
 
 class TestTranslation(unittest.TestCase):
     def setUp(self):
@@ -17,6 +18,13 @@ class TestTranslation(unittest.TestCase):
         self.assertEquals(verse.book, "Genesis")
         self.assertEquals(verse.chapter, 1)
         self.assertEquals(verse.verse, 4)
+
+    def testSearch(self):
+        results = SearchResultsSerial("beginning")
+        self.translation.search(results, 0)
+        self.assertEquals(results.num_results(), 7)
+        self.assertEquals(results.at(0), 0)
+        self.assertEquals(results.translation_at(0), "Test Translation")
 
 if __name__ == "__main__":
     unittest.main()

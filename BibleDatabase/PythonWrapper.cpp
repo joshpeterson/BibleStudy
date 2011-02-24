@@ -47,6 +47,12 @@ struct ISearchResultsWrapper : ISearchResults, wrapper<ISearchResults>
 
 BOOST_PYTHON_MODULE(BibleDatabase)
 {
+    class_<ISearchResultsWrapper, boost::noncopyable>("ISearchResults")
+        .def("get_search_string", pure_virtual(&ISearchResults::get_search_string))
+        .def("num_results", pure_virtual(&ISearchResults::num_results))
+        .def("at", pure_virtual(&ISearchResults::at))
+        .def("translation_at", pure_virtual(&ISearchResults::translation_at));
+
     class_<Verse, boost::noncopyable>("Verse", init<const std::string&, int, int, const std::string&, int>())
         .add_property("book", &Verse::get_book)
         .add_property("chapter", &Verse::get_chapter)
@@ -60,13 +66,8 @@ BOOST_PYTHON_MODULE(BibleDatabase)
         .def("resume", &Translation::resume)
         .add_property("short_name", &Translation::get_short_name)
         .add_property("long_name", &Translation::get_long_name)
-        .def("get_verse", get_verse_1, return_value_policy<reference_existing_object>());
-
-    class_<ISearchResultsWrapper, boost::noncopyable>("ISearchResults")
-        .def("get_search_string", pure_virtual(&ISearchResults::get_search_string))
-        .def("num_results", pure_virtual(&ISearchResults::num_results))
-        .def("at", pure_virtual(&ISearchResults::at))
-        .def("translation_at", pure_virtual(&ISearchResults::translation_at));
+        .def("get_verse", get_verse_1, return_value_policy<reference_existing_object>())
+        .def("search", &Translation::search);
 
     class_<SearchResultsSerial, boost::noncopyable, bases<ISearchResults> >("SearchResultsSerial", init<std::string>());
 }
