@@ -66,6 +66,7 @@ BOOST_PYTHON_MODULE(BibleDatabase)
         .def("resume", &Translation::resume)
         .add_property("short_name", &Translation::get_short_name)
         .add_property("long_name", &Translation::get_long_name)
+        .add_property("num_verses", &Translation::num_verses)
         .def("get_verse", get_verse_1, return_value_policy<reference_existing_object>())
         .def("search", &Translation::search);
 

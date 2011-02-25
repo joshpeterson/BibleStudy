@@ -19,6 +19,9 @@ class TestTranslation(unittest.TestCase):
         self.assertEquals(verse.chapter, 1)
         self.assertEquals(verse.verse, 4)
 
+    def testNumVerses(self):
+        self.assertEquals(self.translation.num_verses, 2741)
+
     def testSearch(self):
         results = SearchResultsSerial("beginning")
         self.translation.search(results, 0)
