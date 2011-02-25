@@ -24,7 +24,7 @@ QVariant BrowseVersesModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     boost::shared_ptr<const Translation> translation = m_translation_manager->at(item->get_translation_name());
-    if (index.row() >= translation->num_entries())
+    if (index.row() >= translation->num_verses())
         return QVariant();
 
     if (role == Qt::DisplayRole)

@@ -47,7 +47,7 @@ public:
     BIBLE_DATABASE_EXPORT std::vector<boost::shared_ptr<const Verse> > get_verse(int unique_id, int num_entries_context) const;
 
     //! Get the number of verses in the translation.
-    BIBLE_DATABASE_EXPORT int num_entries() const { return static_cast<int>(m_verses.size()); }
+    BIBLE_DATABASE_EXPORT int num_verses() const { return static_cast<int>(m_verses.size()); }
 
     //! Get the root item of the tree representation of this translation.
     BIBLE_DATABASE_EXPORT boost::shared_ptr<VerseTreeItem> get_verse_item_tree() const;
