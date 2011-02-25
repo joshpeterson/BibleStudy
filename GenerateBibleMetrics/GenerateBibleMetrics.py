@@ -20,6 +20,14 @@ class WordDataTest(unittest.TestCase):
         wordData.add("foo", 15)
         self.assertEquals(wordData.verses("foo"), [3, 15])
 
+    def testGetCountForWordThatHasNotBeenAdded(self):
+        wordData = WordData()
+        self.assertEquals(wordData.count("foo"), 0)
+
+    def testGetVersesForWordThatHasNotBeenAdded(self):
+        wordData = WordData()
+        self.assertEquals(wordData.verses("foo"), [])
+
 class WordData:
     def __init__(self):
         self.words = {}
@@ -31,10 +39,45 @@ class WordData:
             self.words[word] = [verse_id]
 
     def count(self, word):
-        return len(self.words[word])
+        if word in self.words:
+            return len(self.words[word])
+        else:
+            return 0
 
     def verses(self, word):
-        return self.words[word]
+        if word in self.words:
+            return self.words[word]
+        else:
+            return []
+
+class WordSearcherTest(unittest.TestCase):
+    def setUp(self):
+        self.translation = BibleDatabase.Translation()
+        self.translation.resume("../Translations/TT.buf")
+
+    def testIterateOneWordFirstFour(self):
+        searcher = WordSearcher(self.translation)
+        self.assertEquals(searcher.findWords(1, 4), ["In", "the", "beginning", "God"])
+
+    def testIterateOneWordFirstFive(self):
+        searcher = WordSearcher(self.translation)
+        self.assertEquals(searcher.findWords(1, 5), ["In", "the", "beginning", "God", "created"])
+
+class WordSearcher:
+    def __init__(self, translation):
+        self.translation = translation
+
+    def findWords(self, numWordsInEntry, numEntries):
+        words = []
+        for verse_id in range(0, self.translation.num_verses):
+            verse = self.translation.get_verse(verse_id)
+            verse_words = verse.text.split(" ")
+            for word in verse_words:
+                words.append(word)
+                if len(words) == numEntries:
+                    return words
+
+        return words
 
 if __name__ == "__main__":
     if len(sys.argv) == 2 and sys.argv[1] == "test":
