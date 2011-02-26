@@ -50,34 +50,48 @@ class WordData:
         else:
             return []
 
-class WordSearcherTest(unittest.TestCase):
-    def setUp(self):
-        self.translation = BibleDatabase.Translation()
-        self.translation.resume("../Translations/TT.buf")
+class WordSplitterTest(unittest.TestCase):
+    def testSplitIntoSingleWordsShort(self):
+        splitter = WordSplitter()
+        self.assertEquals(splitter.findWords("In the beginning God", 1), ["In", "the", "beginning", "God"])
 
-    def testIterateOneWordFirstFour(self):
-        searcher = WordSearcher(self.translation)
-        self.assertEquals(searcher.findWords(1, 4), ["In", "the", "beginning", "God"])
+    def testSplitIntoSingleWordsLong(self):
+        splitter = WordSplitter()
+        self.assertEquals(splitter.findWords("In the beginning God created the earth", 1), ["In", "the", "beginning", "God", "created", "the", "earth"])
 
-    def testIterateOneWordFirstFive(self):
-        searcher = WordSearcher(self.translation)
-        self.assertEquals(searcher.findWords(1, 5), ["In", "the", "beginning", "God", "created"])
+    def testSplitIntoDoubleWords(self):
+        splitter = WordSplitter()
+        self.assertEquals(splitter.findWords("In the beginning God", 2), ["In the", "the beginning", "beginning God"])
 
-class WordSearcher:
-    def __init__(self, translation):
-        self.translation = translation
+    def testSplitInto3Words(self):
+        splitter = WordSplitter()
+        self.assertEquals(splitter.findWords("In the beginning God", 3), ["In the beginning", "the beginning God"])
 
-    def findWords(self, numWordsInEntry, numEntries):
-        words = []
-        for verse_id in range(0, self.translation.num_verses):
-            verse = self.translation.get_verse(verse_id)
-            verse_words = verse.text.split(" ")
-            for word in verse_words:
-                words.append(word)
-                if len(words) == numEntries:
-                    return words
+    def testSplitInto3WordsLong(self):
+        splitter = WordSplitter()
+        self.assertEquals(splitter.findWords("In the beginning God created the earth", 3), ["In the beginning", "the beginning God", "beginning God created", "God created the", "created the earth"])
 
-        return words
+    def testWordListToString(self):
+        splitter = WordSplitter()
+        self.assertEquals(splitter.wordListToString(["foo", "bar", "baz"]), "foo bar baz")
+
+class WordSplitter:
+    def findWords(self, text, numWordsInEachEntry):
+        wordList = []
+        individual_words = text.split(" ")
+
+        for i in range(0, len(individual_words)):
+            if i + numWordsInEachEntry-1 < len(individual_words):
+                wordList.append(self.wordListToString(individual_words[i:i + numWordsInEachEntry]))
+
+        return wordList
+
+    def wordListToString(self, wordList):
+        output = ""
+        for word in wordList:
+            output += word + " "
+
+        return output[:len(output)-1]
 
 if __name__ == "__main__":
     if len(sys.argv) == 2 and sys.argv[1] == "test":
