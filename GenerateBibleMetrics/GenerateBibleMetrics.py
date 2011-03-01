@@ -4,33 +4,40 @@ import BibleDatabase
 
 class WordDataTest(unittest.TestCase):
     def testAddWordData(self):
-        wordData = WordData()
+        wordData = WordData("Foo", "F")
         wordData.add("foo", 1)
         self.assertEquals(wordData.count("foo"), 1)
 
     def testAddWordTwice(self):
-        wordData = WordData()
+        wordData = WordData("Foo", "F")
         wordData.add("foo", 3)
         wordData.add("foo", 15)
         self.assertEquals(wordData.count("foo"), 2)
 
     def testGetWordVerseIds(self):
-        wordData = WordData()
+        wordData = WordData("Foo", "F")
         wordData.add("foo", 3)
         wordData.add("foo", 15)
         self.assertEquals(wordData.verses("foo"), [3, 15])
 
     def testGetCountForWordThatHasNotBeenAdded(self):
-        wordData = WordData()
+        wordData = WordData("Foo", "F")
         self.assertEquals(wordData.count("foo"), 0)
 
     def testGetVersesForWordThatHasNotBeenAdded(self):
-        wordData = WordData()
+        wordData = WordData("Foo", "F")
         self.assertEquals(wordData.verses("foo"), [])
 
+    def testWordDataNames(self):
+        wordData = WordData("Foo", "F")
+        self.assertEquals(wordData.longName, "Foo")
+        self.assertEquals(wordData.shortName, "F")
+
 class WordData:
-    def __init__(self):
+    def __init__(self, longName, shortName):
         self.words = {}
+        self.longName = longName
+        self.shortName = shortName
 
     def add(self, word, verse_id):
         if word in self.words:
@@ -74,6 +81,36 @@ class WordSplitterTest(unittest.TestCase):
     def testWordListToString(self):
         splitter = WordSplitter()
         self.assertEquals(splitter.wordListToString(["foo", "bar", "baz"]), "foo bar baz")
+
+class VerseIteratorTest(unittest.TestCase):
+    def setUp(self):
+        self.translation = BibleDatabase.Translation()
+        self.translation.resume("../Translations/TT.buf")
+
+    def testVerseIterator(self):
+        verses = VerseIterator(self.translation)
+
+        num_verses_iterated = 0
+        for verse in verses:
+            num_verses_iterated += 1
+
+        self.assertEquals(num_verses_iterated, self.translation.num_verses)
+
+class VerseIterator:
+    def __init__(self, translation):
+        self.translation = translation
+        self.current_verse_id = -1
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        if self.current_verse_id >= self.translation.num_verses - 1:
+            raise StopIteration
+        else:
+            self.current_verse_id += 1
+            return self.translation.get_verse(self.current_verse_id)
+
 
 class WordSplitter:
     def findWords(self, text, numWordsInEachEntry):
