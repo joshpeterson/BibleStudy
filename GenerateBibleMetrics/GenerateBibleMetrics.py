@@ -1,6 +1,8 @@
 import sys
+import re
 import unittest
 import BibleDatabase
+from operator import itemgetter
 
 class WordDataTest(unittest.TestCase):
     def testAddWordData(self):
@@ -12,6 +14,12 @@ class WordDataTest(unittest.TestCase):
         wordData = WordData("Foo", "F")
         wordData.add("foo", 3)
         wordData.add("foo", 15)
+        self.assertEquals(wordData.count("foo"), 2)
+
+    def testAddWordDifferentCasing(self):
+        wordData = WordData("Foo", "F")
+        wordData.add("foo", 3)
+        wordData.add("Foo", 15)
         self.assertEquals(wordData.count("foo"), 2)
 
     def testGetWordVerseIds(self):
@@ -40,6 +48,7 @@ class WordData:
         self.shortName = shortName
 
     def add(self, word, verse_id):
+        word = word.lower()
         if word in self.words:
             self.words[word].append(verse_id)
         else:
@@ -78,9 +87,43 @@ class WordSplitterTest(unittest.TestCase):
         splitter = WordSplitter()
         self.assertEquals(splitter.findWords("In the beginning God created the earth", 3), ["In the beginning", "the beginning God", "beginning God created", "God created the", "created the earth"])
 
+    def testSplitOnPeriod(self):
+        splitter = WordSplitter()
+        self.assertEquals(splitter.findWords("In. the beginning God", 1), ["In", "the", "beginning", "God"])
+
+    def testSplitOnComma(self):
+        splitter = WordSplitter()
+        self.assertEquals(splitter.findWords("In, the beginning God", 1), ["In", "the", "beginning", "God"])
+        
+    def testSplitOnColon(self):
+        splitter = WordSplitter()
+        self.assertEquals(splitter.findWords("In the beginning: God", 1), ["In", "the", "beginning", "God"])
+
+    def testSplitOnSemiColon(self):
+        splitter = WordSplitter()
+        self.assertEquals(splitter.findWords("In the beginning;God", 1), ["In", "the", "beginning", "God"])
+
     def testWordListToString(self):
         splitter = WordSplitter()
         self.assertEquals(splitter.wordListToString(["foo", "bar", "baz"]), "foo bar baz")
+
+class WordSplitter:
+    def findWords(self, text, numWordsInEachEntry):
+        wordList = []
+        individual_words = re.findall(r'\w+', text)
+
+        for i in range(0, len(individual_words)):
+            if i + numWordsInEachEntry-1 < len(individual_words):
+                wordList.append(self.wordListToString(individual_words[i:i + numWordsInEachEntry]))
+
+        return wordList
+
+    def wordListToString(self, wordList):
+        output = ""
+        for word in wordList:
+            output += word + " "
+
+        return output[:len(output)-1]
 
 class VerseIteratorTest(unittest.TestCase):
     def setUp(self):
@@ -111,28 +154,44 @@ class VerseIterator:
             self.current_verse_id += 1
             return self.translation.get_verse(self.current_verse_id)
 
+def GenerateForTranslation(translationFileName, numberOfWordsInGroup):
+    translation = BibleDatabase.Translation()
+    translation.resume(translationFileName)
+    verses = VerseIterator(translation)
+    wordData = WordData(translation.long_name, translation.short_name)
+    splitter = WordSplitter()
 
-class WordSplitter:
-    def findWords(self, text, numWordsInEachEntry):
-        wordList = []
-        individual_words = text.split(" ")
+    stopWords = ("a", "i", "of", "and", "or", "but", "to", "the", "in", "that", "with", "for", "from", "of the", "and the", "in the", "to the", "for the", "from the")
 
-        for i in range(0, len(individual_words)):
-            if i + numWordsInEachEntry-1 < len(individual_words):
-                wordList.append(self.wordListToString(individual_words[i:i + numWordsInEachEntry]))
+    for verse in verses:
+        words = splitter.findWords(verse.text, numberOfWordsInGroup)
+        for word in words:
+            word = word.lower()
+            if not word in stopWords:
+                wordData.add(word, verse.id)
 
-        return wordList
+    counter = {}
+    for entry in wordData.words.keys():
+        counter[entry] = len(wordData.words[entry])
 
-    def wordListToString(self, wordList):
-        output = ""
-        for word in wordList:
-            output += word + " "
+    sorted_counter = sorted(counter.iteritems(), key=itemgetter(1), reverse=True)
 
-        return output[:len(output)-1]
+    i = 0
+    for key in sorted_counter:
+        print key
+        i += 1
+        if i == 20:
+            break
+
+    return wordData
 
 if __name__ == "__main__":
     if len(sys.argv) == 2 and sys.argv[1] == "test":
         del sys.argv[1]
         unittest.main()
     else:
-        raise("Not implemented yet.")
+        if len(sys.argv) != 3:
+            print "Usage: GenerateBibleMetrics.py <translation file name> <number of words in group>"
+        else:
+            wordData = GenerateForTranslation(sys.argv[1], int(sys.argv[2]))
+
