@@ -3,6 +3,7 @@
 if "%QT_DIR%" == "" goto :qterror
 if "%BOOST_DIR%" == "" goto :boosterror
 if "%GOOGLE_PROTOBUF_DIR%" == "" goto :protobuferror
+if "%PYTHON_DIR%" == "" goto :pythonerror
 
 set PATH=%QT_DIR%\bin;%PATH%
 set QMAKESPEC=win32-msvc2008
@@ -33,6 +34,10 @@ goto :end
 
 :protobuferror
 echo Please set the GOOGLE_PROTOBUF_DIR environment variable (example: C:\Program Files\protobuf-2.0.1\protobuf-2.0.1\vsprojects).
+goto :end
+
+:pythonerror
+echo Please set the PYTHON_DIR environment variable (example: C:\python26).
 goto :end
 
 :end

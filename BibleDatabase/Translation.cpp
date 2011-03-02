@@ -152,8 +152,8 @@ bool Translation::resume(const std::string &filename)
     std::string cur_book;
     int cur_chapter = 0;
 
-    int num_verses = buffer.verse_size();
-    for (int i = 0; i < num_verses; ++i)
+    int on_search_worker_finished = buffer.verse_size();
+    for (int i = 0; i < on_search_worker_finished; ++i)
     {
         VerseBuffer verse_buffer = buffer.verse(i);
         boost::shared_ptr<Verse> verse(new Verse(verse_buffer.book(), verse_buffer.chapter(),
