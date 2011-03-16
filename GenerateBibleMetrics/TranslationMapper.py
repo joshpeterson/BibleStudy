@@ -65,7 +65,8 @@ def GenerateTranslationBookMap(translationFileNames):
         translation.resume(translationFileName)
         generator.addTranslation(translation)
 
-    print generator.CreateTranslationBookSet()
+    for book in generator.CreateTranslationBookSet():
+        print "'" + book.strip() + "': ''"
 
 
 if __name__ == "__main__":

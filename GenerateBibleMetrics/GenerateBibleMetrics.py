@@ -3,6 +3,7 @@ import re
 import unittest
 import BibleDatabase
 from operator import itemgetter
+from BookAbbreviation import bookAbbreviation
 
 class WordDataTest(unittest.TestCase):
     def testAddWordData(self):
@@ -41,6 +42,16 @@ class WordDataTest(unittest.TestCase):
         self.assertEquals(wordData.longName, "Foo")
         self.assertEquals(wordData.shortName, "F")
 
+    def testToLiquidTemplatingEngineArrayFormat(self):
+        wordData = WordData("Foo", "F")
+        wordData.add("bar", 3)
+        wordData.add("bar", 15)
+
+        translation = BibleDatabase.Translation()
+        translation.resume("../Translations/TT.buf")
+
+        self.assertEquals(wordData.toLiquidTemplatingEngineArrayFormat("bar", translation), "[Foo,Gen 1:4,Gen 1:16]")
+
 class WordData:
     def __init__(self, longName, shortName):
         self.words = {}
@@ -65,6 +76,21 @@ class WordData:
             return self.words[word]
         else:
             return []
+
+    def toLiquidTemplatingEngineArrayFormat(self, word, translation):
+        if word in self.words:
+            arrayString = "[" + self.longName + ","
+            for verse_id in self.words[word]:
+                verse = translation.get_verse(verse_id)
+                book = verse.book.strip()
+                if book in bookAbbreviation.keys():
+                    arrayString += bookAbbreviation[book] + " " + str(verse.chapter) + ":" + str(verse.verse) + ","
+                else:
+                    raise "Book not found in book abbreviations: " + book
+        else:
+            raise "Word not found: " + word
+
+        return re.sub(",$", "]", arrayString)
 
 class WordSplitterTest(unittest.TestCase):
     def testSplitIntoSingleWordsShort(self):
@@ -190,8 +216,11 @@ if __name__ == "__main__":
         del sys.argv[1]
         unittest.main()
     else:
-        if len(sys.argv) != 3:
-            print "Usage: GenerateBibleMetrics.py <translation file name> <number of words in group>"
+        if len(sys.argv) < 3:
+            print "Usage: GenerateBibleMetrics.py <number of words in group> <translation file name(s)>"
         else:
-            wordData = GenerateForTranslation(sys.argv[1], int(sys.argv[2]))
+            numberOfWordInGroup = int(sys.argv[1])
+            wordDataList = []
+            for translationFileName in sys.argv[2:]:
+                wordDataList.append(GenerateForTranslation(translationFileName, numberOfWordsInGroup))
 
