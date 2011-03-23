@@ -1,5 +1,6 @@
 import sys
 import re
+import os
 import unittest
 import BibleDatabase
 from operator import itemgetter
@@ -78,23 +79,23 @@ class WordDataToLiquidTest(unittest.TestCase):
 
         converter = WordDataToLiquid()
 
-        self.assertEquals(converter.toLiquidTemplatingEngineArrayFormat(wordData, "bar", translation), "[Foo,Gen 1:4,Gen 1:16]")
+        self.assertEquals(converter.toLiquidTemplatingEngineArrayFormat(wordData, "bar", translation), "[Foo, Gen 1:4, Gen 1:16]")
 
 class WordDataToLiquid:
     def toLiquidTemplatingEngineArrayFormat(self, wordData, word, translation):
         if word in wordData.words:
-            arrayString = "[" + wordData.longName + ","
+            arrayString = "[" + wordData.longName + ", "
             for verse_id in wordData.words[word]:
                 verse = translation.get_verse(verse_id)
                 book = verse.book.strip()
                 if book in bookAbbreviation.keys():
-                    arrayString += bookAbbreviation[book] + " " + str(verse.chapter) + ":" + str(verse.verse) + ","
+                    arrayString += bookAbbreviation[book] + " " + str(verse.chapter) + ":" + str(verse.verse) + ", "
                 else:
                     raise "Book not found in book abbreviations: " + book
         else:
             raise "Word not found: " + word
 
-        return re.sub(",$", "]", arrayString)
+        return re.sub(", $", "]", arrayString)
 
 class WordDataCollatorTest(unittest.TestCase):
     def setUp(self):
@@ -130,7 +131,7 @@ class WordDataCollatorTest(unittest.TestCase):
         collator = WordDataCollator()
         collator.add(wordData, self.translation)
 
-        self.assertEquals(collator.toLiquidTemplateEngineDataString("bar"), "data:[[Foo,Gen 1:4,Gen 1:16]]")
+        self.assertEquals(collator.toLiquidTemplateEngineDataString("bar"), "data: [[Foo, Gen 1:4, Gen 1:16]]")
 
     def testToLiquidTemplateEngineDataStringWithMulipleWordDatas(self):
         wordData1 = WordData("Foo", "F")
@@ -145,7 +146,17 @@ class WordDataCollatorTest(unittest.TestCase):
         collator.add(wordData1, self.translation)
         collator.add(wordData2, self.translation)
 
-        self.assertEquals(collator.toLiquidTemplateEngineDataString("bar"), "data:[[Foo,Gen 1:4,Gen 1:16],[Bar,Gen 1:5,Gen 1:17]]")
+        self.assertEquals(collator.toLiquidTemplateEngineDataString("bar"), "data: [[Foo, Gen 1:4, Gen 1:16], [Bar, Gen 1:5, Gen 1:17]]")
+
+    def testToLiquidTemplateEngineDataStringInvalidWord(self):
+        wordData = WordData("Foo", "F")
+        wordData.add("bar", 3)
+        wordData.add("bar", 15)
+
+        collator = WordDataCollator()
+        collator.add(wordData, self.translation)
+
+        self.assertRaises(Exception, collator.toLiquidTemplateEngineDataString, "baz")
 
 class WordDataCollator:
     def __init__(self):
@@ -161,11 +172,13 @@ class WordDataCollator:
 
     def toLiquidTemplateEngineDataString(self, word):
         if word in self.words:
-            dataString = "data:["
+            dataString = "data: ["
             for translationData in self.words[word]:
-                dataString += translationData + ","
+                dataString += translationData + ", "
 
-            return re.sub(",$", "]", dataString)
+            return re.sub(", $", "]", dataString)
+        else:
+            raise Exception("Word is not found: " + word)
 
 class WordSplitterTest(unittest.TestCase):
     def testSplitIntoSingleWordsShort(self):
@@ -255,9 +268,7 @@ class VerseIterator:
             self.current_verse_id += 1
             return self.translation.get_verse(self.current_verse_id)
 
-def GenerateForTranslation(translationFileName, numberOfWordsInGroup):
-    translation = BibleDatabase.Translation()
-    translation.resume(translationFileName)
+def GenerateForTranslation(translation, numberOfWordsInGroup):
     verses = VerseIterator(translation)
     wordData = WordData(translation.long_name, translation.short_name)
     splitter = WordSplitter()
@@ -268,23 +279,46 @@ def GenerateForTranslation(translationFileName, numberOfWordsInGroup):
         words = splitter.findWords(verse.text, numberOfWordsInGroup)
         for word in words:
             word = word.lower()
-            if not word in stopWords:
+            if not WordIsOrContainsStopWords(word, stopWords):
                 wordData.add(word, verse.id)
 
-    counter = {}
-    for entry in wordData.words.keys():
-        counter[entry] = len(wordData.words[entry])
-
-    sorted_counter = sorted(counter.iteritems(), key=itemgetter(1), reverse=True)
-
-    i = 0
-    for key in sorted_counter:
-        print key
-        i += 1
-        if i == 20:
-            break
+#    counter = {}
+#    for entry in wordData.words.keys():
+#        counter[entry] = len(wordData.words[entry])
+#
+#    sorted_counter = sorted(counter.iteritems(), key=itemgetter(1), reverse=True)
+#
+#    i = 0
+#    for key in sorted_counter:
+#        print key
+#        i += 1
+#        if i == 20:
+#            break
 
     return wordData
+
+def WordIsOrContainsStopWords(word, stopWords):
+    words = word.split()
+    for word in words:
+        if word in stopWords:
+            return True
+
+    return False
+
+def WriteWordFiles(collator):
+    for word in collator.words:
+        fileName = re.sub(" ", "_", word) + ".html"
+        if os.path.exists(fileName):
+            raise Exception("The file already exists: " + fileName)
+
+        file = open(fileName, "w")
+        file.write("---\n")
+        file.write("layout: default\n")
+        file.write("word: " + word + "\n")
+        file.write(collator.toLiquidTemplateEngineDataString(word) + "\n")
+        file.write("---\n")
+        file.write("{% include word.html %}")
+        file.close()
 
 if __name__ == "__main__":
     if len(sys.argv) == 2 and sys.argv[1] == "test":
@@ -294,8 +328,13 @@ if __name__ == "__main__":
         if len(sys.argv) < 3:
             print "Usage: GenerateBibleMetrics.py <number of words in group> <translation file name(s)>"
         else:
-            numberOfWordInGroup = int(sys.argv[1])
-            wordDataList = []
+            numberOfWordsInGroup = int(sys.argv[1])
+            collator = WordDataCollator()
             for translationFileName in sys.argv[2:]:
-                wordDataList.append(GenerateForTranslation(translationFileName, numberOfWordsInGroup))
+                translation = BibleDatabase.Translation()
+                translation.resume(translationFileName)
+
+                collator.add(GenerateForTranslation(translation, numberOfWordsInGroup), translation)
+
+            WriteWordFiles(collator)
 
