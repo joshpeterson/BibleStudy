@@ -273,7 +273,7 @@ def GenerateForTranslation(translation, numberOfWordsInGroup):
     wordData = WordData(translation.long_name, translation.short_name)
     splitter = WordSplitter()
 
-    stopWords = ("a", "i", "of", "and", "or", "but", "to", "the", "in", "that", "with", "for", "from", "of the", "and the", "in the", "to the", "for the", "from the")
+    stopWords = ("a", "i", "o", "s", "of", "and", "or", "but", "to", "the", "in", "that", "with", "for", "from", "of the", "and the", "in the", "to the", "for the", "from the")
 
     for verse in verses:
         words = splitter.findWords(verse.text, numberOfWordsInGroup)
