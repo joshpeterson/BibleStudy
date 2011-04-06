@@ -1,3 +1,7 @@
+#
+# This file is used to generate bible metrics data in a format suitable for the Liquid templating engine.
+#
+
 import sys
 import re
 import os
