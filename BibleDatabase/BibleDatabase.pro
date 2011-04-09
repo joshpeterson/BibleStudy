@@ -72,8 +72,13 @@ win32 {
 }
 
 unix {
+    INCLUDEPATH += "/usr/include/python2.6"
     DESTDIR = "../Output/lib"
     LIBS += -l"protobuf"
     LIBS += -l"boost_system"
+    LIBS += -l"boost_python"
+    LIBS += -l"python2.6"
+
+    QMAKE_POST_LINK = ln -s libBibleDatabase.so.1.0.0 ../Output/lib/BibleDatabase.so
 }
 
