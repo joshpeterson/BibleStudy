@@ -70,3 +70,7 @@ To create a release:
 `git branch -d release-1.2`
 
 `git push origin :release-1.2` (if the release branch was pushed to github)
+
+License
+-------
+This software is licensed under the [Boost Software License](http://www.boost.org/LICENSE_1_0.txt).
